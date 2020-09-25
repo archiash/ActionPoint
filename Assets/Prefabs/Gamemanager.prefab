@@ -1,0 +1,224 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3795377148819830191
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3795377148819830189}
+  - component: {fileID: 3795377148819830190}
+  - component: {fileID: 3795377148819830188}
+  - component: {fileID: 3795377148819830187}
+  - component: {fileID: 3795377148819830186}
+  - component: {fileID: 7211708386385561541}
+  m_Layer: 0
+  m_Name: Gamemanager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3795377148819830189
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3795377148819830191}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 109.12953, y: 302.5808, z: -118.66029}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3795377148819830190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3795377148819830191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 066f67ee98d8b7e4b824bb5d0fefdb19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Level: 1
+  exp: 0
+  status:
+    STR:
+      baseValue: 0
+      upgradeModifier: 0
+      modifiers: []
+    DEX:
+      baseValue: 0
+      upgradeModifier: 0
+      modifiers: []
+    AGI:
+      baseValue: 0
+      upgradeModifier: 0
+      modifiers: []
+    INT:
+      baseValue: 0
+      upgradeModifier: 0
+      modifiers: []
+    CON:
+      baseValue: 0
+      upgradeModifier: 0
+      modifiers: []
+    HP:
+      baseValue: 150
+      mainModifiers:
+      - type: 4
+        modifier: 15
+      modifiers: []
+    currentHP: 150
+    MP:
+      baseValue: 50
+      mainModifiers:
+      - type: 3
+        modifier: 5
+      modifiers: []
+    currentMP: 0
+    PAtk:
+      baseValue: 10
+      mainModifiers:
+      - type: 0
+        modifier: 3
+      modifiers: []
+    PDef:
+      baseValue: 8
+      mainModifiers:
+      - type: 0
+        modifier: 1
+      - type: 4
+        modifier: 1
+      modifiers: []
+    MAtk:
+      baseValue: 10
+      mainModifiers:
+      - type: 3
+        modifier: 5
+      modifiers: []
+    MDef:
+      baseValue: 8
+      mainModifiers:
+      - type: 3
+        modifier: 1
+      - type: 4
+        modifier: 1
+      modifiers: []
+    Spd:
+      baseValue: 15
+      mainModifiers:
+      - type: 2
+        modifier: 3
+      modifiers: []
+    Hit:
+      baseValue: 15
+      mainModifiers:
+      - type: 1
+        modifier: 3
+      modifiers: []
+    Eva:
+      baseValue: 10
+      mainModifiers:
+      - type: 2
+        modifier: 2
+      modifiers: []
+    Crate:
+      baseValue: 10
+      mainModifiers:
+      - type: 1
+        modifier: 2
+      modifiers: []
+    Cdmg:
+      baseValue: 10
+      mainModifiers:
+      - type: 1
+        modifier: 2
+      modifiers: []
+  hpRegen: 1
+  regenRate: 0
+  weapon: {fileID: 0}
+  head: {fileID: 0}
+  body: {fileID: 0}
+  arms: {fileID: 0}
+  legs: {fileID: 0}
+  accessory: {fileID: 0}
+  learnedSkill: []
+  currentSkill: []
+  upgradeLevel:
+    healthLevel: 0
+    attackLevel: 0
+    defenseLevel: 0
+    speedLevel: 0
+    regenLevel: 0
+    pointLevel: 0
+--- !u!114 &3795377148819830188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3795377148819830191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af54b433e3cf3cd42a90395b32c25fcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  money: 300
+  moneyBuff: 0
+  storageSize: 0
+  storageCurrent: 0
+  space: 20
+  items: []
+--- !u!114 &3795377148819830187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3795377148819830191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d68d9237795d5664e923886139095b77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionPoint: 0
+  actionPersec: 1
+--- !u!114 &3795377148819830186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3795377148819830191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dd7437ec05996c439fc5ac5f393a4a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemSaveManager: {fileID: 7211708386385561541}
+  cameras:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+--- !u!114 &7211708386385561541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3795377148819830191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3696e55efc402c14382591df83230054, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemDatabase: {fileID: 11400000, guid: 57a07f44fadb4fd48ad8d18d47229d20, type: 2}

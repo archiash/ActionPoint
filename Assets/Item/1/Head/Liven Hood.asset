@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2be80355694d66478b9b2fc718b2c38, type: 3}
+  m_Name: Liven Hood
+  m_EditorClassIdentifier: 
+  id: 9bd47a47651f9f9438e0a9180817b571
+  icon: {fileID: 21300000, guid: f71475d9eb32407439ab66c1b65604ce, type: 3}
+  itemName: Liven Hood
+  rarity: 1
+  itemDes: 
+  itemType: 2
+  sellPrice: 0
+  enchantment: 0
+  powerPercent: 0
+  part: 1
+  modifiers:
+  - modifierType: 0
+    mainType: 4
+    statType: 0
+    type: 0
+    amount: 5
+  - modifierType: 1
+    mainType: 0
+    statType: 2
+    type: 0
+    amount: 6
+  - modifierType: 1
+    mainType: 0
+    statType: 3
+    type: 0
+    amount: 6

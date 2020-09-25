@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74e3031b0682f9849b9decda61c5491c, type: 3}
+  m_Name: ClawGlove
+  m_EditorClassIdentifier: 
+  resulItem: {fileID: 11400000, guid: cf1c36f0b4749804197be97cbea415ea, type: 2}
+  material:
+  - item: {fileID: 11400000, guid: 2ba967c2d48010f4a9b51a9eb5764d92, type: 2}
+    amount: 5
+  - item: {fileID: 11400000, guid: 14d08605fcf3f98449029aa52616096f, type: 2}
+    amount: 3
+  - item: {fileID: 11400000, guid: 757c723f192087e41bddd36fe27e1679, type: 2}
+    amount: 1
+  cost: 40

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74e3031b0682f9849b9decda61c5491c, type: 3}
+  m_Name: BlackPlateBoot
+  m_EditorClassIdentifier: 
+  resulItem: {fileID: 11400000, guid: 2ce71a37bdca0ca41980d1224d081798, type: 2}
+  material:
+  - item: {fileID: 11400000, guid: c8fd9e83970a6f040af26f18ec55dc15, type: 2}
+    amount: 5
+  - item: {fileID: 11400000, guid: ad32ad408974a454da57ab76d51d7922, type: 2}
+    amount: 3
+  cost: 90

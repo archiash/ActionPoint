@@ -1,0 +1,104 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5825999a020fbf841bf87164bae64088, type: 3}
+  m_Name: Houndra Berserker
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 21300000, guid: 42828861a0c780e488b80db808695336, type: 3}
+  Name: Houndra Berserker
+  Desc: 
+  status:
+    STR:
+      baseValue: 0
+      upgradeModifier: 0
+      modifiers: []
+    DEX:
+      baseValue: 0
+      upgradeModifier: 0
+      modifiers: []
+    AGI:
+      baseValue: 0
+      upgradeModifier: 0
+      modifiers: []
+    INT:
+      baseValue: 0
+      upgradeModifier: 0
+      modifiers: []
+    CON:
+      baseValue: 0
+      upgradeModifier: 0
+      modifiers: []
+    HP:
+      baseValue: 230
+      mainModifiers: []
+      modifiers: []
+    currentHP: 230
+    MP:
+      baseValue: 0
+      mainModifiers: []
+      modifiers: []
+    currentMP: 0
+    PAtk:
+      baseValue: 20
+      mainModifiers: []
+      modifiers: []
+    PDef:
+      baseValue: 8
+      mainModifiers: []
+      modifiers: []
+    MAtk:
+      baseValue: 0
+      mainModifiers: []
+      modifiers: []
+    MDef:
+      baseValue: 6
+      mainModifiers: []
+      modifiers: []
+    Spd:
+      baseValue: 13
+      mainModifiers: []
+      modifiers: []
+    Hit:
+      baseValue: 15
+      mainModifiers: []
+      modifiers: []
+    Eva:
+      baseValue: 15
+      mainModifiers: []
+      modifiers: []
+    Crate:
+      baseValue: 10
+      mainModifiers: []
+      modifiers: []
+    Cdmg:
+      baseValue: 10
+      mainModifiers: []
+      modifiers: []
+  currentSkill: []
+  usePoint: 36
+  expReward: 21
+  dropItems:
+  - item: {fileID: 11400000, guid: ad32ad408974a454da57ab76d51d7922, type: 2}
+    rateDrop: 75
+    minDrop: 1
+    maxDrop: 3
+  - item: {fileID: 11400000, guid: 14d08605fcf3f98449029aa52616096f, type: 2}
+    rateDrop: 60
+    minDrop: 1
+    maxDrop: 3
+  - item: {fileID: 11400000, guid: 2ba967c2d48010f4a9b51a9eb5764d92, type: 2}
+    rateDrop: 60
+    minDrop: 1
+    maxDrop: 3
+  - item: {fileID: 11400000, guid: c8fd9e83970a6f040af26f18ec55dc15, type: 2}
+    rateDrop: 60
+    minDrop: 1
+    maxDrop: 3

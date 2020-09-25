@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5825999a020fbf841bf87164bae64088, type: 3}
+  m_Name: Loglem
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 21300000, guid: 6c154a8fec05a984286177b644d562dc, type: 3}
+  Name: Loglem
+  Desc: 
+  status:
+    STR:
+      baseValue: 0
+      upgradeModifier: 0
+      modifiers: []
+    DEX:
+      baseValue: 0
+      upgradeModifier: 0
+      modifiers: []
+    AGI:
+      baseValue: 0
+      upgradeModifier: 0
+      modifiers: []
+    INT:
+      baseValue: 0
+      upgradeModifier: 0
+      modifiers: []
+    CON:
+      baseValue: 0
+      upgradeModifier: 0
+      modifiers: []
+    HP:
+      baseValue: 90
+      mainModifiers: []
+      modifiers: []
+    currentHP: 90
+    MP:
+      baseValue: 0
+      mainModifiers: []
+      modifiers: []
+    currentMP: 0
+    PAtk:
+      baseValue: 9
+      mainModifiers: []
+      modifiers: []
+    PDef:
+      baseValue: 5
+      mainModifiers: []
+      modifiers: []
+    MAtk:
+      baseValue: 0
+      mainModifiers: []
+      modifiers: []
+    MDef:
+      baseValue: 5
+      mainModifiers: []
+      modifiers: []
+    Spd:
+      baseValue: 10
+      mainModifiers: []
+      modifiers: []
+    Hit:
+      baseValue: 15
+      mainModifiers: []
+      modifiers: []
+    Eva:
+      baseValue: 10
+      mainModifiers: []
+      modifiers: []
+    Crate:
+      baseValue: 10
+      mainModifiers: []
+      modifiers: []
+    Cdmg:
+      baseValue: 10
+      mainModifiers: []
+      modifiers: []
+  currentSkill: []
+  usePoint: 10
+  expReward: 5
+  dropItems:
+  - item: {fileID: 11400000, guid: 995ed0f3ca4fdf04c937726efc69ff94, type: 2}
+    rateDrop: 100
+    minDrop: 1
+    maxDrop: 5
+  - item: {fileID: 11400000, guid: c94f412d138f84e47a840853726cd04e, type: 2}
+    rateDrop: 100
+    minDrop: 1
+    maxDrop: 5

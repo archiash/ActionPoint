@@ -1,0 +1,161 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class EquipmentSlot : MonoBehaviour
+{
+    public Image icon;
+    public Image rarity;
+    public EquipmentPart part;
+
+    public TextMeshProUGUI enchantment;
+    public TextMeshProUGUI powerpercent;
+
+    Equipment onSlot;
+
+    private void OnValidate()
+    {
+        gameObject.name = part.ToString() + "Slot";
+        icon = transform.Find("Button/Icon").GetComponentInChildren<Image>();
+        rarity = GetComponent<Image>();
+    }
+
+    private void Start()
+    {
+        icon = transform.Find("Button/Icon").GetComponentInChildren<Image>();
+        rarity = GetComponent<Image>();
+    }
+
+    public void ChangeEquipment()
+    {
+        EquipmentSelectPanel.instance.ShowPanel(part);
+    }
+
+    private void Update()
+    {
+       switch (part)
+        {
+            case EquipmentPart.Weapon:
+                if (Character.instance.weapon != null)
+                {
+                    onSlot = Character.instance.weapon;
+                    icon.sprite = Character.instance.weapon.icon;
+                    icon.enabled = true;
+                    rarity.color = RarityColor(Character.instance.weapon);
+                }
+                else
+                {
+                    onSlot = null;
+                    rarity.color = Color.white;
+                    icon.enabled = false;
+                }
+                break;
+            case EquipmentPart.Head:
+                if (Character.instance.head != null)
+                {
+                    onSlot = Character.instance.head;
+                    icon.sprite = Character.instance.head.icon;
+                    icon.enabled = true;
+                    rarity.color = RarityColor(Character.instance.head);
+                }
+                else
+                {
+                    onSlot = null;
+                    rarity.color = Color.white;
+                    icon.enabled = false;
+                }
+                break;
+            case EquipmentPart.Body:
+                if (Character.instance.body != null)
+                {
+                    onSlot = Character.instance.body;
+                    icon.sprite = Character.instance.body.icon;
+                    icon.enabled = true;
+                    rarity.color = RarityColor(Character.instance.body);
+                }
+                else
+                {
+                    onSlot = null;
+                    rarity.color = Color.white;
+                    icon.enabled = false;
+                }
+                break;
+            case EquipmentPart.Arms:
+                if (Character.instance.arms != null)
+                {
+                    onSlot = Character.instance.arms;
+                    icon.sprite = Character.instance.arms.icon;
+                    icon.enabled = true;
+                    rarity.color = RarityColor(Character.instance.arms);
+                }
+                else
+                {
+                    onSlot = null;
+                    rarity.color = Color.white;
+                    icon.enabled = false;
+                }
+                break;
+            case EquipmentPart.Legs:
+                if (Character.instance.legs != null)
+                {
+                    onSlot = Character.instance.legs;
+                    icon.sprite = Character.instance.legs.icon;
+                    icon.enabled = true;
+                    rarity.color = RarityColor(Character.instance.legs);
+                }
+                else
+                {
+                    onSlot = null;
+                    rarity.color = Color.white;
+                    icon.enabled = false;
+                }
+                break;
+            case EquipmentPart.Accessory:
+                if (Character.instance.accessory != null)
+                {
+                    onSlot = Character.instance.accessory;
+                    icon.sprite = Character.instance.accessory.icon;
+                    icon.enabled = true;
+                    rarity.color = RarityColor(Character.instance.accessory);
+                }
+                else
+                {
+                    onSlot = null;
+                    rarity.color = Color.white;
+                    icon.enabled = false;
+                }
+                break;
+        }
+        if (enchantment != null && powerpercent != null)
+        {
+            if (onSlot != null)
+            {
+                enchantment.text = "+" + onSlot.enchantment.ToString();
+                enchantment.enabled = true;
+                powerpercent.text = onSlot.powerPercent.ToString() + "%";
+                powerpercent.enabled = true;
+            }
+            else
+            {
+                enchantment.enabled = false;
+                powerpercent.enabled = false;
+            }
+        }
+    }
+
+    public Color RarityColor(Equipment item)
+    {
+        switch(item.rarity)
+        {
+            case Rarity.Common:
+                return Color.white;
+            case Rarity.Uncommon:
+                return Color.green;
+        }
+        return Color.white;
+    }
+
+}
