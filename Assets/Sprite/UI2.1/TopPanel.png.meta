@@ -1,7 +1,22 @@
 fileFormatVersion: 2
 guid: 1322725d1423e1d4f97a13469d810912
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -2417718169706831085
+    second: TopPanel_0
+  - first:
+      213: -5076687430254054708
+    second: TopPanel_1
+  - first:
+      213: -1612436637198459455
+    second: TopPanel_2
+  - first:
+      213: -6331056771125942252
+    second: TopPanel_3
+  - first:
+      213: -7778366566494075740
+    second: TopPanel_4
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -35,9 +50,9 @@ TextureImporter:
     filterMode: -1
     aniso: -1
     mipBias: -100
-    wrapU: 1
-    wrapV: 1
-    wrapW: 1
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -51,7 +66,7 @@ TextureImporter:
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
-  spriteTessellationDetail: -1
+  spriteTessellationDetail: 0
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
@@ -73,10 +88,112 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
-    outline: []
+    sprites:
+    - serializedVersion: 2
+      name: TopPanel_0
+      rect:
+        serializedVersion: 2
+        x: 533
+        y: 0
+        width: 374
+        height: 338
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 313ed9f522a827ed0800000000000000
+      internalID: -2417718169706831085
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TopPanel_1
+      rect:
+        serializedVersion: 2
+        x: 908
+        y: 0
+        width: 533
+        height: 338
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 31, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc2340cfdabfb89b0800000000000000
+      internalID: -5076687430254054708
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TopPanel_2
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 0
+        width: 505
+        height: 338
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1cdd5f8eb697f99e0800000000000000
+      internalID: -1612436637198459455
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline:
+    - - {x: 50.5, y: 97}
+      - {x: -33.5, y: 98}
+      - {x: -62.5, y: 98}
+      - {x: -120.5, y: 73}
+      - {x: -133.5, y: 22}
+      - {x: -133.5, y: -119}
+      - {x: -83.5, y: -169}
+      - {x: 103.5, y: -169}
+      - {x: 135.5, y: -99}
+      - {x: 135.5, y: 57}
+      - {x: 129.5, y: 66}
+    - - {x: -720.5, y: 169}
+      - {x: -720.5, y: -20}
+      - {x: 720.5, y: -20}
+      - {x: 720.5, y: 169}
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000

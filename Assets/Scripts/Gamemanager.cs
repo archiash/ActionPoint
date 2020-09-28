@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEditor;
-using Ludiq;
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Bolt;
+
 using UnityEngine.Android;
 
 public class Gamemanager : MonoBehaviour

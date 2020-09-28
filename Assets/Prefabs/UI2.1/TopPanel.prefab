@@ -32,10 +32,10 @@ RectTransform:
   m_Father: {fileID: 1441929050990378568}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 419.3, y: 46}
-  m_SizeDelta: {x: 486.80304, y: 48.358704}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: -300.7, y: 46}
+  m_SizeDelta: {x: 486.80298, y: 48.358704}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1441929050811444803
 CanvasRenderer:
@@ -265,11 +265,11 @@ RectTransform:
   m_Father: {fileID: 1441929050990378568}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -419.3, y: 93}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 57.298706, y: 92.999756}
   m_SizeDelta: {x: 486.80304, y: 72.763855}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &1441929051303236562
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -400,10 +400,10 @@ RectTransform:
   m_Father: {fileID: 1441929050990378568}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 419.3, y: 93}
-  m_SizeDelta: {x: 486.8, y: 72.763855}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: -300.7, y: 93}
+  m_SizeDelta: {x: 486.80005, y: 72.763855}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1441929051626038313
 CanvasRenderer:
@@ -535,11 +535,11 @@ RectTransform:
   m_Father: {fileID: 1441929050990378568}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -419.3, y: 46}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 57.298706, y: 46}
   m_SizeDelta: {x: 486.80304, y: 48.358704}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &1441929051661232964
 CanvasRenderer:
   m_ObjectHideFlags: 0
