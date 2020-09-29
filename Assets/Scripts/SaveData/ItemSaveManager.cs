@@ -24,6 +24,11 @@ public class ItemSaveManager : MonoBehaviour
         if(saveData.money != null)
             inventory.setMoney = saveData.money;
 
+        if (saveData.inventoryLevel > 0)
+            inventory.level = saveData.inventoryLevel;
+        else
+            inventory.level = 1;
+
         inventory.items.Clear();
         for(int i =0;i < saveData.SavedSlots.Length;i++)
         {
@@ -55,13 +60,13 @@ public class ItemSaveManager : MonoBehaviour
     public void SaveInventory(Inventory inventory = null)
     {
         if (inventory == null)
-            SaveItem(Inventory.instance.items,Inventory.instance.getMoney, InventoryFileName);
+            SaveItem(Inventory.instance.items,Inventory.instance.getMoney, Inventory.instance.level, InventoryFileName);
         else
-            SaveItem(inventory.items,inventory.getMoney, InventoryFileName);
+            SaveItem(inventory.items,inventory.getMoney,inventory.level, InventoryFileName);
     }
-    private void SaveItem(IList<StackItem> stackItems,double money,string fileName)
+    private void SaveItem(IList<StackItem> stackItems,double money,int level,string fileName)
     {
-        var saveData = new ItemContainerSaveData(stackItems.Count,money);
+        var saveData = new ItemContainerSaveData(stackItems.Count,money,level);
 
         for(int i = 0; i < saveData.SavedSlots.Length; i++)
         {

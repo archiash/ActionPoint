@@ -21,11 +21,13 @@ public class ItemContainerSaveData
 {
     public ItemSlotSaveData[] SavedSlots;
     public double money;
+    public int inventoryLevel;
 
-    public ItemContainerSaveData(int numItems, double money = 0)
+    public ItemContainerSaveData(int numItems, double money = 0,int level = 0)
     {
         SavedSlots = new ItemSlotSaveData[numItems];
         this.money = money;
+        inventoryLevel = level;
     }
 }
 

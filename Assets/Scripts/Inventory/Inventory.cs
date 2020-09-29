@@ -40,7 +40,22 @@ public class Inventory : MonoBehaviour
         instance = this;
     }
 
+    public int level { get { return inventoryLevel; }
+        set { inventoryLevel = value;
+            space = GetSpaceFormLevel(level);
+            if (onItemChange != null)
+                onItemChange.Invoke();
+        }
+    }
+
+    public int GetSpaceFormLevel(int level)
+    {
+        return 20 + (level - 1) * 5;
+    }
+
+    [SerializeField]int inventoryLevel = 1;
     public int space = 10;
+
     public List<StackItem> items = new List<StackItem>();
 
     public bool GetItem(Item newItem,int amount = 1)

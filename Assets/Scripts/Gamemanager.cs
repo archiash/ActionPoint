@@ -1,12 +1,6 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEditor;
-
-using System;
-using System.Collections;
 using System.Collections.Generic;
-
-using UnityEngine.Android;
 
 public class Gamemanager : MonoBehaviour
 {
@@ -20,11 +14,11 @@ public class Gamemanager : MonoBehaviour
     {
         if(instance != null)
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }else
         {
             instance = this;
-            DontDestroyOnLoad(this.gameObject);
+            DontDestroyOnLoad(gameObject);
         }
        
     }

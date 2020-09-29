@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,6 +13,8 @@ public class UI_Inventory : MonoBehaviour
 
     [SerializeField] UI_InventorySlot slotPrefab;
     Transform parent;
+
+    [SerializeField] TextMeshProUGUI spaceText;
 
     Inventory inventory;
     List<UI_InventorySlot> slots = new List<UI_InventorySlot>();
@@ -32,6 +35,8 @@ public class UI_Inventory : MonoBehaviour
     {
         if(inventory == null)
             inventory = Inventory.instance;
+
+        spaceText.text = inventory.GetSpaceFormLevel(inventory.level).ToString();
 
         if (InventoryCamera.gameObject.activeSelf)
         {
