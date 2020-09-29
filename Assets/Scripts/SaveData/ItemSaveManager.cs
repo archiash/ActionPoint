@@ -96,7 +96,7 @@ public class ItemSaveManager : MonoBehaviour
         {
             pointManager = PointManager.instance;
         }
-        double pointWhileExit = (DateTime.Now - saveData.lastExit).TotalSeconds * saveData.pointPerSec / 2;
+        double pointWhileExit = (DateTime.UtcNow - saveData.lastExit).TotalSeconds * saveData.pointPerSec / 2;
         if (pointWhileExit > 3600)
             pointWhileExit = 3600;
 
@@ -107,7 +107,7 @@ public class ItemSaveManager : MonoBehaviour
     {
         PointManager pointManager = PointManager.instance;
 
-        PointSaveData saveData = new PointSaveData(pointManager.GetActionPoint,pointManager.GetActionPerSec,DateTime.Now);
+        PointSaveData saveData = new PointSaveData(pointManager.GetActionPoint,pointManager.GetActionPerSec,DateTime.UtcNow);
         ItemSaveIO.SaveItems(saveData, PointFileName);
     }
     public void SaveEquipment(Character character = null)
@@ -162,7 +162,7 @@ public class ItemSaveManager : MonoBehaviour
             character = Character.instance;
         }
 
-        var saveData = new CharacterSaveData(character.status.currentHP, DateTime.Now);
+        var saveData = new CharacterSaveData(character.status.currentHP, DateTime.UtcNow);
         ItemSaveIO.SaveCharacter(saveData, CharacterFileName);
     }
     public void LoadCharacterData(Character character = null)
@@ -174,7 +174,7 @@ public class ItemSaveManager : MonoBehaviour
         CharacterSaveData saveData = ItemSaveIO.LoadCharacter(CharacterFileName);
         if (saveData == null)
             return;
-        double healWhileExit = (DateTime.Now - saveData.lastExit).TotalSeconds / 2;
+        double healWhileExit = (DateTime.UtcNow - saveData.lastExit).TotalSeconds / 2;
         if (healWhileExit > 100)
             healWhileExit = 100;
 

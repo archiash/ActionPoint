@@ -20,4 +20,4 @@ MonoBehaviour:
     amount: 3
   - item: {fileID: 11400000, guid: 757c723f192087e41bddd36fe27e1679, type: 2}
     amount: 1
-  cost: 40
+  cost: 60
