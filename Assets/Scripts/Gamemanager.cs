@@ -57,7 +57,16 @@ public class Gamemanager : MonoBehaviour
 
         if (x == 1)
             UI_Inventory.instance.UpdateSlot();
+        if (x == 2)
+        {
+            if (Enchantment.instance != null)
+                Enchantment.instance.ResetSelect();
+
+            
+        }
+     
     }
+        
 
     void OnApplicationQuit()
     {

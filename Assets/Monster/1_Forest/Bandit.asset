@@ -37,21 +37,21 @@ MonoBehaviour:
       upgradeModifier: 0
       modifiers: []
     HP:
-      baseValue: 150
+      baseValue: 160
       mainModifiers: []
       modifiers: []
-    currentHP: 150
+    currentHP: 160
     MP:
       baseValue: 0
       mainModifiers: []
       modifiers: []
     currentMP: 0
     PAtk:
-      baseValue: 14
+      baseValue: 15
       mainModifiers: []
       modifiers: []
     PDef:
-      baseValue: 7
+      baseValue: 8
       mainModifiers: []
       modifiers: []
     MAtk:
@@ -59,11 +59,11 @@ MonoBehaviour:
       mainModifiers: []
       modifiers: []
     MDef:
-      baseValue: 7
+      baseValue: 8
       mainModifiers: []
       modifiers: []
     Spd:
-      baseValue: 12
+      baseValue: 15
       mainModifiers: []
       modifiers: []
     Hit:
@@ -87,10 +87,10 @@ MonoBehaviour:
   expReward: 12
   dropItems:
   - item: {fileID: 11400000, guid: 15a9f18e6f4c47748bfb8f7726d76cfa, type: 2}
-    rateDrop: 70
+    rateDrop: 80
     minDrop: 1
     maxDrop: 3
   - item: {fileID: 11400000, guid: 5714baf2c517be14b9678a66bb315917, type: 2}
     rateDrop: 80
     minDrop: 1
-    maxDrop: 5
+    maxDrop: 3

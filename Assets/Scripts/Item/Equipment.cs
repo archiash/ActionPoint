@@ -157,69 +157,69 @@ public class Equipment : Item
                 {
                     case SubStatType.HP:
                         if (mod.amount >= 0)
-                            desc += $"HP + {displayValue}";
+                            desc += $"พลังชีวิต + {displayValue}";
                         else
-                            desc += $"HP {displayValue}";
+                            desc += $"พลังชีวิต {displayValue}";
                         break;
                     case SubStatType.MP:
                         if (mod.amount >= 0)
-                            desc += $"MP + {displayValue}";
+                            desc += $"มานา + {displayValue}";
                         else
-                            desc += $"MP {displayValue}";
+                            desc += $"มานา {displayValue}";
                         break;
                     case SubStatType.PAtk:
                         if (mod.amount >= 0)
-                            desc += $"Attack + {displayValue}";
+                            desc += $"โจมตี + {displayValue}";
                         else
-                            desc += $"Attack {displayValue}";
+                            desc += $"โจมตี {displayValue}";
                         break;
                     case SubStatType.PDef:
                         if (mod.amount >= 0)
-                            desc += $"Defense + {displayValue}";
+                            desc += $"ป้องกัน + {displayValue}";
                         else
-                            desc += $"Defense {displayValue}";
+                            desc += $"ป้องกัน {displayValue}";
                         break;
                     case SubStatType.MAtk:
                         if (mod.amount >= 0)
-                            desc += $"Magic + {displayValue}";
+                            desc += $"เวทย์ + {displayValue}";
                         else
-                            desc += $"Magic {displayValue}";
+                            desc += $"เวทย์ {displayValue}";
                         break;
                     case SubStatType.MDef:
                         if (mod.amount >= 0)
-                            desc += $"MagicResist + {displayValue}";
+                            desc += $"ต้านเวทย์ + {displayValue}";
                         else
-                            desc += $"MagicResist {displayValue}";
+                            desc += $"ต้านเวทย์ {displayValue}";
                         break;
                     case SubStatType.Spd:
                         if (mod.amount >= 0)
-                            desc += $"Speed + {displayValue}";
+                            desc += $"ความเร็ว + {displayValue}";
                         else
-                            desc += $"Speed {displayValue}";
+                            desc += $"ความเร็ว {displayValue}";
                         break;
                     case SubStatType.Hit:
                         if (mod.amount >= 0)
-                            desc += $"Hit + {displayValue}";
+                            desc += $"เเม่นยำ + {displayValue}";
                         else
-                            desc += $"Hit {displayValue}";
+                            desc += $"เเม่นยำ {displayValue}";
                         break;
                     case SubStatType.Eva:
                         if (mod.amount >= 0)
-                            desc += $"Eva + {displayValue}";
+                            desc += $"หลบหลีก + {displayValue}";
                         else
-                            desc += $"Eva {displayValue}";
+                            desc += $"หลบหลีก {displayValue}";
                         break;
                     case SubStatType.Crate:
                         if (mod.amount >= 0)
-                            desc += $"Cri rate + {displayValue}";
+                            desc += $"โอกาสคริ + {displayValue}";
                         else
-                            desc += $"Cri rate {displayValue}";
+                            desc += $"โอกาสคริ {displayValue}";
                         break;
                     case SubStatType.Cdmg:
                         if (mod.amount >= 0)
-                            desc += $"Cri dmg + {displayValue}";
+                            desc += $"ความเสียหายคริ + {displayValue}";
                         else
-                            desc += $"Cri dmg {displayValue}";
+                            desc += $"ความเสียหายคริ {displayValue}";
                         break;
                 }
             }
@@ -284,69 +284,69 @@ public class Equipment : Item
                 {
                     case SubStatType.HP:
                         if (mod.amount >= 0)
-                            desc += $"HP + {displayValue}";
+                            desc += $"พลังชีวิต + {displayValue}";
                         else
-                            desc += $"HP {displayValue}";
+                            desc += $"พลังชีวิต {displayValue}";
                         break;
                     case SubStatType.MP:
                         if (mod.amount >= 0)
-                            desc += $"MP + {displayValue}";
+                            desc += $"มานา + {displayValue}";
                         else
-                            desc += $"MP {displayValue}";
+                            desc += $"มานา {displayValue}";
                         break;
                     case SubStatType.PAtk:
                         if (mod.amount >= 0)
-                            desc += $"Attack + {displayValue}";
+                            desc += $"โจมตี + {displayValue}";
                         else
-                            desc += $"Attack {displayValue}";
+                            desc += $"โจมตี {displayValue}";
                         break;
                     case SubStatType.PDef:
                         if (mod.amount >= 0)
-                            desc += $"Defense + {displayValue}";
+                            desc += $"ป้องกัน + {displayValue}";
                         else
-                            desc += $"Defense {displayValue}";
+                            desc += $"ป้องกัน {displayValue}";
                         break;
                     case SubStatType.MAtk:
                         if (mod.amount >= 0)
-                            desc += $"Magic + {displayValue}";
+                            desc += $"เวทย์ + {displayValue}";
                         else
-                            desc += $"Magic {displayValue}";
+                            desc += $"เวทย์ {displayValue}";
                         break;
                     case SubStatType.MDef:
                         if (mod.amount >= 0)
-                            desc += $"MagicResist + {displayValue}";
+                            desc += $"ต้านเวทย์ + {displayValue}";
                         else
-                            desc += $"MagicResist {displayValue}";
+                            desc += $"ต้านเวทย์ {displayValue}";
                         break;
                     case SubStatType.Spd:
                         if (mod.amount >= 0)
-                            desc += $"Speed + {displayValue}";
+                            desc += $"ความเร็ว + {displayValue}";
                         else
-                            desc += $"Speed {displayValue}";
+                            desc += $"ความเร็ว {displayValue}";
                         break;
                     case SubStatType.Hit:
                         if (mod.amount >= 0)
-                            desc += $"Hit + {displayValue}";
+                            desc += $"เเม่นยำ + {displayValue}";
                         else
-                            desc += $"Hit {displayValue}";
+                            desc += $"เเม่นยำ {displayValue}";
                         break;
                     case SubStatType.Eva:
                         if (mod.amount >= 0)
-                            desc += $"Eva + {displayValue}";
+                            desc += $"หลบหลีก + {displayValue}";
                         else
-                            desc += $"Eva {displayValue}";
+                            desc += $"หลบหลีก {displayValue}";
                         break;
                     case SubStatType.Crate:
                         if (mod.amount >= 0)
-                            desc += $"Cri rate + {displayValue}";
+                            desc += $"โอกาสคริ + {displayValue}";
                         else
-                            desc += $"Cri rate {displayValue}";
+                            desc += $"โอกาสคริ {displayValue}";
                         break;
                     case SubStatType.Cdmg:
                         if (mod.amount >= 0)
-                            desc += $"Cri dmg + {displayValue}";
+                            desc += $"ความเสียหายคริ + {displayValue}";
                         else
-                            desc += $"Cri dmg {displayValue}";
+                            desc += $"ความเสียหายคริ {displayValue}";
                         break;
                 }
             }

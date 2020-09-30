@@ -24,7 +24,7 @@ public class CraftBar : MonoBehaviour
         materials = newRecipe.material;
         itemImage.sprite = resultItem.icon;
         itemName.text = resultItem.itemName;
-        costText.text = newRecipe.cost.ToString() + " Hex";
+        costText.text = newRecipe.cost.ToString() + " $";
 
         foreach (StackItem material in materials)
         {

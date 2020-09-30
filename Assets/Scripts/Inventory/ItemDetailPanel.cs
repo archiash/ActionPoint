@@ -16,6 +16,8 @@ public class ItemDetailPanel : MonoBehaviour
     public Image iconImage;
     public TMP_InputField sellAmount;
 
+    [SerializeField] TextMeshProUGUI sellPrice;
+
     public GameObject useButton;
     StackItem currentItem;
 
@@ -44,7 +46,7 @@ public class ItemDetailPanel : MonoBehaviour
 
 
             nameText.text = currentItem.item.itemName;
-            amountText.text = "Amount: " + currentItem.amount.ToString();
+            amountText.text = "จำนวน: " + currentItem.amount.ToString();
             amountText.enabled = true;
             powerText.enabled = false;
 
@@ -57,7 +59,9 @@ public class ItemDetailPanel : MonoBehaviour
         }
               
         iconImage.sprite = currentItem.item.icon;
-        
+
+        sellPrice.text = "ราคา: " + currentItem.item.sellPrice;
+
         sellAmount.text = "1";
         statText.text = item.item.GetDesc();
 

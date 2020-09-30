@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 
 public class EnchantMaterialSelect : MonoBehaviour
@@ -17,6 +18,7 @@ public class EnchantMaterialSelect : MonoBehaviour
 
     [SerializeField]GameObject panel;
     public EnchantMaterialSlot slot;
+
 
     private void Awake()
     {
@@ -97,4 +99,6 @@ public class EnchantMaterialSelect : MonoBehaviour
     {
         panel.SetActive(false);
     }
+
+
 }

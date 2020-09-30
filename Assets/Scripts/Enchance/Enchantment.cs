@@ -15,6 +15,8 @@ public class Enchantment : MonoBehaviour
 
     [SerializeField]EnchantMaterialSlot slotPrefab;
     [SerializeField] Transform parent;
+    [SerializeField] TextMeshProUGUI costText;
+    [SerializeField] Button button;
 
     private void Awake()
     {
@@ -31,7 +33,11 @@ public class Enchantment : MonoBehaviour
         image.sprite = equipment.icon;
         enchantmentLevel.text = "+" + item.enchantment.ToString();
         powerPercentage.text = item.powerPercent.ToString() + "%";
+        costText.text = "ราคา:" + CalculateCost(equipment);
 
+        button.interactable = Condition(item);
+
+        costText.enabled = true;
         image.enabled = true;
         enchantmentLevel.enabled = true;
         powerPercentage.enabled = true;
@@ -39,9 +45,11 @@ public class Enchantment : MonoBehaviour
         CreateMaterialSlot();
     }
 
-    void ResetSelect()
+    public void ResetSelect()
     {
         item = null;
+        button.interactable = false;
+        costText.enabled = false;
         image.enabled = false;
         enchantmentLevel.enabled = false;
         powerPercentage.enabled = false;
@@ -69,18 +77,19 @@ public class Enchantment : MonoBehaviour
     public void Enchant()
     {   if (item == null)
             return;
-
+        
         if (Condition(item))
         {
+            Inventory.instance.UseMoney(CalculateCost(item));
             item.enchantment++;
-            UseMaterial();          
-            ResetSelect();
+            UseMaterial();
+            SelectEnchant(item);
         }
     }
 
     bool Condition(Equipment item)
     {
-        if (materials.Count == materialCount(item))
+        if (materials.Count == materialCount(item) && Inventory.instance.getMoney >= CalculateCost(item))
             return true;
         return false;
     }
@@ -99,6 +108,7 @@ public class Enchantment : MonoBehaviour
     public void AddMaterial(Equipment material)
     {
         materials.Add(material);
+        button.interactable = Condition(item);
     }
 
     public void RemoveMaterial(Equipment material)
@@ -109,5 +119,25 @@ public class Enchantment : MonoBehaviour
     public int materialCount(Equipment item)
     {
         return Mathf.FloorToInt(1 + (item.enchantment / 3));
+    }
+
+    public int CalculateCost(Equipment equipment)
+    {
+        int cost = 0;
+        for (int i = 0; i <= equipment.enchantment; i++)
+        {
+            cost += 100 * Mathf.FloorToInt(1 + (i / 3));
+        }
+        return cost;
+    }
+
+    public int CalculateCost(int level)
+    {
+        int cost = 0;
+        for (int i = 0; i <= level; i++)
+        {
+            cost += 100 * Mathf.FloorToInt(1 + (i / 3));
+        }
+        return cost;
     }
 }

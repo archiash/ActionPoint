@@ -15,5 +15,5 @@ MonoBehaviour:
   resulItem: {fileID: 11400000, guid: 0a96e16b84dec374c8b273162110dbe5, type: 2}
   material:
   - item: {fileID: 11400000, guid: 3593f713fe398af4bbf641e42ab472cb, type: 2}
-    amount: 4
+    amount: 5
   cost: 30
