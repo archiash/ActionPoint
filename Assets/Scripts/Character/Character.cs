@@ -12,6 +12,10 @@ public class Character : MonoBehaviour
 {
     public static Character instance;
 
+    public bool isFullHP
+    {
+        get { return status.currentHP == status.HP.Value; }
+    }
     private void Awake()
     {
         if (instance == null)
@@ -200,7 +204,7 @@ public class Character : MonoBehaviour
         return null;
     }
 
-
+    
 
 }
 

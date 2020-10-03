@@ -1,11 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class RestPanel : MonoBehaviour
 {
+    [SerializeField] bool onQuickRest;
+
     public int level;
     //public TextMeshProUGUI levelText;
     public TextMeshProUGUI costText;
@@ -26,8 +26,13 @@ public class RestPanel : MonoBehaviour
     private void Update()
     {
         cost = Mathf.RoundToInt(character.status.HP.Value - character.status.currentHP) * 2;
-        costText.text = "จ่าย " + cost + " Point";
-        if(!CheckCondition())
+
+        if (!onQuickRest)
+            costText.text = "จ่าย " + cost + " Point";
+        else
+            costText.text = $"ใช้ {cost} Point เพื่อฟื้นฟูพลังชีวิตจนเต็ม";
+
+        if (!CheckCondition() || Character.instance.isFullHP)
         {
             button.interactable = false;
         }else
@@ -42,7 +47,8 @@ public class RestPanel : MonoBehaviour
         {
             pointManager.UseAction(cost);
             character.status.currentHP = character.status.HP.Value;
-            gameObject.SetActive(false);
+            if(!onQuickRest)
+                gameObject.SetActive(false);
         }
     }
 
