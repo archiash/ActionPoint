@@ -23,7 +23,7 @@ public class UI_HpPanel : MonoBehaviour
     {
         hpText.text = ((int)character.status.currentHP).ToString() + "/" + ((int)character.status.HP.Value).ToString();
         rengenText.text = "+" + ((int)character.regenRate).ToString() + "/วิ";
-        hpBar.fillAmount = Mathf.Lerp(hpBar.fillAmount, character.status.currentHP / character.status.HP.Value, Time.deltaTime * 2);
+        hpBar.fillAmount = Mathf.Lerp(hpBar.fillAmount, character.status.currentHP / character.status.HP.Value, Time.deltaTime);
         if (hpBar.fillAmount >= .9999f)
             hpBarEnd.enabled = true;
         else

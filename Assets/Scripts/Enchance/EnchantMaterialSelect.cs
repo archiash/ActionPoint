@@ -76,7 +76,7 @@ public class EnchantMaterialSelect : MonoBehaviour
             }
         }
 
-        equipments = equipments.OrderByDescending(x => x.enchantment).ToList();
+        equipments = equipments.OrderByDescending(x => x.enchantment).ThenByDescending(x => x.powerPercent).ToList();
 
         for(int i = 0; i < equipments.Count; i++)
         {

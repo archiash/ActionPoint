@@ -52,11 +52,36 @@ public class CharacterSaveData
 {
     public float lastHealth;
     public DateTime lastExit;
+    public int level;
+    public int skillPoint;
+    public float exp;
 
-    public CharacterSaveData(float health,DateTime exit)
-    {
-        
+    public int[] statLevel;
+
+    public CharacterSaveData(float health,DateTime exit,int lvl,int sp,int[] sL, float xp)
+    {        
         lastHealth = health;
         lastExit = exit;
+        level = lvl;
+        skillPoint = sp;
+        statLevel = sL;
+        exp = xp;
+    }
+}
+
+[Serializable]
+public class RaidSaveData
+{
+    public string raid;
+    public float currentHP;
+    public int round;
+    public bool isRaid;
+
+    public RaidSaveData(string rb,float hp,int round,bool isRaiding)
+    {
+        raid = rb;
+        currentHP = hp;
+        this.round = round;
+        isRaid = isRaiding;
     }
 }

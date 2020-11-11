@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f8b422af388bd246a5e45c5031e3756, type: 3}
+  m_Name: ArsternMage_FireBolt
+  m_EditorClassIdentifier: 
+  skillName: Fire Bolt
+  skillDesc: "\u0E22\u0E34\u0E48\u0E07\u0E25\u0E39\u0E01\u0E44\u0E1F\u0E2A\u0E23\u0E49\u0E32\u0E07\u0E04\u0E27\u0E32\u0E21\u0E40\u0E2A\u0E35\u0E22\u0E2B\u0E32\u0E22
+    150% \u0E1E\u0E25\u0E31\u0E07\u0E40\u0E27\u0E17\u0E22\u0E4C"
+  manaCost: 10
+  coolTime: 1
+  isUsePoint: 1
+  actions:
+  - target: 1
+    skillType: 0
+    value: 0
+    damageType: 1
+    critical: 1
+    actionModifiers:
+    - statType: 1
+      mainType: 0
+      subType: 4
+      amount: 1.5
+    statToBuff: 0
+    buffModType: 0
+    turnDaration: 0
+    dType: 0
+    penetrate: 0
+    isDrain: 0
+    drainPercent: 0

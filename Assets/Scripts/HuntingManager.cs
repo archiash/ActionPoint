@@ -18,6 +18,8 @@ public class HuntingManager : MonoBehaviour
 
     public Monster testMonster;
 
+    public List<string> huntReport = new List<string>();
+
     float characterSpeed;
     float monsterSpeed;
 
@@ -25,6 +27,12 @@ public class HuntingManager : MonoBehaviour
     float monsterNextTurn = 0f;
 
     float previousHp;
+
+    public List<DebuffDamage> characterDDPS = new List<DebuffDamage>();
+    public List<DebuffDamage> monsterDDPS = new List<DebuffDamage>();
+
+    public int characterStun;
+    public int monsterStun;
 
     public void Setup(Monster _monster = null, Character _character = null)
     {
@@ -40,116 +48,156 @@ public class HuntingManager : MonoBehaviour
         monsterNextTurn = 0f;
         characterNextTurn = 0f;
 
-        characterSkill = 0;
-        monsterSkill = 0;
-
-        characterSkillCooltime = 0;
-        monsterSkillCooltime = 0;
+        characterCooldown = new int[character.currentSkill.Count];
+        monsterCooldown = new int[monster.currentSkill.Count];
 
         character.status.currentMP = character.status.MP.Value;
         previousHp = character.status.currentHP;
+
+        characterStun = 0;
+        monsterStun = 0;
+
+        characterDDPS.Clear();
+        monsterDDPS.Clear();
+        monster.SetSkill();
     }
 
     void CalculateSpeed()
     {
         if (character.status.Spd.Value < monster.status.Spd.Value)
         {
-            characterSpeed = character.status.Spd.Value / character.status.Spd.Value;
-            monsterSpeed = monster.status.Spd.Value / character.status.Spd.Value;
+            characterSpeed = (10 + character.status.Spd.Value) * 100f / (100 + character.status.Spd.Value);
+            monsterSpeed = (10 + monster.status.Spd.Value) * 100f / (100 + character.status.Spd.Value);
         }
         else
         {
-            characterSpeed = character.status.Spd.Value / monster.status.Spd.Value;
-            monsterSpeed = monster.status.Spd.Value / monster.status.Spd.Value;
+            characterSpeed = (10 + character.status.Spd.Value) * 100f / ( 100 +monster.status.Spd.Value);
+            monsterSpeed = (10 + monster.status.Spd.Value) * 100f / (100 + monster.status.Spd.Value);
         }
     }
 
-    int characterSkill = 0;
-    int monsterSkill = 0;
-
-    int characterSkillCooltime = 0;
-    int monsterSkillCooltime = 0;
-
-    float debugValue;
+    int[] characterCooldown;
+    int[] monsterCooldown;
 
     void CharacterTurn()
     {
-        
-        characterNextTurn -= 10;
+        bool isUsedSkill = false;
+        characterNextTurn -= 100;
         print("Character Turn");
         if (character.status.currentHP <= 0)
             return;
 
+        if (!character.status.isFullMP)
+            character.status.currentMP += character.status.MP.Value * 5 / 100f;
+
+        DDPS(character.status, characterDDPS);
         ReduceBuffTurn(character.status);
 
-        if (character.currentSkill.Count > 0 && characterSkillCooltime <= 0)
+        if (characterStun <= 0)
         {
-            character.currentSkill[characterSkill].ActiveSkill(character.status, monster.status);
-
-            characterSkill++;
-            if (characterSkill >= character.currentSkill.Count)
-                characterSkill = 0;
-
-            characterSkillCooltime = character.currentSkill[characterSkill].coolTime;
+            if (character.currentSkill.Count > 0)
+            {
+                for (int i = 0; i < character.currentSkill.Count; i++)
+                {
+                    if (characterCooldown[i] <= 0 && character.status.currentMP >= character.currentSkill[i].manaCost)
+                    {
+                        if (character.currentSkill[i] is CounterSkill)
+                            continue;
+                        isUsedSkill = character.currentSkill[i].Use(character, monster, ArenaType.Hunting);
+                        characterCooldown[i] = character.currentSkill[i].coolTime + 1;
+                        character.status.currentMP -= character.currentSkill[i].manaCost;
+                        break;
+                    }
+                }
+                if (!isUsedSkill)
+                    CharacterNormalAttack();
+            }
+            else
+                CharacterNormalAttack();
         }
-        else           
-            CharacterNormalAttack();
 
-        
+        for(int i = 0; i< character.currentSkill.Count;i++)
+        {
+            characterCooldown[i] = characterCooldown[i] > 0 ? characterCooldown[i] - 1 : characterCooldown[i];
+        }
+
+        if (characterStun > 0)
+        {
+            characterStun--;
+            Debug.Log("STUN Turn Left" + characterStun);
+        }
 
     }
     void MonsterTurn()
     {
-        
-        monsterNextTurn -= 10;
+        bool isUsedSkill = false;
+        monsterNextTurn -= 100;
         print("Monster Turn");
         if (monster.status.currentHP <= 0)
             return;
 
+        if (!monster.status.isFullMP)
+            monster.status.currentMP += monster.status.MP.Value * 5 / 100f;
 
+        Debug.Log("MP: " + monster.status.currentMP);
+
+        DDPS(monster.status, monsterDDPS);
         ReduceBuffTurn(monster.status);
 
-        if (monster.currentSkill.Count > 0 && monsterSkillCooltime <= 0)
-        {                 
-            monster.currentSkill[monsterSkill].ActiveSkill(monster.status, character.status);
 
-            monsterSkill++;              
-            if (monsterSkill >= monster.currentSkill.Count)                    
-                monsterSkill = 0;              
-            monsterSkillCooltime = monster.currentSkill[monsterSkill].coolTime;
+
+        if (monsterStun <= 0)
+        {
+            if (monster.currentSkill.Count > 0)
+            {
+                for (int i = 0; i < monster.currentSkill.Count; i++)
+                {
+                    if (monsterCooldown[i] <= 0 && monster.status.currentMP >= monster.currentSkill[i].manaCost)
+                    {
+                        if (monster.currentSkill[i] is CounterSkill)
+                            continue;
+                        isUsedSkill = monster.currentSkill[i].Use(monster, character, ArenaType.Hunting);
+                        monsterCooldown[i] = monster.currentSkill[i].coolTime + 1;
+                        monster.status.currentMP -= monster.currentSkill[i].manaCost;
+                        break;
+                    }
+                }
+                if (!isUsedSkill)
+                    MonsterNormalAttack();
+            }
+            else
+                MonsterNormalAttack();
         }
-        else               
-            MonsterNormalAttack();
+        for (int i = 0; i < monster.currentSkill.Count; i++)
+        {
+            monsterCooldown[i] = monsterCooldown[i] > 0 ? monsterCooldown[i] - 1 : monsterCooldown[i];
+        }
 
-        
+        if (monsterStun > 0)
+        {
+            monsterStun--;
+            Debug.Log("STUN Turn Left" + monsterStun);
+        }
     }
     void CharacterNormalAttack()
     {
         Debug.Log("Character use Normal Attack");
-
-        float damage = character.status.PAtk.Value;
-        if (Uility.IsCritical(character.status.Crate.Value))
-            damage = Uility.CriticalDamage(damage, character.status.Cdmg.Value);
-        
-        monster.status.GetDamage(ref damage,DamageType.Physic,character.status);
-
-        if(damage != -1)
+        float damage = Formula.DamageFormula(character.status, monster.status);
+        if (Formula.CriticalFormula(character.status, monster.status, ref damage))
+            Debug.Log("Critical");
+        if (monster.status.GetDamage(ref damage, character.status))
+        {
             Debug.Log($"Deal {damage} Physic Damage to {monster.Name}");
-                  
-        characterSkillCooltime--;
+        }
     }
     void MonsterNormalAttack()
     {
         Debug.Log($"{monster.Name} use Normal Attack");
-
-        float damage = monster.status.PAtk.Value;
-        if (Uility.IsCritical(monster.status.Crate.Value))
-            damage = Uility.CriticalDamage(damage, monster.status.Cdmg.Value);
-
-        character.status.GetDamage(ref damage, DamageType.Physic, monster.status);
-        if (damage != -1)
+        float damage = Formula.DamageFormula(monster.status, character.status);
+        if(Formula.CriticalFormula(monster.status, character.status,ref damage))
+            Debug.Log("Critical");
+        if (character.status.GetDamage(ref damage, character.status))
             Debug.Log($"Deal {damage} Physic Damage to Character");
-        monsterSkillCooltime--;
     }
     void ReduceBuffTurn(Status status)
     {
@@ -189,9 +237,9 @@ public class HuntingManager : MonoBehaviour
             characterNextTurn += characterSpeed;
             monsterNextTurn += monsterSpeed;
 
-            while (characterNextTurn >= 10 || monsterNextTurn >= 10)
+            while (characterNextTurn >= 100 || monsterNextTurn >= 100)
             {
-                if (characterNextTurn >= 10 && monsterNextTurn >= 10)
+                if (characterNextTurn >= 100 && monsterNextTurn >= 100)
                 {
                     if (characterNextTurn > monsterNextTurn)
                     {
@@ -219,13 +267,13 @@ public class HuntingManager : MonoBehaviour
                 }
                 else
                 {
-                    if (characterNextTurn >= 10)
+                    if (characterNextTurn >= 100)
                     {
                         CharacterTurn();
                         i++;
                     }
 
-                    if (monsterNextTurn >= 10)
+                    if (monsterNextTurn >= 100)
                     {
                         MonsterTurn();
                         i++;
@@ -253,6 +301,7 @@ public class HuntingManager : MonoBehaviour
         if(character.status.currentHP <= 0)
         {
             print("Lose");
+            print("Still Left :" + monster.status.currentHP);
             ResultReport.instance.ShowResult("เเพ้");
             return true;
 
@@ -272,6 +321,25 @@ public class HuntingManager : MonoBehaviour
         return false;
     }
 
+    void DDPS(Status status,List<DebuffDamage> DDPS)
+    {
+        
+        for(int i = 0; i < DDPS.Count; i++)
+        {
+            if (DDPS[i].turnDuration > 0)
+            {
+                float damage = Formula.DamageFormula(DDPS[i].userStat, status, DDPS[i].damageType, true, DDPS[i].dps, DDPS[i].penetrate, false);
+                status.GetDamage(ref damage,DDPS[i].userStat,false);
+                DDPS[i].turnDuration--;
+                Debug.Log(DDPS[i].source.skillName + " Deal Damage " + damage + " Trun Left " + DDPS[i].turnDuration);
+                
+            }
+            else
+            {
+                DDPS.Remove(DDPS[i]);
+            }                 
+        }
+    }
     void RemoveInHuntBuff(Status status)
     {
         foreach (var statName in Enum.GetValues(typeof(SubStatType)))
@@ -335,16 +403,15 @@ public class HuntingManager : MonoBehaviour
 
     void GiveReward()
     {       
-        for (int i = 0;i< monster.dropItems.Length;i++)
-        {      
-           if( Random.value <= monster.dropItems[i].rateDrop/100f)
-           {
-                int amount = Random.Range(monster.dropItems[i].minDrop, monster.dropItems[i].maxDrop + 1);
-                Inventory.instance.GetItem(monster.dropItems[i].item, amount);
-                ResultReport.instance.AddDrop(monster.dropItems[i].item, amount);
-                
-           }
+        for (int i = 0;i< monster.dropTables.Length;i++)
+        {
+            StackItem dropItem = monster.dropTables[i].DropLoot();
+            if (dropItem == null)
+                continue;
+            Inventory.instance.GetItem(dropItem.item,dropItem.amount);               
+            ResultReport.instance.AddDrop(dropItem.item, dropItem.amount);                     
         }
+        character.GetExp(monster.expReward);
     }
 
 }

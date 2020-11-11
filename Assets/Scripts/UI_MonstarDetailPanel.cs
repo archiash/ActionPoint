@@ -30,7 +30,7 @@ public class UI_MonstarDetailPanel : MonoBehaviour
     [SerializeField] TextMeshProUGUI usePoint;
 
     [SerializeField] GameObject panel;
-    [SerializeField] GameObject button;
+    [SerializeField] Button button;
 
     private void Awake()
     {
@@ -60,10 +60,19 @@ public class UI_MonstarDetailPanel : MonoBehaviour
         crate.text = monster.status.Crate.Value.ToString();
         cdmg.text = monster.status.Cdmg.Value.ToString();
 
-        if (PointManager.instance.GetActionPoint >= monster.usePoint)
-            button.SetActive(true);
+        if (PointManager.instance.GetActionPoint >= monster.usePoint && Inventory.instance.HaveEmptySpace())
+        {
+            button.interactable = true;
+            button.GetComponentInChildren<TextMeshProUGUI>().text = "สู้";
+        }
         else
-            button.SetActive(false);
+        {
+            button.interactable = false;
+            if(PointManager.instance.GetActionPoint < monster.usePoint)
+                button.GetComponentInChildren<TextMeshProUGUI>().text = "Point ไม่พอ";
+            else
+                button.GetComponentInChildren<TextMeshProUGUI>().text = "กระเป๋าเต็ม";
+        }
     }
 
     public void Hunt()

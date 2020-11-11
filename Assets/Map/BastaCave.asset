@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bca02457c5d76ce4e8c5920ba00b9a4d, type: 3}
+  m_Name: BastaCave
+  m_EditorClassIdentifier: 
+  mapName: Basta Cave
+  level: 5
+  monsters:
+  - {fileID: 11400000, guid: 357710b9504c6484d96a7de19aa697b4, type: 2}
+  - {fileID: 11400000, guid: 1712f262fd2b22c48b1107600f9966e3, type: 2}
+  - {fileID: 11400000, guid: 05777fab4d5cf2e4e96d8e9c8c5ac139, type: 2}
+  - {fileID: 11400000, guid: 08675c16b770bed4f8700062a151d0ae, type: 2}
+  - {fileID: 11400000, guid: 0c2de809156d8014f8a75ee1472ea555, type: 2}
+  - {fileID: 11400000, guid: 4954be4153b85a64bb65cd2a02680932, type: 2}

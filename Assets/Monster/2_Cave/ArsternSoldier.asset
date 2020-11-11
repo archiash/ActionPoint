@@ -1,0 +1,108 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5825999a020fbf841bf87164bae64088, type: 3}
+  m_Name: ArsternSoldier
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 21300000, guid: 180ea35f4f080b84cbf00b1317fc8ec1, type: 3}
+  Name: Arstern's Soldier
+  Desc: 
+  status:
+    STR:
+      baseValue: 0
+      upgradeModifier: 0
+      modifiers: []
+    DEX:
+      baseValue: 0
+      upgradeModifier: 0
+      modifiers: []
+    AGI:
+      baseValue: 0
+      upgradeModifier: 0
+      modifiers: []
+    INT:
+      baseValue: 0
+      upgradeModifier: 0
+      modifiers: []
+    CON:
+      baseValue: 0
+      upgradeModifier: 0
+      modifiers: []
+    HP:
+      baseValue: 450
+      mainModifiers: []
+      modifiers: []
+    currentHP: 450
+    MP:
+      baseValue: 30
+      mainModifiers: []
+      modifiers: []
+    currentMP: 30
+    PAtk:
+      baseValue: 35
+      mainModifiers: []
+      modifiers: []
+    PDef:
+      baseValue: 30
+      mainModifiers: []
+      modifiers: []
+    MAtk:
+      baseValue: 0
+      mainModifiers: []
+      modifiers: []
+    MDef:
+      baseValue: 25
+      mainModifiers: []
+      modifiers: []
+    Spd:
+      baseValue: 22
+      mainModifiers: []
+      modifiers: []
+    Hit:
+      baseValue: 25
+      mainModifiers: []
+      modifiers: []
+    Eva:
+      baseValue: 25
+      mainModifiers: []
+      modifiers: []
+    Crate:
+      baseValue: 20
+      mainModifiers: []
+      modifiers: []
+    Cdmg:
+      baseValue: 20
+      mainModifiers: []
+      modifiers: []
+  currentSkill:
+  - {fileID: 11400000, guid: af278dfb65c6bd3418a7a21d19145865, type: 2}
+  usePoint: 50
+  expReward: 60
+  dropTables:
+  - items:
+    - item: {fileID: 11400000, guid: cc13ead9bb77fe447b932dc0a0411411, type: 2}
+      rateDrop: 100
+      minDrop: 1
+      maxDrop: 3
+  - items:
+    - item: {fileID: 11400000, guid: f6a3acec7d63cbd43a9f11ce52f9c5ec, type: 2}
+      rateDrop: 100
+      minDrop: 1
+      maxDrop: 3
+  - items:
+    - item: {fileID: 11400000, guid: f6a3acec7d63cbd43a9f11ce52f9c5ec, type: 2}
+      rateDrop: 100
+      minDrop: 1
+      maxDrop: 1
+    - item: {fileID: 11400000, guid: cc13ead9bb77fe447b932dc0a0411411, type: 2}
+      rateDrop: 50
+      minDrop: 1
+      maxDrop: 1

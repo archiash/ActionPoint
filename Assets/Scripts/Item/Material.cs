@@ -18,7 +18,7 @@ public class MaterialEditor : Editor
     public override void OnInspectorGUI()
     {
         Material t = (Material)target;
-        Texture2D aTexture = SpriteUtility.GetSpriteTexture(t.icon, false);
+        Texture2D aTexture = t.icon? SpriteUtility.GetSpriteTexture(t.icon, false):null;
         GUILayout.Label(aTexture);
         DrawDefaultInspector();
         if (GUILayout.Button("Get Item"))

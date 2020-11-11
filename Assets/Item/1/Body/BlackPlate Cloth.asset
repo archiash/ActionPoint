@@ -18,7 +18,7 @@ MonoBehaviour:
   rarity: 0
   itemDes: 
   itemType: 2
-  sellPrice: 220
+  sellPrice: 240
   enchantment: 0
   powerPercent: 0
   part: 2
@@ -28,8 +28,12 @@ MonoBehaviour:
     statType: 0
     type: 0
     amount: 40
+    isEnchantEffect: 1
+    isPowerEffect: 1
   - modifierType: 1
     mainType: 0
     statType: 3
     type: 0
     amount: 7
+    isEnchantEffect: 1
+    isPowerEffect: 1

@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f8b422af388bd246a5e45c5031e3756, type: 3}
+  m_Name: Muraka_NaturalBless
+  m_EditorClassIdentifier: 
+  skillName: Natural Bless
+  skillDesc: "\u0E1F\u0E37\u0E49\u0E19\u0E1F\u0E39\u0E1E\u0E25\u0E31\u0E07\u0E0A\u0E35\u0E27\u0E34\u0E15
+    250% \u0E40\u0E27\u0E17\u0E22\u0E4C"
+  manaCost: 25
+  coolTime: 10
+  isUsePoint: 1
+  actions:
+  - target: 0
+    skillType: 1
+    value: 0
+    damageType: 0
+    critical: 0
+    actionModifiers:
+    - statType: 1
+      mainType: 0
+      subType: 4
+      amount: 1.5
+    statToBuff: 0
+    buffModType: 0
+    turnDaration: 0
+    dType: 0
+    penetrate: 0
+    isDrain: 0
+    drainPercent: 0

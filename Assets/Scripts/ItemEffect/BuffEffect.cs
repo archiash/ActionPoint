@@ -6,7 +6,7 @@ public class BuffEffect : UsableItem.UsageEffect
 {
     public SubStatType statType;
     public float value;
-    public Modifier.ModifierType modifierType;
+    public ModifierType modifierType;
     public int duration;
 
     public override bool Use(Status user, object source = null)

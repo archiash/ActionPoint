@@ -1,10 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
-using System;
+﻿using System.Collections.Generic;
 using UnityEditor;
+using UnityEngine;
 
 public enum StatType { Main, Sub }
 
@@ -16,6 +12,7 @@ public class Character : MonoBehaviour
     {
         get { return status.currentHP == status.HP.Value; }
     }
+
     private void Awake()
     {
         if (instance == null)
@@ -28,7 +25,9 @@ public class Character : MonoBehaviour
     }
 
     public int Level = 1;
-    public float exp;
+    public float exp = 0;
+
+    public int statusPoint = 0;
 
     public Status status;
     [Range(1,100)]
@@ -48,6 +47,12 @@ public class Character : MonoBehaviour
 
     public UpgradeLevel upgradeLevel;
 
+    private void Start()
+    {
+        for(int i = 1; i< 10; i++)
+        print(Mathf.RoundToInt(30 * Mathf.Pow(i, 2) + (50 * (i - 1))));
+    }
+
     private void Update()
     {
         if (status.currentHP > 0)
@@ -64,7 +69,8 @@ public class Character : MonoBehaviour
             regenRate = 0;
         
         status.currentHP += regenRate * Time.deltaTime;
-
+        if (status.currentHP > status.HP.Value)
+            status.currentHP = status.HP.Value;
     }
     public void Equip(Equipment item,bool fromSave = false)
     {
@@ -154,16 +160,16 @@ public class Character : MonoBehaviour
     }
     public void LevelUp()
     {
-        if (exp >= Mathf.RoundToInt(30 * Mathf.Pow(Level, 2) - (50 * (Level - 1))))
+        if (exp >= Mathf.RoundToInt(30 * Mathf.Pow(Level, 2) + (50 * (Level - 1))))
         {
-            exp -= Mathf.RoundToInt(30 * Mathf.Pow(Level, 2) - (50 * (Level - 1)));
+            exp -= Mathf.RoundToInt(30 * Mathf.Pow(Level, 2) + (50 * (Level - 1)));
             Level++;
-            //skillPoint++;
+            statusPoint++;
         }
     }
     public void GetExp(int amount)
     {
-        //exp += amount + Mathf.RoundToInt(amount * expBuff);
+        exp += amount;
         LevelUp();
     }
     public Equipment GetEquipmentPart(EquipmentPart part)
@@ -248,12 +254,12 @@ public class CharacterEditor : Editor
             GUILayout.Space(20);
 
             GUILayout.Label("Equipment");
-            GUILayout.Label("Weapon: " + t.weapon?.itemName);
-            GUILayout.Label("Head: " + t.head?.itemName);
-            GUILayout.Label("Body: " + t.body?.itemName);
-            GUILayout.Label("Arms: " + t.arms?.itemName);
-            GUILayout.Label("Legs: " + t.legs?.itemName);
-            GUILayout.Label("Accessory: " + t.accessory?.itemName);
+            GUILayout.Label("Weapon: " + t.weapon?.itemName + " " + t.weapon?.powerPercent + "% +" + t.weapon?.enchantment);
+            GUILayout.Label("Head: " + t.head?.itemName + " " + t.head?.powerPercent + "% +" + t.head?.enchantment);
+            GUILayout.Label("Body: " + t.body?.itemName + " " + t.body?.powerPercent + "% +" + t.body?.enchantment);
+            GUILayout.Label("Arms: " + t.arms?.itemName + " " + t.arms?.powerPercent + "% +" + t.arms?.enchantment);
+            GUILayout.Label("Legs: " + t.legs?.itemName + " " + t.legs?.powerPercent + "% +" + t.legs?.enchantment);
+            GUILayout.Label("Accessory: " + t.accessory?.itemName + " " + t.accessory?.powerPercent + "% +" + t.accessory?.enchantment);
 
             GUILayout.Label("Atk Mod Count: " + t.status.PAtk.modifiers.Count);
 

@@ -34,7 +34,7 @@ public class UI_StatusPanel : MonoBehaviour
         spd.text = ((float)Math.Round(status.Spd.Value * 100f) / 100f).ToString();
         eva.text = ((float)Math.Round(status.Eva.Value * 100f) / 100f).ToString();
         hit.text = ((float)Math.Round(status.Hit.Value * 100f) / 100f).ToString();
-        crate.text = ((float)Math.Round(status.Crate.Value * 100f) / 100f).ToString();
-        cdmg.text = ((float)Math.Round(status.Cdmg.Value * 100f) / 100f).ToString();
+        crate.text = ((float)Math.Round(status.Crate.Value * 100f) / 100f).ToString() + " | " + ((50 + (float)Math.Round(status.Crate.Value * 100f) / 100f) / 5) + "%";
+        cdmg.text = ((float)Math.Round(status.Cdmg.Value * 100f) / 100f).ToString() + " | " + (2f + ((float)Math.Round(status.Cdmg.Value * 100f) / 100f) / 100) * 100 + "%" ;
     }
 }

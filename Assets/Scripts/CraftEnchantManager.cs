@@ -12,6 +12,12 @@ public class CraftEnchantManager : MonoBehaviour
     [SerializeField] GameObject enchantment;
     [SerializeField] GameObject crafting;
 
+
+    public void Start()
+    {
+        OptionChange();
+    }
+
     public void OptionChange()
     {
         List<TMP_Dropdown.OptionData> option = new List<TMP_Dropdown.OptionData>();

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e3b25a13f51a4d44b52634692689d33, type: 3}
+  m_Name: CoperiteShard
+  m_EditorClassIdentifier: 
+  id: f6a3acec7d63cbd43a9f11ce52f9c5ec
+  icon: {fileID: 21300000, guid: 31c2b6cedf06bc44780eb8dd952df0ca, type: 3}
+  itemName: Coperite Shard
+  rarity: 0
+  itemDes: 
+  itemType: 0
+  sellPrice: 20

@@ -1,0 +1,105 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5825999a020fbf841bf87164bae64088, type: 3}
+  m_Name: Geoform
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 21300000, guid: f8bb96538d4aeb545b3527b2c41e06f1, type: 3}
+  Name: Geoform
+  Desc: 
+  status:
+    STR:
+      baseValue: 0
+      upgradeModifier: 0
+      modifiers: []
+    DEX:
+      baseValue: 0
+      upgradeModifier: 0
+      modifiers: []
+    AGI:
+      baseValue: 0
+      upgradeModifier: 0
+      modifiers: []
+    INT:
+      baseValue: 0
+      upgradeModifier: 0
+      modifiers: []
+    CON:
+      baseValue: 0
+      upgradeModifier: 0
+      modifiers: []
+    HP:
+      baseValue: 1000
+      mainModifiers: []
+      modifiers: []
+    currentHP: 1000
+    MP:
+      baseValue: 120
+      mainModifiers: []
+      modifiers: []
+    currentMP: 120
+    PAtk:
+      baseValue: 40
+      mainModifiers: []
+      modifiers: []
+    PDef:
+      baseValue: 60
+      mainModifiers: []
+      modifiers: []
+    MAtk:
+      baseValue: 65
+      mainModifiers: []
+      modifiers: []
+    MDef:
+      baseValue: 45
+      mainModifiers: []
+      modifiers: []
+    Spd:
+      baseValue: 32
+      mainModifiers: []
+      modifiers: []
+    Hit:
+      baseValue: 50
+      mainModifiers: []
+      modifiers: []
+    Eva:
+      baseValue: 30
+      mainModifiers: []
+      modifiers: []
+    Crate:
+      baseValue: 25
+      mainModifiers: []
+      modifiers: []
+    Cdmg:
+      baseValue: 25
+      mainModifiers: []
+      modifiers: []
+  currentSkill:
+  - {fileID: 11400000, guid: 0bed2ef2433e9074e8f870b0602fd036, type: 2}
+  - {fileID: 11400000, guid: f5e73ffddfbfa7949814623413c7ad03, type: 2}
+  - {fileID: 11400000, guid: 1736b2d17debdeb4ca4be53eb918c426, type: 2}
+  usePoint: 100
+  expReward: 150
+  dropTables:
+  - items:
+    - item: {fileID: 11400000, guid: a9035b84dea41b6499d1c87c9c75dd7c, type: 2}
+      rateDrop: 100
+      minDrop: 1
+      maxDrop: 3
+  - items:
+    - item: {fileID: 11400000, guid: a9035b84dea41b6499d1c87c9c75dd7c, type: 2}
+      rateDrop: 100
+      minDrop: 1
+      maxDrop: 1
+    - item: {fileID: 11400000, guid: 0af5a2d8ee1f34b458468c5b0e9235f4, type: 2}
+      rateDrop: 25
+      minDrop: 1
+      maxDrop: 1

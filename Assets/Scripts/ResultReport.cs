@@ -23,9 +23,15 @@ public class ResultReport : MonoBehaviour
 
     public void AddDrop(Item newItem, int newAmount)
     {
-        StackItem newSLot = new StackItem();
-        newSLot.item = newItem;
-        newSLot.amount = newAmount;
+        for(int i = 0; i <droplist.Count;i++)
+        {
+            if(newItem.ID == droplist[i].item.ID)
+            {
+                droplist[i].amount += newAmount;
+                return;
+            }
+        }
+        StackItem newSLot = new StackItem(newItem,newAmount);
         droplist.Add(newSLot);
     }
 

@@ -15,7 +15,7 @@ MonoBehaviour:
   id: b46f2fe1b8819264ab1a25241859cc0a
   icon: {fileID: 21300000, guid: 71d498ceda8764946aa479d3f3986798, type: 3}
   itemName: RedClaw Ring
-  rarity: 0
+  rarity: 1
   itemDes: 
   itemType: 2
   sellPrice: 240
@@ -28,13 +28,19 @@ MonoBehaviour:
     statType: 0
     type: 0
     amount: 3
+    isEnchantEffect: 1
+    isPowerEffect: 1
   - modifierType: 1
     mainType: 0
     statType: 10
     type: 0
     amount: 5
+    isEnchantEffect: 1
+    isPowerEffect: 1
   - modifierType: 1
     mainType: 0
     statType: 9
     type: 0
     amount: 5
+    isEnchantEffect: 1
+    isPowerEffect: 1

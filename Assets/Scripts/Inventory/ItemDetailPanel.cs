@@ -60,7 +60,7 @@ public class ItemDetailPanel : MonoBehaviour
               
         iconImage.sprite = currentItem.item.icon;
 
-        sellPrice.text = "ราคา: " + currentItem.item.sellPrice;
+        sellPrice.text = "ราคา: " + currentItem.item.price;
 
         sellAmount.text = "1";
         statText.text = item.item.GetDesc();

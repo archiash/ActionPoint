@@ -19,6 +19,14 @@ public class Item : ScriptableObject
 
     public int sellPrice;
 
+    public virtual int price
+    {
+        get
+        {
+            return sellPrice;
+        }
+    }
+
 #if UNITY_EDITOR
     private void OnValidate()
     {
@@ -63,7 +71,7 @@ public class ItemEditor
         m_DescriptionProperty = m_Target.FindProperty(nameof(Item.itemDes));
         m_RarityProperty = m_Target.FindProperty(nameof(Item.rarity));
         m_TypeProperty = m_Target.FindProperty(nameof(Item.itemType));
-        m_PriceProperty = m_Target.FindProperty(nameof(Item.sellPrice));
+        m_PriceProperty = m_Target.FindProperty(nameof(Item.price));
     }
 
     public void GUI()

@@ -28,3 +28,5 @@ MonoBehaviour:
     statType: 2
     type: 0
     amount: 4
+    isEnchantEffect: 1
+    isPowerEffect: 1

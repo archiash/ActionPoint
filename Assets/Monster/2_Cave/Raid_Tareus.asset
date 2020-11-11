@@ -1,0 +1,137 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e895d16d24d0831449cbba76c201d457, type: 3}
+  m_Name: Raid_Tareus
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 21300000, guid: 08092b9975a4c0b45978ca998fbb299d, type: 3}
+  Name: Tareus
+  Desc: 
+  status:
+    STR:
+      baseValue: 0
+      upgradeModifier: 0
+      modifiers: []
+    DEX:
+      baseValue: 0
+      upgradeModifier: 0
+      modifiers: []
+    AGI:
+      baseValue: 0
+      upgradeModifier: 0
+      modifiers: []
+    INT:
+      baseValue: 0
+      upgradeModifier: 0
+      modifiers: []
+    CON:
+      baseValue: 0
+      upgradeModifier: 0
+      modifiers: []
+    HP:
+      baseValue: 3000
+      mainModifiers: []
+      modifiers: []
+    currentHP: 3000
+    MP:
+      baseValue: 200
+      mainModifiers: []
+      modifiers: []
+    currentMP: 200
+    PAtk:
+      baseValue: 40
+      mainModifiers: []
+      modifiers: []
+    PDef:
+      baseValue: 50
+      mainModifiers: []
+      modifiers: []
+    Pen:
+      baseValue: 0
+      mainModifiers: []
+      modifiers: []
+    MAtk:
+      baseValue: 80
+      mainModifiers: []
+      modifiers: []
+    MDef:
+      baseValue: 70
+      mainModifiers: []
+      modifiers: []
+    Neu:
+      baseValue: 10
+      mainModifiers: []
+      modifiers: []
+    Spd:
+      baseValue: 70
+      mainModifiers: []
+      modifiers: []
+    Hit:
+      baseValue: 60
+      mainModifiers: []
+      modifiers: []
+    Eva:
+      baseValue: 50
+      mainModifiers: []
+      modifiers: []
+    Crate:
+      baseValue: 40
+      mainModifiers: []
+      modifiers: []
+    Cdmg:
+      baseValue: 60
+      mainModifiers: []
+      modifiers: []
+    Cres:
+      baseValue: 20
+      mainModifiers: []
+      modifiers: []
+  currentSkill:
+  - {fileID: 11400000, guid: 576bddbdf652fca42b57d4f33b55bd7c, type: 2}
+  - {fileID: 11400000, guid: da7bf54b42b65d54a82c4add583956f3, type: 2}
+  - {fileID: 11400000, guid: 9820de62489342044bde42636f2e26d7, type: 2}
+  - {fileID: 11400000, guid: c1fe8a936eaf49e48b0e08e45c388c9d, type: 2}
+  usePoint: 200
+  expReward: 500
+  dropTables:
+  - items:
+    - item: {fileID: 11400000, guid: c2a3d7c386ffdf341a8855568a39251c, type: 2}
+      rateDrop: 100
+      minDrop: 1
+      maxDrop: 1
+    - item: {fileID: 11400000, guid: 9e6dedae9ca0226409cc6e7331f64970, type: 2}
+      rateDrop: 10
+      minDrop: 1
+      maxDrop: 1
+  - items:
+    - item: {fileID: 11400000, guid: c2a3d7c386ffdf341a8855568a39251c, type: 2}
+      rateDrop: 100
+      minDrop: 1
+      maxDrop: 1
+    - item: {fileID: 11400000, guid: 6e93471bbdbd1c64295f6beaac8a93d3, type: 2}
+      rateDrop: 80
+      minDrop: 1
+      maxDrop: 3
+  - items:
+    - item: {fileID: 11400000, guid: cc13ead9bb77fe447b932dc0a0411411, type: 2}
+      rateDrop: 100
+      minDrop: 1
+      maxDrop: 3
+    - item: {fileID: 11400000, guid: f6a3acec7d63cbd43a9f11ce52f9c5ec, type: 2}
+      rateDrop: 50
+      minDrop: 1
+      maxDrop: 3
+  id: 87239d827cd7fc642af11cf782dd5f01
+  summonMaterial:
+  - item: {fileID: 11400000, guid: 0af5a2d8ee1f34b458468c5b0e9235f4, type: 2}
+    amount: 3
+  - item: {fileID: 11400000, guid: 4dc57a7badc6f70499b7d773bbb1e8a0, type: 2}
+    amount: 5

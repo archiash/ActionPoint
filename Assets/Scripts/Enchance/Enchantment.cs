@@ -98,7 +98,7 @@ public class Enchantment : MonoBehaviour
     {
         foreach(Equipment x in materials)
         {
-            Inventory.instance.UseAsMaterial(x,1);
+            Inventory.instance.UseAsMaterial(x);
         }
         materials.Clear();
     }

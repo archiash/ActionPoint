@@ -5,6 +5,10 @@ using UnityEditor;
 using UnityEngine;
 
 public enum SubStatType { HP,MP,PAtk,PDef,MAtk,MDef,Spd,Hit,Eva,Crate,Cdmg}
+public enum ModifierType
+{
+    Flat, Pecentage
+}
 
 [System.Serializable]
 public class Stat
@@ -35,7 +39,7 @@ public class Stat
         float value = baseValue + MainValueModifier();
         for(int i = 0;i < modifiers.Count;i++)
         {
-            if (modifiers[i].type == Modifier.ModifierType.Flat)
+            if (modifiers[i].type == ModifierType.Flat)
                 value += modifiers[i].value;
             else
                 value *= 1 + (modifiers[i].value / 100);
@@ -88,16 +92,41 @@ public class Stat
         return 0;
     }
 
+    public static string SubToNormalName(SubStatType subStatType)
+    {
+        switch (subStatType)
+        {
+            case SubStatType.HP:
+                return "พลังชีวิต";
+            case SubStatType.MP:
+                return "มานา";
+            case SubStatType.PAtk:
+                return "โจมตี";
+            case SubStatType.PDef:
+                return "ป้องกัน";
+            case SubStatType.MAtk:
+                return "เวทย์";
+            case SubStatType.MDef:
+                return "ต้านเวทย์";
+            case SubStatType.Spd:
+                return "ความเร็ว";
+            case SubStatType.Hit:
+                return "เเม่นยำ";                
+            case SubStatType.Eva:
+                return "หลบหลีก";
+            case SubStatType.Crate:
+                return "อัตราคริติคอล";    
+            case SubStatType.Cdmg:
+                return "ดาเมจคริติคอล";                
+        }
+
+        return "";
+    }
 }
 
 [System.Serializable]
 public class Modifier
 {
-    public enum ModifierType
-    {
-        Flat,Pecentage
-    }
-
     public enum ModifierTime
     {
         Equip,Hunt,Turn

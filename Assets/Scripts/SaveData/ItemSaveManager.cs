@@ -12,6 +12,18 @@ public class ItemSaveManager : MonoBehaviour
     private const string EquipmentFileName = "Equipment";
     private const string PointFileName = "Point";
     private const string CharacterFileName = "Character";
+    private const string RaidFileName = "Raid";
+
+    public void SaveRaid(string id,float hp,int time,bool isRaid)
+    {
+        var saveData = new RaidSaveData(id, hp, time,isRaid);
+        ItemSaveIO.SaveItems(saveData, RaidFileName);
+    }
+
+    public RaidSaveData LoadRaid()
+    {
+        return ItemSaveIO.LoadItems<RaidSaveData>(RaidFileName);
+    }
 
     public void LoadInventory(Inventory inventory = null)
     {
@@ -32,7 +44,7 @@ public class ItemSaveManager : MonoBehaviour
         inventory.items.Clear();
         for(int i =0;i < saveData.SavedSlots.Length;i++)
         {
-            StackItem stackItem = new StackItem();
+            StackItem stackItem = new StackItem(null,0);
             ItemSlotSaveData saveSlot = saveData.SavedSlots[i];
 
             if(saveSlot == null)
@@ -96,6 +108,8 @@ public class ItemSaveManager : MonoBehaviour
         {
             pointManager = PointManager.instance;
         }
+        if (saveData == null)
+            return;
         double pointWhileExit = (DateTime.UtcNow - saveData.lastExit).TotalSeconds * saveData.pointPerSec / 2;
         if (pointWhileExit > 3600)
             pointWhileExit = 3600;
@@ -149,20 +163,23 @@ public class ItemSaveManager : MonoBehaviour
                     continue;
 
                 Equipment equipment = (Equipment)itemDatabase.GetItemCopy(saveData.SavedSlots[i].itemID);
+            if (equipment == null)
+                continue;
                 equipment.enchantment = saveData.SavedSlots[i].amount;
                 equipment.powerPercent = saveData.SavedSlots[i].powerpercentage;
                 character.Equip(equipment,true);
             }
         
     }
-    public void SaveCharacterData(Character character =null)
+    public void SaveCharacterData(Character character = null)
     {
+        StatusUpgrade status = StatusUpgrade.instance;
         if (character == null)
-        {
+        {            
             character = Character.instance;
         }
 
-        var saveData = new CharacterSaveData(character.status.currentHP, DateTime.UtcNow);
+        var saveData = new CharacterSaveData(character.status.currentHP, DateTime.UtcNow,character.Level,character.statusPoint,new int[5] {status.STR,status.DEX,status.AGI,status.INT,status.CON},character.exp);
         ItemSaveIO.SaveCharacter(saveData, CharacterFileName);
     }
     public void LoadCharacterData(Character character = null)
@@ -171,9 +188,24 @@ public class ItemSaveManager : MonoBehaviour
         {
             character = Character.instance;
         }
+        StatusUpgrade status = StatusUpgrade.instance;
         CharacterSaveData saveData = ItemSaveIO.LoadCharacter(CharacterFileName);
         if (saveData == null)
             return;
+
+        if (saveData.level > 0)
+        {
+            character.Level = saveData.level;
+            character.statusPoint = saveData.skillPoint;
+            character.exp = saveData.exp;
+            status.STR = saveData.statLevel[0];
+            status.DEX = saveData.statLevel[1];
+            status.AGI = saveData.statLevel[2];
+            status.INT = saveData.statLevel[3];
+            status.CON = saveData.statLevel[4];
+        }
+        
+
         double healWhileExit = (DateTime.UtcNow - saveData.lastExit).TotalSeconds / 2;
         if (healWhileExit > 100)
             healWhileExit = 100;

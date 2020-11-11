@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 #if UNITY_EDITOR
+using UnityEditor.Sprites;
 using UnityEditor;
 #endif
 
@@ -21,7 +22,10 @@ public class RecipeEditor : Editor
     {
         Recipe t = (Recipe)target;
         Cost = t.cost;
-
+        
+        
+        Texture2D aTexture = t.resulItem ? SpriteUtility.GetSpriteTexture(t.resulItem.icon, false) : null;
+        GUILayout.Label(aTexture);
         base.OnInspectorGUI();
         for(int i = 0;i<t.material.Count;i++)
         {

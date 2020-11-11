@@ -16,7 +16,7 @@ public class MainStat
         float value = baseValue;
         for (int i = 0; i < modifiers.Count; i++)
         {
-            if (modifiers[i].type == Modifier.ModifierType.Flat)
+            if (modifiers[i].type == ModifierType.Flat)
                 value += modifiers[i].value;
             else
                 value *= (1 + (modifiers[i].value / 100));

@@ -15,14 +15,28 @@ public class Equipment : Item
     public EquipmentPart part;
     public List<EquipmentModifier> modifiers = new List<EquipmentModifier>();
 
+    public override int price
+    {
+        get
+        {
+            return (int)(sellPrice * (1 + (enchantment / 5f)));
+        }
+    }
+
     public void Equip(Character character)
     {
         foreach(EquipmentModifier mod in modifiers)
         {
-            //float amount = mod.amount * ((powerPercent + (enchantment * 20))/100f);
+            float amount = mod.amount;
 
-            float amount = (mod.amount * powerPercent/100f) * (1 + (enchantment * 0.2f));
-            if(mod.modifierType == StatType.Main)
+            if (mod.isPowerEffect)
+            {
+                amount *= powerPercent / 100f;
+
+                if (mod.isEnchantEffect)
+                    amount *= (1 + (enchantment * 0.2f));
+            }
+            if (mod.modifierType == StatType.Main)
             {
                 switch(mod.mainType)
                 {
@@ -108,13 +122,19 @@ public class Equipment : Item
     {
         string desc = "";
         if(fulldesc)
-            desc = itemDes + " ";
+            desc = itemDes + " \n";
 
         foreach (EquipmentModifier mod in modifiers)
         {
-            //float displayValue = mod.amount * ((powerPercent + (enchantment * 20)) / 100f);
-            float displayValue = (mod.amount * powerPercent/100f) * (1 + (enchantment * 0.2f));
+            float displayValue = mod.amount;
 
+            if (mod.isPowerEffect)
+            {
+                displayValue *= powerPercent / 100f;
+
+                if (mod.isEnchantEffect)
+                    displayValue *= (1 + (enchantment * 0.2f));
+            }
             if (mod.modifierType == StatType.Main)
             {
                 switch (mod.mainType)
@@ -224,23 +244,40 @@ public class Equipment : Item
                 }
             }
 
-            if(mod.type == Modifier.ModifierType.Pecentage)
+            if(mod.type == ModifierType.Pecentage)
             {
                 desc += "% ";
             }else
             {
                 desc += " ";
             }
-            
+
+            if (!mod.isPowerEffect)
+            {
+                desc += "**";            
+            }else
+            {
+                if (!mod.isEnchantEffect)
+                {
+                    desc += "*";
+                }
+            }
+
+            desc += "\n";
         }
         return desc;
     }
     public string GetDesc(int percent)
     {
-        string desc = itemDes + " ";
+        string desc = "";
+        if(itemDes != "")
+            desc = itemDes + " \n";
         foreach (EquipmentModifier mod in modifiers)
         {
-            float displayValue = mod.amount * (percent / 100f);
+            float displayValue = mod.amount;
+
+            if (mod.isPowerEffect)
+                displayValue *= percent / 100f;
 
             if (mod.modifierType == StatType.Main)
             {
@@ -351,7 +388,7 @@ public class Equipment : Item
                 }
             }
 
-            if (mod.type == Modifier.ModifierType.Pecentage)
+            if (mod.type == ModifierType.Pecentage)
             {
                 desc += "% ";
             }
@@ -360,6 +397,19 @@ public class Equipment : Item
                 desc += " ";
             }
 
+            if (!mod.isPowerEffect)
+            {
+                desc += "**";
+            }
+            else
+            {
+                if (!mod.isEnchantEffect)
+                {
+                    desc += "*";
+                }
+            }
+
+            desc += "\n";
         }
         return desc;
     }
@@ -378,8 +428,10 @@ public class EquipmentModifier
     public StatType modifierType;
     public MainStatType mainType;
     public SubStatType statType;
-    public Modifier.ModifierType type;
+    public ModifierType type;
     public int amount;
+    public bool isEnchantEffect = true;
+    public bool isPowerEffect = true;
 }
 
 #if UNITY_EDITOR
@@ -392,9 +444,7 @@ public class EquipmentModifierDrawer : PropertyDrawer
         var statRect = new Rect(position.x, position.y, 100, position.height -25);
         var typeRect = new Rect(position.x + 100, position.y, 100, position.height -25);
         var amountRect = new Rect(position.x + 200, position.y, 100, position.height -25);
-        var modTypeRect = new Rect(position.x + 200, position.y + 25, 100, position.height -25);
-        EditorGUILayout.BeginVertical();
-        EditorGUILayout.BeginHorizontal();
+        var modTypeRect = new Rect(position.x + 300, position.y, 100, position.height -25);
         EditorGUI.PropertyField(statRect, property.FindPropertyRelative("modifierType"), GUIContent.none);
         if(property.FindPropertyRelative("modifierType").enumValueIndex == 0)
         {
@@ -404,9 +454,16 @@ public class EquipmentModifierDrawer : PropertyDrawer
             EditorGUI.PropertyField(typeRect, property.FindPropertyRelative("statType"), GUIContent.none);
         }
         EditorGUI.PropertyField(amountRect, property.FindPropertyRelative("amount"), GUIContent.none);
-        EditorGUILayout.EndHorizontal();
         EditorGUI.PropertyField(modTypeRect, property.FindPropertyRelative("type"), GUIContent.none);
-        EditorGUILayout.EndVertical();
+        statRect.y += 25;
+        statRect.width = position.width / 2;
+        EditorGUI.PropertyField(statRect, property.FindPropertyRelative("isPowerEffect"));
+        if (property.FindPropertyRelative("isPowerEffect").boolValue == true)
+        {
+            statRect.x += statRect.width;
+            EditorGUI.PropertyField(statRect, property.FindPropertyRelative("isEnchantEffect"));
+        }
+
     }
 
     public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
@@ -418,21 +475,23 @@ public class EquipmentModifierDrawer : PropertyDrawer
 [CustomEditor(typeof(Equipment))]
 public class EquipmentEditor : Editor
 {
+    int enchantment;
+    int percentage;
+
     public override void OnInspectorGUI()
     {
         Equipment t = (Equipment)target;
-        Texture2D aTexture = SpriteUtility.GetSpriteTexture(t.icon, false);
+        Texture2D aTexture = t.icon? SpriteUtility.GetSpriteTexture(t.icon, false):null;
         GUILayout.Label(aTexture);
         DrawDefaultInspector();
-        if(GUILayout.Button("Get Item"))
+        percentage = EditorGUILayout.IntSlider("PowerPercentage", percentage,0,10);
+        enchantment = EditorGUILayout.IntSlider("Enchantment", enchantment, 0, 10);
+        if (GUILayout.Button("Get Item"))
         {
-            Inventory.instance.GetItem(t.GetCopyItem());
-        }
-        if (GUILayout.Button("Equip Item"))
-        {
-            Item newItem = t.GetCopyItem();
+           Equipment newItem = (Equipment)(t.GetCopyItem());
+            newItem.powerPercent = 50 + (percentage * 5);
+            newItem.enchantment = enchantment;
             Inventory.instance.GetItem(newItem);
-            Character.instance.Equip((Equipment)newItem);
         }
     }
 }

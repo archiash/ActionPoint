@@ -5,6 +5,9 @@ EditorUserSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 4
   m_ConfigSettings:
+    UIBuilder.EditorExtensionModeKey:
+      value: 37434103
+      flags: 0
     UnityRemoteDevice:
       value: 225f4d46245b0d4902070862342649191512
       flags: 0
@@ -20,6 +23,3 @@ EditorUserSettings:
   m_VCOverwriteFailedCheckoutAssets: 1
   m_VCOverlayIcons: 1
   m_VCAllowAsyncUpdate: 0
-  m_AssetPipelineMode2: 1
-  m_CacheServerMode: 0
-  m_CacheServers: []

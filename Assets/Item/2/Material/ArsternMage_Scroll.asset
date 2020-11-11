@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e3b25a13f51a4d44b52634692689d33, type: 3}
+  m_Name: ArsternMage_Scroll
+  m_EditorClassIdentifier: 
+  id: 4dc57a7badc6f70499b7d773bbb1e8a0
+  icon: {fileID: 21300000, guid: ae7d68a83b020d444b42e76b9763fc7e, type: 3}
+  itemName: Arstern Scroll
+  rarity: 1
+  itemDes: 
+  itemType: 0
+  sellPrice: 50

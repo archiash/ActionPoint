@@ -77,11 +77,7 @@ public class Inventory : MonoBehaviour
             }
         }
         
-        StackItem newStack = new StackItem();
-        newStack.item = newItem;
-        
-
-        newStack.amount = amount;
+        StackItem newStack = new StackItem(newItem,amount);
         items.Add(newStack);
 
         if (onItemChange != null)
@@ -129,12 +125,27 @@ public class Inventory : MonoBehaviour
     {
         foreach (StackItem item in items)
         {
-            if (useItem == item.item)
+            if (useItem.ID == item.item.ID)
             {
                 item.amount -= useAmount;
             }
 
             if (item.amount <= 0)
+            {
+                items.Remove(item);
+                break;
+            }
+        }
+
+        if (onItemChange != null)
+            onItemChange.Invoke();
+    }
+
+    public void UseAsMaterial(Equipment equipment)
+    {
+        foreach (StackItem item in items)
+        {
+            if (equipment == item.item)
             {
                 items.Remove(item);
                 break;
@@ -151,7 +162,7 @@ public class Inventory : MonoBehaviour
             if(item.item == sellItem)
             {
                 item.amount--;
-                money += sellItem.sellPrice;
+                money += sellItem.price;
             }
 
             if(item.amount <= 0)
@@ -171,7 +182,7 @@ public class Inventory : MonoBehaviour
             if (item.item == sellItem)
             {
                 item.amount -= amount;
-                money += sellItem.sellPrice * amount;
+                money += sellItem.price * amount;
             }
 
             if (item.amount <= 0)

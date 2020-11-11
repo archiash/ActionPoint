@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2be80355694d66478b9b2fc718b2c38, type: 3}
+  m_Name: VenomSword
+  m_EditorClassIdentifier: 
+  id: 02e5af28e1039774b9b97adb489da85f
+  icon: {fileID: 21300000, guid: e309a4f832cc7b443b916097bb056282, type: 3}
+  itemName: Venom Sword
+  rarity: 0
+  itemDes: 
+  itemType: 2
+  sellPrice: 315
+  enchantment: 0
+  powerPercent: 100
+  part: 0
+  modifiers:
+  - modifierType: 1
+    mainType: 1
+    statType: 2
+    type: 0
+    amount: 13
+    isEnchantEffect: 1
+    isPowerEffect: 1
+  - modifierType: 1
+    mainType: 0
+    statType: 6
+    type: 0
+    amount: 5
+    isEnchantEffect: 1
+    isPowerEffect: 1
+  - modifierType: 1
+    mainType: 0
+    statType: 9
+    type: 0
+    amount: 5
+    isEnchantEffect: 1
+    isPowerEffect: 1
+  - modifierType: 1
+    mainType: 0
+    statType: 7
+    type: 0
+    amount: 3
+    isEnchantEffect: 1
+    isPowerEffect: 1

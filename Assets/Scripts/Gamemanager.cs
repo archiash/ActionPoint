@@ -4,11 +4,13 @@ using System.Collections.Generic;
 
 public class Gamemanager : MonoBehaviour
 {
-    [SerializeField]ItemSaveManager itemSaveManager;
+    public ItemSaveManager itemSaveManager;
 
     public static Gamemanager instance;
 
     public List<Camera> cameras;
+
+    bool isLoad;
 
     private void Awake()
     {
@@ -87,17 +89,20 @@ public class Gamemanager : MonoBehaviour
         itemSaveManager.LoadCharacterData();        
         itemSaveManager.LoadPoint();
         itemSaveManager.LoadInventory();
+        isLoad = true;
         
     }
 
     public void Save()
     {
-        itemSaveManager.SaveEquipment();
-        itemSaveManager.SaveInventory();
-        itemSaveManager.SavePoint();
-        itemSaveManager.SaveCharacterData();
+        if (isLoad)
+        {
+            itemSaveManager.SaveEquipment();
+            itemSaveManager.SaveInventory();
+            itemSaveManager.SavePoint();
+            itemSaveManager.SaveCharacterData();
+        }
     }
-
 
 }
 #if UNITY_EDITOR

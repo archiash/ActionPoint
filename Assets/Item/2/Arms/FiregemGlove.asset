@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2be80355694d66478b9b2fc718b2c38, type: 3}
+  m_Name: FiregemGlove
+  m_EditorClassIdentifier: 
+  id: 6f7688679b625944889ab57d3622e87a
+  icon: {fileID: 21300000, guid: 5d677f2c72a4e524992aa4944335f8f5, type: 3}
+  itemName: Firegem Glove
+  rarity: 1
+  itemDes: 
+  itemType: 2
+  sellPrice: 510
+  enchantment: 0
+  powerPercent: 100
+  part: 3
+  modifiers:
+  - modifierType: 0
+    mainType: 0
+    statType: 0
+    type: 0
+    amount: 5
+    isEnchantEffect: 1
+    isPowerEffect: 1
+  - modifierType: 0
+    mainType: 4
+    statType: 0
+    type: 0
+    amount: 5
+    isEnchantEffect: 1
+    isPowerEffect: 1
+  - modifierType: 1
+    mainType: 0
+    statType: 7
+    type: 0
+    amount: 8
+    isEnchantEffect: 1
+    isPowerEffect: 1
+  - modifierType: 1
+    mainType: 0
+    statType: 9
+    type: 0
+    amount: 5
+    isEnchantEffect: 1
+    isPowerEffect: 1
+  - modifierType: 1
+    mainType: 0
+    statType: 2
+    type: 1
+    amount: 1
+    isEnchantEffect: 0
+    isPowerEffect: 0

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3795377148819830187}
   - component: {fileID: 3795377148819830186}
   - component: {fileID: 7211708386385561541}
+  - component: {fileID: 983225468}
   m_Layer: 0
   m_Name: Gamemanager
   m_TagString: Untagged
@@ -175,6 +176,7 @@ MonoBehaviour:
   moneyBuff: 0
   storageSize: 0
   storageCurrent: 0
+  inventoryLevel: 1
   space: 20
   items: []
 --- !u!114 &3795377148819830187
@@ -222,3 +224,52 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemDatabase: {fileID: 11400000, guid: 57a07f44fadb4fd48ad8d18d47229d20, type: 2}
+--- !u!114 &983225468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3795377148819830191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30a7b8bd306d1c84d9203b57bf7b6237, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  strSub:
+  - value: 3
+    subType: 2
+  - value: 1
+    subType: 3
+  dexSub:
+  - value: 3
+    subType: 7
+  - value: 2
+    subType: 9
+  - value: 2
+    subType: 10
+  conSub:
+  - value: 15
+    subType: 0
+  - value: 1
+    subType: 3
+  - value: 1
+    subType: 5
+  agiSub:
+  - value: 3
+    subType: 6
+  - value: 2
+    subType: 8
+  intSub:
+  - value: 5
+    subType: 1
+  - value: 5
+    subType: 4
+  - value: 1
+    subType: 5
+  scale: 5
+  strLevel: 0
+  dexLevel: 0
+  conLevel: 0
+  agiLevel: 0
+  intLevel: 0

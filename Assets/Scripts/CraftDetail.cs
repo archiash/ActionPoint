@@ -9,7 +9,7 @@ public class CraftDetail : MonoBehaviour
     public static CraftDetail instance;
     private void Start()
     {
-            instance = this;
+        instance = this;
     }
     [SerializeField]
     private bool freeCraft;
@@ -25,7 +25,24 @@ public class CraftDetail : MonoBehaviour
     public Transform parent;
     public GameObject detailPanel;
 
-    public GameObject craftButton;
+    public Button craftButton;
+
+    [Header("Result")]
+    [SerializeField] GameObject resultPanel;
+    [SerializeField]Image resultImage;// ItemIcon
+    [SerializeField] TextMeshProUGUI PP; //PowerPercentage
+    [SerializeField] TextMeshProUGUI resultName; //Name of ResultItem
+    [SerializeField] TextMeshProUGUI resultStat; // Stat of ResultItem
+
+    void ShowResult(Equipment resultItem)
+    {
+        resultImage.sprite = resultItem.icon;
+        PP.text = "ระดับพลัง " + resultItem.powerPercent + "%";
+        resultName.text = resultItem.itemName;
+        resultStat.text = resultItem.GetDesc(false);
+        resultPanel.SetActive(true);
+    }
+
 
     public void ShowDetail(Recipe newRecipe)
     {
@@ -38,18 +55,29 @@ public class CraftDetail : MonoBehaviour
         }
             
         image.sprite = recipe.resulItem.icon;
-        cost.text = "Cost: " + recipe.cost.ToString() + " Hex";
+        cost.text = "Cost: " + recipe.cost.ToString() + " $";
         ClearDetail();
         foreach (StackItem stackItem in recipe.material)
         {
             GameObject materialbar = Instantiate(pf_materialbar, parent);
             materialbar.GetComponent<CraftDetail_Material>().Init(stackItem);
         }
-        if (CheckCondition() && Inventory.instance.getMoney >= recipe.cost || freeCraft)
-            craftButton.SetActive(true);
+        if (CheckCondition() && Inventory.instance.getMoney >= recipe.cost && Inventory.instance.HaveEmptySpace() || freeCraft)
+        {
+            craftButton.interactable = true;
+            craftButton.GetComponentInChildren<TextMeshProUGUI>().text = "สร้าง";
+        }
         else
-            craftButton.SetActive(false);
+        {
+            craftButton.interactable = false;
+            if (!CheckCondition())
+                craftButton.GetComponentInChildren<TextMeshProUGUI>().text = "ไม่มีวัตถุดิบ";
+            else if(Inventory.instance.getMoney < recipe.cost)
+                craftButton.GetComponentInChildren<TextMeshProUGUI>().text = "เงินไม่เพียงพอ";
+            else 
+                craftButton.GetComponentInChildren<TextMeshProUGUI>().text = "กระเป๋าเต็ม";
 
+        }
         detailPanel.SetActive(true);
     }
 
@@ -112,7 +140,9 @@ public class CraftDetail : MonoBehaviour
             }
             Inventory.instance.UseMoney(recipe.cost);
         }
-        Inventory.instance.GetItem(recipe.resulItem.GetCopyItem());
+        Item result = recipe.resulItem.GetCopyItem();
+        ShowResult((Equipment)result);
+        Inventory.instance.GetItem(result);
         detailPanel.SetActive(false);
     }
 }
