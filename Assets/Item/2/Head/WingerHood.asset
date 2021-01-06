@@ -17,7 +17,7 @@ MonoBehaviour:
   itemName: Winger Hood
   rarity: 0
   itemDes: 
-  itemType: 0
+  itemType: 2
   sellPrice: 420
   enchantment: 0
   powerPercent: 100

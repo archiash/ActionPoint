@@ -17,7 +17,7 @@ MonoBehaviour:
   itemName: Arstern Helm
   rarity: 0
   itemDes: 
-  itemType: 0
+  itemType: 2
   sellPrice: 210
   enchantment: 0
   powerPercent: 100

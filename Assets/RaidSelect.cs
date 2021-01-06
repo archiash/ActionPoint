@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class RaidSelect : MonoBehaviour,IDragHandler, IEndDragHandler
+public class RaidSelect : MonoBehaviour, IDragHandler, IEndDragHandler
 {
     public List<RaidBoss> raidList = new List<RaidBoss>();
     public CraftBar_Material prefab;
@@ -30,7 +30,12 @@ public class RaidSelect : MonoBehaviour,IDragHandler, IEndDragHandler
     public int indexOnSelect;
     public Image image;
 
-    RaidManager raidManager;
+    public RaidManager raidManager;
+
+    public RaidBoss currentShow{
+    get{ return raidList[Index];}    
+
+    }
 
     private void Start()
     {

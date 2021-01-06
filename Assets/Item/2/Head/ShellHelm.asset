@@ -17,7 +17,7 @@ MonoBehaviour:
   itemName: Shell Helm
   rarity: 0
   itemDes: 
-  itemType: 0
+  itemType: 2
   sellPrice: 325
   enchantment: 0
   powerPercent: 100

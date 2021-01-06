@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: Natural Bless
   skillDesc: "\u0E1F\u0E37\u0E49\u0E19\u0E1F\u0E39\u0E1E\u0E25\u0E31\u0E07\u0E0A\u0E35\u0E27\u0E34\u0E15
-    250% \u0E40\u0E27\u0E17\u0E22\u0E4C"
+    150% \u0E40\u0E27\u0E17\u0E22\u0E4C"
   manaCost: 25
   coolTime: 10
   isUsePoint: 1

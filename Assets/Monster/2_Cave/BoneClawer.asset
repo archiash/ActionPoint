@@ -75,11 +75,11 @@ MonoBehaviour:
       mainModifiers: []
       modifiers: []
     Hit:
-      baseValue: 35
+      baseValue: 28
       mainModifiers: []
       modifiers: []
     Eva:
-      baseValue: 28
+      baseValue: 25
       mainModifiers: []
       modifiers: []
     Crate:

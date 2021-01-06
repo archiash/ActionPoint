@@ -79,7 +79,7 @@ MonoBehaviour:
       mainModifiers: []
       modifiers: []
     Eva:
-      baseValue: 50
+      baseValue: 45
       mainModifiers: []
       modifiers: []
     Crate:

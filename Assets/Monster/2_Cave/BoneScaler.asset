@@ -54,6 +54,10 @@ MonoBehaviour:
       baseValue: 32
       mainModifiers: []
       modifiers: []
+    Pen:
+      baseValue: 0
+      mainModifiers: []
+      modifiers: []
     MAtk:
       baseValue: 0
       mainModifiers: []
@@ -62,16 +66,20 @@ MonoBehaviour:
       baseValue: 27
       mainModifiers: []
       modifiers: []
+    Neu:
+      baseValue: 0
+      mainModifiers: []
+      modifiers: []
     Spd:
       baseValue: 27
       mainModifiers: []
       modifiers: []
     Hit:
-      baseValue: 35
+      baseValue: 25
       mainModifiers: []
       modifiers: []
     Eva:
-      baseValue: 30
+      baseValue: 28
       mainModifiers: []
       modifiers: []
     Crate:
@@ -80,6 +88,10 @@ MonoBehaviour:
       modifiers: []
     Cdmg:
       baseValue: 20
+      mainModifiers: []
+      modifiers: []
+    Cres:
+      baseValue: 0
       mainModifiers: []
       modifiers: []
   currentSkill:
