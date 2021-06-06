@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2d33e7dd5e2f2f4994ccbab9d0178b9, type: 3}
+  m_Name: Freylust
+  m_EditorClassIdentifier: 
+  mapName: Freylust
+  maps:
+  - {fileID: 11400000, guid: e3d68262c5d3c53449c619cf9314dcb8, type: 2}
+  - {fileID: 11400000, guid: 61975172841b74d48ab80258b508bca0, type: 2}

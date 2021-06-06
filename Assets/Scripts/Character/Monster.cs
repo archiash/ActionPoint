@@ -61,8 +61,7 @@ public class Monster : ScriptableObject
         {
             if(currentSkill[i] is CounterSkill)
             {
-                status.counterSkill += ((CounterSkill)currentSkill[i]).Use;
-                
+                status.counterSkill += ((CounterSkill)currentSkill[i]).Use;           
             }
         }
     }

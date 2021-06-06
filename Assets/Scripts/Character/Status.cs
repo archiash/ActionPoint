@@ -66,11 +66,14 @@ public class Status
 
     }
 
-    public bool GetDamage(ref float damage,Status attacker,bool dodgeAble = true)
+    public bool GetDamage(ref float damage,Status attacker,bool dodgeAble = true,int evaReduce = 0)
     {
         if (dodgeAble)
         {
-            if (Formula.HitFormula(attacker.Hit.Value, Eva.Value))
+            float hitRate = attacker.Hit.Value;
+            float evaRate = Eva.Value * (1 - (evaReduce / 100));
+
+            if (Formula.HitFormula(hitRate,evaRate))
             {
                 damage *= Random.Range(0.8f, 1.2f);
                 currentHP -= damage;

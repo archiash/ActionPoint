@@ -11,7 +11,7 @@ public class CounterSkill : Skill
 
     public bool Use(ref float damage,Status attacker)
     {
-        bool isHit = false; ;
+       bool isHit = false; ;
        float counterDamage = damage;
        if(counterDamage > 0)
        {

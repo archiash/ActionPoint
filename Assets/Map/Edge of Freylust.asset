@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bca02457c5d76ce4e8c5920ba00b9a4d, type: 3}
-  m_Name: AshcarresWood
+  m_Name: Edge of Freylust
   m_EditorClassIdentifier: 
-  mapName: Ashcarres Wood
+  difficult: Edge of Freylust
   level: 1
   monsters:
-  - {fileID: 11400000, guid: 26a927b9d02cf134fa387590a211148b, type: 2}
-  - {fileID: 11400000, guid: 4fdef21f5948873449dae091ab4342ea, type: 2}
-  - {fileID: 11400000, guid: 9170d91a0d1783d41a4a9d0d9f8d1e28, type: 2}
-  - {fileID: 11400000, guid: a75954b4094353e4d887a58764d306aa, type: 2}
   - {fileID: 11400000, guid: fd81f5f150642d546a0d80db8cae5d2e, type: 2}
-  - {fileID: 11400000, guid: 7fb5b826a40ecb4409b6c402ddcc1569, type: 2}
   - {fileID: 11400000, guid: 5ef074b703b70e443ae4d8f094c717b3, type: 2}
+  - {fileID: 11400000, guid: 26a927b9d02cf134fa387590a211148b, type: 2}
+  - {fileID: 11400000, guid: a75954b4094353e4d887a58764d306aa, type: 2}
+  - {fileID: 11400000, guid: 9170d91a0d1783d41a4a9d0d9f8d1e28, type: 2}
+  - {fileID: 11400000, guid: 4fdef21f5948873449dae091ab4342ea, type: 2}
+  - {fileID: 11400000, guid: 7fb5b826a40ecb4409b6c402ddcc1569, type: 2}

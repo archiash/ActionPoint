@@ -21,7 +21,7 @@ public class CraftDetail : MonoBehaviour
     public TextMeshProUGUI itemDesc;
     public TextMeshProUGUI cost;
 
-    public GameObject pf_materialbar;
+    public CraftDetail_Material pf_materialbar;
     public Transform parent;
     public GameObject detailPanel;
 
@@ -59,7 +59,7 @@ public class CraftDetail : MonoBehaviour
         ClearDetail();
         foreach (StackItem stackItem in recipe.material)
         {
-            GameObject materialbar = Instantiate(pf_materialbar, parent);
+            CraftDetail_Material materialbar = Instantiate(pf_materialbar, parent);
             materialbar.GetComponent<CraftDetail_Material>().Init(stackItem);
         }
         if (CheckCondition() && Inventory.instance.getMoney >= recipe.cost && Inventory.instance.HaveEmptySpace() || freeCraft)

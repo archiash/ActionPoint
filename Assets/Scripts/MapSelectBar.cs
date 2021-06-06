@@ -13,7 +13,7 @@ public class MapSelectBar : MonoBehaviour
     public void CreateBar(Map _map)
     {
         map = _map;
-        mapName.text = map.mapName;
+        mapName.text = map.difficult;
         mapDesc.text = "Recommended Level: " + map.level.ToString();
     }
 

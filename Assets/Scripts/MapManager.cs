@@ -9,7 +9,7 @@ public class MapManager : MonoBehaviour
 {
     public static MapManager instance;
 
-    public List<Map> maps = new List<Map>();
+    public List<Maps> maps = new List<Maps>();
     public Transform parent;
 
     [SerializeField] MonsterBar monsterBarPrefab;
@@ -20,12 +20,36 @@ public class MapManager : MonoBehaviour
     private void Start()
     {
         instance = this;
-        MapFromDropdown();
+        OnMapChange();
     }
 
     public void MapFromDropdown()
     {
-        CreateMonsterList(maps[mapDropdown.value]);
+        CreateMonsterList(maps[mapDropdown.value].maps[difficultDropdown.value]);    
+    }
+
+    public void OnMapChange()
+    {
+        if (difficultDropdown.value > maps[mapDropdown.value].maps.Count - 1)
+        {
+            difficultDropdown.value = 0;
+            difficultDropdown.RefreshShownValue();
+        }
+
+        difficultDropdown.ClearOptions();
+        List<string> m_DropdownOption = new List<string>();
+        foreach (Map map in maps[mapDropdown.value].maps)
+        {
+            m_DropdownOption.Add(map.difficult);
+        }
+        difficultDropdown.AddOptions(m_DropdownOption);
+
+        MapFromDropdown();
+    }
+
+    public void OnDifficultChange()
+    {
+        MapFromDropdown();
     }
 
     public void CreateMonsterList(Map map)
