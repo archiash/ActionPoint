@@ -11,7 +11,7 @@ public class HookBlade : Skill
         else
             userStat = (user as Monster).status;
         Status targetStatus = new Status();
-        if (user is Character)
+        if (enermy is Character)
             targetStatus = (enermy as Character).status;
         else
             targetStatus = (enermy as Monster).status;
@@ -27,7 +27,6 @@ public class HookBlade : Skill
         }
         else
         {
-            Debug.Log("Miss");
             Debug.Log("HookBlade");
             damage = Formula.DamageFormula(userStat, targetStatus) / 2;
             if (Formula.CriticalFormula(userStat, targetStatus, ref damage))
@@ -37,8 +36,7 @@ public class HookBlade : Skill
             if (targetStatus.GetDamage(ref damage, userStat, evaReduce: 50))
             {
                 Debug.Log($"Deal {damage}");
-            }else
-                Debug.Log("Miss");
+            }
         }
 
         return true;

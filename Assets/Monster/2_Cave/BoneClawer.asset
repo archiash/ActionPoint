@@ -37,21 +37,21 @@ MonoBehaviour:
       upgradeModifier: 0
       modifiers: []
     HP:
-      baseValue: 650
+      baseValue: 700
       mainModifiers: []
       modifiers: []
-    currentHP: 650
+    currentHP: 700
     MP:
       baseValue: 30
       mainModifiers: []
       modifiers: []
     currentMP: 30
     PAtk:
-      baseValue: 40
+      baseValue: 38
       mainModifiers: []
       modifiers: []
     PDef:
-      baseValue: 45
+      baseValue: 40
       mainModifiers: []
       modifiers: []
     Pen:

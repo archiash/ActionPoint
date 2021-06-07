@@ -37,10 +37,10 @@ MonoBehaviour:
       upgradeModifier: 0
       modifiers: []
     HP:
-      baseValue: 1000
+      baseValue: 820
       mainModifiers: []
       modifiers: []
-    currentHP: 1000
+    currentHP: 820
     MP:
       baseValue: 120
       mainModifiers: []
@@ -51,15 +51,23 @@ MonoBehaviour:
       mainModifiers: []
       modifiers: []
     PDef:
-      baseValue: 60
+      baseValue: 50
+      mainModifiers: []
+      modifiers: []
+    Pen:
+      baseValue: 0
       mainModifiers: []
       modifiers: []
     MAtk:
-      baseValue: 65
+      baseValue: 70
       mainModifiers: []
       modifiers: []
     MDef:
       baseValue: 45
+      mainModifiers: []
+      modifiers: []
+    Neu:
+      baseValue: 0
       mainModifiers: []
       modifiers: []
     Spd:
@@ -80,6 +88,10 @@ MonoBehaviour:
       modifiers: []
     Cdmg:
       baseValue: 25
+      mainModifiers: []
+      modifiers: []
+    Cres:
+      baseValue: 0
       mainModifiers: []
       modifiers: []
   currentSkill:

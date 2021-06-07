@@ -627,7 +627,8 @@ MonoBehaviour:
   currentItemPower: {fileID: 1808667027}
   currentItemIcon: {fileID: 1902187482}
   parent: {fileID: 172701623}
-  slectBarPrefab: {fileID: 1625127040}
+  slectBarPrefab: {fileID: 2366843138097325841, guid: 5b9b4170b5def92438d5403e688b2e01,
+    type: 3}
   panel: {fileID: 747410534}
 --- !u!1 &43955551
 GameObject:
@@ -1416,7 +1417,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 739161006}
-  cost: {fileID: 1883871764}
+  cost: {fileID: 422552775}
 --- !u!1 &81917559
 GameObject:
   m_ObjectHideFlags: 0
@@ -4781,7 +4782,7 @@ MonoBehaviour:
   item: {fileID: 0}
   enchantmentLevel: {fileID: 484718134}
   powerPercentage: {fileID: 1073378511}
-  slotPrefab: {fileID: 5649510383446752825, guid: 436c1b3da173f1040a43560c9803bf5a,
+  slotPrefab: {fileID: -6025941263607302426, guid: f2c8f0773c5eba247a477aaeacc7570a,
     type: 3}
   parent: {fileID: 1726944929}
   costText: {fileID: 1187003820}
@@ -4799,7 +4800,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 905857e84481a204289bacddad26c492, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaterialBarPrefab: {fileID: 337465787}
+  MaterialBarPrefab: {fileID: 8699809352913292083, guid: 9cc81f8f0eaad864f8804006f82582d6,
+    type: 3}
   BaseBarPrefab: {fileID: 6114254042371330728, guid: 699c714d8901f4547afa2faf413d6d00,
     type: 3}
   parent: {fileID: 797751343}
@@ -5669,18 +5671,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 336557521}
   m_CullTransparentMesh: 0
---- !u!114 &337465787 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8699809352913292083, guid: 9cc81f8f0eaad864f8804006f82582d6,
-    type: 3}
-  m_PrefabInstance: {fileID: 4904460966811310781}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20c5bf9141646604eba1b8e55f4e7248, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &359527769
 GameObject:
   m_ObjectHideFlags: 0
@@ -32927,18 +32917,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1623335254}
   m_CullTransparentMesh: 0
---- !u!114 &1625127040 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2366843138097325841, guid: 5b9b4170b5def92438d5403e688b2e01,
-    type: 3}
-  m_PrefabInstance: {fileID: 2366843137131375531}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 999e5b0345c0a8843b9c185364e584ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1638326782
 GameObject:
   m_ObjectHideFlags: 0

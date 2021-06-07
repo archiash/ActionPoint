@@ -37,10 +37,10 @@ MonoBehaviour:
       upgradeModifier: 0
       modifiers: []
     HP:
-      baseValue: 450
+      baseValue: 400
       mainModifiers: []
       modifiers: []
-    currentHP: 450
+    currentHP: 400
     MP:
       baseValue: 30
       mainModifiers: []

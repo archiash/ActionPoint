@@ -71,6 +71,8 @@ public class RaidManager : MonoBehaviour
     }
     public void EndRaid(float hpLeft)
     {
+        Character.instance.status.RemoveInHuntModifier();
+
         if (hpLeft <= 0)
         {
             isRaiding = false;

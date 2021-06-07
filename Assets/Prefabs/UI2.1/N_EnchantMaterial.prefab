@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 6645278862788122324}
   - component: {fileID: -6025941263607302426}
   m_Layer: 0
-  m_Name: EnchantMaterial
+  m_Name: N_EnchantMaterial
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -257,6 +257,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}

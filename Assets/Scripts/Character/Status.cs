@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -75,7 +76,7 @@ public class Status
 
             if (Formula.HitFormula(hitRate,evaRate))
             {
-                damage *= Random.Range(0.8f, 1.2f);
+                damage *= UnityEngine.Random.Range(0.8f, 1.2f);
                 currentHP -= damage;
                 if (counterSkill != null)
                     counterSkill(ref damage, attacker);
@@ -90,7 +91,7 @@ public class Status
         }
         else
         {
-            damage *= Random.Range(0.8f, 1.2f);
+            damage *= UnityEngine.Random.Range(0.8f, 1.2f);
             currentHP -= damage;
             if (counterSkill != null)
                 counterSkill(ref damage, attacker);
@@ -104,6 +105,24 @@ public class Status
         set { 
             if(value)
                 currentMP = MP.Value; 
+        }
+    }
+
+
+    public void RemoveInHuntModifier()
+    {
+        foreach (var statName in Enum.GetValues(typeof(SubStatType)))
+        {
+
+            Stat stat = (Stat)(this.GetType().GetField(statName.ToString()).GetValue(this));
+            for (int i = stat.modifiers.Count - 1; i >+ 0; i--)
+            {
+
+                if (stat.modifiers[i].timeType == Modifier.ModifierTime.Turn)
+                {
+                    stat.RemoveModifier(stat.modifiers[i]);
+                }
+            }
         }
     }
 

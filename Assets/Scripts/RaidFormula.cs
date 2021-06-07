@@ -225,6 +225,12 @@ public class RaidFormula : MonoBehaviour
         int endturn = 0;
         for (int i = 0; i < turnCount;)
         {
+            if (CheckResult(i))
+            {
+                endturn = i;
+                i = turnCount;
+            }
+
             CalculateSpeed();
             characterNextTurn += characterSpeed;
             monsterNextTurn += monsterSpeed;
@@ -281,13 +287,12 @@ public class RaidFormula : MonoBehaviour
                 i = turnCount;
             }
 
-
-
         }
 
-        EndBattle();
+        
         Destroy(monster);
         Debug.Log(endturn);
+        EndBattle();
     }
 
     public bool CheckResult(int turn)
@@ -332,20 +337,7 @@ public class RaidFormula : MonoBehaviour
             }
         }
     }
-    void RemoveInHuntBuff(Status status)
-    {
-        foreach (var statName in Enum.GetValues(typeof(SubStatType)))
-        {
-            Stat stat = (Stat)(status.GetType().GetField(statName.ToString()).GetValue(status));
-            for (int i = 0; i < stat.modifiers.Count; i++)
-            {
-                if (stat.modifiers[i].timeType == Modifier.ModifierTime.Turn)
-                {
-                    stat.RemoveModifier(stat.modifiers[i]);
-                }
-            }
-        }
-    }
+
     void ReduceHuntBuff(Status status)
     {
         foreach (var statName in Enum.GetValues(typeof(SubStatType)))
@@ -374,6 +366,9 @@ public class RaidFormula : MonoBehaviour
     }
     void EndBattle()
     {
+
+        ReduceHuntBuff(character.status);
+
         character.status.currentHP = characterPreHp;
 
         if (monster.status.currentHP > monsterPreHp)
@@ -383,8 +378,7 @@ public class RaidFormula : MonoBehaviour
 
         raidManager.EndRaid(monster.status.currentHP);
 
-        RemoveInHuntBuff(character.status);
-        ReduceHuntBuff(character.status);
+
     }
 
 }

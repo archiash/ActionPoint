@@ -66,19 +66,31 @@ public class Stat
             }
         }
     }
+
     public void RemoveModifier(Modifier modifier)
     {
-        if (modifier.value != 0)
+        for (int i = 0; i < modifiers.Count; i++)
         {
-            foreach (Modifier mod in modifiers)
+            if (modifiers[i] == modifier)
             {
-                if (mod.type == modifier.type && mod.value == modifier.value)
-                {
-                    modifiers.Remove(modifier);
-                    break;
-                }
+                Debug.Log("Remove");
+                modifiers.RemoveAt(i);
             }
         }
+
+        /*
+        foreach (Modifier mod in modifiers)
+        {
+            if (mod.type == modifier.type && mod.value == modifier.value)
+            {
+                modifiers.Remove(mod);
+                break;
+            }
+            if(mod == modifier)
+                modifiers.Remove(mod);
+                break;
+        }*/
+        
     }
     private int CompareModifierOrder(Modifier a,Modifier b)
     {
