@@ -17,7 +17,7 @@ public class UI_InventorySlot : MonoBehaviour
     {
         item = newItem;
         icon.sprite = item.item.icon;
-        rarity.color = RarityColor(item.item);
+        rarity.color = RarityColor.color(item.item.rarity);
         if(item.item is Equipment)
         {
             amount.text = "+" + ((Equipment)item.item).enchantment.ToString();
@@ -45,15 +45,4 @@ public class UI_InventorySlot : MonoBehaviour
         amount.enabled = false;
     }
 
-    public Color RarityColor(Item item)
-    {
-        switch (item.rarity)
-        {
-            case Rarity.Common:
-                return Color.white;
-            case Rarity.Uncommon:
-                return Color.green;
-        }
-        return Color.white;
-    }
 }

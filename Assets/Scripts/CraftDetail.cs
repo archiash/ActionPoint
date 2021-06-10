@@ -16,8 +16,10 @@ public class CraftDetail : MonoBehaviour
 
     Recipe recipe;
 
+    [SerializeField] TextMeshProUGUI itemSlot;
     public TextMeshProUGUI itemName;
     public Image image;
+    public Image rarity;
     public TextMeshProUGUI itemDesc;
     public TextMeshProUGUI cost;
 
@@ -47,6 +49,15 @@ public class CraftDetail : MonoBehaviour
     public void ShowDetail(Recipe newRecipe)
     {
         recipe = newRecipe;
+        if (recipe.resulItem is Equipment)
+        {
+            itemSlot.text = ((Equipment)recipe.resulItem).part.ToString();
+            itemSlot.enabled = true;
+        }
+        else
+            itemSlot.enabled = false;
+
+        rarity.color = RarityColor.color(recipe.resulItem.rarity);
         itemName.text = recipe.resulItem.itemName;
         itemDesc.text = recipe.resulItem.GetDesc();
         if(recipe.resulItem is Equipment)

@@ -12,6 +12,7 @@ public class EnchantBaseBar : EnchantMaterialBar
         desc.text = equipment.GetDesc();
         powerPercent.text = equipment.powerPercent.ToString();
         this.enchantment = enchantment;
+        rarity.color = RarityColor.color(equipment.rarity);
     }
 
     public override void Select()

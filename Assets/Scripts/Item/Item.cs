@@ -3,7 +3,7 @@ using UnityEditor;
 
 using UnityEngine;
 
-public enum Rarity { Common, Uncommon }
+public enum Rarity { Common, Uncommon, Rare }
 public enum ItemType {Material, Useable, Equipment }
 public class Item : ScriptableObject
 {

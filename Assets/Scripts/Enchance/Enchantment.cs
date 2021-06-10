@@ -13,6 +13,7 @@ public class Enchantment : MonoBehaviour
 
     public static Enchantment instance;
 
+    [SerializeField] Image rarity;
     [SerializeField]EnchantMaterialSlot slotPrefab;
     [SerializeField] Transform parent;
     [SerializeField] TextMeshProUGUI costText;
@@ -35,6 +36,8 @@ public class Enchantment : MonoBehaviour
         powerPercentage.text = item.powerPercent.ToString() + "%";
         costText.text = "ราคา:" + CalculateCost(equipment);
 
+        rarity.color = RarityColor.color(equipment.rarity);
+
         button.interactable = Condition(item);
 
         costText.enabled = true;
@@ -50,6 +53,7 @@ public class Enchantment : MonoBehaviour
         item = null;
         button.interactable = false;
         costText.enabled = false;
+        rarity.color = Color.white;
         image.enabled = false;
         enchantmentLevel.enabled = false;
         powerPercentage.enabled = false;
@@ -126,7 +130,7 @@ public class Enchantment : MonoBehaviour
         int cost = 0;
         for (int i = 0; i <= equipment.enchantment; i++)
         {
-            cost += 100 * Mathf.FloorToInt(1 + (i / 3));
+            cost += Mathf.RoundToInt(100 * Mathf.FloorToInt(1 + (i / 3)) * (1 + ((int)equipment.rarity * 25/100f)));
         }
         return cost;
     }

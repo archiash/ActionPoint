@@ -11,6 +11,7 @@ public class Recipe : ScriptableObject
     public Item resulItem;
     public List<StackItem> material = new List<StackItem>();
     public int cost;
+
 }
 
 #if UNITY_EDITOR
@@ -22,14 +23,14 @@ public class RecipeEditor : Editor
     {
         Recipe t = (Recipe)target;
         Cost = t.cost;
-        
-        
+              
         Texture2D aTexture = t.resulItem ? SpriteUtility.GetSpriteTexture(t.resulItem.icon, false) : null;
         GUILayout.Label(aTexture);
         base.OnInspectorGUI();
         for(int i = 0;i<t.material.Count;i++)
         {
-            Cost += t.material[i].item.sellPrice * t.material[i].amount;
+            if(t.material[i].item != null)
+                Cost += t.material[i].item.sellPrice * t.material[i].amount;
         }
         GUILayout.Label("Cost: " + Cost.ToString() + " " + Mathf.Round(Cost * 80f / 100f));
 

@@ -44,7 +44,7 @@ public class EquipmentSlot : MonoBehaviour
                     onSlot = Character.instance.weapon;
                     icon.sprite = Character.instance.weapon.icon;
                     icon.enabled = true;
-                    rarity.color = RarityColor(Character.instance.weapon);
+                    rarity.color = RarityColor.color(Character.instance.weapon.rarity);
                 }
                 else
                 {
@@ -59,7 +59,7 @@ public class EquipmentSlot : MonoBehaviour
                     onSlot = Character.instance.head;
                     icon.sprite = Character.instance.head.icon;
                     icon.enabled = true;
-                    rarity.color = RarityColor(Character.instance.head);
+                    rarity.color = rarity.color = RarityColor.color(Character.instance.head.rarity);
                 }
                 else
                 {
@@ -74,7 +74,7 @@ public class EquipmentSlot : MonoBehaviour
                     onSlot = Character.instance.body;
                     icon.sprite = Character.instance.body.icon;
                     icon.enabled = true;
-                    rarity.color = RarityColor(Character.instance.body);
+                    rarity.color = rarity.color = RarityColor.color(Character.instance.body.rarity);
                 }
                 else
                 {
@@ -89,7 +89,7 @@ public class EquipmentSlot : MonoBehaviour
                     onSlot = Character.instance.arms;
                     icon.sprite = Character.instance.arms.icon;
                     icon.enabled = true;
-                    rarity.color = RarityColor(Character.instance.arms);
+                    rarity.color = rarity.color = RarityColor.color(Character.instance.arms.rarity);
                 }
                 else
                 {
@@ -104,7 +104,7 @@ public class EquipmentSlot : MonoBehaviour
                     onSlot = Character.instance.legs;
                     icon.sprite = Character.instance.legs.icon;
                     icon.enabled = true;
-                    rarity.color = RarityColor(Character.instance.legs);
+                    rarity.color = rarity.color = RarityColor.color(Character.instance.legs.rarity);
                 }
                 else
                 {
@@ -119,7 +119,7 @@ public class EquipmentSlot : MonoBehaviour
                     onSlot = Character.instance.accessory;
                     icon.sprite = Character.instance.accessory.icon;
                     icon.enabled = true;
-                    rarity.color = RarityColor(Character.instance.accessory);
+                    rarity.color = rarity.color = RarityColor.color(Character.instance.accessory.rarity);
                 }
                 else
                 {
@@ -144,18 +144,6 @@ public class EquipmentSlot : MonoBehaviour
                 powerpercent.enabled = false;
             }
         }
-    }
-
-    public Color RarityColor(Equipment item)
-    {
-        switch(item.rarity)
-        {
-            case Rarity.Common:
-                return Color.white;
-            case Rarity.Uncommon:
-                return Color.green;
-        }
-        return Color.white;
     }
 
 }

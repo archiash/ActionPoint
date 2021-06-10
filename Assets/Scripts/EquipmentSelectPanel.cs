@@ -12,6 +12,7 @@ public class EquipmentSelectPanel : MonoBehaviour
     [SerializeField] TextMeshProUGUI currentItemStat;
     [SerializeField] TextMeshProUGUI currentItemPower;
     [SerializeField] Image currentItemIcon;
+    [SerializeField] Image rarity;
 
     [SerializeField] Transform parent;
     [SerializeField] EquipmentSlectBar slectBarPrefab;
@@ -35,16 +36,19 @@ public class EquipmentSelectPanel : MonoBehaviour
         currentItem = Character.instance.GetEquipmentPart(part);
         if(currentItem != null)
         {
+            rarity.enabled = true;
             currentItemName.enabled = true;
             currentItemStat.enabled = true;
             currentItemPower.enabled = true;
             currentItemIcon.enabled = true;
+            rarity.color =  RarityColor.color(currentItem.rarity);
             currentItemName.text = currentItem.itemName + " +" + currentItem.enchantment;
             currentItemStat.text = currentItem.GetDesc(false);
             currentItemPower.text = currentItem.powerPercent.ToString() + "%";
             currentItemIcon.sprite = currentItem.icon;
         }else
         {
+            rarity.enabled = false;
             currentItemPower.enabled = false;
             currentItemName.enabled = false;
             currentItemStat.enabled = false;

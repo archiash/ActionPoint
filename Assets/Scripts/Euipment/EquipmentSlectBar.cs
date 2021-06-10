@@ -11,6 +11,8 @@ public class EquipmentSlectBar : MonoBehaviour
     public TextMeshProUGUI stat;
     public TextMeshProUGUI power;
 
+    [SerializeField] Image rarity;
+
     Equipment equipment;
     
     public void CreateBar(Equipment equipment)
@@ -20,6 +22,7 @@ public class EquipmentSlectBar : MonoBehaviour
         name.text = equipment.itemName + " +" + equipment.enchantment;
         stat.text =  equipment.GetDesc(false);
         power.text = equipment.powerPercent.ToString() + "%";
+        rarity.color = RarityColor.color(equipment.rarity);
     }
 
     public void Equip()

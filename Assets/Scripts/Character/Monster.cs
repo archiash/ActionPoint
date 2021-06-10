@@ -1,7 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using System.Linq;
 
 [CreateAssetMenu(menuName = "Create/Monster/Monster", fileName = "New Monster")]
 public class Monster : ScriptableObject
@@ -30,6 +30,16 @@ public class Monster : ScriptableObject
             
         return desc;
     }
+
+#if UNITY_EDITOR
+    private void OnValidate()
+    {
+        for(int i = 0; i<dropTables.Length;i++)
+        {
+            dropTables[i].items = dropTables[i].items.OrderByDescending(i => i.rateDrop).ToArray();
+        }
+    }
+#endif
 
     public virtual string GetStatus()
     {

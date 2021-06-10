@@ -86,8 +86,8 @@ public class Gamemanager : MonoBehaviour
     public  void Load()
     {
         itemSaveManager.LoadEquipment();
-        itemSaveManager.LoadCharacterData();        
-        itemSaveManager.LoadPoint();
+        itemSaveManager.LoadCharacterData();
+        itemSaveManager.LoadPoint();       
         itemSaveManager.LoadInventory();
         isLoad = true;
         

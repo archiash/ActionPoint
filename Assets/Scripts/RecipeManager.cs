@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.SceneManagement;
@@ -17,6 +16,7 @@ public class RecipeManager : MonoBehaviour
     public List<Recipe> recipes = new List<Recipe>();
     public GameObject pf_recipe;
     public Transform parent;
+
 
     public void UpdateRecipe(int tier)
     {

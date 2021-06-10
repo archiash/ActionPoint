@@ -13,6 +13,7 @@ public class CraftBar : MonoBehaviour
     public Transform parent;
 
     public Image itemImage;
+    public Image rarity;
     public TextMeshProUGUI itemName;
     public TextMeshProUGUI costText;
 
@@ -21,9 +22,15 @@ public class CraftBar : MonoBehaviour
         ClearMaterialList();
         recipe = newRecipe;
         resultItem = newRecipe.resulItem;
+        rarity.color = RarityColor.color(resultItem.rarity);
         materials = newRecipe.material;
         itemImage.sprite = resultItem.icon;
         itemName.text = resultItem.itemName;
+        if (recipe.resulItem is Equipment)
+        {
+            itemName.text += " - " + ((Equipment)resultItem).part.ToString(); 
+        }
+
         costText.text = newRecipe.cost.ToString() + " $";
 
         foreach (StackItem material in materials)

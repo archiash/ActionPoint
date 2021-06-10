@@ -7,6 +7,59 @@ public enum StatType { Main, Sub }
 public class Character : MonoBehaviour
 {
     public static Character instance;
+    [SerializeField] LevelBonus levelBonus;
+    private bool isLoad = true;
+    [SerializeField] UI_LevelBonusPanel pfBonusPanel;
+    public int Level
+    {
+        set
+        {
+            level = value;
+
+            if (isLoad)
+            {
+                isLoad = false;
+                Debug.Log(isLoad);
+                for (int i = 0; i < levelBonus.bonus.Count; i++)
+                {
+                    Debug.Log("B " + levelBonus.bonus.Count);
+                    if (level >= levelBonus.bonus[i].requireLevel)
+                    {
+                        Debug.Log(levelBonus.bonus[i].requireLevel);
+                        if (levelBonus.bonus[i].bonusType == LvBonusType.pointRate)
+                            PointManager.instance.actionPerSecLvBonus += levelBonus.bonus[i].value;
+                        if (levelBonus.bonus[i].bonusType == LvBonusType.healRate)
+                            hpRegenLvBonus += levelBonus.bonus[i].value;
+                    }
+                }
+                
+            }else
+            {
+                for (int i = 0; i < levelBonus.bonus.Count; i++)
+                {
+                    if (level == levelBonus.bonus[i].requireLevel)
+                    {
+                        if (levelBonus.bonus[i].bonusType == LvBonusType.pointRate)
+                        {
+                            PointManager.instance.actionPerSecLvBonus += levelBonus.bonus[i].value;
+                            UI_LevelBonusPanel panel = Instantiate(pfBonusPanel); //สร้าง Bonus Panel Object
+                            string text = $"อัตราการเพิ่ม Point +1/s"; 
+                            panel.ShowText(text);
+                        }
+                        if (levelBonus.bonus[i].bonusType == LvBonusType.healRate)
+                        {
+                            hpRegenLvBonus += levelBonus.bonus[i].value;                        
+                            UI_LevelBonusPanel panel = Instantiate(pfBonusPanel); //สร้าง Bonus Panel Object
+                            string text = $"อัตราการฟื้นฟูเพิ่ม +1%/s";
+                            panel.ShowText(text);
+                        }
+                    }
+                }
+            }           
+        }
+        get { return level; }
+    }
+
 
     public bool isFullHP
     {
@@ -24,7 +77,7 @@ public class Character : MonoBehaviour
         status.currentMP = status.MP.Value;
     }
 
-    public int Level = 1;
+    public int level = 1;
     public float exp = 0;
 
     public int statusPoint = 0;
@@ -33,6 +86,7 @@ public class Character : MonoBehaviour
     [Range(1,100)]
 
     public int hpRegen;
+    public int hpRegenLvBonus;
     public float regenRate;
 
     public Equipment weapon;
@@ -59,8 +113,8 @@ public class Character : MonoBehaviour
         {
             if (status.currentHP < status.HP.Value)
             {
-                if (regenRate < status.HP.Value * hpRegen / 100)
-                    regenRate += status.HP.Value * hpRegen / 100 * Time.deltaTime;
+                if (regenRate < status.HP.Value * (hpRegen + hpRegenLvBonus) / 100)
+                    regenRate += status.HP.Value * (hpRegen + hpRegenLvBonus) / 100 * Time.deltaTime;
             }
             else
                 regenRate = 0;

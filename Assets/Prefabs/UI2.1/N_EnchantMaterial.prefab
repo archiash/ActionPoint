@@ -166,6 +166,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slotItem: {fileID: 0}
   icon: {fileID: 4081372692480843755}
+  rarity: {fileID: 6645278862788122324}
 --- !u!1 &6645278863040213982
 GameObject:
   m_ObjectHideFlags: 0

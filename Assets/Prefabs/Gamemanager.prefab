@@ -48,8 +48,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 066f67ee98d8b7e4b824bb5d0fefdb19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Level: 1
+  levelBonus: {fileID: 11400000, guid: c2f35feeb27ebb840b468800d5b1f015, type: 2}
+  level: 1
   exp: 0
+  statusPoint: 0
   status:
     STR:
       baseValue: 0
@@ -99,6 +101,10 @@ MonoBehaviour:
       - type: 4
         modifier: 1
       modifiers: []
+    Pen:
+      baseValue: 0
+      mainModifiers: []
+      modifiers: []
     MAtk:
       baseValue: 10
       mainModifiers:
@@ -112,6 +118,10 @@ MonoBehaviour:
         modifier: 1
       - type: 4
         modifier: 1
+      modifiers: []
+    Neu:
+      baseValue: 0
+      mainModifiers: []
       modifiers: []
     Spd:
       baseValue: 15
@@ -143,7 +153,12 @@ MonoBehaviour:
       - type: 1
         modifier: 2
       modifiers: []
+    Cres:
+      baseValue: 0
+      mainModifiers: []
+      modifiers: []
   hpRegen: 1
+  hpRegenLvBonus: 0
   regenRate: 0
   weapon: {fileID: 0}
   head: {fileID: 0}
@@ -193,6 +208,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionPoint: 0
   actionPersec: 1
+  actionPerSecLvBonus: 0
 --- !u!114 &3795377148819830186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -242,32 +258,32 @@ MonoBehaviour:
   - value: 1
     subType: 3
   dexSub:
-  - value: 3
+  - value: 2
     subType: 7
-  - value: 2
+  - value: 1
     subType: 9
-  - value: 2
+  - value: 1
     subType: 10
   conSub:
-  - value: 15
+  - value: 10
     subType: 0
   - value: 1
     subType: 3
   - value: 1
     subType: 5
   agiSub:
-  - value: 3
+  - value: 2
     subType: 6
   - value: 2
     subType: 8
   intSub:
   - value: 5
     subType: 1
-  - value: 5
+  - value: 3
     subType: 4
   - value: 1
     subType: 5
-  scale: 5
+  scale: 10
   strLevel: 0
   dexLevel: 0
   conLevel: 0

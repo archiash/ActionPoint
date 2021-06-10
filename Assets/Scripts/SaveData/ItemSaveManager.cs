@@ -114,7 +114,7 @@ public class ItemSaveManager : MonoBehaviour
         if (pointWhileExit > 3600)
             pointWhileExit = 3600;
 
-        pointManager.GetActionPerSec = saveData.pointPerSec;
+        pointManager.GetActionPerSec = 1;
         pointManager.GetActionPoint = saveData.point + pointWhileExit;       
     }
     public void SavePoint()

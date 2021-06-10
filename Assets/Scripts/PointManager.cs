@@ -17,10 +17,11 @@ public class PointManager : MonoBehaviour
 
     [SerializeField] private double actionPoint;
     [SerializeField] private float actionPersec;
+    public float actionPerSecLvBonus;
 
     private void FixedUpdate()
     {
-        actionPoint += actionPersec * Time.fixedDeltaTime;
+        actionPoint += (actionPersec + actionPerSecLvBonus) * Time.fixedDeltaTime;
     }
 
     public void UseAction(int point)
@@ -29,7 +30,7 @@ public class PointManager : MonoBehaviour
     }
 
     public double GetActionPoint { get { return actionPoint; } set { actionPoint = value; } }
-    public double GetActionPerSec {get { return actionPersec; } set { actionPersec = (float)value; } }
+    public double GetActionPerSec {get { return actionPersec + actionPerSecLvBonus; } set { actionPersec = (float)value; } }
  
     public void AddPointPerSec(float amount)
     {

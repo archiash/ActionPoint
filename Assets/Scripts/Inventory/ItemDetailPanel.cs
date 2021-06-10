@@ -9,11 +9,13 @@ public class ItemDetailPanel : MonoBehaviour
     public static ItemDetailPanel instance;
     public GameObject panel;
 
+    [SerializeField] TextMeshProUGUI part;
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI statText;
     public TextMeshProUGUI powerText;
     public TextMeshProUGUI amountText;
     public Image iconImage;
+    [SerializeField] Image rarity;
     public TMP_InputField sellAmount;
 
     [SerializeField] TextMeshProUGUI sellPrice;
@@ -34,6 +36,8 @@ public class ItemDetailPanel : MonoBehaviour
         currentItem = item;
         if (item.item is Equipment)
         {
+            part.text = ((Equipment)currentItem.item).part.ToString();
+            part.enabled = true;
             nameText.text = string.Format($"{currentItem.item.itemName} +{((Equipment)currentItem.item).enchantment}");
             powerText.text = ((Equipment)currentItem.item).powerPercent.ToString() + "%";
             powerText.enabled = true;
@@ -43,8 +47,7 @@ public class ItemDetailPanel : MonoBehaviour
         }
         else
         {
-
-
+            part.enabled = false;
             nameText.text = currentItem.item.itemName;
             amountText.text = "จำนวน: " + currentItem.amount.ToString();
             amountText.enabled = true;
@@ -59,7 +62,7 @@ public class ItemDetailPanel : MonoBehaviour
         }
               
         iconImage.sprite = currentItem.item.icon;
-
+        rarity.color = RarityColor.color(currentItem.item.rarity);
         sellPrice.text = "ราคา: " + currentItem.item.price;
 
         sellAmount.text = "1";
