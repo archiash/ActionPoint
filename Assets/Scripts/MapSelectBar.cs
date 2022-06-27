@@ -19,6 +19,6 @@ public class MapSelectBar : MonoBehaviour
 
     public void SelectMap()
     {
-        MapManager.instance.CreateMonsterList(map);
+        MapManager.instance.MapFromDropdown();
     }
 }

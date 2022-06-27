@@ -19,3 +19,12 @@ MonoBehaviour:
   - requireLevel: 8
     bonusType: 1
     value: 1
+  - requireLevel: 12
+    bonusType: 0
+    value: 1
+  - requireLevel: 17
+    bonusType: 0
+    value: 1
+  - requireLevel: 25
+    bonusType: 1
+    value: 0.5

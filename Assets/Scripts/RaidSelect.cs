@@ -19,6 +19,10 @@ public class RaidSelect : MonoBehaviour, IDragHandler, IEndDragHandler
     public Image healthBar;
     public TextMeshProUGUI usePoint;
     public TextMeshProUGUI round;
+
+    [SerializeField] TextMeshProUGUI raidBossName;
+    [SerializeField] TextMeshProUGUI raidBossSubName;
+    [SerializeField] TextMeshProUGUI swipeText;
     public int Index
     {
         get { return indexOnSelect; }
@@ -57,6 +61,10 @@ public class RaidSelect : MonoBehaviour, IDragHandler, IEndDragHandler
                 Index++;
             else if (difference < 0 && Index > 0)
                 Index--;
+            else if (difference < 0 && Index == 0)
+                Index = raidList.Count - 1;
+            else if (difference > 0 && Index == raidList.Count - 1)
+                Index = 0;
         }
     }
 
@@ -78,8 +86,11 @@ public class RaidSelect : MonoBehaviour, IDragHandler, IEndDragHandler
         raidSection.gameObject.SetActive(raidManager.isRaiding);
         if (!raidManager.isRaiding)
         {
+            
             image.sprite = raidList[indexOnSelect].sprite;
-
+            raidBossName.text = raidList[indexOnSelect].Name;
+            raidBossSubName.text = raidList[indexOnSelect].Desc;
+            swipeText.enabled = true;
             ClearSlot();
 
             foreach (StackItem i in raidList[Index].summonMaterial)
@@ -92,11 +103,13 @@ public class RaidSelect : MonoBehaviour, IDragHandler, IEndDragHandler
         } else
         {
             ClearSlot();
+            raidBossName.text = raidManager.raidBoss.Name;
+            raidBossSubName.text = raidManager.raidBoss.Desc;
             image.sprite = raidManager.raidBoss.sprite;
             healthValue.text = raidManager.currentHP.ToString();
             round.text = "Round " + raidManager.amountTime.ToString();
             usePoint.text = raidManager.raidBoss.usePoint.ToString() + " Points";
-            
+            swipeText.enabled = false ;
         }
     }
 

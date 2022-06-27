@@ -154,6 +154,16 @@ public class StatusUpgrade : MonoBehaviour
     [SerializeField] int agiLevel;
     [SerializeField] int intLevel;
 
+    public void ResetPoint()
+    {
+        STR = 0;
+        INT = 0;
+        CON = 0;
+        AGI = 0;
+        DEX = 0;
+        Character.instance.statusPoint = Character.instance.Level - 1;
+    }
+
 }
 #if UNITY_EDITOR
 

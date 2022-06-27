@@ -23,17 +23,17 @@ public class ShowSkillDetail : MonoBehaviour
     {
         this.skillSlot = skillSlot;
 
-        if(skillSlot.CheckCondition() /*&& Character.character.skillPoint > 0*/)
-        {
-            button.SetActive(true);
-        }else
-        {
-            button.SetActive(false);
-        }
+        //if(skillSlot.CheckCondition() /*&& Character.character.skillPoint > 0*/)
+        //{
+         //   button.SetActive(true);
+       // }else
+       // {
+      //      button.SetActive(false);
+      //  }
     }
 
     public void OnLearnButton()
     {
-        skillSlot.OnLearnSkill();
+        //skillSlot.OnLearnSkill();
     }
 }

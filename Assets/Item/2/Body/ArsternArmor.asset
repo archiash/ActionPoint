@@ -27,7 +27,7 @@ MonoBehaviour:
     mainType: 0
     statType: 0
     type: 0
-    amount: 75
+    amount: 65
     isEnchantEffect: 1
     isPowerEffect: 1
   - modifierType: 1
@@ -41,13 +41,6 @@ MonoBehaviour:
     mainType: 0
     statType: 5
     type: 0
-    amount: 5
+    amount: 8
     isEnchantEffect: 1
     isPowerEffect: 1
-  - modifierType: 1
-    mainType: 0
-    statType: 6
-    type: 0
-    amount: -5
-    isEnchantEffect: 1
-    isPowerEffect: 0

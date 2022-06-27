@@ -10,12 +10,12 @@ public class Skillbook : Item
 
     public override bool UseItem(Status status = null)
     {
-       return Character.instance.LearnSkill(skill);
+       return Character.instance.LearnSkill(skill,this);
     }
 
-    public override string GetDesc(bool fulldesc = true)
+    public override string GetDesc(bool fulldesc = true,bool isDownList = true)
     {
-        return $"Use to learn Skill {skill.skillName}";
+        return $"Use to learn Skill {skill?.skillName}";
     }
 }
 

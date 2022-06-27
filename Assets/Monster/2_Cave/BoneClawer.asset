@@ -103,27 +103,33 @@ MonoBehaviour:
   - items:
     - item: {fileID: 11400000, guid: 97fcf9999bee23645b2e61952b0ea250, type: 2}
       rateDrop: 100
+      trueRate: 100
       minDrop: 1
       maxDrop: 2
   - items:
     - item: {fileID: 11400000, guid: f1be68ff5ab737548a6695c795798763, type: 2}
-      rateDrop: 100
+      rateDrop: 50
+      trueRate: 50
       minDrop: 1
       maxDrop: 1
     - item: {fileID: 11400000, guid: 38598ef3b1230af49a7ed9ac999b32b4, type: 2}
-      rateDrop: 50
+      rateDrop: 100
+      trueRate: 50
       minDrop: 1
       maxDrop: 1
   - items:
     - item: {fileID: 11400000, guid: 97fcf9999bee23645b2e61952b0ea250, type: 2}
-      rateDrop: 100
+      rateDrop: 33.33
+      trueRate: 33.3
       minDrop: 1
       maxDrop: 1
     - item: {fileID: 11400000, guid: f1be68ff5ab737548a6695c795798763, type: 2}
       rateDrop: 50
+      trueRate: 33.3
       minDrop: 1
       maxDrop: 1
     - item: {fileID: 11400000, guid: 38598ef3b1230af49a7ed9ac999b32b4, type: 2}
-      rateDrop: 25
+      rateDrop: 100
+      trueRate: 33.4
       minDrop: 1
       maxDrop: 1

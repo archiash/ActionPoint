@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 [System.Serializable]
 public class DropItem
 {
     public Item item;
     [Range(0,100)]
-    public int rateDrop;
+    public float rateDrop;
+    [ShowOnly]public float trueRate;
 
     public int minDrop;
     public int maxDrop;
@@ -21,25 +24,67 @@ public class DropTable
 
     public StackItem DropLoot()
     {
-        int dropIndex = -1;
-        int random = Random.Range(0, 101);
-        for(int i = 0;i < items.Length;i++)
+        float random = Random.Range(1.0f, 100.0f);
+        float currentRate = 0;
+        for (int i = 0; i < items.Length; i++)
         {
-            if(random <= items[i].rateDrop)
+            currentRate += items[i].trueRate;
+            if (random <= currentRate)
             {
-                if (dropIndex >= 0)
+                int dropAmount = Random.Range(items[i].minDrop, items[i].maxDrop + 1);
+                if(Character.instance.Class == Character.CharacterClass.Adventurer)
                 {
-                    if (items[i].rateDrop < items[dropIndex].rateDrop)
-                        dropIndex = i;
+                    if (Random.value <= 0.1f)
+                    {
+                        dropAmount++;
+                        Debug.Log("Adventurer Extra Drop");
+                    }
+
                 }
-                dropIndex = i;
+                return new StackItem(items[i].item, dropAmount);
             }
         }
-        if(dropIndex < 0)
-        {
-            return null;
-        }
-        int dropAmount = Random.Range(items[dropIndex].minDrop, items[dropIndex].maxDrop + 1);
-        return new StackItem(items[dropIndex].item,dropAmount);
+
+        return null;
     }
 }
+
+#if UNITY_EDITOR
+[CustomPropertyDrawer(typeof(DropTable))]
+public class DropTableDrawer : PropertyDrawer
+{
+
+    SerializedProperty items;
+
+    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+    {
+        property.isExpanded = EditorGUI.Foldout(new Rect(position.x, position.y, position.width, EditorGUIUtility.singleLineHeight), property.isExpanded, label);
+
+
+        items = property.FindPropertyRelative("items");
+        float percent = 100f;
+        for (int i = 0; i < items.arraySize; i++)
+        {
+            float rate = items.GetArrayElementAtIndex(i).FindPropertyRelative("rateDrop").floatValue;
+            float trueValue = (float)System.Math.Round(percent * rate / 100, 1);
+            items.GetArrayElementAtIndex(i).FindPropertyRelative("trueRate").floatValue = trueValue;
+            percent -= trueValue;
+        }
+
+
+        if (property.isExpanded)
+        {
+            EditorGUI.PropertyField(new Rect(position.x, position.y + EditorGUIUtility.singleLineHeight, position.width, EditorGUIUtility.singleLineHeight), property.FindPropertyRelative("items"), true);
+        }
+    }
+
+    public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+    {
+        if (property.isExpanded)
+        {
+            return EditorGUIUtility.singleLineHeight + EditorGUI.GetPropertyHeight(property.FindPropertyRelative("items"), true);
+        }
+        return EditorGUIUtility.singleLineHeight;
+    }
+}
+# endif

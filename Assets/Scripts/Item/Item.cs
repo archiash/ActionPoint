@@ -14,6 +14,7 @@ public class Item : ScriptableObject
     public string itemName;
     public Rarity rarity;
 
+    [TextArea(2,3)]
     public string itemDes;
     public ItemType itemType;
 
@@ -39,7 +40,7 @@ public class Item : ScriptableObject
         return false;
     }
 
-    public virtual string GetDesc(bool fulldesc = true)
+    public virtual string GetDesc(bool fulldesc = true, bool isDownList = true)
     {
         return itemDes;
     }

@@ -49,8 +49,6 @@ public class BasicSkill : Skill
     public bool isUsePoint = true;
     public List<BasicAction> actions = new List<BasicAction>();
 
-
-
     public override bool Use<U, T>(U user, T enermy, ArenaType arena = ArenaType.Hunting)
     {
         Activate(user,enermy,arena);
@@ -287,106 +285,103 @@ public class BasicActionDrawer : PropertyDrawer
 
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
-        position.height = 16;
-        EditorGUI.PropertyField(position, property) ;
-        if (property.isExpanded)
+        position.height = EditorGUIUtility.singleLineHeight;
+        position.y += position.height;
+        EditorGUI.PropertyField(position, property.FindPropertyRelative("skillType"));
+        position.y += position.height;
+
+        EditorGUI.PropertyField(position, property.FindPropertyRelative("target"));
+        position.y += position.height;
+        EditorGUI.PropertyField(position, property.FindPropertyRelative("value"));
+        if (property.FindPropertyRelative("skillType").enumValueIndex == 0)
         {
-            position.y += 20;
-            EditorGUI.PropertyField(position, property.FindPropertyRelative("skillType"));
-            position.y += 20;
 
-            EditorGUI.PropertyField(position, property.FindPropertyRelative("target"));
-            position.y += 20;
-            EditorGUI.PropertyField(position, property.FindPropertyRelative("value"));
-            if (property.FindPropertyRelative("skillType").enumValueIndex == 0)
-            {
-
-                position.y += 20;
-                EditorGUI.PropertyField(position, property.FindPropertyRelative("damageType"));
-                position.y += 20;
-                EditorGUI.PropertyField(position, property.FindPropertyRelative("critical"));
-                position.y += 20;
-                Rect percentDrain = position;
-                percentDrain.width /= 2;
-                EditorGUI.PropertyField(percentDrain, property.FindPropertyRelative("isDrain"));
-                percentDrain.x += percentDrain.width;
-                EditorGUI.PropertyField(percentDrain, property.FindPropertyRelative("drainPercent"), GUIContent.none);
-                position.y += 20;
-                EditorGUI.PropertyField(position, property.FindPropertyRelative("actionModifiers"), true);
-            }
-            else if (property.FindPropertyRelative("skillType").enumValueIndex == 1)
-            {
-                position.y += 20;
-                EditorGUI.PropertyField(position, property.FindPropertyRelative("actionModifiers"), true);
-            }
-            else if (property.FindPropertyRelative("skillType").enumValueIndex == 2)
-            {
-                position.y += 20;
-                EditorGUI.PropertyField(position, property.FindPropertyRelative("statToBuff"));
-                position.y += 20;
-                EditorGUI.PropertyField(position, property.FindPropertyRelative("buffModType"));
-                position.y += 20;
-                EditorGUI.PropertyField(position, property.FindPropertyRelative("turnDaration"));
-            }
-            else if (property.FindPropertyRelative("skillType").enumValueIndex == 3)
-            {
-                position.y += 20;
-                EditorGUI.PropertyField(position, property.FindPropertyRelative("damageType"));
-                position.y += 20;
-                EditorGUI.PropertyField(position, property.FindPropertyRelative("critical"));
-                position.y += 20;
-                EditorGUI.PropertyField(position, property.FindPropertyRelative("dType"));
-                position.y += 20;
-                EditorGUI.PropertyField(position, property.FindPropertyRelative("penetrate"));
-                position.y += 20;
-                EditorGUI.PropertyField(position, property.FindPropertyRelative("turnDaration"));
-                position.y += 20;
-                EditorGUI.PropertyField(position, property.FindPropertyRelative("actionModifiers"), true);
-            }
+            position.y += position.height;
+            EditorGUI.PropertyField(position, property.FindPropertyRelative("damageType"));
+            position.y += position.height;
+            EditorGUI.PropertyField(position, property.FindPropertyRelative("critical"));
+            position.y += position.height;
+            Rect percentDrain = position;
+            percentDrain.width /= 2;
+            EditorGUI.PropertyField(percentDrain, property.FindPropertyRelative("isDrain"));
+            percentDrain.x += percentDrain.width;
+            EditorGUI.PropertyField(percentDrain, property.FindPropertyRelative("drainPercent"), GUIContent.none);
+            position.y += position.height;
+            EditorGUI.PropertyField(position, property.FindPropertyRelative("actionModifiers"), true);
         }
+        else if (property.FindPropertyRelative("skillType").enumValueIndex == 1)
+        {
+            position.y += position.height;
+            EditorGUI.PropertyField(position, property.FindPropertyRelative("actionModifiers"), true);
+        }
+        else if (property.FindPropertyRelative("skillType").enumValueIndex == 2)
+        {
+            position.y += position.height;
+            EditorGUI.PropertyField(position, property.FindPropertyRelative("statToBuff"));
+            position.y += position.height;
+            EditorGUI.PropertyField(position, property.FindPropertyRelative("buffModType"));
+            position.y += position.height;
+            EditorGUI.PropertyField(position, property.FindPropertyRelative("turnDaration"));
+        }
+        else if (property.FindPropertyRelative("skillType").enumValueIndex == 3)
+        {
+            position.y += position.height;
+            EditorGUI.PropertyField(position, property.FindPropertyRelative("damageType"));
+            position.y += position.height;
+            EditorGUI.PropertyField(position, property.FindPropertyRelative("critical"));
+            position.y += position.height;
+            EditorGUI.PropertyField(position, property.FindPropertyRelative("dType"));
+            position.y += position.height;
+            EditorGUI.PropertyField(position, property.FindPropertyRelative("penetrate"));
+            position.y += position.height;
+            EditorGUI.PropertyField(position, property.FindPropertyRelative("turnDaration"));
+            position.y += position.height;
+            EditorGUI.PropertyField(position, property.FindPropertyRelative("actionModifiers"), true);
+        }
+        
     }
 
     public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
     {
-        int x = 0;
+        float x = 0;
         int y = 0;
-        if (property.isExpanded)
+        
+        y = 0; 
+        switch (property.FindPropertyRelative("skillType").enumValueIndex)
         {
-            x = property.FindPropertyRelative("actionModifiers").arraySize * 20;
-            y = 0; ;
-            switch (property.FindPropertyRelative("skillType").enumValueIndex)
-            {
-                case 0:
-                    y = 160;
-                    break;
-                case 1:
-                    y = 100;
-                    break;
-                case 2:
-                    y = 130;
-                    break;
-                case 3:
-                    y = 200;
-                    break;
-            }
+            case 0:
+                y = 7;
+                x = EditorGUI.GetPropertyHeight(property.FindPropertyRelative("actionModifiers"), true);
+                break;
+            case 1:
+                y = 4;
+                x = EditorGUI.GetPropertyHeight(property.FindPropertyRelative("actionModifiers"), true);
+                break;
+            case 2:
+                y = 7;
+                break;
+            case 3:
+                y = 9;
+                x = EditorGUI.GetPropertyHeight(property.FindPropertyRelative("actionModifiers"), true);
+                break;
         }
-        return EditorGUIUtility.singleLineHeight + y + x;
+        
+        return EditorGUIUtility.singleLineHeight * y + x;
         //return base.GetPropertyHeight(property, label);
         //return EditorGUI.GetPropertyHeight(property, label,true);
     }
 }
-
 
 [CustomPropertyDrawer(typeof(BasicSkill.BasicAction.ActionModifier))]
 public class BasicActionModifierDrawer : PropertyDrawer
 {
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
-        position.height = 16;
+        position.height = EditorGUIUtility.singleLineHeight;
         position.width /= 3;
         EditorGUI.PropertyField(position, property.FindPropertyRelative("statType"), GUIContent.none);
         var statTyper = property.FindPropertyRelative("statType");
-        position.x += position.width - 5;
+        position.x += position.width;
         if (statTyper.enumValueIndex == 0)
         {
             EditorGUI.PropertyField(position, property.FindPropertyRelative("mainType"),GUIContent.none);
@@ -394,7 +389,7 @@ public class BasicActionModifierDrawer : PropertyDrawer
         {
             EditorGUI.PropertyField(position, property.FindPropertyRelative("subType"), GUIContent.none);
         }
-        position.x += position.width - 5;
+        position.x += position.width;
         EditorGUI.PropertyField(position, property.FindPropertyRelative("amount"), GUIContent.none);
     }
 

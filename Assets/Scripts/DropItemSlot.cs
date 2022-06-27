@@ -14,7 +14,7 @@ public class DropItemSlot : MonoBehaviour
     {
         amount.text = drop.amount.ToString();
         image.sprite = drop.item.icon;
-        rarity.color = InventorySlot.RarityColor(drop.item);
+        rarity.color = RarityColor.color(drop.item.rarity);
     }
 
 }

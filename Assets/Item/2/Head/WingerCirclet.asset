@@ -15,7 +15,7 @@ MonoBehaviour:
   id: 951b51fa59965ae45b61940091e20789
   icon: {fileID: 21300000, guid: cc7e73373dc2e2143b276c3c53d92981, type: 3}
   itemName: Winger Circlet
-  rarity: 0
+  rarity: 1
   itemDes: 
   itemType: 2
   sellPrice: 400

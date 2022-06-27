@@ -24,23 +24,23 @@ MonoBehaviour:
   part: 5
   modifiers:
   - modifierType: 0
-    mainType: 0
+    mainType: 4
     statType: 0
     type: 0
-    amount: 3
+    amount: 2
     isEnchantEffect: 1
     isPowerEffect: 1
   - modifierType: 1
     mainType: 0
-    statType: 2
+    statType: 4
     type: 0
-    amount: 7
+    amount: 5
     isEnchantEffect: 1
     isPowerEffect: 1
   - modifierType: 1
     mainType: 0
-    statType: 9
+    statType: 5
     type: 0
-    amount: 7
+    amount: 5
     isEnchantEffect: 1
     isPowerEffect: 1

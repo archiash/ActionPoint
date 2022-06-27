@@ -1,0 +1,114 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5825999a020fbf841bf87164bae64088, type: 3}
+  m_Name: Student of Aldiranum
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 21300000, guid: 912745ede2ebc7c45be5d5f224fa9ee0, type: 3}
+  Name: Student of Aldiranum
+  Desc: 
+  status:
+    STR:
+      baseValue: 0
+      upgradeModifier: 0
+      modifiers: []
+    DEX:
+      baseValue: 0
+      upgradeModifier: 0
+      modifiers: []
+    AGI:
+      baseValue: 0
+      upgradeModifier: 0
+      modifiers: []
+    INT:
+      baseValue: 0
+      upgradeModifier: 0
+      modifiers: []
+    CON:
+      baseValue: 0
+      upgradeModifier: 0
+      modifiers: []
+    HP:
+      baseValue: 900
+      mainModifiers: []
+      modifiers: []
+    currentHP: 900
+    MP:
+      baseValue: 150
+      mainModifiers: []
+      modifiers: []
+    currentMP: 150
+    PAtk:
+      baseValue: 20
+      mainModifiers: []
+      modifiers: []
+    PDef:
+      baseValue: 60
+      mainModifiers: []
+      modifiers: []
+    Pen:
+      baseValue: 0
+      mainModifiers: []
+      modifiers: []
+    MAtk:
+      baseValue: 85
+      mainModifiers: []
+      modifiers: []
+    MDef:
+      baseValue: 60
+      mainModifiers: []
+      modifiers: []
+    Neu:
+      baseValue: 20
+      mainModifiers: []
+      modifiers: []
+    Spd:
+      baseValue: 70
+      mainModifiers: []
+      modifiers: []
+    Hit:
+      baseValue: 70
+      mainModifiers: []
+      modifiers: []
+    Eva:
+      baseValue: 60
+      mainModifiers: []
+      modifiers: []
+    Crate:
+      baseValue: 40
+      mainModifiers: []
+      modifiers: []
+    Cdmg:
+      baseValue: 40
+      mainModifiers: []
+      modifiers: []
+    Cres:
+      baseValue: 20
+      mainModifiers: []
+      modifiers: []
+  currentSkill:
+  - {fileID: 11400000, guid: 3d51c4b8ebf8e4a43882a258363dce26, type: 2}
+  - {fileID: 11400000, guid: a3888c2332959b14087390f65a295c0f, type: 2}
+  usePoint: 120
+  expReward: 200
+  dropTables:
+  - items:
+    - item: {fileID: 11400000, guid: 58d7cf988bfdec0439b90255669d4cd9, type: 2}
+      rateDrop: 100
+      trueRate: 100
+      minDrop: 1
+      maxDrop: 3
+  - items:
+    - item: {fileID: 11400000, guid: 2b16a817877016c489872e80400e462b, type: 2}
+      rateDrop: 100
+      trueRate: 100
+      minDrop: 1
+      maxDrop: 3

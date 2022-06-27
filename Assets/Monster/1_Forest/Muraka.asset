@@ -97,29 +97,34 @@ MonoBehaviour:
   currentSkill:
   - {fileID: 11400000, guid: 05ab7d5dc2ef9f444a182736d82a14c3, type: 2}
   - {fileID: 11400000, guid: dcc9dc1abfb0fb9459923538edc2d8a8, type: 2}
-  usePoint: 60
+  usePoint: 40
   expReward: 40
   dropTables:
   - items:
     - item: {fileID: 11400000, guid: 9b2907ac00cbf824ebc5e78c8af66b28, type: 2}
       rateDrop: 100
+      trueRate: 100
       minDrop: 1
       maxDrop: 2
   - items:
     - item: {fileID: 11400000, guid: 20a4fed774a301c4e880df5e5132bcc1, type: 2}
-      rateDrop: 60
+      rateDrop: 75
+      trueRate: 75
       minDrop: 1
       maxDrop: 1
   - items:
     - item: {fileID: 11400000, guid: 9b2907ac00cbf824ebc5e78c8af66b28, type: 2}
-      rateDrop: 100
+      rateDrop: 30
+      trueRate: 30
       minDrop: 1
       maxDrop: 1
     - item: {fileID: 11400000, guid: 995ed0f3ca4fdf04c937726efc69ff94, type: 2}
-      rateDrop: 60
-      minDrop: 1
-      maxDrop: 3
+      rateDrop: 42.9
+      trueRate: 30
+      minDrop: 2
+      maxDrop: 2
     - item: {fileID: 11400000, guid: c94f412d138f84e47a840853726cd04e, type: 2}
-      rateDrop: 30
-      minDrop: 1
-      maxDrop: 3
+      rateDrop: 100
+      trueRate: 40
+      minDrop: 2
+      maxDrop: 2

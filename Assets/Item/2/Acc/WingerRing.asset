@@ -34,6 +34,6 @@ MonoBehaviour:
     mainType: 2
     statType: 0
     type: 0
-    amount: 3
+    amount: 2
     isEnchantEffect: 1
     isPowerEffect: 1

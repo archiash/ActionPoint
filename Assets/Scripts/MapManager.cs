@@ -15,54 +15,47 @@ public class MapManager : MonoBehaviour
     [SerializeField] MonsterBar monsterBarPrefab;
 
     [SerializeField] TMP_Dropdown mapDropdown;
-    [SerializeField] TMP_Dropdown difficultDropdown;
+
+    [SerializeField] MapZoneUI zonePrefab;
 
     private void Start()
     {
+        Map2DropDownList();
         instance = this;
-        OnMapChange();
+        MapFromDropdown();
+    }
+
+    void Map2DropDownList()
+    {
+        mapDropdown.ClearOptions();
+        foreach(Maps i in maps)
+        {
+            mapDropdown.AddOptions(new List<string>() { i.mapName});
+        }
     }
 
     public void MapFromDropdown()
-    {
-        CreateMonsterList(maps[mapDropdown.value].maps[difficultDropdown.value]);    
-    }
-
-    public void OnMapChange()
-    {
-        if (difficultDropdown.value > maps[mapDropdown.value].maps.Count - 1)
-        {
-            difficultDropdown.value = 0;
-            difficultDropdown.RefreshShownValue();
-        }
-
-        difficultDropdown.ClearOptions();
-        List<string> m_DropdownOption = new List<string>();
-        foreach (Map map in maps[mapDropdown.value].maps)
-        {
-            m_DropdownOption.Add(map.difficult);
-        }
-        difficultDropdown.AddOptions(m_DropdownOption);
-
-        MapFromDropdown();
-    }
-
-    public void OnDifficultChange()
-    {
-        MapFromDropdown();
-    }
-
-    public void CreateMonsterList(Map map)
     {
         foreach (Transform i in parent)
         {
             Destroy(i.gameObject);
         }
-        map.monsters = map.monsters.OrderBy(x => x.usePoint).ToList();
-        foreach (Monster monster in map.monsters)
+
+        Maps map = maps[mapDropdown.value];
+        
+        for(int i = 0; i < map.maps.Count;i++)
         {
-            MonsterBar monsterBar = Instantiate(monsterBarPrefab, parent);
-            monsterBar.Create(monster);
+            MapZoneUI zone = Instantiate(zonePrefab, parent);
+            zone.Init(map.maps[i],i);
+
+            map.maps[i].monsters = map.maps[i].monsters.OrderBy(x => x.usePoint).ToList();
+            foreach(Monster monster in map.maps[i].monsters)
+            {
+                MonsterBar monsterBar = Instantiate(monsterBarPrefab, zone.transform);
+                monsterBar.Create(monster);
+            }
         }
+
     }
+
 }

@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5825999a020fbf841bf87164bae64088, type: 3}
-  m_Name: FurWInger
+  m_Name: FurWinger
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: f1da8ddb2d87c654083c284bb0dcae83, type: 3}
-  Name: Fur WInger
+  Name: Fur Winger
   Desc: 
   status:
     STR:
@@ -96,25 +96,29 @@ MonoBehaviour:
       modifiers: []
   currentSkill:
   - {fileID: 11400000, guid: ba418ab1d3b5baa4bb939ba84aae825d, type: 2}
-  usePoint: 62
+  usePoint: 60
   expReward: 85
   dropTables:
   - items:
     - item: {fileID: 11400000, guid: d93b37b20e83bbf40a34ab9edc7edc3b, type: 2}
       rateDrop: 100
+      trueRate: 100
       minDrop: 1
       maxDrop: 2
   - items:
     - item: {fileID: 11400000, guid: 1303d9a6b8a6f9746a398d187f8c5393, type: 2}
       rateDrop: 100
+      trueRate: 100
       minDrop: 1
       maxDrop: 2
   - items:
     - item: {fileID: 11400000, guid: 1303d9a6b8a6f9746a398d187f8c5393, type: 2}
-      rateDrop: 80
+      rateDrop: 50
+      trueRate: 50
       minDrop: 1
       maxDrop: 1
     - item: {fileID: 11400000, guid: d93b37b20e83bbf40a34ab9edc7edc3b, type: 2}
-      rateDrop: 40
+      rateDrop: 100
+      trueRate: 50
       minDrop: 1
       maxDrop: 1

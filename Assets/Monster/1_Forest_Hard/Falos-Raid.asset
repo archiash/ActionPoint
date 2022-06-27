@@ -1,0 +1,149 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e895d16d24d0831449cbba76c201d457, type: 3}
+  m_Name: Falos-Raid
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 21300000, guid: 6b298fb36dbe60844b6cfba4469ffd62, type: 3}
+  Name: Falos
+  Desc: the Exiled Houndra
+  status:
+    STR:
+      baseValue: 0
+      upgradeModifier: 0
+      modifiers: []
+    DEX:
+      baseValue: 0
+      upgradeModifier: 0
+      modifiers: []
+    AGI:
+      baseValue: 0
+      upgradeModifier: 0
+      modifiers: []
+    INT:
+      baseValue: 0
+      upgradeModifier: 0
+      modifiers: []
+    CON:
+      baseValue: 0
+      upgradeModifier: 0
+      modifiers: []
+    HP:
+      baseValue: 2800
+      mainModifiers: []
+      modifiers: []
+    currentHP: 2800
+    MP:
+      baseValue: 0
+      mainModifiers: []
+      modifiers: []
+    currentMP: 0
+    PAtk:
+      baseValue: 90
+      mainModifiers: []
+      modifiers: []
+    PDef:
+      baseValue: 80
+      mainModifiers: []
+      modifiers: []
+    Pen:
+      baseValue: 15
+      mainModifiers: []
+      modifiers: []
+    MAtk:
+      baseValue: 40
+      mainModifiers: []
+      modifiers: []
+    MDef:
+      baseValue: 80
+      mainModifiers: []
+      modifiers: []
+    Neu:
+      baseValue: 0
+      mainModifiers: []
+      modifiers: []
+    Spd:
+      baseValue: 85
+      mainModifiers: []
+      modifiers: []
+    Hit:
+      baseValue: 75
+      mainModifiers: []
+      modifiers: []
+    Eva:
+      baseValue: 60
+      mainModifiers: []
+      modifiers: []
+    Crate:
+      baseValue: 60
+      mainModifiers: []
+      modifiers: []
+    Cdmg:
+      baseValue: 50
+      mainModifiers: []
+      modifiers: []
+    Cres:
+      baseValue: 30
+      mainModifiers: []
+      modifiers: []
+  currentSkill:
+  - {fileID: 11400000, guid: 41b3742130d1d3f48bbb0ca197c21216, type: 2}
+  - {fileID: 11400000, guid: a4edc1050c00d2b4db41e164726bfe6e, type: 2}
+  - {fileID: 11400000, guid: d9654dd68be510845aa32f5027863b14, type: 2}
+  usePoint: 200
+  expReward: 1200
+  dropTables:
+  - items:
+    - item: {fileID: 11400000, guid: c268a6485585624499e128490bb6f2e9, type: 2}
+      rateDrop: 70
+      trueRate: 70
+      minDrop: 1
+      maxDrop: 1
+  - items:
+    - item: {fileID: 11400000, guid: b619513d8edf5f743b01ef3d01b3367a, type: 2}
+      rateDrop: 50
+      trueRate: 50
+      minDrop: 2
+      maxDrop: 4
+    - item: {fileID: 11400000, guid: e38dc663ade513f47927a8dc6fea64d1, type: 2}
+      rateDrop: 100
+      trueRate: 50
+      minDrop: 2
+      maxDrop: 4
+  - items:
+    - item: {fileID: 11400000, guid: c8fd9e83970a6f040af26f18ec55dc15, type: 2}
+      rateDrop: 40
+      trueRate: 40
+      minDrop: 3
+      maxDrop: 5
+    - item: {fileID: 11400000, guid: cc13ead9bb77fe447b932dc0a0411411, type: 2}
+      rateDrop: 66.6
+      trueRate: 40
+      minDrop: 3
+      maxDrop: 5
+    - item: {fileID: 11400000, guid: b619513d8edf5f743b01ef3d01b3367a, type: 2}
+      rateDrop: 50
+      trueRate: 10
+      minDrop: 1
+      maxDrop: 2
+    - item: {fileID: 11400000, guid: e38dc663ade513f47927a8dc6fea64d1, type: 2}
+      rateDrop: 100
+      trueRate: 10
+      minDrop: 1
+      maxDrop: 2
+  id: 18269a35b71725c48b705705d0d580db
+  summonMaterial:
+  - item: {fileID: 11400000, guid: 4a0d7d7dbb0f9db418a87489344d359d, type: 2}
+    amount: 5
+  - item: {fileID: 11400000, guid: f25af702fdd5e5345bde89dbfdd8ff9d, type: 2}
+    amount: 5
+  - item: {fileID: 11400000, guid: fccc5bf31dd5bba4eb486b0b1877f9c1, type: 2}
+    amount: 10

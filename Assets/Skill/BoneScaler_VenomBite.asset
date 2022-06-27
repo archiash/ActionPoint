@@ -12,22 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f8b422af388bd246a5e45c5031e3756, type: 3}
   m_Name: BoneScaler_VenomBite
   m_EditorClassIdentifier: 
+  skillIcon: {fileID: 0}
   skillName: Venom Bite
   skillDesc: "\u0E1E\u0E34\u0E29\u0E02\u0E2D\u0E07 Bone Scale \u0E08\u0E30\u0E2A\u0E23\u0E49\u0E32\u0E07\u0E04\u0E27\u0E32\u0E21\u0E40\u0E2A\u0E35\u0E22\u0E2B\u0E32\u0E22
-    20 \u0E40\u0E1B\u0E47\u0E19\u0E40\u0E27\u0E25\u0E32 5 \u0E40\u0E17\u0E34\u0E23\u0E4C\u0E19"
+    15 \u0E40\u0E1B\u0E47\u0E19\u0E40\u0E27\u0E25\u0E32 5 \u0E40\u0E17\u0E34\u0E23\u0E4C\u0E19"
   manaCost: 20
   coolTime: 10
   isUsePoint: 1
   actions:
   - target: 1
     skillType: 3
-    value: 20
+    value: 15
     damageType: 0
     critical: 1
     actionModifiers: []
     statToBuff: 0
     buffModType: 0
-    turnDaration: 5
+    turnDaration: 6
     dType: 0
     penetrate: 100
     isDrain: 0

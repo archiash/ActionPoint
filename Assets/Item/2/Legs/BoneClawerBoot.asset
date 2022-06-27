@@ -25,6 +25,13 @@ MonoBehaviour:
   modifiers:
   - modifierType: 1
     mainType: 0
+    statType: 0
+    type: 0
+    amount: 40
+    isEnchantEffect: 1
+    isPowerEffect: 1
+  - modifierType: 1
+    mainType: 0
     statType: 6
     type: 0
     amount: 8
@@ -42,12 +49,5 @@ MonoBehaviour:
     statType: 3
     type: 0
     amount: 5
-    isEnchantEffect: 1
-    isPowerEffect: 1
-  - modifierType: 1
-    mainType: 0
-    statType: 2
-    type: 0
-    amount: 3
     isEnchantEffect: 1
     isPowerEffect: 1

@@ -50,7 +50,8 @@ public class DebuffDamage
 }
 
 public class Skill : ScriptableObject
-{  
+{
+    public Sprite skillIcon;
     public string skillName;
     [TextArea(1,5)]
     public string skillDesc;

@@ -4,15 +4,33 @@ public static class RarityColor
 {
     public static Color color(Rarity rarity)
     {
+        Color color = Color.white;
         switch (rarity)
         {
             case Rarity.Common:
-                return Color.white;
+                return color;
             case Rarity.Uncommon:
-                return Color.green;
+                ColorUtility.TryParseHtmlString("#9ADEA8", out color);
+                return color;
             case Rarity.Rare:
-                return new Color(0, 125 / 255f, 255 / 255f, 1);
+                ColorUtility.TryParseHtmlString("#85A2D7", out color);
+                return color;
         }
         return Color.white;
+    }
+
+    public static Color MapZoneColor(int rarity)
+    {
+        Color color = Color.white;
+        switch (rarity)
+        {
+            case 0:
+                ColorUtility.TryParseHtmlString("#9ADEA8", out color);
+                return color;
+            case 1:
+                ColorUtility.TryParseHtmlString("#85A2D7", out color);
+                return color;
+        }
+        return color;
     }
 }

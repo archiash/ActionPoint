@@ -16,6 +16,7 @@ public class CraftBar : MonoBehaviour
     public Image rarity;
     public TextMeshProUGUI itemName;
     public TextMeshProUGUI costText;
+    [SerializeField] TextMeshProUGUI statusText;
 
     public void Init(Recipe newRecipe)
     {
@@ -28,7 +29,8 @@ public class CraftBar : MonoBehaviour
         itemName.text = resultItem.itemName;
         if (recipe.resulItem is Equipment)
         {
-            itemName.text += " - " + ((Equipment)resultItem).part.ToString(); 
+            itemName.text += " - " + ((Equipment)resultItem).part.ToString();
+            statusText.text = ((Equipment)resultItem).GetDesc(100,false,false);
         }
 
         costText.text = newRecipe.cost.ToString() + " $";
@@ -38,6 +40,9 @@ public class CraftBar : MonoBehaviour
             GameObject newMaterial = Instantiate(pf_material, parent);
             newMaterial.GetComponent<CraftBar_Material>().Init(material);
         }
+
+        GameObject money = Instantiate(pf_material, parent);
+        money.GetComponent<CraftBar_Material>().Init(newRecipe.cost);
     }
 
     public void ClearMaterialList()

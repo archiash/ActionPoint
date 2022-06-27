@@ -23,13 +23,6 @@ MonoBehaviour:
   powerPercent: 100
   part: 0
   modifiers:
-  - modifierType: 0
-    mainType: 0
-    statType: 0
-    type: 0
-    amount: 2
-    isEnchantEffect: 1
-    isPowerEffect: 1
   - modifierType: 1
     mainType: 0
     statType: 2

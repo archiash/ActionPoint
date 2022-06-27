@@ -37,10 +37,10 @@ MonoBehaviour:
       upgradeModifier: 0
       modifiers: []
     HP:
-      baseValue: 525
+      baseValue: 475
       mainModifiers: []
       modifiers: []
-    currentHP: 525
+    currentHP: 475
     MP:
       baseValue: 20
       mainModifiers: []
@@ -51,7 +51,7 @@ MonoBehaviour:
       mainModifiers: []
       modifiers: []
     PDef:
-      baseValue: 32
+      baseValue: 30
       mainModifiers: []
       modifiers: []
     Pen:
@@ -63,7 +63,7 @@ MonoBehaviour:
       mainModifiers: []
       modifiers: []
     MDef:
-      baseValue: 27
+      baseValue: 25
       mainModifiers: []
       modifiers: []
     Neu:
@@ -102,28 +102,34 @@ MonoBehaviour:
   - items:
     - item: {fileID: 11400000, guid: 1c2ea067b7430ca4c8e57fb321c6b306, type: 2}
       rateDrop: 100
+      trueRate: 100
       minDrop: 1
       maxDrop: 3
   - items:
     - item: {fileID: 11400000, guid: 63f06fa1fbc9f9b48aacf14b0032df6a, type: 2}
       rateDrop: 100
+      trueRate: 100
       minDrop: 1
       maxDrop: 1
   - items:
     - item: {fileID: 11400000, guid: 8ff45303a1828ac418ef33d736252859, type: 2}
       rateDrop: 100
+      trueRate: 100
       minDrop: 1
       maxDrop: 2
   - items:
     - item: {fileID: 11400000, guid: 8ff45303a1828ac418ef33d736252859, type: 2}
-      rateDrop: 100
+      rateDrop: 33.3
+      trueRate: 33.3
       minDrop: 1
       maxDrop: 1
     - item: {fileID: 11400000, guid: 63f06fa1fbc9f9b48aacf14b0032df6a, type: 2}
-      rateDrop: 66
+      rateDrop: 50
+      trueRate: 33.3
       minDrop: 1
       maxDrop: 1
     - item: {fileID: 11400000, guid: 1c2ea067b7430ca4c8e57fb321c6b306, type: 2}
-      rateDrop: 33
+      rateDrop: 100
+      trueRate: 33.4
       minDrop: 1
       maxDrop: 1

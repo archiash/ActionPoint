@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2be80355694d66478b9b2fc718b2c38, type: 3}
+  m_Name: Silver Edge
+  m_EditorClassIdentifier: 
+  id: 704b56c3cd3cc524f8789435a9785a25
+  icon: {fileID: 21300000, guid: 5bf663adbf65f414fb517febb2c17cfe, type: 3}
+  itemName: Silver Edge
+  rarity: 2
+  itemDes: 
+  itemType: 2
+  sellPrice: 1200
+  enchantment: 0
+  powerPercent: 100
+  part: 0
+  modifiers:
+  - modifierType: 0
+    mainType: 0
+    statType: 0
+    type: 0
+    amount: 3
+    isEnchantEffect: 0
+    isPowerEffect: 0
+  - modifierType: 0
+    mainType: 0
+    statType: 0
+    type: 0
+    amount: 5
+    isEnchantEffect: 1
+    isPowerEffect: 1
+  - modifierType: 1
+    mainType: 0
+    statType: 2
+    type: 0
+    amount: 25
+    isEnchantEffect: 1
+    isPowerEffect: 1
+  - modifierType: 1
+    mainType: 0
+    statType: 10
+    type: 0
+    amount: 30
+    isEnchantEffect: 0
+    isPowerEffect: 0
+  - modifierType: 1
+    mainType: 0
+    statType: 11
+    type: 0
+    amount: 15
+    isEnchantEffect: 0
+    isPowerEffect: 0

@@ -15,7 +15,7 @@ public class LevelBonus : ScriptableObject
     {
         public int requireLevel;
         public LvBonusType bonusType;
-        public int value;
+        public float value;
     }
 
     public List<Bonus> bonus = new List<Bonus>();

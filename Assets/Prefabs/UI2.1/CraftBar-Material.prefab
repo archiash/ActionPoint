@@ -107,11 +107,11 @@ RectTransform:
   m_Father: {fileID: 9059515651165579856}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 39.1, y: -41.715}
-  m_SizeDelta: {x: 45.515747, y: 34.255127}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: -14.292, y: 34.2551}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &2895050732354595414
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -176,7 +176,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 4
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -302,3 +302,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 423061586650902197}
   amount: {fileID: 7947730905958794359}
+  coin: {fileID: 21300000, guid: 51b5907fc84041949adf7c08fc2f8272, type: 3}

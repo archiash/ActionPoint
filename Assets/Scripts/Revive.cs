@@ -7,7 +7,6 @@ public class Revive : MonoBehaviour
 {
     public GameObject panel;
     public TextMeshProUGUI cost;
-    
     private void Update()
     {
         if (Character.instance.status.currentHP <= 0)

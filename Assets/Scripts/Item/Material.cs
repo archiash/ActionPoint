@@ -26,5 +26,22 @@ public class MaterialEditor : Editor
             Inventory.instance.GetItem(t.GetCopyItem());
         }
     }
+
+    public override Texture2D RenderStaticPreview(string assetPath, Object[] subAssets, int width, int height)
+    {
+        Material t = (Material)target;
+
+        if (t != null && t.icon != null)
+        {
+
+            // example.PreviewIcon must be a supported format: ARGB32, RGBA32, RGB24,
+            // Alpha8 or one of float formats
+            Texture2D tex = new Texture2D(width, height);
+            EditorUtility.CopySerialized(source: t.icon.texture, dest: tex);
+
+            return tex;
+        }
+        return null;
+    }
 }
 #endif

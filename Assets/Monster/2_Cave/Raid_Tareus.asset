@@ -63,7 +63,7 @@ MonoBehaviour:
       mainModifiers: []
       modifiers: []
     MDef:
-      baseValue: 70
+      baseValue: 60
       mainModifiers: []
       modifiers: []
     Neu:
@@ -99,34 +99,40 @@ MonoBehaviour:
   - {fileID: 11400000, guid: da7bf54b42b65d54a82c4add583956f3, type: 2}
   - {fileID: 11400000, guid: 9820de62489342044bde42636f2e26d7, type: 2}
   - {fileID: 11400000, guid: c1fe8a936eaf49e48b0e08e45c388c9d, type: 2}
-  usePoint: 200
+  usePoint: 120
   expReward: 500
   dropTables:
   - items:
     - item: {fileID: 11400000, guid: c2a3d7c386ffdf341a8855568a39251c, type: 2}
-      rateDrop: 100
+      rateDrop: 90
+      trueRate: 90
       minDrop: 1
       maxDrop: 1
     - item: {fileID: 11400000, guid: 9e6dedae9ca0226409cc6e7331f64970, type: 2}
-      rateDrop: 10
+      rateDrop: 100
+      trueRate: 10
       minDrop: 1
       maxDrop: 1
   - items:
     - item: {fileID: 11400000, guid: c2a3d7c386ffdf341a8855568a39251c, type: 2}
-      rateDrop: 100
+      rateDrop: 50
+      trueRate: 50
       minDrop: 1
       maxDrop: 1
     - item: {fileID: 11400000, guid: 6e93471bbdbd1c64295f6beaac8a93d3, type: 2}
-      rateDrop: 80
+      rateDrop: 100
+      trueRate: 50
       minDrop: 1
       maxDrop: 3
   - items:
     - item: {fileID: 11400000, guid: cc13ead9bb77fe447b932dc0a0411411, type: 2}
-      rateDrop: 100
+      rateDrop: 50
+      trueRate: 50
       minDrop: 1
       maxDrop: 3
     - item: {fileID: 11400000, guid: f6a3acec7d63cbd43a9f11ce52f9c5ec, type: 2}
-      rateDrop: 50
+      rateDrop: 100
+      trueRate: 50
       minDrop: 1
       maxDrop: 3
   id: 87239d827cd7fc642af11cf782dd5f01

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e3b25a13f51a4d44b52634692689d33, type: 3}
+  m_Name: Broken Blade of Falos
+  m_EditorClassIdentifier: 
+  id: e38dc663ade513f47927a8dc6fea64d1
+  icon: {fileID: 21300000, guid: df80e4d0e8432c54aba6fd43c63656c6, type: 3}
+  itemName: Broken Blade of Falos
+  rarity: 1
+  itemDes: "\u0E21\u0E35\u0E14\u0E17\u0E35\u0E48\u0E1E\u0E31\u0E07\u0E02\u0E2D\u0E07
+    Falos \u0E21\u0E31\u0E19\u0E17\u0E33\u0E08\u0E32\u0E01\u0E41\u0E23\u0E48\u0E1B\u0E23\u0E34\u0E28\u0E19\u0E32\u0E17\u0E35\u0E48\u0E41\u0E21\u0E49\u0E41\u0E15\u0E48\u0E0A\u0E48\u0E32\u0E07\u0E15\u0E35\u0E14\u0E32\u0E1A\n\u0E1D\u0E35\u0E21\u0E37\u0E2D\u0E14\u0E35\u0E02\u0E2D\u0E07
+    Arstern \u0E01\u0E47\u0E44\u0E21\u0E48\u0E23\u0E39\u0E49\u0E08\u0E31\u0E01"
+  itemType: 0
+  sellPrice: 90

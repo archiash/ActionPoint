@@ -47,6 +47,7 @@ public class RaidFormula : MonoBehaviour
         characterCooldown = new int[character.currentSkill.Count];
         monsterCooldown = new int[monster.currentSkill.Count];
 
+        
         character.status.currentMP = character.status.MP.Value;
         characterPreHp = character.status.currentHP;
         character.status.currentHP = character.status.HP.Value;
@@ -117,7 +118,7 @@ public class RaidFormula : MonoBehaviour
         if (characterStun > 0)
         {
             characterStun--;
-            Debug.Log("STUN Turn Left" + characterStun);
+            Debug.Log($"STUN Turn Left: {characterStun}");
         }
 
     }
@@ -132,7 +133,7 @@ public class RaidFormula : MonoBehaviour
         if (!monster.status.isFullMP)
             monster.status.currentMP += monster.status.MP.Value * 5 / 100f;
 
-        Debug.Log("MP: " + monster.status.currentMP);
+        Debug.Log($"MP: {monster.status.currentMP}");
 
         DDPS(monster.status, monsterDDPS);
         ReduceBuffTurn(monster.status);
@@ -169,18 +170,19 @@ public class RaidFormula : MonoBehaviour
         if (monsterStun > 0)
         {
             monsterStun--;
-            Debug.Log("STUN Turn Left" + monsterStun);
+            Debug.Log($"STUN Turn Left: {monsterStun}");
         }
     }
     void CharacterNormalAttack()
     {
+        (float pureDamage, DamageType damageType) = character.GetDamageAttack();
         Debug.Log("Character use Normal Attack");
-        float damage = Formula.DamageFormula(character.status, monster.status);
+        float damage = Formula.DamageFormula(character.status, monster.status, damageType, true, pureDamage, 0, true);
         if (Formula.CriticalFormula(character.status, monster.status, ref damage))
             Debug.Log("Critical");
         if (monster.status.GetDamage(ref damage, character.status))
         {
-            Debug.Log($"Deal {damage} Physic Damage to {monster.Name}");
+            Debug.Log($"Deal {damage} {damageType} Damage to {monster.Name}");
         }
     }
     void MonsterNormalAttack()
@@ -300,7 +302,7 @@ public class RaidFormula : MonoBehaviour
         if (character.status.currentHP <= 0)
         {
             print("Lose");
-            print("Still Left :" + monster.status.currentHP);
+            print($"Still Left: {monster.status.currentHP}");
             return true;
 
         }
@@ -328,7 +330,7 @@ public class RaidFormula : MonoBehaviour
                 float damage = Formula.DamageFormula(DDPS[i].userStat, status, DDPS[i].damageType, true, DDPS[i].dps, DDPS[i].penetrate, false);
                 status.GetDamage(ref damage, DDPS[i].userStat, false);
                 DDPS[i].turnDuration--;
-                Debug.Log(DDPS[i].source.skillName + " Deal Damage " + damage + " Trun Left " + DDPS[i].turnDuration);
+                Debug.Log($"{DDPS[i].source.skillName} Deal Damage {damage} | Trun Left: {DDPS[i].turnDuration}");
 
             }
             else

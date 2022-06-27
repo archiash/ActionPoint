@@ -51,7 +51,7 @@ MonoBehaviour:
       mainModifiers: []
       modifiers: []
     PDef:
-      baseValue: 30
+      baseValue: 28
       mainModifiers: []
       modifiers: []
     Pen:
@@ -102,19 +102,23 @@ MonoBehaviour:
   - items:
     - item: {fileID: 11400000, guid: cc13ead9bb77fe447b932dc0a0411411, type: 2}
       rateDrop: 100
+      trueRate: 100
       minDrop: 1
       maxDrop: 3
   - items:
     - item: {fileID: 11400000, guid: f6a3acec7d63cbd43a9f11ce52f9c5ec, type: 2}
       rateDrop: 100
+      trueRate: 100
       minDrop: 1
       maxDrop: 3
   - items:
     - item: {fileID: 11400000, guid: f6a3acec7d63cbd43a9f11ce52f9c5ec, type: 2}
-      rateDrop: 100
+      rateDrop: 50
+      trueRate: 50
       minDrop: 1
       maxDrop: 1
     - item: {fileID: 11400000, guid: cc13ead9bb77fe447b932dc0a0411411, type: 2}
-      rateDrop: 50
+      rateDrop: 100
+      trueRate: 50
       minDrop: 1
       maxDrop: 1

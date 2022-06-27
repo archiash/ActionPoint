@@ -108,12 +108,19 @@ public class ItemSaveManager : MonoBehaviour
         {
             pointManager = PointManager.instance;
         }
+        pointManager.restLevel = 1;
         if (saveData == null)
             return;
         double pointWhileExit = (DateTime.UtcNow - saveData.lastExit).TotalSeconds * saveData.pointPerSec / 2;
         if (pointWhileExit > 3600)
             pointWhileExit = 3600;
 
+        
+        if (saveData.restLevel > pointManager.restLevel)
+        {
+            pointManager.restLevel = saveData.restLevel;
+        }
+     
         pointManager.GetActionPerSec = 1;
         pointManager.GetActionPoint = saveData.point + pointWhileExit;       
     }
@@ -121,7 +128,7 @@ public class ItemSaveManager : MonoBehaviour
     {
         PointManager pointManager = PointManager.instance;
 
-        PointSaveData saveData = new PointSaveData(pointManager.GetActionPoint,pointManager.GetActionPerSec,DateTime.UtcNow);
+        PointSaveData saveData = new PointSaveData(pointManager.GetActionPoint,pointManager.GetActionPerSec,DateTime.UtcNow,pointManager.restLevel);
         ItemSaveIO.SaveItems(saveData, PointFileName);
     }
     public void SaveEquipment(Character character = null)
@@ -173,13 +180,14 @@ public class ItemSaveManager : MonoBehaviour
     }
     public void SaveCharacterData(Character character = null)
     {
+
         StatusUpgrade status = StatusUpgrade.instance;
         if (character == null)
         {            
             character = Character.instance;
         }
 
-        var saveData = new CharacterSaveData(character.status.currentHP, DateTime.UtcNow,character.Level,character.statusPoint,new int[5] {status.STR,status.DEX,status.AGI,status.INT,status.CON},character.exp);
+        var saveData = new CharacterSaveData(character.status.currentHP, DateTime.UtcNow,character.Level,character.statusPoint,new int[5] {status.STR,status.DEX,status.AGI,status.INT,status.CON},character.exp,character);
         ItemSaveIO.SaveCharacter(saveData, CharacterFileName);
     }
     public void LoadCharacterData(Character character = null)
@@ -195,14 +203,45 @@ public class ItemSaveManager : MonoBehaviour
 
         if (saveData.level > 0)
         {
+            character.highestLevelBonus = saveData.currentLevelBonus;
             character.Level = saveData.level;
             character.statusPoint = saveData.skillPoint;
             character.exp = saveData.exp;
-            status.STR = saveData.statLevel[0];
-            status.DEX = saveData.statLevel[1];
-            status.AGI = saveData.statLevel[2];
-            status.INT = saveData.statLevel[3];
-            status.CON = saveData.statLevel[4];
+            if(saveData.statLevel[0] > 15)
+            {
+                character.statusPoint += 15 - saveData.statLevel[0];
+                status.STR = 15;
+            }else status.STR = saveData.statLevel[0];
+
+            if (saveData.statLevel[1] > 15)
+            {
+                character.statusPoint += 15 - saveData.statLevel[1];
+                status.DEX = 15;
+            }
+            else status.DEX = saveData.statLevel[1];
+
+            if (saveData.statLevel[2] > 15)
+            {
+                character.statusPoint += 15 - saveData.statLevel[2];
+                status.AGI = 15;
+            }
+            else status.AGI = saveData.statLevel[2];
+
+            if (saveData.statLevel[3] > 15)
+            {
+                character.statusPoint += 15 - saveData.statLevel[3];
+                status.INT = 15;
+            }
+            else status.INT = saveData.statLevel[3];
+
+            if (saveData.statLevel[4] > 15)
+            {
+                character.statusPoint += 15 - saveData.statLevel[4];
+                status.CON = 15;
+            }
+            else status.CON = saveData.statLevel[4];
+            character.Class = saveData.characterClass;
+            
         }
         
 

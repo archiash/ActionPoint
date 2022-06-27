@@ -7,6 +7,8 @@ public class PointManager : MonoBehaviour
 {
     public static PointManager instance;
 
+    public int restLevel;
+
     private void Awake()
     {
         if (instance != null)
@@ -27,6 +29,11 @@ public class PointManager : MonoBehaviour
     public void UseAction(int point)
     {
         actionPoint -= point;
+    }
+
+    public void UseAction(float point)
+    {
+        actionPoint -= Mathf.CeilToInt(point);
     }
 
     public double GetActionPoint { get { return actionPoint; } set { actionPoint = value; } }

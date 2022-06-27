@@ -7,53 +7,15 @@ using UnityEngine.UI;
 public class SkillSlot : MonoBehaviour
 {
     public Skill skill;
-    public bool learned = false;
-
-    public SkillSlot[] condition;
-    public Image[] beforeLink;
-    public Image[] nextLink;
-
-    public void OnLearnSkill()
+    [SerializeField] Image icon;
+    public void OnCreate(Skill skill)
     {
-        if(CheckCondition())
-        {
-
-            learned = true;
-
-            foreach(Image i in beforeLink)
-                i.color = Color.green;
-                this.gameObject.GetComponent<Image>().color = Color.green;
-            foreach (Image i in nextLink)
-                i.color = new Color32(47, 236, 255, 255);
-        }
+        this.skill = skill;
+        icon.sprite = skill.skillIcon;
     }
 
-    public void Update()
-    {   if (CheckCondition())            
-            this.gameObject.GetComponent<Image>().color = new Color32(47,236,255,255) ;
-    }
-
-    public void ShowDetailButton()
-    {       
-        ShowSkillDetail.instance.ShowDetail(this);
-    }
-
-    public bool CheckCondition()
+    public void OnButton()
     {
-
-        if (condition == null) return true;
-
-        if (learned == true) return false;
-
-        foreach(SkillSlot skill in condition)
-        {
-            if(skill.learned != true)
-            {
-                return false;
-            }
-        }
-
-        return true;
+        SkillDetailPanel.instance.OnShow(skill);
     }
-
 }

@@ -63,7 +63,8 @@ public class Gamemanager : MonoBehaviour
         {
             if (Enchantment.instance != null)
                 Enchantment.instance.ResetSelect();
-
+            if (EnchantmentTranfer.instance != null)
+                EnchantmentTranfer.instance.ResetTranfer();
             
         }
      
@@ -93,9 +94,11 @@ public class Gamemanager : MonoBehaviour
         
     }
 
+    [SerializeField] bool saveable;
+
     public void Save()
     {
-        if (isLoad)
+        if (isLoad && saveable)
         {
             itemSaveManager.SaveEquipment();
             itemSaveManager.SaveInventory();

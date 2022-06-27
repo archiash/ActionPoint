@@ -24,7 +24,7 @@ MonoBehaviour:
   part: 3
   modifiers:
   - modifierType: 0
-    mainType: 0
+    mainType: 4
     statType: 0
     type: 0
     amount: 3

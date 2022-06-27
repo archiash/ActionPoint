@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Reflection;
 
 public class ItemDetailPanel : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class ItemDetailPanel : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI sellPrice;
 
-    public GameObject useButton;
+    public Button useButton;
     StackItem currentItem;
 
     private void Awake()
@@ -42,7 +43,7 @@ public class ItemDetailPanel : MonoBehaviour
             powerText.text = ((Equipment)currentItem.item).powerPercent.ToString() + "%";
             powerText.enabled = true;
             amountText.enabled = false;
-            useButton.SetActive(false);
+            useButton.gameObject.SetActive(false);
 
         }
         else
@@ -53,12 +54,12 @@ public class ItemDetailPanel : MonoBehaviour
             amountText.enabled = true;
             powerText.enabled = false;
 
-            useButton.SetActive(false);
-
-            if (item.item is UsableItem)
-            { 
-                useButton.SetActive(true);
-            }
+            useButton.gameObject.SetActive(false);
+/*
+            if (item.item is UsableItem || item.item is Skillbook)
+            {
+                useButton.gameObject.SetActive(true);
+            }*/
         }
               
         iconImage.sprite = currentItem.item.icon;

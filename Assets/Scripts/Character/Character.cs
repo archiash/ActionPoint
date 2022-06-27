@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -10,26 +11,50 @@ public class Character : MonoBehaviour
     [SerializeField] LevelBonus levelBonus;
     private bool isLoad = true;
     [SerializeField] UI_LevelBonusPanel pfBonusPanel;
+
+    public int highestLevelBonus;
+
     public int Level
     {
         set
         {
-            level = value;
+            int setLevel = value;
+            if (setLevel > 25) setLevel = 25;
+            level = setLevel;
 
-            if (isLoad)
+            if(isLoad)
             {
                 isLoad = false;
                 Debug.Log(isLoad);
                 for (int i = 0; i < levelBonus.bonus.Count; i++)
                 {
-                    Debug.Log("B " + levelBonus.bonus.Count);
                     if (level >= levelBonus.bonus[i].requireLevel)
                     {
+                        
                         Debug.Log(levelBonus.bonus[i].requireLevel);
-                        if (levelBonus.bonus[i].bonusType == LvBonusType.pointRate)
+                        if (levelBonus.bonus[i].bonusType == LvBonusType.pointRate) {
                             PointManager.instance.actionPerSecLvBonus += levelBonus.bonus[i].value;
-                        if (levelBonus.bonus[i].bonusType == LvBonusType.healRate)
+                            if (highestLevelBonus < levelBonus.bonus[i].requireLevel)
+                            {
+                                highestLevelBonus = levelBonus.bonus[i].requireLevel;
+                                UI_LevelBonusPanel panel = Instantiate(pfBonusPanel); //สร้าง Bonus Panel Object
+                                string text = $"อัตราการเพิ่ม Point +{levelBonus.bonus[i].value}/s";
+                                panel.ShowText(text);
+                            }
+                        }
+                        if (levelBonus.bonus[i].bonusType == LvBonusType.healRate) {
                             hpRegenLvBonus += levelBonus.bonus[i].value;
+                            if (highestLevelBonus < levelBonus.bonus[i].requireLevel)
+                            {
+                                highestLevelBonus = levelBonus.bonus[i].requireLevel;
+                                UI_LevelBonusPanel panel = Instantiate(pfBonusPanel); //สร้าง Bonus Panel Object
+                                string text = $"อัตราการฟื้นฟูเพิ่ม +{levelBonus.bonus[i].value}%/s";
+                                panel.ShowText(text);
+                            }
+                        }
+
+                        
+                        
                     }
                 }
                 
@@ -39,19 +64,22 @@ public class Character : MonoBehaviour
                 {
                     if (level == levelBonus.bonus[i].requireLevel)
                     {
+                        
                         if (levelBonus.bonus[i].bonusType == LvBonusType.pointRate)
                         {
                             PointManager.instance.actionPerSecLvBonus += levelBonus.bonus[i].value;
                             UI_LevelBonusPanel panel = Instantiate(pfBonusPanel); //สร้าง Bonus Panel Object
-                            string text = $"อัตราการเพิ่ม Point +1/s"; 
+                            string text = $"อัตราการเพิ่ม Point +{levelBonus.bonus[i].value}/s";
                             panel.ShowText(text);
+                            highestLevelBonus = levelBonus.bonus[i].requireLevel;
                         }
                         if (levelBonus.bonus[i].bonusType == LvBonusType.healRate)
                         {
-                            hpRegenLvBonus += levelBonus.bonus[i].value;                        
+                            hpRegenLvBonus += levelBonus.bonus[i].value;   
                             UI_LevelBonusPanel panel = Instantiate(pfBonusPanel); //สร้าง Bonus Panel Object
-                            string text = $"อัตราการฟื้นฟูเพิ่ม +1%/s";
+                            string text = $"อัตราการฟื้นฟูเพิ่ม +{levelBonus.bonus[i].value}%/s";
                             panel.ShowText(text);
+                            highestLevelBonus = levelBonus.bonus[i].requireLevel;
                         }
                     }
                 }
@@ -59,8 +87,6 @@ public class Character : MonoBehaviour
         }
         get { return level; }
     }
-
-
     public bool isFullHP
     {
         get { return status.currentHP == status.HP.Value; }
@@ -71,10 +97,8 @@ public class Character : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            
+         
         }
-        status.currentHP = status.HP.Value;
-        status.currentMP = status.MP.Value;
     }
 
     public int level = 1;
@@ -83,10 +107,11 @@ public class Character : MonoBehaviour
     public int statusPoint = 0;
 
     public Status status;
-    [Range(1,100)]
 
+    [Range(1,100)]
     public int hpRegen;
-    public int hpRegenLvBonus;
+    public float hpRegenLvBonus;
+
     public float regenRate;
 
     public Equipment weapon;
@@ -96,15 +121,101 @@ public class Character : MonoBehaviour
     public Equipment legs;
     public Equipment accessory;
 
-    public List<Skill> learnedSkill = new List<Skill>();
+    public List<LearnedSkill> learnedSkill = new List<LearnedSkill>();
     public List<Skill> currentSkill = new List<Skill>();
 
     public UpgradeLevel upgradeLevel;
 
-    private void Start()
+    [SerializeField]CharacterClass characterClass;
+    public CharacterClass Class
     {
-        for(int i = 1; i< 10; i++)
-        print(Mathf.RoundToInt(30 * Mathf.Pow(i, 2) + (50 * (i - 1))));
+        get { return characterClass; }
+        set {
+
+            RemoveModifier(this);
+
+            characterClass = value; 
+            if( value == CharacterClass.Magician)
+            {
+                float modValue = 5 + (0.5f * (level - 1));
+                AddModifier(MainStatType.INT,new Modifier(modValue, this, ModifierType.Flat));
+            }
+            
+        }
+    }
+
+    public enum CharacterClass
+    {
+        Adventurer,
+        Magician,
+        Rogue
+    }
+
+    public (float,DamageType) GetDamageAttack()
+    {
+        switch (Class)
+        {
+            case CharacterClass.Adventurer:
+                return (status.PAtk.Value,DamageType.Physic);
+            case CharacterClass.Magician:
+                if (status.currentMP > 10)
+                {
+                    status.currentMP -= 10;
+                    Debug.Log($"-10 MP Magician Normal Attack, Current MP = {status.currentMP}");
+                    return (status.MAtk.Value, DamageType.Magic);
+                }else
+                {
+                    Debug.Log($"Out of MP Magician Normal Attack, Current MP = {status.currentMP}");
+                    return (status.PAtk.Value / 2, DamageType.Physic);
+                }
+            case CharacterClass.Rogue:
+                return ((status.PAtk.Value * 0.75f) + (status.Spd.Value + 0.35f), DamageType.Physic);
+        }
+
+        return (status.PAtk.Value, DamageType.Physic);
+    }
+   
+    public void ChangeClass()
+    {
+
+    }
+
+    public void RemoveModifier(Modifier modifier)
+    {
+        foreach (SubStatType statType in Enum.GetValues(typeof(SubStatType)))
+        {
+            Stat stat = (Stat)(status.GetType().GetField(statType.ToString()).GetValue(status));
+            stat.RemoveModifier(modifier);
+        }
+        foreach (MainStatType statType in Enum.GetValues(typeof(MainStatType)))
+        {
+            MainStat stat = (MainStat)(status.GetType().GetField(statType.ToString()).GetValue(status));
+            stat.RemoveModifier(modifier);
+        }
+    }
+    public void RemoveModifier(object source)
+    {
+        foreach (SubStatType statType in Enum.GetValues(typeof(SubStatType)))
+        {
+            Stat stat = (Stat)(status.GetType().GetField(statType.ToString()).GetValue(status));
+            stat.RemoveModifier(source);
+        }
+        foreach (MainStatType statType in Enum.GetValues(typeof(MainStatType)))
+        {
+            MainStat stat = (MainStat)(status.GetType().GetField(statType.ToString()).GetValue(status));
+            stat.RemoveModifier(source);
+        }
+    }
+    public void AddModifier(MainStatType statType, Modifier modifier)
+    {
+        MainStat stat = (MainStat)(status.GetType().GetField(statType.ToString()).GetValue(status));
+        stat.AddModifier(modifier);
+    }
+
+    public void AddModifier(SubStatType statType, Modifier modifier)
+    {
+        Stat stat = (Stat)(status.GetType().GetField(statType.ToString()).GetValue(status));
+        stat.AddModifier(modifier);
     }
 
     private void Update()
@@ -126,6 +237,7 @@ public class Character : MonoBehaviour
         if (status.currentHP > status.HP.Value)
             status.currentHP = status.HP.Value;
     }
+
     public void Equip(Equipment item,bool fromSave = false)
     {
         if (Inventory.instance.RemoveItem(item) || fromSave)
@@ -150,20 +262,33 @@ public class Character : MonoBehaviour
             Inventory.instance.GetItem(item);
         }
     }
-    public bool LearnSkill(Skill skill)
+
+    public bool LearnSkill(Skill skill,object source)
     {
         for(int i = 0; i<learnedSkill.Count; i++)
         {
-            if(learnedSkill[i] == skill)
+            if(learnedSkill[i].skill == skill)
             {
                 Debug.Log("Already Learned");
                 return false;
             }
         }
 
-        learnedSkill.Add(skill);
+        learnedSkill.Add(new LearnedSkill(skill,source));
         return true;
     }
+
+    public void UnlearnSkill(object source)
+    {
+        for (int i = 0; i < learnedSkill.Count; i++)
+        {
+            if (learnedSkill[i].source == source)
+            {
+                learnedSkill.RemoveAt(i);
+            }
+        }
+    }
+
     public void EquipmentChange(Equipment item)
     {
         switch (item.part)
@@ -213,18 +338,24 @@ public class Character : MonoBehaviour
         }
     }
     public void LevelUp()
-    {
-        if (exp >= Mathf.RoundToInt(30 * Mathf.Pow(Level, 2) + (50 * (Level - 1))))
+    {if (level < 25)
         {
-            exp -= Mathf.RoundToInt(30 * Mathf.Pow(Level, 2) + (50 * (Level - 1)));
-            Level++;
-            statusPoint++;
+            if (exp >= Mathf.RoundToInt(30 * Mathf.Pow(Level, 2) + (50 * (Level - 1))))
+            {
+                exp -= Mathf.RoundToInt(30 * Mathf.Pow(Level, 2) + (50 * (Level - 1)));
+                Level++;
+                statusPoint++;
+                Class = Class;
+            }
         }
     }
     public void GetExp(int amount)
     {
-        exp += amount;
-        LevelUp();
+        if (level < 25)
+        {
+            exp += amount;
+            LevelUp();
+        }
     }
     public Equipment GetEquipmentPart(EquipmentPart part)
     {
@@ -247,7 +378,6 @@ public class Character : MonoBehaviour
     }
     public MainStat GetMainStat(MainStatType type)
     {
-
         switch (type)
         {
             case MainStatType.STR:
@@ -264,60 +394,22 @@ public class Character : MonoBehaviour
         return null;
     }
 
-    
-
 }
 
 #if UNITY_EDITOR
-[CustomEditor(typeof(Character))]
-public class CharacterEditor : Editor
+
+[CustomPropertyDrawer(typeof(Character))]
+public class CharacterDrawer : PropertyDrawer
 {
-    public bool ShowSetting;
-    public override void OnInspectorGUI()
+    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
-        Character t = (Character)target;
+        EditorGUILayout.PropertyField(property.FindPropertyRelative("health"), true);
+    }
 
-
-        if(!Application.isPlaying)
-            base.OnInspectorGUI();
-        else
-        {
-            if (GUILayout.Button("OpenSetting"))
-            {
-                if (ShowSetting)
-                    ShowSetting = false;
-                else
-                    ShowSetting = true;
-            }
-
-            if (ShowSetting)
-                base.OnInspectorGUI();
-
-            GUILayout.Label("HP: " + t.status.currentHP.ToString() + "/" + t.status.HP.Value.ToString());
-            GUILayout.Label("MP: " + t.status.currentMP.ToString() + "/" + t.status.MP.Value.ToString());
-            GUILayout.Label("Attack: " + t.status.PAtk.Value.ToString());
-            GUILayout.Label("Defense: " + t.status.PDef.Value.ToString());
-            GUILayout.Label("Magic: " + t.status.MAtk.Value.ToString());
-            GUILayout.Label("Magic Resist: " + t.status.MDef.Value.ToString());
-            GUILayout.Label("Speed: " + t.status.Spd.Value.ToString());
-            GUILayout.Label("Hit: " + t.status.Hit.Value.ToString());
-            GUILayout.Label("Eva: " + t.status.Eva.Value.ToString());
-            GUILayout.Label("Critical Rate: " + t.status.Crate.Value.ToString());
-            GUILayout.Label("Critical Damage: " + t.status.Cdmg.Value.ToString());
-
-            GUILayout.Space(20);
-
-            GUILayout.Label("Equipment");
-            GUILayout.Label("Weapon: " + t.weapon?.itemName + " " + t.weapon?.powerPercent + "% +" + t.weapon?.enchantment);
-            GUILayout.Label("Head: " + t.head?.itemName + " " + t.head?.powerPercent + "% +" + t.head?.enchantment);
-            GUILayout.Label("Body: " + t.body?.itemName + " " + t.body?.powerPercent + "% +" + t.body?.enchantment);
-            GUILayout.Label("Arms: " + t.arms?.itemName + " " + t.arms?.powerPercent + "% +" + t.arms?.enchantment);
-            GUILayout.Label("Legs: " + t.legs?.itemName + " " + t.legs?.powerPercent + "% +" + t.legs?.enchantment);
-            GUILayout.Label("Accessory: " + t.accessory?.itemName + " " + t.accessory?.powerPercent + "% +" + t.accessory?.enchantment);
-
-            GUILayout.Label("Atk Mod Count: " + t.status.PAtk.modifiers.Count);
-
-        }
+    public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+    {
+        return base.GetPropertyHeight(property, label);
     }
 }
+
 #endif

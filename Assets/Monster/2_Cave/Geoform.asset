@@ -98,20 +98,23 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0bed2ef2433e9074e8f870b0602fd036, type: 2}
   - {fileID: 11400000, guid: f5e73ffddfbfa7949814623413c7ad03, type: 2}
   - {fileID: 11400000, guid: 1736b2d17debdeb4ca4be53eb918c426, type: 2}
-  usePoint: 100
-  expReward: 150
+  usePoint: 75
+  expReward: 120
   dropTables:
   - items:
     - item: {fileID: 11400000, guid: a9035b84dea41b6499d1c87c9c75dd7c, type: 2}
       rateDrop: 100
+      trueRate: 100
       minDrop: 1
       maxDrop: 3
   - items:
-    - item: {fileID: 11400000, guid: a9035b84dea41b6499d1c87c9c75dd7c, type: 2}
-      rateDrop: 100
+    - item: {fileID: 11400000, guid: 0af5a2d8ee1f34b458468c5b0e9235f4, type: 2}
+      rateDrop: 80
+      trueRate: 80
       minDrop: 1
       maxDrop: 1
-    - item: {fileID: 11400000, guid: 0af5a2d8ee1f34b458468c5b0e9235f4, type: 2}
-      rateDrop: 25
+    - item: {fileID: 11400000, guid: a9035b84dea41b6499d1c87c9c75dd7c, type: 2}
+      rateDrop: 100
+      trueRate: 20
       minDrop: 1
       maxDrop: 1

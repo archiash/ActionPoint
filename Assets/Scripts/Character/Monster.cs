@@ -31,16 +31,6 @@ public class Monster : ScriptableObject
         return desc;
     }
 
-#if UNITY_EDITOR
-    private void OnValidate()
-    {
-        for(int i = 0; i<dropTables.Length;i++)
-        {
-            dropTables[i].items = dropTables[i].items.OrderByDescending(i => i.rateDrop).ToArray();
-        }
-    }
-#endif
-
     public virtual string GetStatus()
     {
         string stat = $"\nHP: {status.HP.Value}               \nMP: {status.MP.Value}" +
@@ -74,6 +64,24 @@ public class Monster : ScriptableObject
                 status.counterSkill += ((CounterSkill)currentSkill[i]).Use;           
             }
         }
+    }
+
+    public void Powerlize(float powerlizeValue)
+    {
+        status.HP.baseValue *= powerlizeValue;
+        status.MP.baseValue *= powerlizeValue;
+        status.PAtk.baseValue *= powerlizeValue;
+        status.PDef.baseValue *= powerlizeValue;
+        status.Pen.baseValue *= powerlizeValue;
+        status.MAtk.baseValue *= powerlizeValue;
+        status.MDef.baseValue *= powerlizeValue;
+        status.Neu.baseValue *= powerlizeValue;
+        status.Spd.baseValue *= powerlizeValue;
+        status.Eva.baseValue *= powerlizeValue;
+        status.Hit.baseValue *= powerlizeValue;
+        status.Crate.baseValue *= powerlizeValue;
+        status.Cres.baseValue *= powerlizeValue;
+        status.Cdmg.baseValue *= powerlizeValue;
     }
 
 }

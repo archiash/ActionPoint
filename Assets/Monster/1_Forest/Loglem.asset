@@ -37,10 +37,10 @@ MonoBehaviour:
       upgradeModifier: 0
       modifiers: []
     HP:
-      baseValue: 100
+      baseValue: 180
       mainModifiers: []
       modifiers: []
-    currentHP: 100
+    currentHP: 180
     MP:
       baseValue: 0
       mainModifiers: []
@@ -54,12 +54,20 @@ MonoBehaviour:
       baseValue: 6
       mainModifiers: []
       modifiers: []
+    Pen:
+      baseValue: 0
+      mainModifiers: []
+      modifiers: []
     MAtk:
       baseValue: 0
       mainModifiers: []
       modifiers: []
     MDef:
       baseValue: 5
+      mainModifiers: []
+      modifiers: []
+    Neu:
+      baseValue: 0
       mainModifiers: []
       modifiers: []
     Spd:
@@ -82,25 +90,33 @@ MonoBehaviour:
       baseValue: 10
       mainModifiers: []
       modifiers: []
+    Cres:
+      baseValue: 0
+      mainModifiers: []
+      modifiers: []
   currentSkill: []
   usePoint: 10
-  expReward: 6
+  expReward: 10
   dropTables:
   - items:
     - item: {fileID: 11400000, guid: 995ed0f3ca4fdf04c937726efc69ff94, type: 2}
-      rateDrop: 100
+      rateDrop: 70
+      trueRate: 70
       minDrop: 1
       maxDrop: 3
     - item: {fileID: 11400000, guid: c94f412d138f84e47a840853726cd04e, type: 2}
-      rateDrop: 30
+      rateDrop: 100
+      trueRate: 30
       minDrop: 1
       maxDrop: 1
   - items:
     - item: {fileID: 11400000, guid: c94f412d138f84e47a840853726cd04e, type: 2}
-      rateDrop: 100
+      rateDrop: 70
+      trueRate: 70
       minDrop: 1
       maxDrop: 3
     - item: {fileID: 11400000, guid: 995ed0f3ca4fdf04c937726efc69ff94, type: 2}
-      rateDrop: 30
+      rateDrop: 100
+      trueRate: 30
       minDrop: 1
       maxDrop: 1

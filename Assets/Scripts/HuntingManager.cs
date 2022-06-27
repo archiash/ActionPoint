@@ -34,8 +34,11 @@ public class HuntingManager : MonoBehaviour
     public int characterStun;
     public int monsterStun;
 
-    public void Setup(Monster _monster = null, Character _character = null)
+    private int powerlize;
+    public void Setup(Monster _monster = null, Character _character = null,int powerlize = 1)
     {
+        this.powerlize = powerlize;
+
         if (_character == null)
             character = Character.instance;
         else
@@ -44,6 +47,8 @@ public class HuntingManager : MonoBehaviour
             monster = Instantiate(testMonster);
         else
             monster = Instantiate(_monster);
+
+        character.status.currentMP = character.status.MP.Value;
 
         monsterNextTurn = 0f;
         characterNextTurn = 0f;
@@ -181,13 +186,14 @@ public class HuntingManager : MonoBehaviour
     }
     void CharacterNormalAttack()
     {
+        (float pureDamage, DamageType damageType) = character.GetDamageAttack();
         Debug.Log("Character use Normal Attack");
-        float damage = Formula.DamageFormula(character.status, monster.status);
+        float damage = Formula.DamageFormula(character.status, monster.status, damageType,true,pureDamage,0,true);
         if (Formula.CriticalFormula(character.status, monster.status, ref damage))
             Debug.Log("Critical");
         if (monster.status.GetDamage(ref damage, character.status))
         {
-            Debug.Log($"Deal {damage} Physic Damage to {monster.Name}");
+            Debug.Log($"Deal {damage} {damageType} Damage to {monster.Name}");
         }
     }
     void MonsterNormalAttack()
@@ -387,6 +393,7 @@ public class HuntingManager : MonoBehaviour
         if (character.status.currentHP > previousHp)
             character.status.currentHP = previousHp;
 
+        character.status.currentMP = character.status.MP.Value;
         Debug.Log(previousHp - character.status.currentHP);
         //character.status.currentHP = character.status.HP.Value;
         
@@ -408,8 +415,8 @@ public class HuntingManager : MonoBehaviour
             StackItem dropItem = monster.dropTables[i].DropLoot();
             if (dropItem == null)
                 continue;
-            Inventory.instance.GetItem(dropItem.item,dropItem.amount);               
-            ResultReport.instance.AddDrop(dropItem.item, dropItem.amount);                     
+            Inventory.instance.GetItem(dropItem.item,dropItem.amount * powerlize);               
+            ResultReport.instance.AddDrop(dropItem.item, dropItem.amount * powerlize);                     
         }
         character.GetExp(monster.expReward);
     }

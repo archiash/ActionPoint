@@ -7,6 +7,7 @@ public class RaidStatusPanel : MonoBehaviour
 {
     public RaidSelect raid;
 
+    [SerializeField] TextMeshProUGUI healthText;
     public TextMeshProUGUI manaText;
     public TextMeshProUGUI atkText;
     public TextMeshProUGUI defText;
@@ -31,6 +32,7 @@ public class RaidStatusPanel : MonoBehaviour
         else
             raidBoss = raid.currentShow;
 
+        healthText.text = "พลังชีวิต: " + raidBoss.status.HP.Value;
         manaText.text = "มานา: " + raidBoss.status.MP.Value;
         atkText.text = "พลังโจมตี: " + raidBoss.status.PAtk.Value;
         defText.text = "พลังป้องกัน: " + raidBoss.status.PDef.Value;

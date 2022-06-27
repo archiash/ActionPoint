@@ -36,9 +36,22 @@ public class Status
 
     public void GetDamage(ref float damage,DamageType damageType = DamageType.Physic,Status attacker = null, int penetrate = 0)
     {
-        if(attacker != null)
+        float additionalHitChange = 0;
+        float additionalDamage = 0;
+
+        bool isRogue = this == Character.instance.status && Character.instance.Class == Character.CharacterClass.Rogue;
+
+        if (isRogue)
         {
-            if (!Formula.HitFormula(attacker.Hit.Value, Eva.Value))
+            Debug.Log("Rogue!! DougeRate + 10%");
+            additionalHitChange -= 10;
+            additionalDamage += 20;
+        }
+
+
+        if (attacker != null)
+        {
+            if (!Formula.HitFormula(attacker.Hit.Value, Eva.Value, additionalHitChange))
             {
                 Debug.Log("Missed");
                 damage = -1;
@@ -46,6 +59,7 @@ public class Status
             }
         }
 
+        if (isRogue) Debug.Log("Rogue!! GetDamage + 20%");
         if (damageType == DamageType.Physic)
         {
             damage -= (PDef.Value - (PDef.Value * penetrate / 100)) / 2;
@@ -53,6 +67,10 @@ public class Status
 
             if (damage <= 1)
                 damage = 1;
+
+            if (isRogue) Debug.Log("Rogue!! GetDamage: " + damage);
+            damage *= (1 + (additionalDamage / 100f));
+            if (isRogue) Debug.Log("Rogue!! GetDamage When Bonus: " + damage);
             currentHP -= damage;
         }
         else if(damageType == DamageType.Magic)
@@ -62,6 +80,10 @@ public class Status
 
             if (damage <= 1)
                 damage = 1;
+
+            if (isRogue) Debug.Log("Rogue!! GetDamage: " + damage);
+            damage *= (1 + (additionalDamage / 100f));
+            if (isRogue) Debug.Log("Rogue!! GetDamage When Bonus: " + damage);
             currentHP -= damage;
         }
 
@@ -69,14 +91,31 @@ public class Status
 
     public bool GetDamage(ref float damage,Status attacker,bool dodgeAble = true,int evaReduce = 0)
     {
+        float additionalHitChange = 0;
+        float additionalDamage = 0;
+
+        bool isRogue = this == Character.instance.status && Character.instance.Class == Character.CharacterClass.Rogue;
+
+        if (isRogue)
+        {
+            Debug.Log("Rogue!! DougeRate + 10%");
+            additionalHitChange -= 10;
+            additionalDamage += 20;
+        }
+
         if (dodgeAble)
         {
             float hitRate = attacker.Hit.Value;
             float evaRate = Eva.Value * (1 - (evaReduce / 100));
 
-            if (Formula.HitFormula(hitRate,evaRate))
+
+            if (Formula.HitFormula(hitRate,evaRate,additionalHitChange))
             {
+                if (isRogue) Debug.Log("Rogue!! GetDamage + 20%");
                 damage *= UnityEngine.Random.Range(0.8f, 1.2f);
+                if (isRogue) Debug.Log("Rogue!! GetDamage: " + damage);
+                damage *= (1 + (additionalDamage / 100f));
+                if (isRogue) Debug.Log("Rogue!! GetDamage When Bonus: " + damage);
                 currentHP -= damage;
                 if (counterSkill != null)
                     counterSkill(ref damage, attacker);
@@ -91,7 +130,11 @@ public class Status
         }
         else
         {
+            if (isRogue) Debug.Log("Rogue!! GetDamage + 20%");
             damage *= UnityEngine.Random.Range(0.8f, 1.2f);
+            if (isRogue) Debug.Log("Rogue!! GetDamage: " + damage);
+            damage *= (1 + (additionalDamage / 100f));
+            if (isRogue) Debug.Log("Rogue!! GetDamage When Bonus: " + damage);
             currentHP -= damage;
             if (counterSkill != null)
                 counterSkill(ref damage, attacker);

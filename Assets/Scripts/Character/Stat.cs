@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public enum SubStatType { HP,MP,PAtk,PDef,MAtk,MDef,Spd,Hit,Eva,Crate,Cdmg}
+public enum SubStatType { HP,MP,PAtk,PDef,MAtk,MDef,Spd,Hit,Eva,Crate,Cdmg,Pen,Neu,Cres}
 public enum ModifierType
 {
     Flat, Pecentage

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e3b25a13f51a4d44b52634692689d33, type: 3}
+  m_Name: Cursed Fur of Falos
+  m_EditorClassIdentifier: 
+  id: b619513d8edf5f743b01ef3d01b3367a
+  icon: {fileID: 21300000, guid: 1ebdd3ef2fe1aca45abb2fb99001d0c7, type: 3}
+  itemName: Cursed Fur of Falos
+  rarity: 1
+  itemDes: "\u0E02\u0E19\u0E2A\u0E35\u0E19\u0E49\u0E33\u0E40\u0E07\u0E34\u0E19\u0E16\u0E37\u0E2D\u0E40\u0E1B\u0E47\u0E19\u0E2A\u0E34\u0E48\u0E07\u0E2D\u0E31\u0E1B\u0E21\u0E07\u0E04\u0E25\u0E2A\u0E33\u0E2B\u0E23\u0E31\u0E1A\u0E40\u0E2B\u0E25\u0E48\u0E32
+    Houndra\n\u0E17\u0E35\u0E48\u0E22\u0E01\u0E22\u0E48\u0E2D\u0E07\u0E2A\u0E35\u0E41\u0E14\u0E07
+    \u0E21\u0E31\u0E19\u0E17\u0E33\u0E43\u0E49\u0E2B\u0E49 Falos \u0E16\u0E39\u0E01\u0E02\u0E31\u0E1A\u0E44\u0E25\u0E48\u0E2D\u0E2D\u0E01\u0E21\u0E32\u0E08\u0E32\u0E01\u0E40\u0E1C\u0E48\u0E32"
+  itemType: 0
+  sellPrice: 85

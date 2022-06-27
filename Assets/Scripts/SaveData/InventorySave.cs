@@ -37,12 +37,14 @@ public class PointSaveData
     public double point;
     public double pointPerSec;
     public DateTime lastExit;
-
-    public PointSaveData(double amount, double pps,DateTime exit)
+    public int restLevel;
+    public PointSaveData(double amount, double pps,DateTime exit,int restLevel)
     {        
+
         point = amount;
         pointPerSec = pps;
         lastExit = exit;
+        this.restLevel = restLevel;
     }
 
 }
@@ -53,12 +55,14 @@ public class CharacterSaveData
     public float lastHealth;
     public DateTime lastExit;
     public int level;
+    public int currentLevelBonus;
     public int skillPoint;
     public float exp;
 
     public int[] statLevel;
+    public Character.CharacterClass characterClass;
 
-    public CharacterSaveData(float health,DateTime exit,int lvl,int sp,int[] sL, float xp)
+    public CharacterSaveData(float health,DateTime exit,int lvl,int sp,int[] sL, float xp,Character character)
     {        
         lastHealth = health;
         lastExit = exit;
@@ -66,6 +70,8 @@ public class CharacterSaveData
         skillPoint = sp;
         statLevel = sL;
         exp = xp;
+        characterClass = character.Class;
+        currentLevelBonus = character.highestLevelBonus;
     }
 }
 

@@ -69,6 +69,9 @@ public class Equipment : Item
                     case SubStatType.PAtk:
                         character.status.PAtk.AddModifier(new Modifier(amount, this, mod.type));
                         break;
+                    case SubStatType.Pen:
+                        character.status.Pen.AddModifier(new Modifier(amount, this, mod.type));
+                        break;
                     case SubStatType.PDef:
                         character.status.PDef.AddModifier(new Modifier(amount, this, mod.type));
                         break;
@@ -77,6 +80,9 @@ public class Equipment : Item
                         break;
                     case SubStatType.MDef:
                         character.status.MDef.AddModifier(new Modifier(amount, this, mod.type));
+                        break;
+                    case SubStatType.Neu:
+                        character.status.Neu.AddModifier(new Modifier(amount, this, mod.type));
                         break;
                     case SubStatType.Spd:
                         character.status.Spd.AddModifier(new Modifier(amount, this, mod.type));
@@ -93,32 +99,19 @@ public class Equipment : Item
                     case SubStatType.Cdmg:
                         character.status.Cdmg.AddModifier(new Modifier(amount, this, mod.type));
                         break;
+                    case SubStatType.Cres:
+                        character.status.Cres.AddModifier(new Modifier(amount, this, mod.type));
+                        break;
                 }
             }
         }
     }
     public void Unequip(Character character)
     {
-        character.status.STR.RemoveModifier(this);
-        character.status.DEX.RemoveModifier(this);
-        character.status.AGI.RemoveModifier(this);
-        character.status.INT.RemoveModifier(this);
-        character.status.CON.RemoveModifier(this);
-
-        character.status.HP.RemoveModifier(this);
-        character.status.MP.RemoveModifier(this);
-        character.status.PAtk.RemoveModifier(this);
-        character.status.PDef.RemoveModifier(this);
-        character.status.MAtk.RemoveModifier(this);
-        character.status.MDef.RemoveModifier(this);
-        character.status.Spd.RemoveModifier(this);
-        character.status.Hit.RemoveModifier(this);
-        character.status.Eva.RemoveModifier(this);
-        character.status.Crate.RemoveModifier(this);
-        character.status.Cdmg.RemoveModifier(this);
+        character.RemoveModifier(this);
     }
 
-    public override string GetDesc(bool fulldesc = true)
+    public override string GetDesc(bool fulldesc = true,bool isDownList = true)
     {
         string desc = "";
         if(fulldesc)
@@ -241,6 +234,24 @@ public class Equipment : Item
                         else
                             desc += $"ความเสียหายคริ {displayValue}";
                         break;
+                    case SubStatType.Cres:
+                        if (mod.amount >= 0)
+                            desc += $"ต้านทานคริ + {displayValue}";
+                        else
+                            desc += $"ต้านทานคริ {displayValue}";
+                        break;
+                    case SubStatType.Pen:
+                        if (mod.amount >= 0)
+                            desc += $"เจาะเกราะกายภาพ + {displayValue}";
+                        else
+                            desc += $"เจาะเกราะกายภาพ {displayValue}";
+                        break;
+                    case SubStatType.Neu:
+                        if (mod.amount >= 0)
+                            desc += $"เจาะเกราะเวทย์ + {displayValue}";
+                        else
+                            desc += $"เจาะเกราะเวทย์ {displayValue}";
+                        break;
                 }
             }
 
@@ -263,15 +274,18 @@ public class Equipment : Item
                 }
             }
 
-            desc += "\n";
+            if (isDownList) desc += "\n";
+            else desc += " ";
         }
         return desc;
     }
-    public string GetDesc(int percent)
+    public string GetDesc(int percent, bool fulldesc = true, bool isDownList = true)
     {
         string desc = "";
-        if(itemDes != "")
+        if (itemDes != "" && fulldesc)
             desc = itemDes + " \n";
+        else if (!fulldesc)
+            desc += "| ";
         foreach (EquipmentModifier mod in modifiers)
         {
             float displayValue = mod.amount;
@@ -385,6 +399,24 @@ public class Equipment : Item
                         else
                             desc += $"ความเสียหายคริ {displayValue}";
                         break;
+                    case SubStatType.Cres:
+                        if (mod.amount >= 0)
+                            desc += $"ต้านทานคริ + {displayValue}";
+                        else
+                            desc += $"ต้านทานคริ {displayValue}";
+                        break;
+                    case SubStatType.Pen:
+                        if (mod.amount >= 0)
+                            desc += $"เจาะเกราะกายภาพ + {displayValue}";
+                        else
+                            desc += $"เจาะเกราะกายภาพ {displayValue}";
+                        break;
+                    case SubStatType.Neu:
+                        if (mod.amount >= 0)
+                            desc += $"เจาะเกราะเวทย์ + {displayValue}";
+                        else
+                            desc += $"เจาะเกราะเวทย์ {displayValue}";
+                        break;
                 }
             }
 
@@ -409,7 +441,8 @@ public class Equipment : Item
                 }
             }
 
-            desc += "\n";
+            if (isDownList) desc += "\n";
+            else desc += " | ";
         }
         return desc;
     }
@@ -441,10 +474,10 @@ public class EquipmentModifierDrawer : PropertyDrawer
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
         EditorGUI.BeginProperty(position, label, property);
-        var statRect = new Rect(position.x, position.y, 100, position.height -25);
-        var typeRect = new Rect(position.x + 100, position.y, 100, position.height -25);
-        var amountRect = new Rect(position.x + 200, position.y, 100, position.height -25);
-        var modTypeRect = new Rect(position.x + 300, position.y, 100, position.height -25);
+        var statRect = new Rect(position.x, position.y, position.width / 4, EditorGUIUtility.singleLineHeight);
+        var typeRect = new Rect(position.x + position.width / 4, position.y, position.width / 4, EditorGUIUtility.singleLineHeight);
+        var amountRect = new Rect(position.x + position.width / 4 * 2, position.y, position.width / 4, EditorGUIUtility.singleLineHeight);
+        var modTypeRect = new Rect(position.x + position.width / 4 * 3, position.y, position.width / 4, EditorGUIUtility.singleLineHeight);
         EditorGUI.PropertyField(statRect, property.FindPropertyRelative("modifierType"), GUIContent.none);
         if(property.FindPropertyRelative("modifierType").enumValueIndex == 0)
         {
@@ -455,7 +488,7 @@ public class EquipmentModifierDrawer : PropertyDrawer
         }
         EditorGUI.PropertyField(amountRect, property.FindPropertyRelative("amount"), GUIContent.none);
         EditorGUI.PropertyField(modTypeRect, property.FindPropertyRelative("type"), GUIContent.none);
-        statRect.y += 25;
+        statRect.y += EditorGUIUtility.singleLineHeight;
         statRect.width = position.width / 2;
         EditorGUI.PropertyField(statRect, property.FindPropertyRelative("isPowerEffect"));
         if (property.FindPropertyRelative("isPowerEffect").boolValue == true)
@@ -468,7 +501,7 @@ public class EquipmentModifierDrawer : PropertyDrawer
 
     public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
     {
-        return base.GetPropertyHeight(property, label) + 30;
+        return EditorGUIUtility.singleLineHeight * 2;
     }
 }
 
@@ -493,6 +526,23 @@ public class EquipmentEditor : Editor
             newItem.enchantment = enchantment;
             Inventory.instance.GetItem(newItem);
         }
+    }
+    
+    public override Texture2D RenderStaticPreview(string assetPath, Object[] subAssets, int width, int height)
+    {
+        Equipment t = (Equipment)target;
+
+        if (t != null && t.icon != null)
+        {
+
+            // example.PreviewIcon must be a supported format: ARGB32, RGBA32, RGB24,
+            // Alpha8 or one of float formats
+            Texture2D tex = new Texture2D(width, height);
+            EditorUtility.CopySerialized(source: t.icon.texture, dest: tex);
+
+            return tex;
+        }
+        return null;
     }
 }
 #endif

@@ -27,7 +27,7 @@ MonoBehaviour:
     mainType: 0
     statType: 0
     type: 0
-    amount: 50
+    amount: 45
     isEnchantEffect: 1
     isPowerEffect: 1
   - modifierType: 1

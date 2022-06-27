@@ -5,9 +5,12 @@ using UnityEngine;
 
 public static class Formula
 {
-    public static bool HitFormula(float hit, float eva)
+    public static bool HitFormula(float hit, float eva,float additionalHitChange = 0)
     {
-        float hitChange = 1 - Mathf.Clamp((eva - hit) / eva, 0f, .67f);
+        float hitChange = 1 - Mathf.Clamp((eva - hit) / eva, 0.2f, 0.8f);
+        Debug.Log("HitChange:" + hitChange);
+        hitChange += (additionalHitChange / 100f);
+        Debug.Log("HitChange When Buff:" + hitChange);
         return Random.value <= hitChange;
     }
 

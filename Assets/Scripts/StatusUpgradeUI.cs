@@ -29,6 +29,9 @@ public class StatusUpgradeUI : MonoBehaviour
 
     [SerializeField] Button[] buttons;
 
+
+    [SerializeField] Button resetButton;
+
     public void Start()
     {
         character = Character.instance;
@@ -58,19 +61,44 @@ public class StatusUpgradeUI : MonoBehaviour
         character.statusPoint--;
     }
 
+    public void ResetPoint()
+    {
+        Inventory.instance.UseMoney(1000);
+        statusUpgrade.ResetPoint();
+        Refresh();
+    }
+
     public void Refresh()
     {
+        resetButton.interactable = Inventory.instance.getMoney >= 1000 && character.statusPoint != character.level - 1;
+
         statPoint.text = "Point: " +  character.statusPoint.ToString();
 
-        if(character.statusPoint > 0)
+
+        for (int i = 0; i  < 5; i++)
         {
-            foreach (Button i in buttons)
-                i.interactable = true;
-        }else
-        {
-            foreach (Button i in buttons)
-                i.interactable = false;
-        }    
+            bool isMaxLevel = false;
+            switch(i)
+            {
+                case 0:
+                    isMaxLevel = statusUpgrade.STR == 15;
+                    break;
+                case 1:
+                    isMaxLevel = statusUpgrade.INT == 15;
+                    break;
+                case 3:
+                    isMaxLevel = statusUpgrade.DEX == 15;
+                    break;
+                case 2:
+                    isMaxLevel = statusUpgrade.AGI == 15;
+                    break;
+                case 4:
+                    isMaxLevel = statusUpgrade.CON == 15;
+                    break;
+            }
+            buttons[i].interactable = character.statusPoint > 0 && !isMaxLevel;
+        }
+
 
         strLvl.text = "STR +" + statusUpgrade.STR;
         intLvl.text = "INT +" + statusUpgrade.INT;
