@@ -22,7 +22,6 @@ public class Gamemanager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
-       
     }
 
     public void Start()
@@ -46,6 +45,7 @@ public class Gamemanager : MonoBehaviour
 
     public void ChangeToScene(int x)
     {
+        /*
         for (int i = 0;i < cameras.Count; i++)
         {
             if (i == x)
@@ -66,7 +66,7 @@ public class Gamemanager : MonoBehaviour
             if (EnchantmentTranfer.instance != null)
                 EnchantmentTranfer.instance.ResetTranfer();
             
-        }
+        }*/
      
     }
         
@@ -86,16 +86,19 @@ public class Gamemanager : MonoBehaviour
 
     public  void Load()
     {
-        itemSaveManager.LoadEquipment();
-        itemSaveManager.LoadCharacterData();
-        itemSaveManager.LoadPoint();       
-        itemSaveManager.LoadInventory();
-        isLoad = true;
+        if (loadable)
+        {
+            itemSaveManager.LoadEquipment();
+            itemSaveManager.LoadCharacterData();
+            itemSaveManager.LoadPoint();
+            itemSaveManager.LoadInventory();
+            isLoad = true;
+        }
         
     }
 
     [SerializeField] bool saveable;
-
+    [SerializeField] bool loadable;
     public void Save()
     {
         if (isLoad && saveable)

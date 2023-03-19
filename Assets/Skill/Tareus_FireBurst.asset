@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f8b422af388bd246a5e45c5031e3756, type: 3}
   m_Name: Tareus_FireBurst
   m_EditorClassIdentifier: 
+  skillIcon: {fileID: 0}
   skillName: Fire Burst
   skillDesc: "Tareus \u0E22\u0E34\u0E07\u0E40\u0E1B\u0E25\u0E27\u0E40\u0E1E\u0E25\u0E34\u0E07\u0E43\u0E2A\u0E48\u0E40\u0E1B\u0E49\u0E32\u0E2B\u0E21\u0E32\u0E22
     \u0E2A\u0E23\u0E49\u0E32\u0E07\u0E04\u0E27\u0E32\u0E21\u0E40\u0E2A\u0E35\u0E22\u0E2B\u0E32\u0E22
-    250% \u0E1E\u0E25\u0E31\u0E07\u0E40\u0E27\u0E17\u0E22\u0E4C"
-  manaCost: 20
-  coolTime: 15
+    200% \u0E1E\u0E25\u0E31\u0E07\u0E40\u0E27\u0E17\u0E22\u0E4C"
+  manaCost: 30
+  coolTime: 40
   isUsePoint: 1
   actions:
   - target: 1
@@ -29,9 +30,10 @@ MonoBehaviour:
     - statType: 1
       mainType: 0
       subType: 4
-      amount: 2.5
+      amount: 2
     statToBuff: 0
     buffModType: 0
+    modifierTime: 0
     turnDaration: 0
     dType: 0
     penetrate: 0

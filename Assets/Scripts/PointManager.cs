@@ -17,6 +17,9 @@ public class PointManager : MonoBehaviour
         instance = this;
     }
 
+    [SerializeField] private int nPoint;
+    public int Point { get { return nPoint; } }
+
     [SerializeField] private double actionPoint;
     [SerializeField] private float actionPersec;
     public float actionPerSecLvBonus;

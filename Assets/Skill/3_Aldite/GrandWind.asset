@@ -20,7 +20,7 @@ MonoBehaviour:
     \u0E41\u0E25\u0E30 \u0E1F\u0E37\u0E49\u0E19\u0E1E\u0E25\u0E31\u0E07\u0E0A\u0E35\u0E27\u0E34\u0E15
     50 \u0E2B\u0E19\u0E48\u0E27\u0E22"
   manaCost: 30
-  coolTime: 10
+  coolTime: 30
   isUsePoint: 1
   actions:
   - target: 1
@@ -35,6 +35,7 @@ MonoBehaviour:
       amount: 1.5
     statToBuff: 0
     buffModType: 0
+    modifierTime: 0
     turnDaration: 0
     dType: 0
     penetrate: 0
@@ -48,6 +49,7 @@ MonoBehaviour:
     actionModifiers: []
     statToBuff: 0
     buffModType: 0
+    modifierTime: 0
     turnDaration: 0
     dType: 0
     penetrate: 0

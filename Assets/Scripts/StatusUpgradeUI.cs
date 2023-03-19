@@ -11,19 +11,16 @@ public class StatusUpgradeUI : MonoBehaviour
     [SerializeField] TextMeshProUGUI statPoint;
 
     [SerializeField] TextMeshProUGUI strLvl;
-    [SerializeField] TextMeshProUGUI strDesc;
 
     [SerializeField] TextMeshProUGUI intLvl;
-    [SerializeField] TextMeshProUGUI intDesc;
     
     [SerializeField] TextMeshProUGUI dexLvl;
-    [SerializeField] TextMeshProUGUI dexDesc;
     
     [SerializeField] TextMeshProUGUI agiLvl;
-    [SerializeField] TextMeshProUGUI agiDesc;
 
     [SerializeField] TextMeshProUGUI conLvl;
-    [SerializeField] TextMeshProUGUI conDesc;
+
+    [SerializeField] TextMeshProUGUI costText;
 
     Character character;
 
@@ -59,82 +56,37 @@ public class StatusUpgradeUI : MonoBehaviour
                 break;
         }
         character.statusPoint--;
+        Refresh();
     }
 
     public void ResetPoint()
     {
-        Inventory.instance.UseMoney(1000);
+        Inventory.instance.UseMoney(ResetCost(Character.instance.level));
         statusUpgrade.ResetPoint();
         Refresh();
     }
 
+    int ResetCost(int level)
+    {
+        return (int)Mathf.Round(Mathf.Pow(Mathf.CeilToInt(Mathf.Log(level - 1) * 10),2) / 10) * 10; 
+    }
+
     public void Refresh()
     {
-        resetButton.interactable = Inventory.instance.getMoney >= 1000 && character.statusPoint != character.level - 1;
+        costText.text = $"{ResetCost(Character.instance.level)}$";
+        resetButton.interactable = Inventory.instance.Money >= ResetCost(Character.instance.level);
 
-        statPoint.text = "Point: " +  character.statusPoint.ToString();
+        buttons[0].interactable = Character.instance.statusPoint > 0 && StatusUpgrade.instance.AGI < 15;
+        buttons[1].interactable = Character.instance.statusPoint > 0 && StatusUpgrade.instance.DEX < 15;
+        buttons[2].interactable = Character.instance.statusPoint > 0 && StatusUpgrade.instance.STR < 15 ;
+        buttons[3].interactable = Character.instance.statusPoint > 0 && StatusUpgrade.instance.CON < 15;
+        buttons[4].interactable = Character.instance.statusPoint > 0 && StatusUpgrade.instance.INT < 15;
 
-
-        for (int i = 0; i  < 5; i++)
-        {
-            bool isMaxLevel = false;
-            switch(i)
-            {
-                case 0:
-                    isMaxLevel = statusUpgrade.STR == 15;
-                    break;
-                case 1:
-                    isMaxLevel = statusUpgrade.INT == 15;
-                    break;
-                case 3:
-                    isMaxLevel = statusUpgrade.DEX == 15;
-                    break;
-                case 2:
-                    isMaxLevel = statusUpgrade.AGI == 15;
-                    break;
-                case 4:
-                    isMaxLevel = statusUpgrade.CON == 15;
-                    break;
-            }
-            buttons[i].interactable = character.statusPoint > 0 && !isMaxLevel;
-        }
-
-
-        strLvl.text = "STR +" + statusUpgrade.STR;
-        intLvl.text = "INT +" + statusUpgrade.INT;
-        dexLvl.text = "DEX +" + statusUpgrade.DEX;
-        agiLvl.text = "AGI +" + statusUpgrade.AGI;
-        conLvl.text = "CON +" + statusUpgrade.CON;
-
-        strDesc.text = "";
-        foreach(StatusUpgrade.SubModify mod in statusUpgrade.strSub)
-        {
-            strDesc.text += Stat.SubToNormalName(mod.subType) + ": " + mod.value * (1 + statusUpgrade.STR / statusUpgrade.scale) + " > " + mod.value * (1 + (statusUpgrade.STR + 1) / statusUpgrade.scale) + " / STR\n";
-        }
-
-        intDesc.text = "";
-        foreach (StatusUpgrade.SubModify mod in statusUpgrade.intSub)
-        {
-            intDesc.text += Stat.SubToNormalName(mod.subType) + ": " + mod.value * (1 + statusUpgrade.INT / statusUpgrade.scale) + " > " + mod.value * (1 + (statusUpgrade.INT + 1) / statusUpgrade.scale) + " / INT\n";
-        }
-
-        dexDesc.text = "";
-        foreach (StatusUpgrade.SubModify mod in statusUpgrade.dexSub)
-        {
-            dexDesc.text += Stat.SubToNormalName(mod.subType) + ": " + mod.value * (1 + statusUpgrade.DEX / statusUpgrade.scale) + " > " + mod.value * (1 + (statusUpgrade.DEX + 1) / statusUpgrade.scale) + " / DEX\n";
-        }
-
-        agiDesc.text = "";
-        foreach (StatusUpgrade.SubModify mod in statusUpgrade.agiSub)
-        {
-            agiDesc.text += Stat.SubToNormalName(mod.subType) + ": " + mod.value * (1 + statusUpgrade.AGI / statusUpgrade.scale) + " > " + mod.value * (1 + (statusUpgrade.AGI + 1) / statusUpgrade.scale) + " / AGI\n";
-        }
-
-        conDesc.text = "";
-        foreach (StatusUpgrade.SubModify mod in statusUpgrade.conSub)
-        {
-            conDesc.text += Stat.SubToNormalName(mod.subType) + ": " + mod.value * (1 + statusUpgrade.CON / statusUpgrade.scale) + " > " + mod.value * (1 + (statusUpgrade.CON + 1) / statusUpgrade.scale) + "/ CON\n";
-        }
-
+        statPoint.text = $"แต้มอัพเกรดที่เหลือ: {Character.instance.statusPoint}";
+        strLvl.text = $"+{StatusUpgrade.instance.STR}";
+        dexLvl.text = $"+{StatusUpgrade.instance.DEX}";
+        agiLvl.text = $"+{StatusUpgrade.instance.AGI}";
+        intLvl.text = $"+{StatusUpgrade.instance.INT}";
+        conLvl.text = $"+{StatusUpgrade.instance.CON}";
     }
 }

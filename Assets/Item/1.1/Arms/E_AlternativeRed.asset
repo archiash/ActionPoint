@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2be80355694d66478b9b2fc718b2c38, type: 3}
+  m_Name: E_AlternativeRed
+  m_EditorClassIdentifier: 
+  id: ddc8e8ecf0719e841a264ac012fd882f
+  icon: {fileID: 21300000, guid: e7af555192bb4e748a07bdfad5849dd6, type: 3}
+  itemName: Alternative Red
+  rarity: 1
+  itemDes: 
+  itemType: 2
+  sellPrice: 300
+  enchantment: 0
+  powerPercent: 100
+  part: 3
+  modifiers:
+  - modifierType: 0
+    mainType: 3
+    statType: 0
+    type: 0
+    amount: 2
+    isEnchantEffect: 1
+    isPowerEffect: 1
+  - modifierType: 1
+    mainType: 0
+    statType: 1
+    type: 0
+    amount: 20
+    isEnchantEffect: 1
+    isPowerEffect: 1
+  - modifierType: 1
+    mainType: 0
+    statType: 3
+    type: 0
+    amount: 5
+    isEnchantEffect: 1
+    isPowerEffect: 1
+  - modifierType: 1
+    mainType: 0
+    statType: 5
+    type: 0
+    amount: 5
+    isEnchantEffect: 1
+    isPowerEffect: 1

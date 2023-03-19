@@ -17,7 +17,7 @@ public enum CriticalType
 
 public enum ArenaType
 {
-    Hunting,Raiding
+    Hunting,Raiding,OffensiveTest, DefensiveTest
 }
 
 public enum DDType

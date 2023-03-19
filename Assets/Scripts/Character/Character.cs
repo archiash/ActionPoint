@@ -7,6 +7,8 @@ public enum StatType { Main, Sub }
 
 public class Character : MonoBehaviour
 {
+    [SerializeField] List<ClassInfluence> influenceData;
+
     public static Character instance;
     [SerializeField] LevelBonus levelBonus;
     private bool isLoad = true;
@@ -30,7 +32,7 @@ public class Character : MonoBehaviour
                 {
                     if (level >= levelBonus.bonus[i].requireLevel)
                     {
-                        
+                        /*
                         Debug.Log(levelBonus.bonus[i].requireLevel);
                         if (levelBonus.bonus[i].bonusType == LvBonusType.pointRate) {
                             PointManager.instance.actionPerSecLvBonus += levelBonus.bonus[i].value;
@@ -53,13 +55,14 @@ public class Character : MonoBehaviour
                             }
                         }
 
-                        
+                        */
                         
                     }
                 }
                 
             }else
             {
+                /*
                 for (int i = 0; i < levelBonus.bonus.Count; i++)
                 {
                     if (level == levelBonus.bonus[i].requireLevel)
@@ -82,7 +85,7 @@ public class Character : MonoBehaviour
                             highestLevelBonus = levelBonus.bonus[i].requireLevel;
                         }
                     }
-                }
+                }*/
             }           
         }
         get { return level; }
@@ -97,7 +100,7 @@ public class Character : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-         
+            
         }
     }
 
@@ -126,7 +129,32 @@ public class Character : MonoBehaviour
 
     public UpgradeLevel upgradeLevel;
 
-    [SerializeField]CharacterClass characterClass;
+    [SerializeField] CharacterClass characterClass;
+    [SerializeField] ClassInfluence classInfluence;
+
+    public ClassInfluence ClassInfluence
+    {
+        set
+        {
+            classInfluence = value;
+            //print($"Change to {value.className}");
+            for(int i = 0;i < 5;i++)
+            {
+                StatusUpgrade.SubModify[] subModifies = classInfluence.subModifies[i];
+
+                foreach (StatusUpgrade.SubModify mod in subModifies)
+                {
+                    Stat a = (Stat)(status.GetType().GetField(mod.subType.ToString()).GetValue(status));
+
+                    foreach (Stat.MainModifier mainModifier in a.mainModifiers)
+                    {
+                        if ((int)mainModifier.type == i)
+                            mainModifier.modifier = mod.value;
+                    }
+                }
+            }
+        }
+    }
     public CharacterClass Class
     {
         get { return characterClass; }
@@ -134,12 +162,15 @@ public class Character : MonoBehaviour
 
             RemoveModifier(this);
 
+            ClassInfluence = influenceData[(int)value];
+
             characterClass = value; 
+            /*
             if( value == CharacterClass.Magician)
             {
                 float modValue = 5 + (0.5f * (level - 1));
                 AddModifier(MainStatType.INT,new Modifier(modValue, this, ModifierType.Flat));
-            }
+            }*/
             
         }
     }
@@ -148,7 +179,8 @@ public class Character : MonoBehaviour
     {
         Adventurer,
         Magician,
-        Rogue
+        Rogue,
+        Defender
     }
 
     public (float,DamageType) GetDamageAttack()
@@ -158,11 +190,11 @@ public class Character : MonoBehaviour
             case CharacterClass.Adventurer:
                 return (status.PAtk.Value,DamageType.Physic);
             case CharacterClass.Magician:
-                if (status.currentMP > 10)
+                if (status.currentMP >= 5 + status.MP.Value * 0.1f)
                 {
-                    status.currentMP -= 10;
-                    Debug.Log($"-10 MP Magician Normal Attack, Current MP = {status.currentMP}");
-                    return (status.MAtk.Value, DamageType.Magic);
+                    status.currentMP -= 5 + status.MP.Value * 0.1f;
+                    Debug.Log($"Magician Normal Attack, Current MP = {status.currentMP}");
+                    return (status.MAtk.Value * 1.5f + 0.15f * status.MP.Value, DamageType.Magic);
                 }else
                 {
                     Debug.Log($"Out of MP Magician Normal Attack, Current MP = {status.currentMP}");
@@ -170,6 +202,10 @@ public class Character : MonoBehaviour
                 }
             case CharacterClass.Rogue:
                 return ((status.PAtk.Value * 0.75f) + (status.Spd.Value + 0.35f), DamageType.Physic);
+            case CharacterClass.Defender:
+                AddModifier(SubStatType.PDef, new Modifier(2, this, ModifierType.Pecentage, Modifier.ModifierTime.Step, 20, "DefenderClass", 10));
+                AddModifier(SubStatType.MDef, new Modifier(2, this, ModifierType.Pecentage, Modifier.ModifierTime.Step, 20, "DefenderClass", 10));
+                return ((status.PAtk.Value * 0.8f) + (status.HP.Value * 0.10f), DamageType.Physic);
         }
 
         return (status.PAtk.Value, DamageType.Physic);
@@ -220,6 +256,7 @@ public class Character : MonoBehaviour
 
     private void Update()
     {
+        /*
         if (status.currentHP > 0)
         {
             if (status.currentHP < status.HP.Value)
@@ -236,6 +273,7 @@ public class Character : MonoBehaviour
         status.currentHP += regenRate * Time.deltaTime;
         if (status.currentHP > status.HP.Value)
             status.currentHP = status.HP.Value;
+        */
     }
 
     public void Equip(Equipment item,bool fromSave = false)

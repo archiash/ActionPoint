@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2be80355694d66478b9b2fc718b2c38, type: 3}
+  m_Name: E_Black Iron Shield
+  m_EditorClassIdentifier: 
+  id: ca556811a3b37ff42a824848bb53c032
+  icon: {fileID: 21300000, guid: 4f856c77a690fbc48a1b3ad7c6919764, type: 3}
+  itemName: Black Iron Shield
+  rarity: 0
+  itemDes: 
+  itemType: 2
+  sellPrice: 200
+  enchantment: 0
+  powerPercent: 100
+  part: 0
+  modifiers:
+  - modifierType: 0
+    mainType: 4
+    statType: 0
+    type: 0
+    amount: 1
+    isEnchantEffect: 1
+    isPowerEffect: 1
+  - modifierType: 1
+    mainType: 4
+    statType: 0
+    type: 0
+    amount: 30
+    isEnchantEffect: 1
+    isPowerEffect: 1

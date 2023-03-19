@@ -45,7 +45,7 @@ public class Item : ScriptableObject
         return itemDes;
     }
 
-    public virtual Item GetCopyItem()
+    public virtual Item GetCopyItem(bool savePower = false)
     {
         return Instantiate(this);
     }

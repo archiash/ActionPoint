@@ -7,6 +7,7 @@ TagManager:
   - InventoryContent
   - BuffDetail
   - BuffDetailText
+  - OverCanvas
   layers:
   - Default
   - TransparentFX

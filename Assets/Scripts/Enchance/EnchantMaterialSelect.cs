@@ -42,6 +42,7 @@ public class EnchantMaterialSelect : MonoBehaviour
 
     public void ShowMaterialList()
     {
+        inventory = Inventory.instance;
         ClearList();
         
         for (int i = 0; i < inventory.items.Count; i++)
@@ -58,16 +59,17 @@ public class EnchantMaterialSelect : MonoBehaviour
 
     public void ShowEquipmentList()
     {
+        inventory = Inventory.instance;
         ClearList();
 
         equipments.Clear();
-
+        
         for (int i = 0; i < inventory.items.Count; i++)
         {
             if (inventory.items[i].item is Equipment)
             {
                 Equipment item = (Equipment)inventory.items[i].item;
-                if (item.enchantment < 10)
+                if (item.enchantment < 5)
                 {
                     equipments.Add((Equipment)inventory.items[i].item);
 

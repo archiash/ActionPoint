@@ -47,11 +47,11 @@ MonoBehaviour:
       modifiers: []
     currentMP: 30
     PAtk:
-      baseValue: 35
+      baseValue: 30
       mainModifiers: []
       modifiers: []
     PDef:
-      baseValue: 28
+      baseValue: 27
       mainModifiers: []
       modifiers: []
     Pen:
@@ -63,7 +63,7 @@ MonoBehaviour:
       mainModifiers: []
       modifiers: []
     MDef:
-      baseValue: 25
+      baseValue: 24
       mainModifiers: []
       modifiers: []
     Neu:
@@ -71,7 +71,7 @@ MonoBehaviour:
       mainModifiers: []
       modifiers: []
     Spd:
-      baseValue: 22
+      baseValue: 20
       mainModifiers: []
       modifiers: []
     Hit:

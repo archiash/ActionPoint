@@ -5,10 +5,10 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class RaidSelect : MonoBehaviour, IDragHandler, IEndDragHandler
+public class RaidSelect : MonoBehaviour,IDragHandler, IEndDragHandler
 {
     public List<RaidBoss> raidList = new List<RaidBoss>();
-    public CraftBar_Material prefab;
+    public CraftMaterial prefab;
     public Transform parent;
     public Button summonButton;
     public Transform summonSection;
@@ -17,8 +17,8 @@ public class RaidSelect : MonoBehaviour, IDragHandler, IEndDragHandler
     public Button raidButton;
     public TextMeshProUGUI healthValue;
     public Image healthBar;
-    public TextMeshProUGUI usePoint;
-    public TextMeshProUGUI round;
+    //public TextMeshProUGUI usePoint;
+    //public TextMeshProUGUI round;
 
     [SerializeField] TextMeshProUGUI raidBossName;
     [SerializeField] TextMeshProUGUI raidBossSubName;
@@ -28,7 +28,6 @@ public class RaidSelect : MonoBehaviour, IDragHandler, IEndDragHandler
         get { return indexOnSelect; }
         set { indexOnSelect = value;
             Refresh();
-
         }
     }
     public int indexOnSelect;
@@ -36,17 +35,12 @@ public class RaidSelect : MonoBehaviour, IDragHandler, IEndDragHandler
 
     public RaidManager raidManager;
 
-    public RaidBoss currentShow{
-    get{ return raidList[Index];}    
-
-    }
-
-    private void Start()
+    public RaidBoss currentShow
     {
-        raidManager = GetComponent<RaidManager>();
+        get { return raidList[Index]; }
     }
 
-    public void OnDrag(PointerEventData data)
+    public void OnDrag(PointerEventData data) 
     {
         
     }
@@ -73,7 +67,7 @@ public class RaidSelect : MonoBehaviour, IDragHandler, IEndDragHandler
         Transform[] transforms = parent.GetComponentsInChildren<Transform>();
         foreach (Transform x in transforms)
         {
-            if (x.GetComponent<CraftBar_Material>())
+            if (x.GetComponent<CraftMaterial>())
             {
                 Destroy(x.gameObject);
             }
@@ -82,11 +76,12 @@ public class RaidSelect : MonoBehaviour, IDragHandler, IEndDragHandler
 
     public void Refresh()
     {
+        if(raidManager == null) raidManager = GetComponent<RaidManager>();
+        raidManager.Load();
         summonSection.gameObject.SetActive(!raidManager.isRaiding);
         raidSection.gameObject.SetActive(raidManager.isRaiding);
         if (!raidManager.isRaiding)
         {
-            
             image.sprite = raidList[indexOnSelect].sprite;
             raidBossName.text = raidList[indexOnSelect].Name;
             raidBossSubName.text = raidList[indexOnSelect].Desc;
@@ -95,29 +90,31 @@ public class RaidSelect : MonoBehaviour, IDragHandler, IEndDragHandler
 
             foreach (StackItem i in raidList[Index].summonMaterial)
             {
-                CraftBar_Material slot = Instantiate(prefab, parent);
+                CraftMaterial slot = Instantiate(prefab, parent);
                 slot.Init(i);
             }
 
             summonButton.interactable = CheckCondition();
-        } else
+        }
+        else
         {
             ClearSlot();
             raidBossName.text = raidManager.raidBoss.Name;
             raidBossSubName.text = raidManager.raidBoss.Desc;
-            image.sprite = raidManager.raidBoss.sprite;
-            healthValue.text = raidManager.currentHP.ToString();
-            round.text = "Round " + raidManager.amountTime.ToString();
-            usePoint.text = raidManager.raidBoss.usePoint.ToString() + " Points";
+            image.sprite = raidManager.raidBoss.sprite; 
+            //round.text = "Round " + raidManager.amountTime.ToString();
+            //usePoint.text = raidManager.raidBoss.usePoint.ToString() + " Points";
             swipeText.enabled = false ;
         }
     }
 
     void Update()
     {
+        if (raidManager == null) raidManager = GetComponent<RaidManager>();
         if (raidManager.isRaiding)
         {
-            healthBar.fillAmount = Mathf.Lerp(healthBar.fillAmount, raidManager.currentHP / raidManager.raidBoss.status.HP.Value, Time.deltaTime);
+            healthValue.text = $"{raidManager.currentHP}/{raidManager.raidBoss.status.HP.Value}";
+            healthBar.fillAmount = Mathf.Lerp(healthBar.fillAmount, raidManager.currentHP / raidManager.raidBoss.status.HP.Value, 0.5f);
             raidButton.interactable = PointManager.instance.GetActionPoint >= raidManager.raidBoss.usePoint;
         }
     }
@@ -165,7 +162,7 @@ public class RaidSelect : MonoBehaviour, IDragHandler, IEndDragHandler
 
     public void OnRaid()
     {
-        PointManager.instance.UseAction(raidManager.raidBoss.usePoint);        
+        //PointManager.instance.UseAction(raidManager.raidBoss.usePoint);        
         raidManager.Raiding();
         Refresh();
     }

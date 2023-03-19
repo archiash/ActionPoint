@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e895d16d24d0831449cbba76c201d457, type: 3}
   m_Name: Falos-Raid
   m_EditorClassIdentifier: 
+  offensivePower: 1340
+  defensivePower: 0
   sprite: {fileID: 21300000, guid: 6b298fb36dbe60844b6cfba4469ffd62, type: 3}
   Name: Falos
   Desc: the Exiled Houndra
@@ -47,23 +49,23 @@ MonoBehaviour:
       modifiers: []
     currentMP: 0
     PAtk:
-      baseValue: 90
+      baseValue: 65
       mainModifiers: []
       modifiers: []
     PDef:
-      baseValue: 80
+      baseValue: 60
       mainModifiers: []
       modifiers: []
     Pen:
-      baseValue: 15
+      baseValue: 10
       mainModifiers: []
       modifiers: []
     MAtk:
-      baseValue: 40
+      baseValue: 30
       mainModifiers: []
       modifiers: []
     MDef:
-      baseValue: 80
+      baseValue: 60
       mainModifiers: []
       modifiers: []
     Neu:
@@ -75,19 +77,19 @@ MonoBehaviour:
       mainModifiers: []
       modifiers: []
     Hit:
-      baseValue: 75
+      baseValue: 65
       mainModifiers: []
       modifiers: []
     Eva:
-      baseValue: 60
+      baseValue: 55
       mainModifiers: []
       modifiers: []
     Crate:
-      baseValue: 60
+      baseValue: 35
       mainModifiers: []
       modifiers: []
     Cdmg:
-      baseValue: 50
+      baseValue: 35
       mainModifiers: []
       modifiers: []
     Cres:
@@ -103,8 +105,8 @@ MonoBehaviour:
   dropTables:
   - items:
     - item: {fileID: 11400000, guid: c268a6485585624499e128490bb6f2e9, type: 2}
-      rateDrop: 70
-      trueRate: 70
+      rateDrop: 80
+      trueRate: 80
       minDrop: 1
       maxDrop: 1
   - items:
@@ -120,23 +122,23 @@ MonoBehaviour:
       maxDrop: 4
   - items:
     - item: {fileID: 11400000, guid: c8fd9e83970a6f040af26f18ec55dc15, type: 2}
-      rateDrop: 40
-      trueRate: 40
+      rateDrop: 30
+      trueRate: 30
       minDrop: 3
       maxDrop: 5
     - item: {fileID: 11400000, guid: cc13ead9bb77fe447b932dc0a0411411, type: 2}
-      rateDrop: 66.6
-      trueRate: 40
+      rateDrop: 42.8
+      trueRate: 30
       minDrop: 3
       maxDrop: 5
     - item: {fileID: 11400000, guid: b619513d8edf5f743b01ef3d01b3367a, type: 2}
       rateDrop: 50
-      trueRate: 10
+      trueRate: 20
       minDrop: 1
       maxDrop: 2
     - item: {fileID: 11400000, guid: e38dc663ade513f47927a8dc6fea64d1, type: 2}
       rateDrop: 100
-      trueRate: 10
+      trueRate: 20
       minDrop: 1
       maxDrop: 2
   id: 18269a35b71725c48b705705d0d580db
@@ -147,3 +149,4 @@ MonoBehaviour:
     amount: 5
   - item: {fileID: 11400000, guid: fccc5bf31dd5bba4eb486b0b1877f9c1, type: 2}
     amount: 10
+  costPerRound: []

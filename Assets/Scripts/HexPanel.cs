@@ -7,6 +7,6 @@ public class HexPanel : MonoBehaviour
 
     private void Update()
     {
-        hexText.text = Inventory.instance.getMoney.ToString();
+        hexText.text = Inventory.instance.Money.ToString();
     }
 }

@@ -6,24 +6,20 @@ using UnityEngine.UI;
 
 public class CraftDetail : MonoBehaviour
 {
-    public static CraftDetail instance;
-    private void Start()
-    {
-        instance = this;
-    }
     [SerializeField]
     private bool freeCraft;
 
     Recipe recipe;
 
-    [SerializeField] TextMeshProUGUI itemSlot;
+    [SerializeField] TextMeshProUGUI itemPart;
     public TextMeshProUGUI itemName;
-    public Image image;
-    public Image rarity;
+    public Image itemIcon;
+    public Image itemRarity;
+    public Image itemRarityFrame;
     public TextMeshProUGUI itemDesc;
     public TextMeshProUGUI cost;
 
-    public CraftDetail_Material pf_materialbar;
+    public CraftMaterial pf_materialbar;
     public Transform parent;
     public GameObject detailPanel;
 
@@ -35,45 +31,59 @@ public class CraftDetail : MonoBehaviour
     [SerializeField] TextMeshProUGUI PP; //PowerPercentage
     [SerializeField] TextMeshProUGUI resultName; //Name of ResultItem
     [SerializeField] TextMeshProUGUI resultStat; // Stat of ResultItem
+    [SerializeField] Image resultItemRarity;
+    [SerializeField] Image resultItemRarityFrame;
 
     void ShowResult(Equipment resultItem)
     {
         resultImage.sprite = resultItem.icon;
-        PP.text = "ระดับพลัง " + resultItem.powerPercent + "%";
+        PP.text = resultItem.powerPercent + "%";
         resultName.text = resultItem.itemName;
-        resultStat.text = resultItem.GetDesc(false);
+        resultStat.text = resultItem.GetDesc();
+        resultItemRarity.color = RarityColor.color(resultItem.rarity);
+        resultItemRarityFrame.color = RarityColor.color(resultItem.rarity);
         resultPanel.SetActive(true);
     }
 
-
-    public void ShowDetail(Recipe newRecipe)
+    public void OnpenCraftMenu()
     {
+        gameObject.SetActive(true);
+        detailPanel.SetActive(false);
+        UIManager.Instance.recipeManager.ShowRecipeList();
+    }
+
+    public void ShowRecipeDetail(Recipe newRecipe)
+    {
+        detailPanel.SetActive(true);
         recipe = newRecipe;
         if (recipe.resulItem is Equipment)
         {
-            itemSlot.text = ((Equipment)recipe.resulItem).part.ToString();
-            itemSlot.enabled = true;
+            itemPart.text = ((Equipment)recipe.resulItem).part.ToString();
+            itemPart.enabled = true;
         }
         else
-            itemSlot.enabled = false;
+            itemPart.enabled = false;
 
-        rarity.color = RarityColor.color(recipe.resulItem.rarity);
+        itemRarity.color = RarityColor.color(recipe.resulItem.rarity);
+        itemRarityFrame.color = RarityColor.color(recipe.resulItem.rarity);
+
         itemName.text = recipe.resulItem.itemName;
         itemDesc.text = recipe.resulItem.GetDesc();
+
         if(recipe.resulItem is Equipment)
         {
-            itemDesc.text = ((Equipment)recipe.resulItem).GetDesc(100);
+            itemDesc.text = ((Equipment)recipe.resulItem).GetCraftDesc();
         }
             
-        image.sprite = recipe.resulItem.icon;
+        itemIcon.sprite = recipe.resulItem.icon;
         cost.text = "Cost: " + recipe.cost.ToString() + " $";
         ClearDetail();
         foreach (StackItem stackItem in recipe.material)
         {
-            CraftDetail_Material materialbar = Instantiate(pf_materialbar, parent);
-            materialbar.GetComponent<CraftDetail_Material>().Init(stackItem);
+            CraftMaterial materialbar = Instantiate(pf_materialbar, parent);
+            materialbar.GetComponent<CraftMaterial>().Init(stackItem);
         }
-        if (CheckCondition() && Inventory.instance.getMoney >= recipe.cost && Inventory.instance.HaveEmptySpace() || freeCraft)
+        if (CheckCondition() && Inventory.instance.Money >= recipe.cost && Inventory.instance.HaveEmptySpace() || freeCraft)
         {
             craftButton.interactable = true;
             craftButton.GetComponentInChildren<TextMeshProUGUI>().text = "สร้าง";
@@ -83,13 +93,13 @@ public class CraftDetail : MonoBehaviour
             craftButton.interactable = false;
             if (!CheckCondition())
                 craftButton.GetComponentInChildren<TextMeshProUGUI>().text = "ไม่มีวัตถุดิบ";
-            else if(Inventory.instance.getMoney < recipe.cost)
+            else if(Inventory.instance.Money < recipe.cost)
                 craftButton.GetComponentInChildren<TextMeshProUGUI>().text = "เงินไม่เพียงพอ";
             else 
                 craftButton.GetComponentInChildren<TextMeshProUGUI>().text = "กระเป๋าเต็ม";
 
         }
-        detailPanel.SetActive(true);
+        
     }
 
     public void ClearDetail()
@@ -98,7 +108,7 @@ public class CraftDetail : MonoBehaviour
 
         foreach (Transform x in transforms)
         {
-            if (x.GetComponent<CraftDetail_Material>())
+            if (x.GetComponent<CraftMaterial>())
             {
                 Destroy(x.gameObject);
             }
@@ -114,15 +124,15 @@ public class CraftDetail : MonoBehaviour
         bool result = true;
         foreach (StackItem material in recipe.material)
         {
-            Debug.Log("Check " + material.item.itemName);
+            //Debug.Log("Check " + material.item.itemName);
             foreach (StackItem item in Inventory.instance.items)
             {
-                Debug.Log("Check with " + item.item.itemName);
+                //Debug.Log("Check with " + item.item.itemName);
 
                 if (item.item.ID == material.item.ID && item.amount >= material.amount)
                 {
                     result = true;
-                    Debug.Log("Have");
+                    //Debug.Log("Have");
                     break;
 
                 }
@@ -154,6 +164,6 @@ public class CraftDetail : MonoBehaviour
         Item result = recipe.resulItem.GetCopyItem();
         ShowResult((Equipment)result);
         Inventory.instance.GetItem(result);
-        detailPanel.SetActive(false);
+        ShowRecipeDetail(recipe);
     }
 }

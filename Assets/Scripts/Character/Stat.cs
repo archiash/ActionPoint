@@ -50,12 +50,34 @@ public class Stat
  
    public List<Modifier> modifiers = new List<Modifier>();
    public void AddModifier(Modifier modifier)
-    {
-        if (modifier.value != 0)
+   {
+        if (modifier.id != "")
+        {
+            bool stack = false;
+            for(int i = 0; i < modifiers.Count; i++)
+            {
+                if (modifiers[i].id == modifier.id)
+                {
+                    if (modifiers[i].value < modifiers[i].maxStackValue)
+                    {
+                        modifiers[i].value += modifier.value;                        
+                    }
+                    modifiers[i].time = modifier.time;
+                    stack = true;
+                    break;
+                }
+            }
+
+            if (!stack)
+            {
+                modifiers.Add(modifier);
+            }
+        }
+        else if (modifier.value != 0)
             modifiers.Add(modifier);
 
         modifiers.Sort(CompareModifierOrder);
-    }
+   }
     public void RemoveModifier(object source)
     {
         for(int i = 0;i < modifiers.Count;i++)
@@ -141,22 +163,26 @@ public class Modifier
 {
     public enum ModifierTime
     {
-        Equip,Hunt,Turn
+        Equip,Hunt,Turn,Step
     }
 
+    public string id;
     public float value;
     public ModifierType type;
     public ModifierTime timeType;
     public int time;
+    public float maxStackValue;
     public readonly object source;
 
-    public Modifier(float _value, object _source, ModifierType _type = ModifierType.Flat,ModifierTime _timeType = ModifierTime.Equip,int _time = int.MaxValue)
+    public Modifier(float _value, object _source, ModifierType _type = ModifierType.Flat,ModifierTime _timeType = ModifierTime.Equip,int _time = int.MaxValue, string id = "", float maxValue = -1)
     {
+        this.id = id;
         value = _value;
         type = _type;
         time = _time;
         timeType = _timeType;
         source = _source;
+        maxStackValue= maxValue == -1 ? _value : maxValue;
     }
 }
 #if UNITY_EDITOR

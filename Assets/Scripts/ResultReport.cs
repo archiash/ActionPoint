@@ -7,13 +7,6 @@ using UnityEngine.SceneManagement;
 
 public class ResultReport : MonoBehaviour
 {
-    public static ResultReport instance;
-    private void Start()
-    {
-        if (instance == null)
-            instance = this;
-    }
-
     public GameObject resultPanel;
     public TextMeshProUGUI resultText;
 
@@ -63,6 +56,10 @@ public class ResultReport : MonoBehaviour
 
     public void ShowResult(string result)
     {
+        if (result == "raid")
+        {
+            return;
+        }
         UpdateDropList();
         resultText.text = result;
         resultPanel.SetActive(true);

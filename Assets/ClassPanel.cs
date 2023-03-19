@@ -6,51 +6,40 @@ using TMPro;
 
 public class ClassPanel : MonoBehaviour
 {
+    public Character.CharacterClass changedClass;
+    public ClassChangeButton currentButton;
+
     [SerializeField] ClassChangeComfirm classChangeComfirm;
 
     [SerializeField] Button[] classButton;
 
     [SerializeField] TextMeshProUGUI currentClassText;
     [SerializeField] TextMeshProUGUI currentClassDetailText;
+
     void UpdatePanel()
     {
-        (string className,string classDetail) = GetClassNameAndDetail(Character.instance.Class);
+        (string className,string classDetail) = ClassUtility.GetClassNameAndDetail(Character.instance.Class);
 
         currentClassText.text = $"ปัจจุบัน: {className}";
         currentClassDetailText.text = $"{classDetail}";
+        currentClassDetailText.fontSize = currentClassText.fontSize;
 
-        foreach(Button button in classButton)
+        currentButton = GameObject.Find(Character.instance.Class.ToString()).GetComponent<ClassChangeButton>();
+        currentButton.ButtonPanel.color = Color.gray;
+
+        foreach (Button button in classButton)
         {
-            button.interactable = Inventory.instance.getMoney >= 300 && Character.instance.Class != button.GetComponent<ClassChangeButton>().characterClass;
+            button.interactable = Inventory.instance.Money >= 300 && Character.instance.Class != button.GetComponent<ClassChangeButton>().characterClass;
         }      
 
     }
 
-    public (string,string) GetClassNameAndDetail(Character.CharacterClass characterClass)
+    public void SelectedChangeClass(Character.CharacterClass characterClass,ClassChangeButton button)
     {
-        string className = "";
-        string classDetail = "";
-        switch (characterClass)
-        {
-            case Character.CharacterClass.Adventurer:
-                className = "นักผจญภัย";
-                classDetail = "โจมตีด้วยพลังโจมตี 100% เป็นความเสียหายกายภาพ\n" +
-                    "มีโอกาส 10% ที่จะได้ไอเท็มจากการล่าเพิ่มขึ้น 1 ชิ้น";
-                break;
-            case Character.CharacterClass.Magician:
-                className = "นักเวทย์";
-                classDetail = "ได้รับ INT 5 หน่วย + 0.5 หน่วยต่อเลเวล" +
-                    "\nการโจมตีจะใช้มานา 10 หน่วย (มานาจะฟื้นฟูในการต่อสู้ 5% ของมานาสูงสุดต่อเทิร์น) โจมตีด้วยพลังเวทย์ 100% เป็นความเสียหายเวทย์ ถ้าหากมานาไม่เพียงพอจะโจมตีด้วยพลังโจมตี" +
-                    " 50% เป็นความเสียหายกายภาพแทน";
-                break;
-            case Character.CharacterClass.Rogue:
-                className = "(จอม)โจร";
-                classDetail = "โจมตีด้วยพลังโจมตี 75% + ความเร็ว 35% เป็นความเสียหายกายภาพ\n" +
-                    "เพิ่มโอกาสในการหลบการโจมตี 10%\n" +
-                    "แต่จะได้รับความเสียหายเพิ่มขึ้น 20%";
-                break;
-        }
-        return (className, classDetail);
+        changedClass = characterClass;
+        if (currentButton != null) currentButton.ResetSelected();
+        currentButton = button;
+        ChangeClass(characterClass);
     }
 
     public void OnPanelOpen()
@@ -61,7 +50,7 @@ public class ClassPanel : MonoBehaviour
 
     public void OpenClassChangeComfirm(Character.CharacterClass characterClass)
     {
-        (string className, string classDetail) = GetClassNameAndDetail(characterClass);
+        (string className, string classDetail) = ClassUtility.GetClassNameAndDetail(characterClass);
         classChangeComfirm.ShowComfirmDetail(characterClass,className,classDetail);
     }
 

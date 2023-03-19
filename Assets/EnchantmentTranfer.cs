@@ -81,7 +81,7 @@ public class EnchantmentTranfer : MonoBehaviour
         giverEnchant.enabled = true;
         giverPercent.enabled = true;
 
-        tranferButton.interactable = Inventory.instance.getMoney >= giver.enchantment * 100;
+        tranferButton.interactable = Inventory.instance.Money >= giver.enchantment * 100;
         costText.enabled = true;
         costText.text = "ค่าใช้จ่าย: " + giver.enchantment * 100;
     }

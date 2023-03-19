@@ -5,15 +5,7 @@ using UnityEngine;
 
 public class StatusUpgrade : MonoBehaviour
 {
-  public SubModify[] strSub;
-    public SubModify[] dexSub;
-    public SubModify[] conSub;
-    public SubModify[] agiSub;
-    public SubModify[] intSub;
-
     Character character;
-
-    public float scale;
 
     public static StatusUpgrade instance;
 
@@ -43,18 +35,6 @@ public class StatusUpgrade : MonoBehaviour
                 character = Character.instance;
             strLevel = value;
             character.status.STR.baseValue = strLevel;
-            foreach(SubModify mod in strSub)
-            {
-
-
-                Stat a = (Stat)(character.status.GetType().GetField(mod.subType.ToString()).GetValue(character.status));
-
-                foreach(Stat.MainModifier mainModifier in a.mainModifiers)
-                {
-                    if (mainModifier.type == MainStatType.STR)
-                        mainModifier.modifier = mod.value * (1 + strLevel / scale);
-                }
-            }
         }
     }
 
@@ -67,17 +47,6 @@ public class StatusUpgrade : MonoBehaviour
                 character = Character.instance;
             dexLevel = value;
             character.status.DEX.baseValue = dexLevel;
-            foreach (SubModify mod in dexSub)
-            {
-
-                Stat a = (Stat)(character.status.GetType().GetField(mod.subType.ToString()).GetValue(character.status));
-
-                foreach (Stat.MainModifier mainModifier in a.mainModifiers)
-                {
-                    if (mainModifier.type == MainStatType.DEX)
-                        mainModifier.modifier = mod.value * (1 + dexLevel / scale);
-                }
-            }
         }
     }
 
@@ -91,16 +60,6 @@ public class StatusUpgrade : MonoBehaviour
             
             conLevel = value;
             character.status.CON.baseValue = conLevel;
-            foreach (SubModify mod in conSub)
-            {
-                Stat a = (Stat)(character.status.GetType().GetField(mod.subType.ToString()).GetValue(character.status));
-
-                foreach (Stat.MainModifier mainModifier in a.mainModifiers)
-                {
-                    if (mainModifier.type == MainStatType.CON)
-                        mainModifier.modifier = mod.value * (1 + conLevel / scale);
-                }
-            }
         }
     }
 
@@ -113,16 +72,6 @@ public class StatusUpgrade : MonoBehaviour
                 character = Character.instance;
             agiLevel = value;
             character.status.AGI.baseValue = agiLevel;
-            foreach (SubModify mod in agiSub)
-            {
-                Stat a = (Stat)(character.status.GetType().GetField(mod.subType.ToString()).GetValue(character.status));
-
-                foreach (Stat.MainModifier mainModifier in a.mainModifiers)
-                {
-                    if (mainModifier.type == MainStatType.AGI)
-                        mainModifier.modifier = mod.value * (1 + agiLevel / scale);
-                }
-            }
         }
     }
 
@@ -135,16 +84,6 @@ public class StatusUpgrade : MonoBehaviour
                 character = Character.instance;
             intLevel = value;
             character.status.INT.baseValue = intLevel;
-            foreach (SubModify mod in intSub)
-            {
-                Stat a = (Stat)(character.status.GetType().GetField(mod.subType.ToString()).GetValue(character.status));
-
-                foreach (Stat.MainModifier mainModifier in a.mainModifiers)
-                {
-                    if (mainModifier.type == MainStatType.INT)
-                        mainModifier.modifier = mod.value * (1 + intLevel / scale);
-                }
-            }
         }
     }
 

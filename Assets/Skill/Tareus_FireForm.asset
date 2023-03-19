@@ -12,21 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f8b422af388bd246a5e45c5031e3756, type: 3}
   m_Name: Tareus_FireForm
   m_EditorClassIdentifier: 
+  skillIcon: {fileID: 0}
   skillName: Fire Form
   skillDesc: "\u0E40\u0E1E\u0E34\u0E48\u0E21\u0E1E\u0E25\u0E31\u0E07\u0E40\u0E27\u0E17\u0E22\u0E4C\u0E40\u0E40\u0E25\u0E30\u0E2B\u0E25\u0E1A\u0E2B\u0E25\u0E35\u0E01\u0E43\u0E2B\u0E49\u0E01\u0E31\u0E1A
-    Tareus 30% 10 \u0E40\u0E17\u0E34\u0E23\u0E4C\u0E19"
+    Tareus 20% 10 step"
   manaCost: 20
-  coolTime: 10
+  coolTime: 30
   isUsePoint: 1
   actions:
   - target: 0
     skillType: 2
-    value: 30
+    value: 20
     damageType: 0
     critical: 0
     actionModifiers: []
     statToBuff: 4
     buffModType: 1
+    modifierTime: 3
     turnDaration: 10
     dType: 0
     penetrate: 0
@@ -34,12 +36,13 @@ MonoBehaviour:
     drainPercent: 0
   - target: 0
     skillType: 2
-    value: 30
+    value: 20
     damageType: 0
     critical: 0
     actionModifiers: []
     statToBuff: 8
     buffModType: 1
+    modifierTime: 3
     turnDaration: 10
     dType: 0
     penetrate: 0

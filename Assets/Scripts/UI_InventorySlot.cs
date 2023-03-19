@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -9,15 +10,15 @@ public class UI_InventorySlot : MonoBehaviour
     public Image icon;
     public TextMeshProUGUI amount;
     public TextMeshProUGUI power;
-    public Image rarity;
+    public Image[] rarity;
 
     public StackItem item;
 
-    public void AddItem(StackItem newItem)
+    public void Init(StackItem newItem)
     {
         item = newItem;
         icon.sprite = item.item.icon;
-        rarity.color = RarityColor.color(item.item.rarity);
+        foreach (Image i in rarity) i.color = RarityColor.color(item.item.rarity); 
         if(item.item is Equipment)
         {
             amount.text = "+" + ((Equipment)item.item).enchantment.ToString();
@@ -32,14 +33,15 @@ public class UI_InventorySlot : MonoBehaviour
 
     public void ShowOnPanel()
     {
-        if (item != null)
-            ItemDetailPanel.instance.ShowItem(item);
+        UI_InventoryManager.instance.ShowItemDetail(item);
+        //if (item != null)
+       //     ItemDetailPanel.instance.ShowItem(item);
     }
 
     public void ClearSlot()
     {
         item = null;
-        rarity.color = Color.white;
+        foreach (Image i in rarity) i.color = Color.white;
         icon.enabled = false;
         power.enabled = false;
         amount.enabled = false;

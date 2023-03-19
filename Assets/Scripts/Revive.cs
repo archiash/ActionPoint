@@ -21,7 +21,7 @@ public class Revive : MonoBehaviour
     public void ShowPanel()
     {     
         panel.SetActive(true);
-        cost.text = "จ่าย $ " + ((int)(Inventory.instance.getMoney * 50 / 100f)).ToString() + ", " + ((int)(PointManager.instance.GetActionPoint * 30 / 100f)).ToString() + " Point";
+        cost.text = "จ่าย $ " + ((int)(Inventory.instance.Money * 50 / 100f)).ToString() + ", " + ((int)(PointManager.instance.GetActionPoint * 30 / 100f)).ToString() + " Point";
     }
 
     public void OnReviveButton()

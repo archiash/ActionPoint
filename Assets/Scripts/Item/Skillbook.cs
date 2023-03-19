@@ -15,7 +15,7 @@ public class Skillbook : Item
 
     public override string GetDesc(bool fulldesc = true,bool isDownList = true)
     {
-        return $"Use to learn Skill {skill?.skillName}";
+        return $"{skill?.skillName}";
     }
 }
 

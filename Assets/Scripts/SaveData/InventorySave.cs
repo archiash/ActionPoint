@@ -62,12 +62,12 @@ public class CharacterSaveData
     public int[] statLevel;
     public Character.CharacterClass characterClass;
 
-    public CharacterSaveData(float health,DateTime exit,int lvl,int sp,int[] sL, float xp,Character character)
+    public CharacterSaveData(float health,DateTime exit,int lvl,int[] sL, float xp,Character character)
     {        
         lastHealth = health;
         lastExit = exit;
         level = lvl;
-        skillPoint = sp;
+        skillPoint = lvl - 1 - sL[0] - sL[1] - sL[2] - sL[3] - sL[4];
         statLevel = sL;
         exp = xp;
         characterClass = character.Class;

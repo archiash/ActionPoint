@@ -12,21 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f8b422af388bd246a5e45c5031e3756, type: 3}
   m_Name: ArsternMage_MagicSurge
   m_EditorClassIdentifier: 
+  skillIcon: {fileID: 0}
   skillName: Magic Surge
   skillDesc: "\u0E40\u0E1E\u0E34\u0E48\u0E21\u0E1E\u0E25\u0E31\u0E07\u0E40\u0E27\u0E17\u0E22\u0E4C
-    50% 5 \u0E40\u0E17\u0E34\u0E23\u0E4C\u0E19"
+    30% 5 step"
   manaCost: 20
   coolTime: 15
   isUsePoint: 1
   actions:
   - target: 0
     skillType: 2
-    value: 50
+    value: 30
     damageType: 0
     critical: 0
     actionModifiers: []
     statToBuff: 4
     buffModType: 1
+    modifierTime: 3
     turnDaration: 5
     dType: 0
     penetrate: 0

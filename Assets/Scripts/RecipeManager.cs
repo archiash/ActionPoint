@@ -12,7 +12,7 @@ public class RecipeManager : MonoBehaviour
     private void Start()
     {
         if (instance == null) instance = this;
-        recipes = Forgesmith.instance.recipeLists[0].recipes;
+        recipes = UIManager.Instance.forgesmith.recipeLists[0].recipes;
         UpdateRecipe();
     }
 
@@ -24,11 +24,11 @@ public class RecipeManager : MonoBehaviour
     public void ShowRecipeList()
     {
         ClearList();
-        for (int i = 0; i < Forgesmith.instance.recipeLists.Count;i++)
+        for (int i = 0; i < UIManager.Instance.forgesmith.recipeLists.Count;i++)
         {
             if (filter.GetFilter($"Tier{i+1}"))
             {
-                recipes = Forgesmith.instance.recipeLists[i].recipes;
+                recipes = UIManager.Instance.forgesmith.recipeLists[i].recipes;
                 recipes = recipes.OrderBy(i => i.cost).ToList();
                 foreach (Recipe recipe in recipes)
                 {

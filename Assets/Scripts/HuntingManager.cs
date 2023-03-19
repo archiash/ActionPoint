@@ -1,17 +1,34 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
+using UnityEngine.UI;
 using UnityEditor;
 using System;
+using UnityEngine.Events;
 
 public class HuntingManager : MonoBehaviour
 {
-    public static HuntingManager instance;
-    private void Start()
-    {
-        instance = this;
-    }
+    public bool raiding = false;
+
+    public List<Follower> playerFollower;
+    public List<Follower> enermyFollower;
+
+    public Image playerCharacterImage;
+    public Animator playerCharacterAnimator;
+    public Image[] playerFollowerImage;
+    public Animator[] playerFollowerAnimators;
+
+    public Image enermyCharacterImage;
+    public Animator enermyCharacterAnimator;
+    public Image[] enermyFollowerImage;
+
+    public int[] playerFollowerSkillTimer;
+    public int[] enermyFollowerSkillTimer;
+
+    public Image playerHealthBar;
+    public Image enermyHealthBar;
+
+    public float timeScale;
 
     Character character;
     Monster monster;
@@ -26,29 +43,56 @@ public class HuntingManager : MonoBehaviour
     float characterNextTurn = 0f;
     float monsterNextTurn = 0f;
 
-    float previousHp;
-
     public List<DebuffDamage> characterDDPS = new List<DebuffDamage>();
+    public List<DebuffDamage> characterDDPT = new List<DebuffDamage>();
     public List<DebuffDamage> monsterDDPS = new List<DebuffDamage>();
+    public List<DebuffDamage> monsterDDPT = new List<DebuffDamage>();
 
     public int characterStun;
     public int monsterStun;
 
     private int powerlize;
-    public void Setup(Monster _monster = null, Character _character = null,int powerlize = 1)
+    public void Setup(Monster _monster, List<Follower> playerFollower, List<Follower> enermyFollower = null, int powerlize = 1)
     {
         this.powerlize = powerlize;
 
-        if (_character == null)
-            character = Character.instance;
-        else
-            character = _character;
+        character = Character.instance;
+
         if (_monster == null)
             monster = Instantiate(testMonster);
         else
             monster = Instantiate(_monster);
 
+        enermyCharacterImage.sprite = monster.sprite;
+
+        character.status.currentHP = character.status.HP.Value;
         character.status.currentMP = character.status.MP.Value;
+
+        for (int i = 0; i < 3; i++)
+        {
+            if (i < playerFollower.Count)
+            {
+                if (playerFollower[i] != null)
+                {
+                    this.playerFollower.Add(playerFollower[i]);
+                    playerFollowerImage[i].sprite = playerFollower[i].followerSquareImage;
+                    playerFollowerImage[i].enabled = true;
+                }
+            }
+            else playerFollowerImage[i].enabled = false;
+
+            if (i < ((enermyFollower == null) ? 0 : enermyFollower.Count))
+            {
+                this.enermyFollower.Add(enermyFollower[i]);
+                enermyFollowerImage[i].sprite = enermyFollower[i].followerSquareImage;
+                enermyFollowerImage[i].enabled = true;
+            }
+            else enermyFollowerImage[i].enabled = false;
+            
+        }
+
+        playerFollowerSkillTimer = new int[playerFollower.Count];
+        enermyFollowerSkillTimer = new int[enermyFollower == null ? 0 : enermyFollower.Count];
 
         monsterNextTurn = 0f;
         characterNextTurn = 0f;
@@ -57,132 +101,105 @@ public class HuntingManager : MonoBehaviour
         monsterCooldown = new int[monster.currentSkill.Count];
 
         character.status.currentMP = character.status.MP.Value;
-        previousHp = character.status.currentHP;
 
         characterStun = 0;
         monsterStun = 0;
 
         characterDDPS.Clear();
+        characterDDPT.Clear();
         monsterDDPS.Clear();
+        monsterDDPT.Clear();
+
         monster.SetSkill();
+        
     }
 
     void CalculateSpeed()
     {
-        if (character.status.Spd.Value < monster.status.Spd.Value)
-        {
-            characterSpeed = (10 + character.status.Spd.Value) * 100f / (100 + character.status.Spd.Value);
-            monsterSpeed = (10 + monster.status.Spd.Value) * 100f / (100 + character.status.Spd.Value);
-        }
-        else
-        {
-            characterSpeed = (10 + character.status.Spd.Value) * 100f / ( 100 +monster.status.Spd.Value);
-            monsterSpeed = (10 + monster.status.Spd.Value) * 100f / (100 + monster.status.Spd.Value);
-        }
+        //float highestValue = Mathf.Max(character.status.Spd.Value, monster.status.Spd.Value);
+        characterSpeed = Formula.ActionPerStep(character.status.Spd.Value);
+        monsterSpeed = Formula.ActionPerStep(monster.status.Spd.Value);
     }
 
     int[] characterCooldown;
     int[] monsterCooldown;
 
+    void CharacterStep()
+    {
+        if (!character.status.isFullMP)
+            character.status.currentMP += 0.5f + (character.level - 1) * 0.1f;
+    }
+
+    void MonsterStep()
+    {
+        if (!monster.status.isFullMP)
+            monster.status.currentMP += Mathf.Pow(Mathf.Log(monster.status.MP.Value),1.5f) / 1.5f;
+    }
     void CharacterTurn()
     {
+        playerCharacterAnimator.SetTrigger("Attack");
         bool isUsedSkill = false;
         characterNextTurn -= 100;
         print("Character Turn");
         if (character.status.currentHP <= 0)
             return;
 
-        if (!character.status.isFullMP)
-            character.status.currentMP += character.status.MP.Value * 5 / 100f;
-
-        DDPS(character.status, characterDDPS);
+        DDPT(character.status, characterDDPS);
         ReduceBuffTurn(character.status);
 
-        if (characterStun <= 0)
+        if (character.currentSkill.Count > 0)
         {
-            if (character.currentSkill.Count > 0)
+            for (int i = 0; i < character.currentSkill.Count; i++)
             {
-                for (int i = 0; i < character.currentSkill.Count; i++)
+                if (characterCooldown[i] <= 0 && character.status.currentMP >= character.currentSkill[i].manaCost)
                 {
-                    if (characterCooldown[i] <= 0 && character.status.currentMP >= character.currentSkill[i].manaCost)
-                    {
-                        if (character.currentSkill[i] is CounterSkill)
-                            continue;
-                        isUsedSkill = character.currentSkill[i].Use(character, monster, ArenaType.Hunting);
-                        characterCooldown[i] = character.currentSkill[i].coolTime + 1;
-                        character.status.currentMP -= character.currentSkill[i].manaCost;
-                        break;
-                    }
+                    if (character.currentSkill[i] is CounterSkill)
+                        continue;
+                    isUsedSkill = character.currentSkill[i].Use(character, monster, ArenaType.Hunting);
+                    characterCooldown[i] = character.currentSkill[i].coolTime + 1;
+                    character.status.currentMP -= character.currentSkill[i].manaCost;
+                    break;
                 }
-                if (!isUsedSkill)
-                    CharacterNormalAttack();
             }
-            else
+            if (!isUsedSkill)
                 CharacterNormalAttack();
         }
-
-        for(int i = 0; i< character.currentSkill.Count;i++)
-        {
-            characterCooldown[i] = characterCooldown[i] > 0 ? characterCooldown[i] - 1 : characterCooldown[i];
-        }
-
-        if (characterStun > 0)
-        {
-            characterStun--;
-            Debug.Log("STUN Turn Left" + characterStun);
-        }
+        else
+            CharacterNormalAttack();
 
     }
     void MonsterTurn()
     {
+        enermyCharacterAnimator.SetTrigger("Attack");
         bool isUsedSkill = false;
         monsterNextTurn -= 100;
         print("Monster Turn");
         if (monster.status.currentHP <= 0)
             return;
 
-        if (!monster.status.isFullMP)
-            monster.status.currentMP += monster.status.MP.Value * 5 / 100f;
-
-        Debug.Log("MP: " + monster.status.currentMP);
-
-        DDPS(monster.status, monsterDDPS);
+        DDPT(monster.status, monsterDDPS);
         ReduceBuffTurn(monster.status);
 
-
-
-        if (monsterStun <= 0)
+        if (monster.currentSkill.Count > 0)
         {
-            if (monster.currentSkill.Count > 0)
+            for (int i = 0; i < monster.currentSkill.Count; i++)
             {
-                for (int i = 0; i < monster.currentSkill.Count; i++)
+                if (monsterCooldown[i] <= 0 && monster.status.currentMP >= monster.currentSkill[i].manaCost)
                 {
-                    if (monsterCooldown[i] <= 0 && monster.status.currentMP >= monster.currentSkill[i].manaCost)
-                    {
-                        if (monster.currentSkill[i] is CounterSkill)
-                            continue;
-                        isUsedSkill = monster.currentSkill[i].Use(monster, character, ArenaType.Hunting);
-                        monsterCooldown[i] = monster.currentSkill[i].coolTime + 1;
-                        monster.status.currentMP -= monster.currentSkill[i].manaCost;
-                        break;
-                    }
+                    if (monster.currentSkill[i] is CounterSkill)
+                        continue;
+                    isUsedSkill = monster.currentSkill[i].Use(monster, character, ArenaType.Hunting);
+                    monsterCooldown[i] = monster.currentSkill[i].coolTime + 1;
+                    monster.status.currentMP -= monster.currentSkill[i].manaCost;
+                    break;
                 }
-                if (!isUsedSkill)
-                    MonsterNormalAttack();
             }
-            else
+            if (!isUsedSkill)
                 MonsterNormalAttack();
         }
-        for (int i = 0; i < monster.currentSkill.Count; i++)
-        {
-            monsterCooldown[i] = monsterCooldown[i] > 0 ? monsterCooldown[i] - 1 : monsterCooldown[i];
-        }
-
-        if (monsterStun > 0)
-        {
-            monsterStun--;
-            Debug.Log("STUN Turn Left" + monsterStun);
-        }
+        else
+            MonsterNormalAttack();
+        
     }
     void CharacterNormalAttack()
     {
@@ -195,6 +212,7 @@ public class HuntingManager : MonoBehaviour
         {
             Debug.Log($"Deal {damage} {damageType} Damage to {monster.Name}");
         }
+        
     }
     void MonsterNormalAttack()
     {
@@ -204,6 +222,7 @@ public class HuntingManager : MonoBehaviour
             Debug.Log("Critical");
         if (character.status.GetDamage(ref damage, character.status))
             Debug.Log($"Deal {damage} Physic Damage to Character");
+  
     }
     void ReduceBuffTurn(Status status)
     {
@@ -232,16 +251,87 @@ public class HuntingManager : MonoBehaviour
                 Debug.Log($"{statName}: {oldValue} -> {stat.Value}");
         }
     }
-
-    public void Hunt()
-   {
-        int turnCount = 500;
-        int endturn = 0;
-        for(int i = 0;i<turnCount;)
+    void ReduceBuffStep(Status status)
+    {
+        foreach (var statName in Enum.GetValues(typeof(SubStatType)))
         {
+            Stat stat = (Stat)(status.GetType().GetField(statName.ToString()).GetValue(status));
+            float oldValue = stat.Value;
+            bool isChange = false;
+            for (int i = 0; i < stat.modifiers.Count; i++)
+            {
+                if (stat.modifiers[i].timeType == Modifier.ModifierTime.Step)
+                {
+                    stat.modifiers[i].time--;
+                    if (stat.modifiers[i].time < 0)
+                    {
+                        stat.RemoveModifier(stat.modifiers[i]);
+                        isChange = true;
+                    }
+                }
+            }
+            if (isChange)
+                Debug.Log($"{statName}: {oldValue} -> {stat.Value}");
+        }
+    }
+    public IEnumerator Hunt()
+    {        
+        int turnCount = 5000;
+        int endturn = 0;
+        int stepCount = 0;
+        playerHealthBar.fillAmount = 1;
+        if (raiding) enermyHealthBar.fillAmount = monster.status.currentHP / monster.status.HP.Value;
+        else enermyHealthBar.fillAmount = 1;
+        StartCoroutine(HealthBarUpdate());
+        for(int i = 0; i < turnCount;)
+        {
+            stepCount++;
+            print("Step: " + stepCount);
             CalculateSpeed();
-            characterNextTurn += characterSpeed;
-            monsterNextTurn += monsterSpeed;
+
+            if(characterStun <= 0) characterNextTurn += characterSpeed * 10;
+            else
+            {
+                characterStun--;
+                Debug.Log("STUN Step Left" + characterStun);              
+            }
+            if(monsterStun <= 0) monsterNextTurn += monsterSpeed * 10;
+            else
+            {
+                monsterStun--;
+                Debug.Log("STUN Step Left" + monsterStun);
+            }
+
+            for (int z = 0; z < monster.currentSkill.Count; z++)
+            {
+                monsterCooldown[z] = monsterCooldown[z] > 0 ? monsterCooldown[z] - 1 : monsterCooldown[z];
+            }
+
+            for (int z = 0; z < character.currentSkill.Count; z++)
+            {
+                characterCooldown[z] = characterCooldown[z] > 0 ? characterCooldown[z] - 1 : characterCooldown[z];
+            }
+
+
+            CharacterStep();
+            MonsterStep();
+
+            ReduceBuffStep(character.status);
+            ReduceBuffStep(monster.status);
+            DDPS(character.status, characterDDPS);
+            DDPS(monster.status, monsterDDPS);
+
+            for (int f = 0; f < 3; f++)
+            {
+                if (f < playerFollowerSkillTimer.Length)
+                {
+                    playerFollowerSkillTimer[f] += 1;
+                }
+                if (f < enermyFollowerSkillTimer.Length)
+                {
+                    enermyFollowerSkillTimer[f] += 1;
+                }
+            }
 
             while (characterNextTurn >= 100 || monsterNextTurn >= 100)
             {
@@ -250,11 +340,13 @@ public class HuntingManager : MonoBehaviour
                     if (characterNextTurn > monsterNextTurn)
                     {
                         CharacterTurn();
+                        //yield return new WaitForSeconds(0.1f);
                         i++;
                     }else
                     if (characterNextTurn < monsterNextTurn)
                     {
                         MonsterTurn();
+                        //yield return new WaitForSeconds(0.1f);
                         i++;
                     }else
                     if (characterNextTurn == monsterNextTurn)
@@ -262,11 +354,13 @@ public class HuntingManager : MonoBehaviour
                         if (character.status.Spd.Value < monster.status.Spd.Value)
                         {
                             MonsterTurn();
+                            //yield return new WaitForSeconds(0.1f);
                             i++;
                         }
                         else
                         {
                             CharacterTurn();
+                            //yield return new WaitForSeconds(0.1f);
                             i++;
                         }
                     }
@@ -276,76 +370,144 @@ public class HuntingManager : MonoBehaviour
                     if (characterNextTurn >= 100)
                     {
                         CharacterTurn();
+                        //yield return new WaitForSeconds(0.1f);
                         i++;
                     }
 
                     if (monsterNextTurn >= 100)
                     {
                         MonsterTurn();
+                        //yield return new WaitForSeconds(0.1f);
                         i++;
                     }
                 }
+
+                
             }
+
+            for (int f = 0; f < 3; f++)
+            {
+                //print(f);
+                if (f < playerFollowerSkillTimer.Length)
+                {
+                    //print("PlayerFollower");
+                    if (playerFollowerSkillTimer[f] >= playerFollower[f].folowerSkills[0].interval)
+                    {
+                        Debug.Log("Tareus!!!!");
+                        playerFollower[f].folowerSkills[0].skill.Use(playerFollower[f], monster);
+                        playerFollowerSkillTimer[f] = 0;
+                        playerFollowerAnimators[f].SetTrigger("Attack");
+                        //yield return new WaitForSeconds(0.1f);
+                    }
+                }
+
+                if (f < enermyFollowerSkillTimer.Length)
+                {
+                    //print("EnermyFollower");
+                    if (enermyFollowerSkillTimer[f] >= enermyFollower[f].folowerSkills[0].interval)
+                    {
+                        enermyFollower[f].folowerSkills[0].skill.Use(enermyFollower[f], character);
+                        enermyFollowerSkillTimer[f] = 0;
+                        //yield return new WaitForSeconds(0.1f);
+                    }
+                }
+            }
+
+            
 
             if (CheckResult(i))
             {
                 endturn = i;
                 i = 500;
+                break;
             }
-                
 
-           
+            yield return new WaitForSeconds(0.1f * timeScale);
         }
-
         EndBattle();
         Destroy(monster);
         Debug.Log(endturn);
     }
+
+    IEnumerator HealthBarUpdate()
+    {
+        while (playerHealthBar.fillAmount > 0.0001f && enermyHealthBar.fillAmount > 0.0001f)
+        {
+            playerHealthBar.fillAmount = Mathf.Lerp(playerHealthBar.fillAmount, character.status.currentHP / character.status.HP.Value, 0.05f);
+            enermyHealthBar.fillAmount = Mathf.Lerp(enermyHealthBar.fillAmount, monster.status.currentHP / monster.status.HP.Value, 0.05f);
+            yield return new WaitForSeconds(0.01f);
+        }
+    }
    
     public bool CheckResult(int turn)
     {
-        if(character.status.currentHP <= 0)
+        if(playerHealthBar.fillAmount < 0.001f)
         {
             print("Lose");
             print("Still Left :" + monster.status.currentHP);
-            ResultReport.instance.ShowResult("เเพ้");
+            if (!raiding) UIManager.Instance.resultReport.ShowResult("เเพ้");
+            if (raiding) gameObject.SetActive(false);
             return true;
 
         }
-        else if (monster.status.currentHP <= 0)
+        else if (enermyHealthBar.fillAmount < 0.001f)
         {
             print("Win");
-            GiveReward();
-            ResultReport.instance.ShowResult("ชนะ");
+            if (!raiding) GiveReward();
+            if (!raiding) UIManager.Instance.resultReport.ShowResult("ชนะ");
+            if (raiding) gameObject.SetActive(false);
             return true;
         }else if(turn == 499)
         {
             print("Time Up");
-            ResultReport.instance.ShowResult("เสมอ");
+            if (!raiding) UIManager.Instance.resultReport.ShowResult("เสมอ");
+            if (raiding) gameObject.SetActive(false);
+            return true;
         }
 
         return false;
     }
 
-    void DDPS(Status status,List<DebuffDamage> DDPS)
+    void DDPT(Status status,List<DebuffDamage> DDPT)
     {
         
-        for(int i = 0; i < DDPS.Count; i++)
+        for(int i = 0; i < DDPT.Count; i++)
         {
-            if (DDPS[i].turnDuration > 0)
+            if (DDPT[i].turnDuration > 0)
             {
-                float damage = Formula.DamageFormula(DDPS[i].userStat, status, DDPS[i].damageType, true, DDPS[i].dps, DDPS[i].penetrate, false);
-                status.GetDamage(ref damage,DDPS[i].userStat,false);
-                DDPS[i].turnDuration--;
-                Debug.Log(DDPS[i].source.skillName + " Deal Damage " + damage + " Trun Left " + DDPS[i].turnDuration);
+                float damage = Formula.DamageFormula(DDPT[i].userStat, status, DDPT[i].damageType, true, DDPT[i].dps, DDPT[i].penetrate, false);
+                status.GetDamage(ref damage,DDPT[i].userStat,false);
+                DDPT[i].turnDuration--;
+                Debug.Log(DDPT[i].source.skillName + " Deal Damage " + damage + " Trun Left " + DDPT[i].turnDuration);
                 
             }
             else
             {
-                DDPS.Remove(DDPS[i]);
+                DDPT.Remove(DDPT[i]);
             }                 
         }
     }
+
+    void DDPS(Status status, List<DebuffDamage> DDPS)
+    {
+
+        for (int i = 0; i < DDPS.Count; i++)
+        {
+            if (DDPS[i].turnDuration > 0)
+            {
+                float damage = Formula.DamageFormula(DDPS[i].userStat, status, DDPS[i].damageType, true, DDPS[i].dps, DDPS[i].penetrate, false);
+                status.GetDamage(ref damage, DDPS[i].userStat, false);
+                DDPS[i].turnDuration--;
+                Debug.Log(DDPS[i].source.skillName + " Deal Damage " + damage + " Step Left " + DDPS[i].turnDuration);
+
+            }
+            else
+            {
+                DDPS.Remove(DDPS[i]);
+            }
+        }
+    }
+
     void RemoveInHuntBuff(Status status)
     {
         foreach (var statName in Enum.GetValues(typeof(SubStatType)))
@@ -353,7 +515,7 @@ public class HuntingManager : MonoBehaviour
             Stat stat = (Stat)(status.GetType().GetField(statName.ToString()).GetValue(status));
             for (int i = 0; i < stat.modifiers.Count; i++)
             {
-                if (stat.modifiers[i].timeType == Modifier.ModifierTime.Turn)
+                if (stat.modifiers[i].timeType == Modifier.ModifierTime.Turn || stat.modifiers[i].timeType == Modifier.ModifierTime.Step)
                 {
                         stat.RemoveModifier(stat.modifiers[i]);
                 }
@@ -387,25 +549,27 @@ public class HuntingManager : MonoBehaviour
         }
     }
     void EndBattle()
-    {
-        
-
-        if (character.status.currentHP > previousHp)
-            character.status.currentHP = previousHp;
-
+    {       
         character.status.currentMP = character.status.MP.Value;
-        Debug.Log(previousHp - character.status.currentHP);
-        //character.status.currentHP = character.status.HP.Value;
         
-
+        if (raiding) UIManager.Instance.raidManager.EndRaid(monster.status.currentHP);
+        //Debug.Log(previousHp - character.status.currentHP);
+        //character.status.currentHP = character.status.HP.Value;
         RemoveInHuntBuff(character.status);
         ReduceHuntBuff(character.status);
     }
 
-    public void StartBattle()
+    public void StartBattle(bool raiding = false)
+    {
+        this.raiding = raiding;      
+        gameObject.SetActive(true);
+        StartCoroutine(Hunt());
+    }
+
+    public void StartHunt()
     {        
-        Setup();
-        Hunt();
+        Setup(null,new List<Follower> {FollowerTeam.instance.follower1});
+        StartCoroutine(Hunt());       
     }
 
     void GiveReward()
@@ -415,8 +579,8 @@ public class HuntingManager : MonoBehaviour
             StackItem dropItem = monster.dropTables[i].DropLoot();
             if (dropItem == null)
                 continue;
-            Inventory.instance.GetItem(dropItem.item,dropItem.amount * powerlize);               
-            ResultReport.instance.AddDrop(dropItem.item, dropItem.amount * powerlize);                     
+            Inventory.instance.GetItem(dropItem.item,dropItem.amount * powerlize);
+            UIManager.Instance.resultReport.AddDrop(dropItem.item, dropItem.amount * powerlize);                     
         }
         character.GetExp(monster.expReward);
     }
@@ -434,7 +598,7 @@ public class HuntingManagerEditor : Editor
         if(Application.isPlaying && t.testMonster != null)
             if(GUILayout.Button("Test Hunt"))
             {
-                t.StartBattle();
+                t.StartHunt();
             }
     }
 }

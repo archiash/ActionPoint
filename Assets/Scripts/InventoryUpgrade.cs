@@ -6,34 +6,63 @@ using UnityEngine.UI;
 
 public class InventoryUpgrade : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI levelText;
-    [SerializeField] TextMeshProUGUI descText;
+    //[SerializeField] TextMeshProUGUI levelText;
+    [SerializeField] TextMeshProUGUI currentLevel_Text;
+    [SerializeField] TextMeshProUGUI nextLevel_Text;
+
+    [SerializeField] TextMeshProUGUI levelArrow;
+    [SerializeField] TextMeshProUGUI spaceArrow;
+
+    [SerializeField] TextMeshProUGUI currentSpace_Text;
+    [SerializeField] TextMeshProUGUI nextSpace_Text;
+
+    [SerializeField] TextMeshProUGUI cost_Text;    
+    
+    //[SerializeField] TextMeshProUGUI descText;
 
     [SerializeField] Button button;
     [SerializeField] GameObject panel;
+
+    [SerializeField] TextMeshProUGUI upgradeText;
 
     Inventory inventory;
 
     [SerializeField] int maxLevel;
 
-    private void Start()
-    {
-        inventory = Inventory.instance;
-    }
-
     public void ShowPanel()
     {
-        panel.SetActive(true);
+        inventory ??= Inventory.instance;
+
+        gameObject.SetActive(true);
+
+        currentLevel_Text.text = inventory.level.ToString();
+        currentSpace_Text.text = inventory.space.ToString();
+
         if (inventory.level < maxLevel)
         {
-            levelText.text = "พื้นที่ - ระดับ " + inventory.level;
-            descText.text = $"พื้นที่: {inventory.GetSpaceFormLevel(inventory.level)} > {inventory.GetSpaceFormLevel(inventory.level + 1)}\n" +
-                $"ราคา: {CalculatePrize(inventory.level)}";
+            nextLevel_Text.text = (inventory.level + 1).ToString();
+            levelArrow.text = ">";
+            spaceArrow.text = ">";
+            nextSpace_Text.text = inventory.GetSpaceFormLevel(inventory.level + 1).ToString();
+
+            cost_Text.text = CalculatePrize(inventory.level).ToString();
+            upgradeText.text = "Upgrade";
+
+            //levelText.text = "พื้นที่ - ระดับ " + inventory.level;
+            //descText.text = $"พื้นที่: {inventory.GetSpaceFormLevel(inventory.level)} > {inventory.GetSpaceFormLevel(inventory.level + 1)}\n" +
+            //$"ราคา: {CalculatePrize(inventory.level)}";
             button.interactable = CheckCondition();
         }else
         {
-            levelText.text = "พื้นที่ - ระดับสูงสุด";
-            descText.text = $"พื้นที่: {inventory.GetSpaceFormLevel(inventory.level)}";
+            nextLevel_Text.text = "";
+            levelArrow.text = "";
+            spaceArrow.text = "";
+            nextSpace_Text.text = "";
+
+            cost_Text.text = "-";
+            upgradeText.text = "Max";
+            //levelText.text = "พื้นที่ - ระดับสูงสุด";
+            //descText.text = $"พื้นที่: {inventory.GetSpaceFormLevel(inventory.level)}";
             button.interactable = false;
         }
     }
@@ -45,10 +74,10 @@ public class InventoryUpgrade : MonoBehaviour
 
     bool CheckCondition()
     {
-        return inventory.getMoney >= CalculatePrize(inventory.level); 
+        return inventory.Money >= CalculatePrize(inventory.level); 
     }
 
-    public void OnButton()
+    public void UpgradeInventory()
     {
         inventory.UseMoney(CalculatePrize(inventory.level));
         inventory.level++;

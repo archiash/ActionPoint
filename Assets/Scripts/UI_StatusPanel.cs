@@ -8,6 +8,13 @@ public class UI_StatusPanel : MonoBehaviour
 {
     Status status;
 
+    [SerializeField] TextMeshProUGUI STR;
+    [SerializeField] TextMeshProUGUI DEX;
+    [SerializeField] TextMeshProUGUI AGI;
+    [SerializeField] TextMeshProUGUI INT;
+    [SerializeField] TextMeshProUGUI CON;
+
+    [SerializeField] TextMeshProUGUI hp;
     [SerializeField] TextMeshProUGUI atk;
     [SerializeField] TextMeshProUGUI def;
     [SerializeField] TextMeshProUGUI pen;
@@ -22,6 +29,8 @@ public class UI_StatusPanel : MonoBehaviour
     [SerializeField] TextMeshProUGUI cdmg;
     [SerializeField] TextMeshProUGUI cres;
 
+    [SerializeField] TextMeshProUGUI pointLeft;
+
     void Start()
     {
         status = Character.instance.status;
@@ -29,6 +38,15 @@ public class UI_StatusPanel : MonoBehaviour
 
     void Update()
     {
+        pointLeft.text = $"อัพสเตตัส ({Character.instance.statusPoint})";
+
+        STR.text = status.STR.Value.ToString();
+        DEX.text = status.DEX.Value.ToString();
+        AGI.text = status.AGI.Value.ToString();
+        INT.text = status.INT.Value.ToString();
+        CON.text = status.CON.Value.ToString();
+
+        hp.text = ((float)Math.Round(status.HP.Value * 100f) / 100f).ToString();
         atk.text = ((float)Math.Round(status.PAtk.Value * 100f) / 100f).ToString();
         def.text = ((float)Math.Round(status.PDef.Value * 100f) / 100f).ToString();
         pen.text = ((float)Math.Round(status.Pen.Value * 100f) / 100f).ToString();

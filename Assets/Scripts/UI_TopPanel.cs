@@ -14,7 +14,7 @@ public class UI_TopPanel : MonoBehaviour
     private void Update()
     {
         levelText.text = Character.instance.Level.ToString();
-        moneyText.text = "$ " + ((int)Inventory.instance.getMoney).ToString();
+        moneyText.text = "$ " + ((int)Inventory.instance.Money).ToString();
         pointText.text = "Point: " + ((int)PointManager.instance.GetActionPoint).ToString();
         ppsText.text = string.Format($"+{ PointManager.instance.GetActionPerSec}/วิ");
         storageText.text = string.Format($"คลัง: {Inventory.instance.getStorageCurr}/{Inventory.instance.getStorageSize}");

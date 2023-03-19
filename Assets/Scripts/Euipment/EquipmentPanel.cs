@@ -2,9 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
 public class EquipmentPanel : MonoBehaviour
 {
+    public static EquipmentPanel instance;
+
+    private void Awake()
+    {
+        instance ??= this;
+    }
 
 }
 

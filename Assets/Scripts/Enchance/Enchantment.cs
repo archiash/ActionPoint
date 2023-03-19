@@ -5,17 +5,24 @@ using UnityEngine.UI;
 
 public class Enchantment : MonoBehaviour
 {
+    [SerializeField] Sprite plusIcon;
+
     public Image image;
     public Equipment item;
 
+    [SerializeField] TextMeshProUGUI itemName;
+    [SerializeField] TextMeshProUGUI itemDesc;
     public TextMeshProUGUI enchantmentLevel;
     public TextMeshProUGUI powerPercentage;
 
     public static Enchantment instance;
 
-    [SerializeField] Image rarity;
-    [SerializeField]EnchantMaterialSlot slotPrefab;
-    [SerializeField] Transform parent;
+    [SerializeField] Image itemRarity;
+    [SerializeField] Image itemRarityFrame;
+
+    public List<Equipment> materials = new List<Equipment>();
+    [SerializeField] EnchantMaterialSlot[] materialSlots;
+
     [SerializeField] TextMeshProUGUI costText;
     [SerializeField] Button button;
 
@@ -30,22 +37,35 @@ public class Enchantment : MonoBehaviour
         ClearMaterialSlot();
         materials.Clear();
 
+        for (int i = 0; i < materialSlots.Length; i++)
+        {
+            materialSlots[i].gameObject.SetActive(equipment.enchantment >= i);
+        }
+
         item = equipment;
         image.sprite = equipment.icon;
-        enchantmentLevel.text = "+" + item.enchantment.ToString();
-        powerPercentage.text = item.powerPercent.ToString() + "%";
-        costText.text = "ราคา:" + CalculateCost(equipment);
+        itemName.text = equipment.itemName;
+        enchantmentLevel.text = $"+{item.enchantment} > + {item.enchantment + 1}";
+        powerPercentage.text = $"{item.powerPercent}%";
+        costText.text = $"{CalculateCost(equipment)}$";
 
-        rarity.color = RarityColor.color(equipment.rarity);
+        itemRarity.color = RarityColor.color(equipment.rarity);
+        itemRarityFrame.color = RarityColor.color(equipment.rarity);
 
         button.interactable = Condition(item);
+
+        Equipment nextLevelEquipment = (Equipment)(equipment.GetCopyItem());
+        nextLevelEquipment.powerPercent = equipment.powerPercent;
+        nextLevelEquipment.enchantment = equipment.enchantment + 1;
+        itemDesc.text = EquipmentComparer.GetCompareStatusDescMerge(EquipmentComparer.GetCompareStatus(equipment, nextLevelEquipment));
 
         costText.enabled = true;
         image.enabled = true;
         enchantmentLevel.enabled = true;
         powerPercentage.enabled = true;
 
-        CreateMaterialSlot();
+        // 1 2 3 4       
+
     }
 
     public void ResetSelect()
@@ -53,27 +73,26 @@ public class Enchantment : MonoBehaviour
         item = null;
         button.interactable = false;
         costText.enabled = false;
-        rarity.color = Color.white;
-        image.enabled = false;
+        itemRarityFrame.color = Color.white;
+        itemRarity.color = Color.white;
+        image.sprite = plusIcon;
+        itemName.text = "";
+        itemDesc.text = "";
         enchantmentLevel.enabled = false;
         powerPercentage.enabled = false;
         ClearMaterialSlot();
     }
 
-    void CreateMaterialSlot()
-    {
-        for(int i = 0; i < materialCount(item);i++)
-        {
-            Instantiate(slotPrefab, parent);
-        }
-        
-    }
-
     void ClearMaterialSlot()
     {
-        for (int i = 0; i < parent.childCount; i++)
+        for (int i = 0; i < materialSlots.Length; i++)
         {
-            Destroy(parent.GetChild(i).gameObject);
+            materialSlots[i].itemRarity.color = Color.white;
+            materialSlots[i].itemRarityFrame.color = Color.white;
+            materialSlots[i].itemIcon.sprite = plusIcon;
+            materialSlots[i].enchantText.text = "";
+            materialSlots[i].percentText.text = "";
+        
         }
     }    
 
@@ -93,7 +112,7 @@ public class Enchantment : MonoBehaviour
 
     bool Condition(Equipment item)
     {
-        if (materials.Count == materialCount(item) && Inventory.instance.getMoney >= CalculateCost(item))
+        if (materials.Count == materialCount(item) && Inventory.instance.Money >= CalculateCost(item))
             return true;
         return false;
     }
@@ -106,8 +125,6 @@ public class Enchantment : MonoBehaviour
         }
         materials.Clear();
     }
-
-    public List<Equipment> materials = new List<Equipment>();
 
     public void AddMaterial(Equipment material)
     {
@@ -122,26 +139,16 @@ public class Enchantment : MonoBehaviour
 
     public int materialCount(Equipment item)
     {
-        return Mathf.FloorToInt(1 + (item.enchantment / 3));
+        return item.enchantment + 1;
     }
 
     public int CalculateCost(Equipment equipment)
     {
-        int cost = 0;
-        for (int i = 0; i <= equipment.enchantment; i++)
-        {
-            cost += Mathf.RoundToInt(100 * Mathf.FloorToInt(1 + (i / 3)) * (1 + ((int)equipment.rarity * 25/100f)));
-        }
-        return cost;
+        return CalculateCost(equipment.enchantment);
     }
 
     public int CalculateCost(int level)
     {
-        int cost = 0;
-        for (int i = 0; i <= level; i++)
-        {
-            cost += 100 * Mathf.FloorToInt(1 + (i / 3));
-        }
-        return cost;
+        return (level + 1) * (level + 2) / 2 * 100;
     }
 }

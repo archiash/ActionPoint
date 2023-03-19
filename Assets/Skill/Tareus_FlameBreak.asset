@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f8b422af388bd246a5e45c5031e3756, type: 3}
   m_Name: Tareus_FlameBreak
   m_EditorClassIdentifier: 
+  skillIcon: {fileID: 0}
   skillName: Flame Bleak
   skillDesc: "\u0E01\u0E32\u0E23\u0E42\u0E08\u0E21\u0E15\u0E35\u0E1B\u0E01\u0E15\u0E34\u0E02\u0E2D\u0E07
     Tareus \u0E08\u0E30\u0E2A\u0E23\u0E49\u0E32\u0E07\u0E04\u0E27\u0E32\u0E21\u0E40\u0E2A\u0E35\u0E22\u0E2B\u0E32\u0E22
     100% \u0E1E\u0E25\u0E31\u0E07\u0E40\u0E27\u0E17\u0E22\u0E4C\n\u0E40\u0E40\u0E25\u0E30\u0E25\u0E14\u0E15\u0E49\u0E32\u0E19\u0E17\u0E32\u0E19\u0E40\u0E27\u0E17\u0E22\u0E4C\u0E02\u0E2D\u0E07\u0E40\u0E1B\u0E49\u0E32\u0E2B\u0E21\u0E32\u0E22\u0E25\u0E07
-    1% 5 \u0E40\u0E17\u0E34\u0E23\u0E4C\u0E19"
+    1% 10 step"
   manaCost: 0
   coolTime: 0
   isUsePoint: 1
@@ -33,6 +34,7 @@ MonoBehaviour:
       amount: 1
     statToBuff: 0
     buffModType: 0
+    modifierTime: 0
     turnDaration: 0
     dType: 0
     penetrate: 0
@@ -46,7 +48,8 @@ MonoBehaviour:
     actionModifiers: []
     statToBuff: 5
     buffModType: 1
-    turnDaration: 5
+    modifierTime: 3
+    turnDaration: 10
     dType: 0
     penetrate: 0
     isDrain: 0

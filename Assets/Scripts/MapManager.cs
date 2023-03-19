@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MapManager : MonoBehaviour
 {
@@ -12,17 +14,54 @@ public class MapManager : MonoBehaviour
     public List<Maps> maps = new List<Maps>();
     public Transform parent;
 
+    int currentMapIndex = 0;
     [SerializeField] MonsterBar monsterBarPrefab;
 
     [SerializeField] TMP_Dropdown mapDropdown;
 
     [SerializeField] MapZoneUI zonePrefab;
 
+    [SerializeField] Button leftChangeButton;
+    [SerializeField] Button rightChangeButton;
+
+    [SerializeField] TextMeshProUGUI mapName;
+
     private void Start()
     {
-        Map2DropDownList();
-        instance = this;
-        MapFromDropdown();
+        ChangeMap(0);
+    }
+
+    public void ChangeMapButton(int dDir)
+    {
+        ChangeMap(currentMapIndex + dDir);
+    } 
+
+    void ChangeMap(int index)
+    {
+        
+        currentMapIndex = index;
+        leftChangeButton.interactable = index != 0;
+        rightChangeButton.interactable = index != maps.Count - 1;
+        
+        foreach (Transform i in parent)
+        {
+            Destroy(i.gameObject);
+        }
+
+        Maps map = maps[index];
+        mapName.text = map.mapName;
+        for (int i = 0; i < map.maps.Count; i++)
+        {
+            MapZoneUI zone = Instantiate(zonePrefab, parent);
+            zone.Init(map.maps[i], i);
+
+            map.maps[i].monsters = map.maps[i].monsters.OrderBy(x => x.usePoint).ToList();
+            foreach (Monster monster in map.maps[i].monsters)
+            {
+                MonsterBar monsterBar = Instantiate(monsterBarPrefab, zone.transform);
+                monsterBar.Create(monster);
+            }
+        }
     }
 
     void Map2DropDownList()

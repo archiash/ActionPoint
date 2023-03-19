@@ -10,7 +10,7 @@ public class UI_MonstarDetailPanel : MonoBehaviour
 
     Monster monster;
 
-    [SerializeField]Image monsterImage;
+    [SerializeField] Image monsterImage;
     [SerializeField] TextMeshProUGUI monsterName;
     [SerializeField] TextMeshProUGUI monsterSubName;
     [SerializeField] TextMeshProUGUI skillText;
@@ -155,8 +155,8 @@ public class UI_MonstarDetailPanel : MonoBehaviour
         PointManager.instance.UseAction(this.monster.usePoint * PowerlizeMultiply);
         Monster monster = Instantiate(this.monster);
         monster.Powerlize(PowerlizeMultiply);
-        HuntingManager.instance.Setup(monster,powerlize:Powerlize);
-        HuntingManager.instance.Hunt();
+        UIManager.Instance.huntingManager.Setup(monster,null,powerlize:Powerlize);
+        UIManager.Instance.huntingManager.Hunt();
         panel.SetActive(false);
     }
 }

@@ -34,6 +34,42 @@ public class Status
     public Stat Cdmg;
     public Stat Cres;
 
+    public Status()
+    {
+        STR = new MainStat();
+        DEX = new MainStat();
+        AGI = new MainStat();
+        INT = new MainStat();
+        CON = new MainStat();
+
+        HP = new Stat();
+        currentHP = 0;
+        MP = new Stat();
+        currentMP = 0;
+        PAtk = new Stat();
+        PDef = new Stat();
+        Pen = new Stat();
+        MAtk = new Stat();
+        MDef = new Stat();
+        Neu = new Stat();
+        Spd = new Stat();
+        Hit = new Stat();
+        Eva = new Stat();
+        Crate = new Stat();
+        Cdmg = new Stat();
+        Cres = new Stat();
+    }
+
+    public void SetFollowerMainStat(int[] stat)
+    {
+        STR.baseValue = stat[0];
+        DEX.baseValue = stat[1];
+        AGI.baseValue = stat[2];
+        INT.baseValue = stat[3];
+        CON.baseValue = stat[4];
+
+    }
+
     public void GetDamage(ref float damage,DamageType damageType = DamageType.Physic,Status attacker = null, int penetrate = 0)
     {
         float additionalHitChange = 0;
@@ -144,7 +180,14 @@ public class Status
 
     public bool isFullMP
     {
-        get { return currentMP == MP.Value; }
+        get {
+            if (currentMP >= MP.Value)
+            {
+                currentMP = MP.Value;
+                return true;
+            }
+            return false;
+        }
         set { 
             if(value)
                 currentMP = MP.Value; 

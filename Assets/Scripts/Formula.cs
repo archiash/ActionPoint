@@ -5,6 +5,7 @@ using UnityEngine;
 
 public static class Formula
 {
+    /*
     public static bool HitFormula(float hit, float eva,float additionalHitChange = 0)
     {
         float hitChange = 1 - Mathf.Clamp((eva - hit) / eva, 0.2f, 0.8f);
@@ -13,7 +14,24 @@ public static class Formula
         Debug.Log("HitChange When Buff:" + hitChange);
         return Random.value <= hitChange;
     }
+    */
+    public static bool HitFormula(float hit, float evade, float additionalHitChange = 0)
+    {
+        int adventage = evade < hit ? 1 : -1;
+        float dodgeAdvantage = Mathf.Log((evade + 1) / (hit + 1));
+        dodgeAdvantage = Mathf.Pow(dodgeAdvantage, 2);
+        dodgeAdvantage = Mathf.Sqrt(Mathf.Sqrt(dodgeAdvantage));
+        dodgeAdvantage *= adventage * 10;
+        dodgeAdvantage += 20;
+        dodgeAdvantage = Mathf.Clamp(dodgeAdvantage, 0, 50);
+        dodgeAdvantage += additionalHitChange;
+        return Random.value >= dodgeAdvantage / 100f;
+    }
 
+    public static float ActionPerStep(float speed)
+    {
+        return 1.3f * Mathf.Log(0.0378f * speed + 1.5653f) + 0.1408f;
+    }
 
     public static bool CriticalFormula(Status user, Status target,ref float damage, CriticalType criticalType = CriticalType.Able)
     {

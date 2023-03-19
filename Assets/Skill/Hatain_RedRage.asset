@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f8b422af388bd246a5e45c5031e3756, type: 3}
   m_Name: Hatain_RedRage
   m_EditorClassIdentifier: 
+  skillIcon: {fileID: 0}
   skillName: Red Rage
-  skillDesc: "\u0E40\u0E1E\u0E37\u0E48\u0E21\u0E1E\u0E25\u0E31\u0E07\u0E42\u0E08\u0E21\u0E15\u0E35\u0E40\u0E40\u0E25\u0E30\u0E04\u0E27\u0E32\u0E21\u0E40\u0E23\u0E47\u0E27
-    20% 7 \u0E40\u0E17\u0E34\u0E23\u0E4C\u0E19"
+  skillDesc: "\u0E40\u0E1E\u0E37\u0E48\u0E21\u0E1E\u0E25\u0E31\u0E07\u0E42\u0E08\u0E21\u0E15\u0E35
+    20% \u0E40\u0E40\u0E25\u0E30\u0E04\u0E27\u0E32\u0E21\u0E40\u0E23\u0E47\u0E27
+    20% 10 step"
   manaCost: 20
-  coolTime: 15
+  coolTime: 20
   isUsePoint: 1
   actions:
   - target: 0
@@ -35,7 +37,8 @@ MonoBehaviour:
       amount: 0
     statToBuff: 2
     buffModType: 1
-    turnDaration: 7
+    modifierTime: 3
+    turnDaration: 10
     dType: 0
     penetrate: 0
     isDrain: 0
@@ -56,7 +59,8 @@ MonoBehaviour:
       amount: 0
     statToBuff: 6
     buffModType: 1
-    turnDaration: 7
+    modifierTime: 3
+    turnDaration: 10
     dType: 0
     penetrate: 0
     isDrain: 0

@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e895d16d24d0831449cbba76c201d457, type: 3}
   m_Name: Raid_Tareus
   m_EditorClassIdentifier: 
+  offensivePower: 0
+  defensivePower: 0
   sprite: {fileID: 21300000, guid: 08092b9975a4c0b45978ca998fbb299d, type: 3}
   Name: Tareus
   Desc: 
@@ -47,11 +49,11 @@ MonoBehaviour:
       modifiers: []
     currentMP: 200
     PAtk:
-      baseValue: 40
+      baseValue: 38
       mainModifiers: []
       modifiers: []
     PDef:
-      baseValue: 50
+      baseValue: 45
       mainModifiers: []
       modifiers: []
     Pen:
@@ -59,11 +61,11 @@ MonoBehaviour:
       mainModifiers: []
       modifiers: []
     MAtk:
-      baseValue: 80
+      baseValue: 65
       mainModifiers: []
       modifiers: []
     MDef:
-      baseValue: 60
+      baseValue: 45
       mainModifiers: []
       modifiers: []
     Neu:
@@ -75,7 +77,7 @@ MonoBehaviour:
       mainModifiers: []
       modifiers: []
     Hit:
-      baseValue: 60
+      baseValue: 45
       mainModifiers: []
       modifiers: []
     Eva:
@@ -83,11 +85,11 @@ MonoBehaviour:
       mainModifiers: []
       modifiers: []
     Crate:
-      baseValue: 40
+      baseValue: 30
       mainModifiers: []
       modifiers: []
     Cdmg:
-      baseValue: 60
+      baseValue: 40
       mainModifiers: []
       modifiers: []
     Cres:
@@ -141,3 +143,6 @@ MonoBehaviour:
     amount: 3
   - item: {fileID: 11400000, guid: 4dc57a7badc6f70499b7d773bbb1e8a0, type: 2}
     amount: 5
+  costPerRound:
+  - item: {fileID: 11400000, guid: 4dc57a7badc6f70499b7d773bbb1e8a0, type: 2}
+    amount: 1

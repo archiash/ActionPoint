@@ -33,21 +33,21 @@ MonoBehaviour:
   - modifierType: 1
     mainType: 3
     statType: 4
-    type: 1
-    amount: 3
-    isEnchantEffect: 1
-    isPowerEffect: 0
-  - modifierType: 1
-    mainType: 3
-    statType: 4
     type: 0
     amount: 12
     isEnchantEffect: 1
     isPowerEffect: 1
   - modifierType: 1
     mainType: 3
+    statType: 4
+    type: 1
+    amount: 3
+    isEnchantEffect: 0
+    isPowerEffect: 0
+  - modifierType: 1
+    mainType: 3
     statType: 7
     type: 0
     amount: 10
-    isEnchantEffect: 1
+    isEnchantEffect: 0
     isPowerEffect: 0

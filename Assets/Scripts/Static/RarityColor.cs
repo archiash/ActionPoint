@@ -19,6 +19,13 @@ public static class RarityColor
         return Color.white;
     }
 
+    public static Color GetColor(string hex)
+    {
+        Color color = Color.white;
+        ColorUtility.TryParseHtmlString(hex, out color);
+        return color;
+    }
+
     public static Color MapZoneColor(int rarity)
     {
         Color color = Color.white;

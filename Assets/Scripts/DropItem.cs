@@ -34,7 +34,7 @@ public class DropTable
                 int dropAmount = Random.Range(items[i].minDrop, items[i].maxDrop + 1);
                 if(Character.instance.Class == Character.CharacterClass.Adventurer)
                 {
-                    if (Random.value <= 0.1f)
+                    if (Random.value <= 0.2f)
                     {
                         dropAmount++;
                         Debug.Log("Adventurer Extra Drop");

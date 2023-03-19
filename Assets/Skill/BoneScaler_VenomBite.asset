@@ -15,21 +15,22 @@ MonoBehaviour:
   skillIcon: {fileID: 0}
   skillName: Venom Bite
   skillDesc: "\u0E1E\u0E34\u0E29\u0E02\u0E2D\u0E07 Bone Scale \u0E08\u0E30\u0E2A\u0E23\u0E49\u0E32\u0E07\u0E04\u0E27\u0E32\u0E21\u0E40\u0E2A\u0E35\u0E22\u0E2B\u0E32\u0E22
-    15 \u0E40\u0E1B\u0E47\u0E19\u0E40\u0E27\u0E25\u0E32 5 \u0E40\u0E17\u0E34\u0E23\u0E4C\u0E19"
+    5 \u0E40\u0E1B\u0E47\u0E19\u0E40\u0E27\u0E25\u0E32 5 \u0E40\u0E17\u0E34\u0E23\u0E4C\u0E19"
   manaCost: 20
-  coolTime: 10
+  coolTime: 20
   isUsePoint: 1
   actions:
   - target: 1
     skillType: 3
-    value: 15
+    value: 5
     damageType: 0
     critical: 1
     actionModifiers: []
     statToBuff: 0
     buffModType: 0
+    modifierTime: 0
     turnDaration: 6
     dType: 0
-    penetrate: 100
+    penetrate: 25
     isDrain: 0
     drainPercent: 0

@@ -47,7 +47,7 @@ MonoBehaviour:
       modifiers: []
     currentMP: 50
     PAtk:
-      baseValue: 24
+      baseValue: 26
       mainModifiers: []
       modifiers: []
     PDef:
@@ -71,7 +71,7 @@ MonoBehaviour:
       mainModifiers: []
       modifiers: []
     Spd:
-      baseValue: 22
+      baseValue: 25
       mainModifiers: []
       modifiers: []
     Hit:

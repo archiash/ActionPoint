@@ -4,14 +4,8 @@ using UnityEngine;
 
 public class Forgesmith : MonoBehaviour
 {
-    public static Forgesmith instance;
     public List<RecipeList> recipeLists = new List<RecipeList>();
     public int smithLevel;
-
-    private void Awake()
-    {
-            instance = this;
-    }
 
     [System.Serializable]
     public class RecipeList

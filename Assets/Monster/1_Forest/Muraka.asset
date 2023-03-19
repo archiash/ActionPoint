@@ -42,10 +42,10 @@ MonoBehaviour:
       modifiers: []
     currentHP: 300
     MP:
-      baseValue: 80
+      baseValue: 100
       mainModifiers: []
       modifiers: []
-    currentMP: 80
+    currentMP: 100
     PAtk:
       baseValue: 18
       mainModifiers: []
@@ -71,7 +71,7 @@ MonoBehaviour:
       mainModifiers: []
       modifiers: []
     Spd:
-      baseValue: 25
+      baseValue: 30
       mainModifiers: []
       modifiers: []
     Hit:

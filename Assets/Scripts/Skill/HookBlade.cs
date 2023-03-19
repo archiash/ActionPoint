@@ -8,15 +8,16 @@ public class HookBlade : Skill
         Status userStat = new Status();
         if (user is Character)
             userStat = (user as Character).status;
-        else
+        else if(user is Monster)
             userStat = (user as Monster).status;
-        Status targetStatus = new Status();
+
+        Status targetStatus = (enermy is Status) ? enermy as Status : new Status();
         if (enermy is Character)
             targetStatus = (enermy as Character).status;
-        else
+        else if(enermy is Monster)
             targetStatus = (enermy as Monster).status;
 
-        float damage = Formula.DamageFormula(userStat,targetStatus);
+        float damage = Formula.DamageFormula(userStat, targetStatus);
         if (Formula.CriticalFormula(userStat, targetStatus, ref damage)) 
         {
             Debug.Log($"Critical Damage");

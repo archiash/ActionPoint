@@ -69,16 +69,14 @@ public class ItemSaveManager : MonoBehaviour
             inventory.items.Add(stackItem);
         }
     }
-    public void SaveInventory(Inventory inventory = null)
+    public void SaveInventory()
     {
-        if (inventory == null)
-            SaveItem(Inventory.instance.items,Inventory.instance.getMoney, Inventory.instance.level, InventoryFileName);
-        else
-            SaveItem(inventory.items,inventory.getMoney,inventory.level, InventoryFileName);
+        Inventory inventory = Inventory.instance;
+        SaveItem(inventory.items, inventory.Money, inventory.level, InventoryFileName);
     }
     private void SaveItem(IList<StackItem> stackItems,double money,int level,string fileName)
     {
-        var saveData = new ItemContainerSaveData(stackItems.Count,money,level);
+        var saveData = new ItemContainerSaveData(stackItems.Count, money, level);
 
         for(int i = 0; i < saveData.SavedSlots.Length; i++)
         {
@@ -187,7 +185,7 @@ public class ItemSaveManager : MonoBehaviour
             character = Character.instance;
         }
 
-        var saveData = new CharacterSaveData(character.status.currentHP, DateTime.UtcNow,character.Level,character.statusPoint,new int[5] {status.STR,status.DEX,status.AGI,status.INT,status.CON},character.exp,character);
+        var saveData = new CharacterSaveData(character.status.currentHP, DateTime.UtcNow,character.Level,new int[5] {status.STR,status.DEX,status.AGI,status.INT,status.CON},character.exp,character);
         ItemSaveIO.SaveCharacter(saveData, CharacterFileName);
     }
     public void LoadCharacterData(Character character = null)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System.Runtime.Serialization;
+using static Modifier;
 
 public enum SkillType { Damage, Heal, Buff, DPS ,Counter}
 
@@ -37,6 +38,7 @@ public class BasicSkill : Skill
 
         public SubStatType statToBuff;
         public ModifierType buffModType;
+        public Modifier.ModifierTime modifierTime;
         public int turnDaration;
 
         public DDType dType;
@@ -51,7 +53,7 @@ public class BasicSkill : Skill
 
     public override bool Use<U, T>(U user, T enermy, ArenaType arena = ArenaType.Hunting)
     {
-        Activate(user,enermy,arena);
+        Activate(user, enermy, arena);
         return isUsePoint;
     }
 
@@ -71,10 +73,15 @@ public class BasicSkill : Skill
                 user = (userStat as Character).status;
             else if (userStat is Monster)
                 user = (userStat as Monster).status;
+            else if (userStat is Follower)
+            {
+                Follower follower = userStat as Follower;
+                Debug.Log(follower.followerName);
+                Debug.Log(user);
+                user.SetFollowerMainStat(follower.followerStatus.MainStatArray(follower.followerLevel));
+            }
 
-            Status target = new Status();
-
-
+            Status target = (enermyStat is Status) ? enermyStat as Status : new Status();
 
             if (actions[i].target == BasicAction.Target.Target)
             {
@@ -111,9 +118,15 @@ public class BasicSkill : Skill
                     if (arena == ArenaType.Hunting)
                     {
                         if (userStat is Character)
-                            DpsAction(user, HuntingManager.instance.monsterDDPS, i);
+                            DpsAction(user, UIManager.Instance.huntingManager.monsterDDPS, i);
                         else if (userStat is Monster)
-                            DpsAction(user, HuntingManager.instance.characterDDPS, i);
+                            DpsAction(user, UIManager.Instance.huntingManager.characterDDPS, i);
+                    }else if (arena == ArenaType.OffensiveTest)
+                    {
+                        DpsAction(user, OffensiveTest.instance.testDDPS, i);
+                    }else if (arena == ArenaType.DefensiveTest)
+                    {
+                        DpsAction(user, DefensiveTest.instance.testDDPS, i);
                     }
 
                 }
@@ -123,12 +136,18 @@ public class BasicSkill : Skill
                     {
                         if (userStat is Character)
                         {
-                            if ((int)actions[i].turnDaration > HuntingManager.instance.monsterStun)
-                                HuntingManager.instance.monsterStun = (int)actions[i].turnDaration;
+                            if ((int)actions[i].turnDaration > UIManager.Instance.huntingManager.monsterStun)
+                                UIManager.Instance.huntingManager.monsterStun = (int)actions[i].turnDaration;
                         }
                         else if (userStat is Monster)
-                            if ((int)actions[i].turnDaration > HuntingManager.instance.characterStun)
-                                HuntingManager.instance.characterStun = (int)actions[i].turnDaration;
+                            if ((int)actions[i].turnDaration > UIManager.Instance.huntingManager.characterStun)
+                                UIManager.Instance.huntingManager.characterStun = (int)actions[i].turnDaration;
+                    }else if(arena == ArenaType.DefensiveTest)
+                    {
+                        if(actions[i].turnDaration > DefensiveTest.instance.testerStun)
+                        {
+                            DefensiveTest.instance.testerStun = actions[i].turnDaration;
+                        }
                     }
                 }
             }
@@ -231,7 +250,7 @@ public class BasicSkill : Skill
 
         Stat statToBuff = (Stat)(target.GetType().GetField(actions[i].statToBuff.ToString()).GetValue(target));
         float oldValue = statToBuff.Value;
-        statToBuff.AddModifier(new Modifier(buffValue, this, actions[i].buffModType, Modifier.ModifierTime.Turn, actions[i].turnDaration));
+        statToBuff.AddModifier(new Modifier(buffValue, this, actions[i].buffModType, actions[i].modifierTime, actions[i].turnDaration));
         string debug = "";
         string pOrM = "+";
         if (buffValue < 0)
@@ -321,6 +340,8 @@ public class BasicActionDrawer : PropertyDrawer
             position.y += position.height;
             EditorGUI.PropertyField(position, property.FindPropertyRelative("buffModType"));
             position.y += position.height;
+            EditorGUI.PropertyField(position, property.FindPropertyRelative("modifierTime"));
+            position.y += position.height;
             EditorGUI.PropertyField(position, property.FindPropertyRelative("turnDaration"));
         }
         else if (property.FindPropertyRelative("skillType").enumValueIndex == 3)
@@ -358,7 +379,7 @@ public class BasicActionDrawer : PropertyDrawer
                 x = EditorGUI.GetPropertyHeight(property.FindPropertyRelative("actionModifiers"), true);
                 break;
             case 2:
-                y = 7;
+                y = 8;
                 break;
             case 3:
                 y = 9;

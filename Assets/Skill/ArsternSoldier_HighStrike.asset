@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f8b422af388bd246a5e45c5031e3756, type: 3}
   m_Name: ArsternSoldier_HighStrike
   m_EditorClassIdentifier: 
+  skillIcon: {fileID: 0}
   skillName: High Strike
   skillDesc: "\u0E17\u0E48\u0E32\u0E42\u0E08\u0E21\u0E15\u0E35\u0E17\u0E35\u0E48\u0E2A\u0E2D\u0E19\u0E01\u0E31\u0E19\u0E21\u0E32\u0E43\u0E19\u0E2B\u0E21\u0E39\u0E48\u0E17\u0E2B\u0E32\u0E23\u0E02\u0E2D\u0E07
     Arstern\n\u0E2A\u0E23\u0E49\u0E32\u0E07\u0E04\u0E27\u0E32\u0E21\u0E40\u0E2A\u0E35\u0E22\u0E2B\u0E32\u0E22
-    2 \u0E04\u0E23\u0E31\u0E49\u0E07 150% \u0E40\u0E40\u0E25\u0E30 200% \u0E1E\u0E25\u0E31\u0E07\u0E42\u0E08\u0E21\u0E15\u0E35"
+    2 \u0E04\u0E23\u0E31\u0E49\u0E07 100% \u0E40\u0E40\u0E25\u0E30 80% \u0E1E\u0E25\u0E31\u0E07\u0E42\u0E08\u0E21\u0E15\u0E35"
   manaCost: 20
-  coolTime: 5
+  coolTime: 20
   isUsePoint: 1
   actions:
   - target: 1
@@ -29,9 +30,10 @@ MonoBehaviour:
     - statType: 1
       mainType: 0
       subType: 2
-      amount: 1.5
+      amount: 1
     statToBuff: 0
     buffModType: 0
+    modifierTime: 0
     turnDaration: 0
     dType: 0
     penetrate: 0
@@ -46,9 +48,10 @@ MonoBehaviour:
     - statType: 1
       mainType: 0
       subType: 2
-      amount: 2
+      amount: 0.8
     statToBuff: 0
     buffModType: 0
+    modifierTime: 0
     turnDaration: 0
     dType: 0
     penetrate: 0

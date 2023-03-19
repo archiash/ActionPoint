@@ -10,19 +10,22 @@ public class MonsterBar : MonoBehaviour
     [SerializeField] Image monsterImage;
     [SerializeField] TextMeshProUGUI monsterName;
     [SerializeField] TextMeshProUGUI monsterSubName;
-    [SerializeField] TextMeshProUGUI monsterUsePoint;
-
+    //[SerializeField] TextMeshProUGUI monsterUsePoint;
+    [SerializeField] TextMeshProUGUI monsterOffensivePower;
+    [SerializeField] TextMeshProUGUI monsterDefensivePower;
     public void Create(Monster _monster)
     {
         monster = _monster;
         monsterImage.sprite = monster.sprite;
         monsterName.text = monster.Name;
         monsterSubName.text = monster.Desc;
-        monsterUsePoint.text = monster.usePoint.ToString() + " Point";
+        monsterOffensivePower.text = $"Offensive Power: {_monster.offensivePower}";
+        monsterDefensivePower.text = $"Defensive Power: {_monster.defensivePower}";
+        //monsterUsePoint.text = monster.usePoint.ToString() + " Point";
     }
 
     public void ShowDetail()
     {
-        UI_MonstarDetailPanel.insctance.ShowDetail(monster);
+        UIManager.Instance.enermyDetail.ShowEnermyDetail(monster);
     }
 }

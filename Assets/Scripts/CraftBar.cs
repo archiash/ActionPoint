@@ -7,26 +7,30 @@ public class CraftBar : MonoBehaviour
 {
     public Recipe recipe;
     public Item resultItem;
-    public List<StackItem> materials = new List<StackItem>();
+    //public List<StackItem> materials = new List<StackItem>();
 
-    public GameObject pf_material;
-    public Transform parent;
+    //public GameObject pf_material;
+    //public Transform parent;
 
     public Image itemImage;
-    public Image rarity;
-    public TextMeshProUGUI itemName;
-    public TextMeshProUGUI costText;
-    [SerializeField] TextMeshProUGUI statusText;
+    public Image itemRarity;
+    public Image itemRarityFrame;
+    //public TextMeshProUGUI itemName;
+    //public TextMeshProUGUI costText;
+    //[SerializeField] TextMeshProUGUI statusText;
 
     public void Init(Recipe newRecipe)
     {
-        ClearMaterialList();
+        //ClearMaterialList();
         recipe = newRecipe;
         resultItem = newRecipe.resulItem;
-        rarity.color = RarityColor.color(resultItem.rarity);
-        materials = newRecipe.material;
+        itemRarity.color = RarityColor.color(resultItem.rarity);
+        itemRarityFrame.color = RarityColor.color(resultItem.rarity);
+        //materials = newRecipe.material;
         itemImage.sprite = resultItem.icon;
+        /*
         itemName.text = resultItem.itemName;
+        
         if (recipe.resulItem is Equipment)
         {
             itemName.text += " - " + ((Equipment)resultItem).part.ToString();
@@ -34,7 +38,7 @@ public class CraftBar : MonoBehaviour
         }
 
         costText.text = newRecipe.cost.ToString() + " $";
-
+        
         foreach (StackItem material in materials)
         {
             GameObject newMaterial = Instantiate(pf_material, parent);
@@ -42,24 +46,25 @@ public class CraftBar : MonoBehaviour
         }
 
         GameObject money = Instantiate(pf_material, parent);
-        money.GetComponent<CraftBar_Material>().Init(newRecipe.cost);
+        */
+        //money.GetComponent<CraftBar_Material>().Init(newRecipe.cost);
     }
-
-    public void ClearMaterialList()
-    {
-        Transform[] transforms = parent.GetComponentsInChildren<Transform>();
-
-        foreach (Transform x in transforms)
+    /*
+        public void ClearMaterialList()
         {
-            if (x.GetComponent<CraftMaterial>())
+            Transform[] transforms = parent.GetComponentsInChildren<Transform>();
+
+            foreach (Transform x in transforms)
             {
-                Destroy(x.gameObject);
+                if (x.GetComponent<CraftMaterial>())
+                {
+                    Destroy(x.gameObject);
+                }
             }
         }
-    }
-    
+       */
     public void ShowCraftDetail()
     {
-        CraftDetail.instance.ShowDetail(recipe);
+        UIManager.Instance.craftDetail.ShowRecipeDetail(recipe);
     }
 }

@@ -35,7 +35,21 @@ public class MainStat
     [SerializeField] private List<Modifier> modifiers = new List<Modifier>();
     public void AddModifier(Modifier modifier)
     {
-        if (modifier.value != 0)
+        if (modifier.id != "")
+        {
+            for (int i = 0; i < modifiers.Count; i++)
+            {
+                if (modifiers[i].id == modifier.id)
+                {
+                    if (modifiers[i].value < modifiers[i].maxStackValue)
+                    {
+                        modifiers[i].value += modifier.value;
+                        modifiers[i].time = modifier.time;
+                    }
+                }
+            }
+        }
+        else if (modifier.value != 0)
             modifiers.Add(modifier);
 
         modifiers.Sort(CompareModifierOrder);

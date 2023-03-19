@@ -18,46 +18,49 @@ MonoBehaviour:
     \u0E25\u0E14\u0E1E\u0E25\u0E31\u0E07\u0E1B\u0E49\u0E2D\u0E07\u0E01\u0E31\u0E19\u0E01\u0E32\u0E22\u0E20\u0E32\u0E1E
     \u0E1B\u0E49\u0E2D\u0E07\u0E01\u0E31\u0E19\u0E40\u0E27\u0E17\u0E22\u0E4C \u0E41\u0E25\u0E30
     \u0E2B\u0E25\u0E1A\u0E2B\u0E25\u0E35\u0E01\u0E02\u0E2D\u0E07\u0E28\u0E31\u0E15\u0E23\u0E39\u0E25\u0E07
-    20% 10 Turn"
+    10% 8 step"
   manaCost: 0
   coolTime: 25
   isUsePoint: 1
   actions:
   - target: 1
     skillType: 2
-    value: -20
+    value: -10
     damageType: 0
     critical: 0
     actionModifiers: []
     statToBuff: 3
     buffModType: 1
-    turnDaration: 10
+    modifierTime: 3
+    turnDaration: 8
     dType: 0
     penetrate: 0
     isDrain: 0
     drainPercent: 0
   - target: 1
     skillType: 2
-    value: -20
+    value: -10
     damageType: 0
     critical: 0
     actionModifiers: []
     statToBuff: 5
     buffModType: 1
-    turnDaration: 10
+    modifierTime: 3
+    turnDaration: 8
     dType: 0
     penetrate: 0
     isDrain: 0
     drainPercent: 0
   - target: 1
     skillType: 2
-    value: -20
+    value: -10
     damageType: 0
     critical: 0
     actionModifiers: []
     statToBuff: 8
     buffModType: 1
-    turnDaration: 10
+    modifierTime: 3
+    turnDaration: 8
     dType: 0
     penetrate: 0
     isDrain: 0

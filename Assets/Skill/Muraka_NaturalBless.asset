@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f8b422af388bd246a5e45c5031e3756, type: 3}
   m_Name: Muraka_NaturalBless
   m_EditorClassIdentifier: 
+  skillIcon: {fileID: 0}
   skillName: Natural Bless
   skillDesc: "\u0E1F\u0E37\u0E49\u0E19\u0E1F\u0E39\u0E1E\u0E25\u0E31\u0E07\u0E0A\u0E35\u0E27\u0E34\u0E15
     150% \u0E40\u0E27\u0E17\u0E22\u0E4C"
   manaCost: 25
-  coolTime: 10
+  coolTime: 20
   isUsePoint: 1
   actions:
   - target: 0
@@ -31,6 +32,7 @@ MonoBehaviour:
       amount: 1.5
     statToBuff: 0
     buffModType: 0
+    modifierTime: 0
     turnDaration: 0
     dType: 0
     penetrate: 0

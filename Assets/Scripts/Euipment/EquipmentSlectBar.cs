@@ -6,29 +6,34 @@ using UnityEngine.UI;
 
 public class EquipmentSlectBar : MonoBehaviour
 {
-    public Image icon;
-    public TextMeshProUGUI name;
-    public TextMeshProUGUI stat;
-    public TextMeshProUGUI power;
+    public Image itemIcon;
+    public TextMeshProUGUI itemName;
+    public TextMeshProUGUI itemStatusDesc;
+    public TextMeshProUGUI itemPercent;
+    public TextMeshProUGUI itemEnchantment;
 
-    [SerializeField] Image rarity;
+    [SerializeField] Image itemRarity;
+    [SerializeField] Image itemRarityFrame;
 
     Equipment equipment;
     
-    public void CreateBar(Equipment equipment)
+    public void Init(Equipment equipment)
     {
         this.equipment = equipment;
-        icon.sprite = equipment.icon;
-        name.text = equipment.itemName + " +" + equipment.enchantment;
-        stat.text =  equipment.GetDesc(false);
-        power.text = equipment.powerPercent.ToString() + "%";
-        rarity.color = RarityColor.color(equipment.rarity);
+        itemIcon.sprite = equipment.icon;
+        itemName.text = equipment.itemName;
+        itemStatusDesc.text =  equipment.GetDesc(false,false);
+        itemPercent.text = $"{equipment.powerPercent}%";
+        itemEnchantment.text = $"+{equipment.enchantment}";
+        itemRarity.color = RarityColor.color(equipment.rarity);
+        itemRarityFrame.color = RarityColor.color(equipment.rarity);
     }
 
     public void Equip()
     {
-        Character.instance.Equip(equipment);
-        EquipmentSelectPanel.instance.ClosePanel();
+        UIManager.Instance.equipmentSelectPanel.CompareNewItem(equipment);
+        //Character.instance.Equip(equipment);
+        //UIManager.Instance.equipmentSelectPanel.ClosePanel();
     }
 
 }

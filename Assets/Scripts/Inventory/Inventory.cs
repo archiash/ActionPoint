@@ -14,7 +14,7 @@ public class Inventory : MonoBehaviour
 
     public double getStorageSize { get { return storageSize; } }
     public double getStorageCurr { get { return storageCurrent; } }
-    public double getMoney { get { return money; } }
+    public double Money { get { return Mathf.RoundToInt((float)money); } }
     public double setMoney { set { money = value; } }
     public double getMoneyBuff { get { return moneyBuff; } }
     

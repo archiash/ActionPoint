@@ -48,7 +48,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 066f67ee98d8b7e4b824bb5d0fefdb19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  influenceData:
+  - {fileID: 11400000, guid: 4aa773d1c2be87b4fa4e692608b1fc45, type: 2}
+  - {fileID: 11400000, guid: 8bf9622e9cb78d644ba87a18177d0f0d, type: 2}
+  - {fileID: 11400000, guid: 359130653f72b4c4e9af689e063fc873, type: 2}
   levelBonus: {fileID: 11400000, guid: c2f35feeb27ebb840b468800d5b1f015, type: 2}
+  pfBonusPanel: {fileID: 0}
+  highestLevelBonus: 0
   level: 1
   exp: 0
   statusPoint: 0
@@ -175,6 +181,8 @@ MonoBehaviour:
     speedLevel: 0
     regenLevel: 0
     pointLevel: 0
+  characterClass: 0
+  classInfluence: {fileID: 11400000, guid: 4aa773d1c2be87b4fa4e692608b1fc45, type: 2}
 --- !u!114 &3795377148819830188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,6 +214,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d68d9237795d5664e923886139095b77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  restLevel: 0
+  nPoint: 0
   actionPoint: 0
   actionPersec: 1
   actionPerSecLvBonus: 0
@@ -227,6 +237,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  saveable: 0
 --- !u!114 &7211708386385561541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -247,7 +258,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3795377148819830191}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 30a7b8bd306d1c84d9203b57bf7b6237, type: 3}
   m_Name: 

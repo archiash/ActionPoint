@@ -6,6 +6,10 @@ using System.Linq;
 [CreateAssetMenu(menuName = "Create/Monster/Monster", fileName = "New Monster")]
 public class Monster : ScriptableObject
 {
+    public int offensivePower;
+
+    public int defensivePower;
+
     public Sprite sprite;
     public string Name;
     public string Desc;
@@ -23,21 +27,27 @@ public class Monster : ScriptableObject
         string desc = Desc;
         desc += $"\nHP: {status.HP.Value}               \nMP: {status.MP.Value}" +
             $"\nAttack: {status.PAtk.Value}             \nDefense: {status.PDef.Value}" +
+            $"\nPenetrage: {status.Pen.Value}" +
             $"\nMagic: {status.MAtk.Value}              \nMagicResist: {status.MDef.Value}" +
+            $"\nNeutralize: {status.Neu.Value}" +
             $"\nHit: {status.Hit.Value}                 \nEva: {status.Eva.Value}" +
             $"\nCriticalRate: {status.Crate.Value}      \nCriticalDamage: {status.Cdmg.Value}" +
-            $"\nSpeed: {status.Spd.Value}"; 
-            
+            $"\nCriticalResist: {status.Cres.Value}" +
+            $"\nSpeed: {status.Spd.Value}";
+
         return desc;
     }
 
     public virtual string GetStatus()
     {
-        string stat = $"\nHP: {status.HP.Value}               \nMP: {status.MP.Value}" +
-            $"\nAttack: {status.PAtk.Value}             \nDefense: {status.PDef.Value}" +
+        string stat = $"HP: {status.HP.Value}               \nMP: {status.MP.Value}" +
+            $"\nAttack: {status.PAtk.Value}             \nDefense: {status.PDef.Value}" + 
+            $"\nPenetrage: {status.Pen.Value}" +
             $"\nMagic: {status.MAtk.Value}              \nMagicResist: {status.MDef.Value}" +
+            $"\nNeutralize: {status.Neu.Value}" +
             $"\nHit: {status.Hit.Value}                 \nEva: {status.Eva.Value}" +
             $"\nCriticalRate: {status.Crate.Value}      \nCriticalDamage: {status.Cdmg.Value}" +
+            $"\nCriticalResist: {status.Cres.Value}" +
             $"\nSpeed: {status.Spd.Value}";
 
         return stat;
@@ -93,12 +103,14 @@ public class MonsterEditor : Editor
     public override void OnInspectorGUI()
     {
         Monster t = (Monster)target;
+        GUILayout.Label(new GUIContent($"Offensive Power: {t.offensivePower}"));
+        GUILayout.Label(new GUIContent($"Defensive Power: {t.defensivePower}"));
         base.OnInspectorGUI();
         if(Application.isPlaying)
             if(GUILayout.Button("Hunt"))
             {
-                HuntingManager.instance.Setup(t);
-                HuntingManager.instance.Hunt();
+                UIManager.Instance.huntingManager.Setup(t,null);
+                UIManager.Instance.huntingManager.Hunt();
             }
     }
 }

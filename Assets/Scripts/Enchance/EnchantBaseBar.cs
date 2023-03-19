@@ -7,12 +7,14 @@ public class EnchantBaseBar : EnchantMaterialBar
     public override void CreateBar(Equipment equipment,Enchantment enchantment)
     {
         this.equipment = equipment;
-        icon.sprite = equipment.icon;
-        name.text = equipment.itemName + " +" + equipment.enchantment;
-        desc.text = equipment.GetDesc();
+        itemIcon.sprite = equipment.icon;
+        itemName.text = equipment.itemName;
+        enchantmentText.text = $"+{equipment.enchantment}";
+        itemDesc.text = equipment.GetDesc();
         powerPercent.text = equipment.powerPercent.ToString();
-        this.enchantment = enchantment;
-        rarity.color = RarityColor.color(equipment.rarity);
+        this.enchantment = Enchantment.instance;
+        itemRarity.color = RarityColor.color(equipment.rarity);
+        itemRarityFrame.color = RarityColor.color(equipment.rarity);
     }
 
     public override void Select()

@@ -47,11 +47,11 @@ MonoBehaviour:
       modifiers: []
     currentMP: 20
     PAtk:
-      baseValue: 37
+      baseValue: 33
       mainModifiers: []
       modifiers: []
     PDef:
-      baseValue: 30
+      baseValue: 27
       mainModifiers: []
       modifiers: []
     Pen:
@@ -71,15 +71,15 @@ MonoBehaviour:
       mainModifiers: []
       modifiers: []
     Spd:
-      baseValue: 27
+      baseValue: 24
       mainModifiers: []
       modifiers: []
     Hit:
-      baseValue: 25
+      baseValue: 22
       mainModifiers: []
       modifiers: []
     Eva:
-      baseValue: 28
+      baseValue: 24
       mainModifiers: []
       modifiers: []
     Crate:

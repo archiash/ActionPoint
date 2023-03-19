@@ -49,5 +49,5 @@ MonoBehaviour:
     statType: 9
     type: 0
     amount: 15
-    isEnchantEffect: 1
+    isEnchantEffect: 0
     isPowerEffect: 0

@@ -7,21 +7,16 @@ public class RaidManager : MonoBehaviour
     public RaidBoss raidBoss;
     public float currentHP;
     public int amountTime;
-    RaidFormula raidFormula;
+    Raidfield raidfield;
     RaidSelect raidSelect;
 
     public bool isRaiding;
 
-    private void Start()
-    {
-        raidSelect = GetComponent<RaidSelect>();
-        raidFormula = GetComponent<RaidFormula>();
-        Load();
-    }
-
     bool isLoad = false;
     public void Load()
     {
+        raidfield = GetComponent<Raidfield>();
+        raidSelect = GetComponent<RaidSelect>();
         RaidSaveData data = Gamemanager.instance.itemSaveManager.LoadRaid();
         if (data != null)
         {
@@ -65,9 +60,8 @@ public class RaidManager : MonoBehaviour
     {
         Monster raid = Instantiate(raidBoss);
         raid.status.currentHP = currentHP;
-        raidFormula.Setup(raid);    
+        raidfield.Raiding(raid);
         amountTime++;
-        raidFormula.Hunt();
     }
     public void EndRaid(float hpLeft)
     {
@@ -77,12 +71,12 @@ public class RaidManager : MonoBehaviour
         {
             isRaiding = false;
             GiveReward();
-            ResultReport.instance.ShowResult("Raid Clear");
+            UIManager.Instance.resultReport.ShowResult("Raid Clear");
             currentHP = 0;
             Save();
+            raidSelect.Refresh();
             return;        
         }
-
         currentHP = hpLeft;
         Save();
     }
@@ -94,7 +88,7 @@ public class RaidManager : MonoBehaviour
             if (dropItem == null)
                 continue;
             Inventory.instance.GetItem(dropItem.item, dropItem.amount);
-            ResultReport.instance.AddDrop(dropItem.item, dropItem.amount);
+            UIManager.Instance.resultReport.AddDrop(dropItem.item, dropItem.amount);
         }
         Character.instance.GetExp(raidBoss.expReward);
     }
