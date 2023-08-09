@@ -6,13 +6,13 @@ using UnityEditor;
 using System;
 using UnityEngine.Events;
 
-public delegate void WinBattle();
+public delegate void WinEvent();
 
 public class HuntingManager : MonoBehaviour
 {
     public bool raiding = false;
 
-    public event WinBattle winBattleEvent;
+    public WinEvent winEvent;
 
     public List<Follower> playerFollower;
     public List<Follower> enermyFollower;
@@ -59,7 +59,9 @@ public class HuntingManager : MonoBehaviour
     private int powerlize;
     public void Setup(Monster _monster, List<Follower> playerFollower, List<Follower> enermyFollower = null, int powerlize = 1, bool fromTranslation = false)
     {
-        
+#if UNITY_EDITOR
+        timeScale = 100;
+#endif
 
         this.powerlize = powerlize;
 
@@ -587,7 +589,10 @@ public class HuntingManager : MonoBehaviour
 
     void GiveReward()
     {
-        winBattleEvent?.Invoke();
+        Debug.Log("Before " + winEvent.Method);
+        winEvent();
+        winEvent = null;
+        Debug.Log("After " + winEvent?.Method);
         for (int i = 0;i< monster.dropTables.Length;i++)
         {
             StackItem dropItem = monster.dropTables[i].DropLoot();

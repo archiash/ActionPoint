@@ -195,7 +195,7 @@ public class Character : MonoBehaviour
             case CharacterClass.Defender:
                 AddModifier(SubStatType.PDef, new Modifier(2, this, ModifierType.Percentage, Modifier.ModifierTime.Step, 20, "DefenderClass", 10));
                 AddModifier(SubStatType.MDef, new Modifier(2, this, ModifierType.Percentage, Modifier.ModifierTime.Step, 20, "DefenderClass", 10));
-                return ((status.PAtk.Value * 0.8f) + Mathf.Min(status.HP.Value * 0.10f, 0.3f * status.PAtk.Value), DamageType.Physic);
+                return ((status.PAtk.Value * 0.8f) + Mathf.Min(status.HP.Value * 0.10f, 0.5f * status.PAtk.Value), DamageType.Physic);
         }
 
         return (status.PAtk.Value, DamageType.Physic);

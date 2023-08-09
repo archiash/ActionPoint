@@ -56,7 +56,11 @@ public class ItemSaveManager : MonoBehaviour
                 if (saveData.followerInTeam[i] > 0)
                 {
                     //print($"Load Team: saveData.followerInTeam[i].ToString()");
-                    ft.ChangeFollower(ft.GetFollowerInListByID(saveData.followerInTeam[i]), i + 1);
+                    Follower fl = ft.GetFollowerInListByID(saveData.followerInTeam[i]);
+                    if (fl != null)
+                        ft.ChangeFollower(fl, i + 1);
+                    else
+                        ft.DisableFollowerImage(i + 1);
                 }
                 else
                 {

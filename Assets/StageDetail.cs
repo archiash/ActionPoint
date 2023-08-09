@@ -65,11 +65,11 @@ public class StageDetail : MonoBehaviour
         {
             FollowerTeam.instance.followerList.Add(stage.stageFollower.GetCopy());
         }
-        UIManager.Instance.huntingManager.winBattleEvent -= WinStage;
     }
 
     public void ShowStageDetail(Monster monster)
     {
+        stage = null;
         gameObject.SetActive(true);
         dialogueBox.SetActive(false);
         enermy = monster;
@@ -121,9 +121,10 @@ public class StageDetail : MonoBehaviour
     {
         scatteredTimePanel.gameObject.SetActive(false);
         enermyImage.enabled = false;
-        UIManager.Instance.huntingManager.winBattleEvent += WinStage;
+        UIManager.Instance.huntingManager.winEvent = WinStage;
         UIManager.Instance.huntingManager.StartBattle();
         GetComponent<Animator>().SetTrigger("EndBattle");
+        
         gameObject.SetActive(false);
     }
 }
