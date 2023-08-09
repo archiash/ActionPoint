@@ -16,3 +16,4 @@ MonoBehaviour:
   level: 15
   monsters:
   - {fileID: 11400000, guid: e963957287a1651428e427824d78a9bb, type: 2}
+  - {fileID: 11400000, guid: 3523b36e8ff273c4496781e834294a63, type: 2}

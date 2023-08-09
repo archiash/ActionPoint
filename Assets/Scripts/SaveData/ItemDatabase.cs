@@ -47,6 +47,7 @@ public class ItemDatabase : ScriptableObject
     {
         items = FindAssetsByType<Item>("Assets/Item");
     }
+
     public static T[] FindAssetsByType<T>(params string[] folders) where T: Object
     {
         string type = typeof(T).ToString().Replace("UnityEngine.", "");

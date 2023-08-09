@@ -12,6 +12,7 @@ public class Monster : ScriptableObject
 
     public Sprite sprite;
     public string Name;
+    [TextArea(1, 5)]
     public string Desc;
 
     public Status status;
@@ -72,6 +73,11 @@ public class Monster : ScriptableObject
             if(currentSkill[i] is CounterSkill)
             {
                 status.counterSkill += ((CounterSkill)currentSkill[i]).Use;           
+            }
+
+            if(currentSkill[i] is OnGetHitEffectData)
+            {
+                ((OnGetHitEffectData)currentSkill[i]).Activate<Status,object>(status,null);
             }
         }
     }

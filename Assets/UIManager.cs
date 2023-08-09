@@ -15,6 +15,9 @@ public class UIManager : MonoBehaviour
     public ResultReport resultReport;
     public HuntingManager huntingManager;
     public RaidManager raidManager;
+    public StageDetail stageDetail;
+    public FollowerSelectionMenu followerSelectionMenu;
+
     private void Start()
     {
         Instance = this;

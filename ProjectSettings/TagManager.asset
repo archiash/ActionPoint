@@ -8,6 +8,7 @@ TagManager:
   - BuffDetail
   - BuffDetailText
   - OverCanvas
+  - Hunt
   layers:
   - Default
   - TransparentFX

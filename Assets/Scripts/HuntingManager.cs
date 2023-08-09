@@ -6,9 +6,13 @@ using UnityEditor;
 using System;
 using UnityEngine.Events;
 
+public delegate void WinBattle();
+
 public class HuntingManager : MonoBehaviour
 {
     public bool raiding = false;
+
+    public event WinBattle winBattleEvent;
 
     public List<Follower> playerFollower;
     public List<Follower> enermyFollower;
@@ -29,6 +33,7 @@ public class HuntingManager : MonoBehaviour
     public Image enermyHealthBar;
 
     public float timeScale;
+    int STEP_PER_SECOND = 4; 
 
     Character character;
     Monster monster;
@@ -52,8 +57,10 @@ public class HuntingManager : MonoBehaviour
     public int monsterStun;
 
     private int powerlize;
-    public void Setup(Monster _monster, List<Follower> playerFollower, List<Follower> enermyFollower = null, int powerlize = 1)
+    public void Setup(Monster _monster, List<Follower> playerFollower, List<Follower> enermyFollower = null, int powerlize = 1, bool fromTranslation = false)
     {
+        
+
         this.powerlize = powerlize;
 
         character = Character.instance;
@@ -64,6 +71,7 @@ public class HuntingManager : MonoBehaviour
             monster = Instantiate(_monster);
 
         enermyCharacterImage.sprite = monster.sprite;
+        if(fromTranslation) enermyCharacterImage.enabled = false;
 
         character.status.currentHP = character.status.HP.Value;
         character.status.currentMP = character.status.MP.Value;
@@ -111,7 +119,9 @@ public class HuntingManager : MonoBehaviour
         monsterDDPT.Clear();
 
         monster.SetSkill();
-        
+
+        monster.status.stacks = new Dictionary<string, Stack>();
+        character.status.stacks = new Dictionary<string, Stack>();
     }
 
     void CalculateSpeed()
@@ -129,7 +139,6 @@ public class HuntingManager : MonoBehaviour
         if (!character.status.isFullMP)
             character.status.currentMP += 0.5f + (character.level - 1) * 0.1f;
     }
-
     void MonsterStep()
     {
         if (!monster.status.isFullMP)
@@ -139,7 +148,7 @@ public class HuntingManager : MonoBehaviour
     {
         playerCharacterAnimator.SetTrigger("Attack");
         bool isUsedSkill = false;
-        characterNextTurn -= 100;
+        characterNextTurn -= STEP_PER_SECOND;
         print("Character Turn");
         if (character.status.currentHP <= 0)
             return;
@@ -172,7 +181,7 @@ public class HuntingManager : MonoBehaviour
     {
         enermyCharacterAnimator.SetTrigger("Attack");
         bool isUsedSkill = false;
-        monsterNextTurn -= 100;
+        monsterNextTurn -= STEP_PER_SECOND;
         print("Monster Turn");
         if (monster.status.currentHP <= 0)
             return;
@@ -186,7 +195,7 @@ public class HuntingManager : MonoBehaviour
             {
                 if (monsterCooldown[i] <= 0 && monster.status.currentMP >= monster.currentSkill[i].manaCost)
                 {
-                    if (monster.currentSkill[i] is CounterSkill)
+                    if (monster.currentSkill[i] is CounterSkill || monster.currentSkill[i] is OnGetHitEffectData)
                         continue;
                     isUsedSkill = monster.currentSkill[i].Use(monster, character, ArenaType.Hunting);
                     monsterCooldown[i] = monster.currentSkill[i].coolTime + 1;
@@ -208,7 +217,8 @@ public class HuntingManager : MonoBehaviour
         float damage = Formula.DamageFormula(character.status, monster.status, damageType,true,pureDamage,0,true);
         if (Formula.CriticalFormula(character.status, monster.status, ref damage))
             Debug.Log("Critical");
-        if (monster.status.GetDamage(ref damage, character.status))
+        AttackData attackData = new AttackData(character.status, damage);
+        if (monster.status.GetDamage(ref attackData))
         {
             Debug.Log($"Deal {damage} {damageType} Damage to {monster.Name}");
         }
@@ -220,7 +230,8 @@ public class HuntingManager : MonoBehaviour
         float damage = Formula.DamageFormula(monster.status, character.status);
         if(Formula.CriticalFormula(monster.status, character.status,ref damage))
             Debug.Log("Critical");
-        if (character.status.GetDamage(ref damage, character.status))
+        AttackData attackData = new AttackData(monster.status, damage);
+        if (character.status.GetDamage(ref attackData))
             Debug.Log($"Deal {damage} Physic Damage to Character");
   
     }
@@ -289,13 +300,13 @@ public class HuntingManager : MonoBehaviour
             print("Step: " + stepCount);
             CalculateSpeed();
 
-            if(characterStun <= 0) characterNextTurn += characterSpeed * 10;
+            if(characterStun <= 0) characterNextTurn += characterSpeed;
             else
             {
                 characterStun--;
                 Debug.Log("STUN Step Left" + characterStun);              
             }
-            if(monsterStun <= 0) monsterNextTurn += monsterSpeed * 10;
+            if(monsterStun <= 0) monsterNextTurn += monsterSpeed;
             else
             {
                 monsterStun--;
@@ -333,9 +344,9 @@ public class HuntingManager : MonoBehaviour
                 }
             }
 
-            while (characterNextTurn >= 100 || monsterNextTurn >= 100)
+            while (characterNextTurn >= STEP_PER_SECOND || monsterNextTurn >= STEP_PER_SECOND)
             {
-                if (characterNextTurn >= 100 && monsterNextTurn >= 100)
+                if (characterNextTurn >= STEP_PER_SECOND && monsterNextTurn >= STEP_PER_SECOND)
                 {
                     if (characterNextTurn > monsterNextTurn)
                     {
@@ -367,14 +378,14 @@ public class HuntingManager : MonoBehaviour
                 }
                 else
                 {
-                    if (characterNextTurn >= 100)
+                    if (characterNextTurn >= STEP_PER_SECOND)
                     {
                         CharacterTurn();
                         //yield return new WaitForSeconds(0.1f);
                         i++;
                     }
 
-                    if (monsterNextTurn >= 100)
+                    if (monsterNextTurn >= STEP_PER_SECOND)
                     {
                         MonsterTurn();
                         //yield return new WaitForSeconds(0.1f);
@@ -394,7 +405,7 @@ public class HuntingManager : MonoBehaviour
                     if (playerFollowerSkillTimer[f] >= playerFollower[f].folowerSkills[0].interval)
                     {
                         Debug.Log("Tareus!!!!");
-                        playerFollower[f].folowerSkills[0].skill.Use(playerFollower[f], monster);
+                        playerFollower[f].folowerSkills[0].skill.Use(character, monster);
                         playerFollowerSkillTimer[f] = 0;
                         playerFollowerAnimators[f].SetTrigger("Attack");
                         //yield return new WaitForSeconds(0.1f);
@@ -406,7 +417,7 @@ public class HuntingManager : MonoBehaviour
                     //print("EnermyFollower");
                     if (enermyFollowerSkillTimer[f] >= enermyFollower[f].folowerSkills[0].interval)
                     {
-                        enermyFollower[f].folowerSkills[0].skill.Use(enermyFollower[f], character);
+                        enermyFollower[f].folowerSkills[0].skill.Use(monster, character);
                         enermyFollowerSkillTimer[f] = 0;
                         //yield return new WaitForSeconds(0.1f);
                     }
@@ -422,7 +433,7 @@ public class HuntingManager : MonoBehaviour
                 break;
             }
 
-            yield return new WaitForSeconds(0.1f * timeScale);
+            yield return new WaitForSecondsRealtime(1.0f / STEP_PER_SECOND / timeScale);
         }
         EndBattle();
         Destroy(monster);
@@ -476,7 +487,8 @@ public class HuntingManager : MonoBehaviour
             if (DDPT[i].turnDuration > 0)
             {
                 float damage = Formula.DamageFormula(DDPT[i].userStat, status, DDPT[i].damageType, true, DDPT[i].dps, DDPT[i].penetrate, false);
-                status.GetDamage(ref damage,DDPT[i].userStat,false);
+                AttackData attackData = new AttackData(DDPT[i].userStat, damage);
+                status.GetDamage(ref attackData, false);
                 DDPT[i].turnDuration--;
                 Debug.Log(DDPT[i].source.skillName + " Deal Damage " + damage + " Trun Left " + DDPT[i].turnDuration);
                 
@@ -496,7 +508,8 @@ public class HuntingManager : MonoBehaviour
             if (DDPS[i].turnDuration > 0)
             {
                 float damage = Formula.DamageFormula(DDPS[i].userStat, status, DDPS[i].damageType, true, DDPS[i].dps, DDPS[i].penetrate, false);
-                status.GetDamage(ref damage, DDPS[i].userStat, false);
+                AttackData attackData = new AttackData(DDPS[i].userStat, damage);
+                status.GetDamage(ref attackData, false);
                 DDPS[i].turnDuration--;
                 Debug.Log(DDPS[i].source.skillName + " Deal Damage " + damage + " Step Left " + DDPS[i].turnDuration);
 
@@ -551,7 +564,6 @@ public class HuntingManager : MonoBehaviour
     void EndBattle()
     {       
         character.status.currentMP = character.status.MP.Value;
-        
         if (raiding) UIManager.Instance.raidManager.EndRaid(monster.status.currentHP);
         //Debug.Log(previousHp - character.status.currentHP);
         //character.status.currentHP = character.status.HP.Value;
@@ -564,6 +576,7 @@ public class HuntingManager : MonoBehaviour
         this.raiding = raiding;      
         gameObject.SetActive(true);
         StartCoroutine(Hunt());
+        enermyCharacterImage.enabled = true;
     }
 
     public void StartHunt()
@@ -573,7 +586,8 @@ public class HuntingManager : MonoBehaviour
     }
 
     void GiveReward()
-    {       
+    {
+        winBattleEvent?.Invoke();
         for (int i = 0;i< monster.dropTables.Length;i++)
         {
             StackItem dropItem = monster.dropTables[i].DropLoot();

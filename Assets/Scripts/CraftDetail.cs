@@ -47,6 +47,8 @@ public class CraftDetail : MonoBehaviour
 
     public void OnpenCraftMenu()
     {
+        cost.gameObject.SetActive(false);
+        craftButton.gameObject.SetActive(false);
         gameObject.SetActive(true);
         detailPanel.SetActive(false);
         UIManager.Instance.recipeManager.ShowRecipeList();
@@ -54,6 +56,8 @@ public class CraftDetail : MonoBehaviour
 
     public void ShowRecipeDetail(Recipe newRecipe)
     {
+        cost.gameObject.SetActive(true);
+        craftButton.gameObject.SetActive(true);
         detailPanel.SetActive(true);
         recipe = newRecipe;
         if (recipe.resulItem is Equipment)

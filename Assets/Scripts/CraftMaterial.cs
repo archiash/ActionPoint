@@ -25,4 +25,10 @@ public class CraftMaterial : MonoBehaviour
             }
         }
     }
+
+    public void Refrest()
+    {
+        if(material != null)
+            Init(material);
+    }
 }

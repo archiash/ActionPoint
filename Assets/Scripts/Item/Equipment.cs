@@ -256,7 +256,7 @@ public class Equipment : Item
                 }
             }
 
-            if (mod.type == ModifierType.Pecentage)
+            if (mod.type == ModifierType.Percentage)
             {
                 desc += "% ";
             }
@@ -426,7 +426,7 @@ public class Equipment : Item
                 }
             }
 
-            if (mod.type == ModifierType.Pecentage)
+            if (mod.type == ModifierType.Percentage)
             {
                 desc += "% ";
             }
@@ -597,7 +597,7 @@ public class Equipment : Item
                 }
             }
 
-            if (mod.type == ModifierType.Pecentage)
+            if (mod.type == ModifierType.Percentage)
             {
                 desc += "% ";
             }
@@ -640,7 +640,7 @@ public class EquipmentModifier
     public MainStatType mainType;
     public SubStatType statType;
     public ModifierType type;
-    public int amount;
+    public float amount;
     public bool isEnchantEffect = true;
     public bool isPowerEffect = true;
 }

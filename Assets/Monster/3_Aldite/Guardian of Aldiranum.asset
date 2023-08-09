@@ -1,0 +1,116 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5825999a020fbf841bf87164bae64088, type: 3}
+  m_Name: Guardian of Aldiranum
+  m_EditorClassIdentifier: 
+  offensivePower: 0
+  defensivePower: 0
+  sprite: {fileID: 21300000, guid: 44dcbfdf20c6a78468d0da27d373eae0, type: 3}
+  Name: Guardian of Aldiranum
+  Desc: 
+  status:
+    STR:
+      baseValue: 0
+      upgradeModifier: 0
+      modifiers: []
+    DEX:
+      baseValue: 0
+      upgradeModifier: 0
+      modifiers: []
+    AGI:
+      baseValue: 0
+      upgradeModifier: 0
+      modifiers: []
+    INT:
+      baseValue: 0
+      upgradeModifier: 0
+      modifiers: []
+    CON:
+      baseValue: 0
+      upgradeModifier: 0
+      modifiers: []
+    HP:
+      baseValue: 815
+      mainModifiers: []
+      modifiers: []
+    currentHP: 815
+    MP:
+      baseValue: 105
+      mainModifiers: []
+      modifiers: []
+    currentMP: 105
+    PAtk:
+      baseValue: 48
+      mainModifiers: []
+      modifiers: []
+    PDef:
+      baseValue: 62
+      mainModifiers: []
+      modifiers: []
+    Pen:
+      baseValue: 0
+      mainModifiers: []
+      modifiers: []
+    MAtk:
+      baseValue: 48
+      mainModifiers: []
+      modifiers: []
+    MDef:
+      baseValue: 70
+      mainModifiers: []
+      modifiers: []
+    Neu:
+      baseValue: 0
+      mainModifiers: []
+      modifiers: []
+    Spd:
+      baseValue: 60
+      mainModifiers: []
+      modifiers: []
+    Hit:
+      baseValue: 70
+      mainModifiers: []
+      modifiers: []
+    Eva:
+      baseValue: 55
+      mainModifiers: []
+      modifiers: []
+    Crate:
+      baseValue: 35
+      mainModifiers: []
+      modifiers: []
+    Cdmg:
+      baseValue: 40
+      mainModifiers: []
+      modifiers: []
+    Cres:
+      baseValue: 25
+      mainModifiers: []
+      modifiers: []
+  currentSkill:
+  - {fileID: 11400000, guid: 3d132216a8cccc2448a228d72ebae679, type: 2}
+  - {fileID: 11400000, guid: 2c5bd1f938bc00d40a2519817ed98188, type: 2}
+  usePoint: 121
+  expReward: 320
+  dropTables:
+  - items:
+    - item: {fileID: 11400000, guid: b8dea0890e8392e4ba799091a8049d10, type: 2}
+      rateDrop: 80
+      trueRate: 80
+      minDrop: 0
+      maxDrop: 0
+  - items:
+    - item: {fileID: 11400000, guid: e15ffa89db72a9b4fa1abf54248c423c, type: 2}
+      rateDrop: 80
+      trueRate: 80
+      minDrop: 0
+      maxDrop: 0

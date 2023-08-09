@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5825999a020fbf841bf87164bae64088, type: 3}
   m_Name: Loglem
   m_EditorClassIdentifier: 
+  offensivePower: 0
+  defensivePower: 0
   sprite: {fileID: 21300000, guid: 6c154a8fec05a984286177b644d562dc, type: 3}
   Name: Loglem
   Desc: 
@@ -37,21 +39,21 @@ MonoBehaviour:
       upgradeModifier: 0
       modifiers: []
     HP:
-      baseValue: 180
+      baseValue: 80
       mainModifiers: []
       modifiers: []
-    currentHP: 180
+    currentHP: 80
     MP:
       baseValue: 0
       mainModifiers: []
       modifiers: []
     currentMP: 0
     PAtk:
-      baseValue: 9
+      baseValue: 11
       mainModifiers: []
       modifiers: []
     PDef:
-      baseValue: 6
+      baseValue: 5
       mainModifiers: []
       modifiers: []
     Pen:
@@ -75,15 +77,15 @@ MonoBehaviour:
       mainModifiers: []
       modifiers: []
     Hit:
-      baseValue: 15
+      baseValue: 12
       mainModifiers: []
       modifiers: []
     Eva:
-      baseValue: 10
+      baseValue: 7
       mainModifiers: []
       modifiers: []
     Crate:
-      baseValue: 10
+      baseValue: 5
       mainModifiers: []
       modifiers: []
     Cdmg:

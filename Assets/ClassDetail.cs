@@ -6,6 +6,6 @@ public class ClassDetail : MonoBehaviour
 
     void Update()
     {
-        className.text = $"�Ҫվ: {ClassUtility.GetClassName(Character.instance.Class)}"; 
+        className.text = $"Class: {ClassUtility.GetClassName(Character.instance.Class)}"; 
     }
 }

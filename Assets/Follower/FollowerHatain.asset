@@ -12,11 +12,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 541b6d8102fb7ce4d8199e5dfaf9b8ad, type: 3}
   m_Name: FollowerHatain
   m_EditorClassIdentifier: 
-  followerSquareImage: {fileID: 21300000, guid: aadda8058eb29ac4cb4cf370bf1d180f,
+  followerSquareImage: {fileID: 21300000, guid: 1c7375515ad19ef43b844de8138be097,
     type: 3}
-  followerImage: {fileID: 0}
-  followerName: 
+  followerImage: {fileID: 21300000, guid: 3ef13b7c1954cb142b4fd8ac07f6846b, type: 3}
+  followerName: Calm Rage Hatain
   followerDescription: 
   followerLevel: 0
+  followerID: 1002
+  followerStatus:
+    StrV:
+      baseValue: 4
+      upgradeModifier: 0
+      modifiers: []
+    DexV:
+      baseValue: 1
+      upgradeModifier: 0
+      modifiers: []
+    AgiV:
+      baseValue: 3
+      upgradeModifier: 0
+      modifiers: []
+    IntV:
+      baseValue: 0
+      upgradeModifier: 0
+      modifiers: []
+    ConV:
+      baseValue: 2
+      upgradeModifier: 0
+      modifiers: []
+    StrPLv: 2
+    DexPLv: 0.5
+    AgiPLv: 1
+    IntPLv: 0
+    ConPLv: 0.5
   followerModifiers: []
-  folowerSkills: []
+  folowerSkills:
+  - skill: {fileID: 11400000, guid: ba9e5d9f213842d4e9d77435356f7502, type: 2}
+    interval: 15

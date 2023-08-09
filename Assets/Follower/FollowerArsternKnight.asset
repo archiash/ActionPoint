@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 541b6d8102fb7ce4d8199e5dfaf9b8ad, type: 3}
+  m_Name: FollowerArsternKnight
+  m_EditorClassIdentifier: 
+  followerSquareImage: {fileID: 21300000, guid: 2979b3ad37632e54b938865c292e4f5f,
+    type: 3}
+  followerImage: {fileID: 21300000, guid: e9719179bc882c24183f3e8cc9821ee8, type: 3}
+  followerName: Arstern Knight
+  followerDescription: 
+  followerLevel: 0
+  followerID: 2001
+  followerStatus:
+    StrV:
+      baseValue: 1
+      upgradeModifier: 0
+      modifiers: []
+    DexV:
+      baseValue: 1
+      upgradeModifier: 0
+      modifiers: []
+    AgiV:
+      baseValue: 1
+      upgradeModifier: 0
+      modifiers: []
+    IntV:
+      baseValue: 1
+      upgradeModifier: 0
+      modifiers: []
+    ConV:
+      baseValue: 4
+      upgradeModifier: 0
+      modifiers: []
+    StrPLv: 0.5
+    DexPLv: 0.5
+    AgiPLv: 0.5
+    IntPLv: 0.5
+    ConPLv: 1
+  followerModifiers:
+  - statType: 0
+    mainStatType: 4
+    subStatType: 0
+    value: 2
+    valuePerLevel: 0.5
+  - statType: 1
+    mainStatType: 0
+    subStatType: 0
+    value: 30
+    valuePerLevel: 5
+  folowerSkills:
+  - skill: {fileID: 11400000, guid: a553e2f9a150cc64cb5d9eecef22d913, type: 2}
+    interval: 15

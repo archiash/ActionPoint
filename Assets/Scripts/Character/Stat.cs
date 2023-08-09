@@ -7,7 +7,7 @@ using UnityEngine;
 public enum SubStatType { HP,MP,PAtk,PDef,MAtk,MDef,Spd,Hit,Eva,Crate,Cdmg,Pen,Neu,Cres}
 public enum ModifierType
 {
-    Flat, Pecentage
+    Flat, Percentage
 }
 
 [System.Serializable]
@@ -30,7 +30,7 @@ public class Stat
         float value = 0;
         foreach (MainModifier mainStat in mainModifiers)
         {
-           value += Character.instance.GetMainStat(mainStat.type).Value * mainStat.modifier * (1 + Character.instance.GetMainStat(mainStat.type).upgradeModifier);
+           value += Character.instance.status.GetStat(mainStat.type).Value * mainStat.modifier * (1 + Character.instance.status.GetStat(mainStat.type).upgradeModifier);
         }
         return value;
     }

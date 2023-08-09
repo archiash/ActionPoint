@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using UnityEngine;
 using static Modifier;
 
@@ -19,7 +18,7 @@ public static class EquipmentComparer
         {
             statID = ID;
             this.statName = statName;
-            statMod = (modifierType == ModifierType.Pecentage) ? "%" : "";
+            statMod = (modifierType == ModifierType.Percentage) ? "%" : "";
             subfix = UpgradeAble ? "" : "U";
             subfix += PercentEffect ? "" : "P";
             this.beforeValue= beforeValue ;
@@ -119,7 +118,7 @@ public static class EquipmentComparer
     public static (string,string) GetStatIDAndName(EquipmentModifier modifier)
     {
         string statName = (modifier.modifierType == StatType.Main) ? modifier.mainType.ToString() : modifier.statType.ToString();
-        string statMod = (modifier.type == ModifierType.Pecentage) ? "P" : "F";
+        string statMod = (modifier.type == ModifierType.Percentage) ? "P" : "F";
         string subfix = (modifier.isEnchantEffect) ? "" : "U";
         subfix += (modifier.isPowerEffect) ? "" : "P";
         return ($"{statName}{statMod}{subfix}", statName);

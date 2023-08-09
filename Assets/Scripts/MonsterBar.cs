@@ -26,6 +26,7 @@ public class MonsterBar : MonoBehaviour
 
     public void ShowDetail()
     {
-        UIManager.Instance.enermyDetail.ShowEnermyDetail(monster);
+        //    UIManager.Instance.enermyDetail.ShowEnermyDetail(monster);
+        UIManager.Instance.stageDetail.ShowStageDetail(monster);
     }
 }

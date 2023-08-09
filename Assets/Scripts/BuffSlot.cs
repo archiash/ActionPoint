@@ -21,7 +21,7 @@ public class BuffSlot : MonoBehaviour
         modifier = _modifier;
         turnAmount.text = modifier.time.ToString();
         Descript = $"{statToBuff}: {modifier.value}";
-        if (modifier.type == ModifierType.Pecentage)
+        if (modifier.type == ModifierType.Percentage)
             Descript += "%";
 
         Descript += $"\nLeft: {modifier.time} Hunt";

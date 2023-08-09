@@ -2,6 +2,11 @@
 using UnityEditor;
 using System.Collections.Generic;
 
+public interface IInitInstance
+{
+    void InitInstance();
+}
+
 public class Gamemanager : MonoBehaviour
 {
     public ItemSaveManager itemSaveManager;
@@ -22,6 +27,11 @@ public class Gamemanager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
+
+        var scripts = gameObject.GetComponentsInChildren<IInitInstance>(true);
+
+        foreach (var script in scripts)
+            script.InitInstance();
     }
 
     public void Start()
@@ -92,6 +102,7 @@ public class Gamemanager : MonoBehaviour
             itemSaveManager.LoadCharacterData();
             itemSaveManager.LoadPoint();
             itemSaveManager.LoadInventory();
+            itemSaveManager.LoadFollwer();
             isLoad = true;
         }
         
@@ -107,6 +118,7 @@ public class Gamemanager : MonoBehaviour
             itemSaveManager.SaveInventory();
             itemSaveManager.SavePoint();
             itemSaveManager.SaveCharacterData();
+            itemSaveManager.SaveFollower();
         }
     }
 

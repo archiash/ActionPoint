@@ -81,6 +81,7 @@ public class Follower : ScriptableObject
     public string followerDescription;
     
     public int followerLevel;
+    public int followerID;
 
     public FollowerStatus followerStatus;
 
@@ -91,6 +92,23 @@ public class Follower : ScriptableObject
     public Follower GetCopy()
     {
         Follower newFollower = Instantiate(this);
+        newFollower.followerLevel = 1;
         return newFollower;
+    }
+
+    public string statusList
+    {
+        get
+        {
+            string status = "";
+            for(int i = 0; i < followerModifiers.Count; i++)
+            {
+                status += followerModifiers[i].statType == StatType.Main ?
+                    followerModifiers[i].mainStatType.ToString()
+                    : followerModifiers[i].subStatType.ToString();
+                status += $" + {followerModifiers[i].GetValue(followerLevel)}\n";
+            }
+            return status;
+        }
     }
 }

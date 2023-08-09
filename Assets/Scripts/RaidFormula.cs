@@ -183,7 +183,8 @@ public class RaidFormula : MonoBehaviour
         float damage = Formula.DamageFormula(character.status, monster.status, damageType, true, pureDamage, 0, true);
         if (Formula.CriticalFormula(character.status, monster.status, ref damage))
             Debug.Log("Critical");
-        if (monster.status.GetDamage(ref damage, character.status))
+        AttackData attackData = new AttackData(character.status, damage, damageType);
+        if (monster.status.GetDamage(ref attackData))
         {
             Debug.Log($"Deal {damage} {damageType} Damage to {monster.Name}");
         }
@@ -194,7 +195,8 @@ public class RaidFormula : MonoBehaviour
         float damage = Formula.DamageFormula(monster.status, character.status);
         if (Formula.CriticalFormula(monster.status, character.status, ref damage))
             Debug.Log("Critical");
-        if (character.status.GetDamage(ref damage, character.status))
+        AttackData attackData = new AttackData(monster.status, damage);
+        if (character.status.GetDamage(ref attackData))
             Debug.Log($"Deal {damage} Physic Damage to Character");
     }
     void ReduceBuffTurn(Status status)
@@ -331,7 +333,8 @@ public class RaidFormula : MonoBehaviour
             if (DDPS[i].turnDuration > 0)
             {
                 float damage = Formula.DamageFormula(DDPS[i].userStat, status, DDPS[i].damageType, true, DDPS[i].dps, DDPS[i].penetrate, false);
-                status.GetDamage(ref damage, DDPS[i].userStat, false);
+                AttackData attackData = new AttackData(DDPS[i].userStat, damage, DDPS[i].damageType);
+                status.GetDamage(ref attackData,false);
                 DDPS[i].turnDuration--;
                 Debug.Log($"{DDPS[i].source.skillName} Deal Damage {damage} | Trun Left: {DDPS[i].turnDuration}");
 

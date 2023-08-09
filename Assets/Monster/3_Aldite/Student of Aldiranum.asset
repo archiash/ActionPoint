@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5825999a020fbf841bf87164bae64088, type: 3}
   m_Name: Student of Aldiranum
   m_EditorClassIdentifier: 
+  offensivePower: 0
+  defensivePower: 0
   sprite: {fileID: 21300000, guid: 912745ede2ebc7c45be5d5f224fa9ee0, type: 3}
   Name: Student of Aldiranum
   Desc: 
@@ -98,17 +100,17 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3d51c4b8ebf8e4a43882a258363dce26, type: 2}
   - {fileID: 11400000, guid: a3888c2332959b14087390f65a295c0f, type: 2}
   usePoint: 120
-  expReward: 200
+  expReward: 300
   dropTables:
   - items:
     - item: {fileID: 11400000, guid: 58d7cf988bfdec0439b90255669d4cd9, type: 2}
-      rateDrop: 100
-      trueRate: 100
+      rateDrop: 80
+      trueRate: 80
       minDrop: 1
       maxDrop: 3
   - items:
     - item: {fileID: 11400000, guid: 2b16a817877016c489872e80400e462b, type: 2}
-      rateDrop: 100
-      trueRate: 100
+      rateDrop: 80
+      trueRate: 80
       minDrop: 1
       maxDrop: 3

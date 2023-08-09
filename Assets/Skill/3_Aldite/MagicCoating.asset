@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f8b422af388bd246a5e45c5031e3756, type: 3}
+  m_Name: MagicCoating
+  m_EditorClassIdentifier: 
+  skillIcon: {fileID: 0}
+  skillName: Magic Coating
+  skillDesc: "\u0E40\u0E1E\u0E34\u0E48\u0E21 M.Atk \u0E01\u0E31\u0E1A M.Def 20% 7
+    Step"
+  manaCost: 20
+  coolTime: 15
+  isUsePoint: 1
+  actions:
+  - target: 0
+    skillType: 2
+    value: 20
+    damageType: 0
+    critical: 0
+    actionModifiers: []
+    statToBuff: 4
+    buffModType: 1
+    modifierTime: 3
+    turnDaration: 7
+    dType: 0
+    penetrate: 0
+    isDrain: 0
+    drainPercent: 0
+  - target: 0
+    skillType: 2
+    value: 20
+    damageType: 0
+    critical: 0
+    actionModifiers: []
+    statToBuff: 5
+    buffModType: 1
+    modifierTime: 3
+    turnDaration: 7
+    dType: 0
+    penetrate: 0
+    isDrain: 0
+    drainPercent: 0

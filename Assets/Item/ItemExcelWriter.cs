@@ -113,7 +113,7 @@ public class ItemExcelWriter : MonoBehaviour
         string s = "";
         if (mod.amount >= 0) s += "+" + mod.amount;
         else s += mod.amount;
-        if (mod.type == ModifierType.Pecentage) s += "%";
+        if (mod.type == ModifierType.Percentage) s += "%";
         if (!mod.isPowerEffect)
         {
             s += "ss";
