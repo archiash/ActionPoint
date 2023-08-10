@@ -74,14 +74,14 @@ public class Monster : ScriptableObject
             {
                 status.counterSkill += ((CounterSkill)currentSkill[i]).Use;           
             }
-<<<<<<< Updated upstream
-=======
+//<<<<<<< Updated upstream
+//=======
 
             if(currentSkill[i] is OnGetHitSkill)
             {
                 ((OnGetHitSkill)currentSkill[i]).Activate<Status,object>(status,null);
             }
->>>>>>> Stashed changes
+//>>>>>>> Stashed changes
         }
     }
 

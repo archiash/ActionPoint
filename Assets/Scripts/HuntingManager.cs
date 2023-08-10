@@ -197,7 +197,7 @@ public class HuntingManager : MonoBehaviour
             {
                 if (monsterCooldown[i] <= 0 && monster.status.currentMP >= monster.currentSkill[i].manaCost)
                 {
-                    if (monster.currentSkill[i] is CounterSkill || monster.currentSkill[i] is OnGetHitEffectData)
+                    if (monster.currentSkill[i] is CounterSkill || monster.currentSkill[i] is OnGetHitSkill)
                         continue;
                     isUsedSkill = monster.currentSkill[i].Use(monster, character, ArenaType.Hunting);
                     monsterCooldown[i] = monster.currentSkill[i].coolTime + 1;
