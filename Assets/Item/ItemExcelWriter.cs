@@ -10,6 +10,8 @@ public class ItemExcelWriter : MonoBehaviour
     string filename;
 
     [SerializeField] Equipment[] itemData;
+    [SerializeField] ItemDatabase itemDatabase;
+    [SerializeField] RecipeDatabase recipeDatabase;
 
     public void WriteToExcel()
     {
@@ -107,6 +109,50 @@ public class ItemExcelWriter : MonoBehaviour
         tw.Close();
     }
 
+    public void WriteMaterialToExcel()
+    {
+        List<Item> materialsList = new List<Item>();
+        filename = Application.dataPath + "/itemMaterialUseData.csv";
+        TextWriter tw = new StreamWriter(filename, false);
+        tw.Write("Item Name");
+        tw.Close();
+
+        tw = new StreamWriter(filename, true);
+
+        foreach (Item i in itemDatabase.items)
+        {
+            if(i.itemType == ItemType.Material)
+            {
+                materialsList.Add(i);
+                tw.Write("," + i.itemName);
+            }
+        }
+
+        tw.WriteLine();
+
+        foreach(Recipe r in recipeDatabase.recipes)
+        {
+            tw.Write(r.resulItem.itemName + ",");
+            foreach (Item m in materialsList)
+            {
+                bool isCheck = true;
+                foreach(StackItem i in r.material)
+                {
+                    if (i.item == m)
+                    {
+                        tw.Write("/,");
+                        isCheck = false;
+                        break;
+                    }
+                }
+                if(isCheck)
+                    tw.Write(",");
+            }
+            tw.WriteLine();
+        }
+
+        tw.Close();
+    }
 
     public string stringModValue(EquipmentModifier mod)
     {
@@ -139,7 +185,7 @@ public class ItemExcelWriterEditor : Editor
         base.OnInspectorGUI();
         if (GUILayout.Button("Write"))
         {
-            t.WriteToExcel();
+            t.WriteMaterialToExcel();
         }
     }
 }

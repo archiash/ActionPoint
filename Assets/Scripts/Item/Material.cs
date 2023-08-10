@@ -10,7 +10,28 @@ using UnityEngine;
 public class Material : Item
 {
     
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #if UNITY_EDITOR
 [CustomEditor(typeof(Material))]
 public class MaterialEditor : Editor

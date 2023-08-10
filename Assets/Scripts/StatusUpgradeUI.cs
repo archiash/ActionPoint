@@ -68,13 +68,13 @@ public class StatusUpgradeUI : MonoBehaviour
 
     int ResetCost(int level)
     {
-        return (int)Mathf.Round(Mathf.Pow(Mathf.CeilToInt(Mathf.Log(level - 1) * 10),2) / 10) * 10; 
+        return Mathf.Max((int)Mathf.Round(Mathf.Pow(Mathf.CeilToInt(Mathf.Log(level - 1) * 10),2) / 10) * 10, 0); 
     }
 
     public void Refresh()
     {
         costText.text = $"{ResetCost(Character.instance.level)}$";
-        resetButton.interactable = Inventory.instance.Money >= ResetCost(Character.instance.level);
+        resetButton.interactable = Inventory.instance.Money >= ResetCost(Character.instance.level) && Character.instance.statusPoint < Character.instance.level - 1;
 
         buttons[0].interactable = Character.instance.statusPoint > 0 && StatusUpgrade.instance.AGI < 15;
         buttons[1].interactable = Character.instance.statusPoint > 0 && StatusUpgrade.instance.DEX < 15;

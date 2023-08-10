@@ -85,11 +85,11 @@ MonoBehaviour:
       mainModifiers: []
       modifiers: []
     Crate:
-      baseValue: 30
+      baseValue: 25
       mainModifiers: []
       modifiers: []
     Cdmg:
-      baseValue: 40
+      baseValue: 30
       mainModifiers: []
       modifiers: []
     Cres:

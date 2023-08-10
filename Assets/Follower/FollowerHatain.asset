@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 541b6d8102fb7ce4d8199e5dfaf9b8ad, type: 3}
   m_Name: FollowerHatain
   m_EditorClassIdentifier: 
+<<<<<<< Updated upstream
   followerSquareImage: {fileID: 21300000, guid: aadda8058eb29ac4cb4cf370bf1d180f,
+=======
+  followerSquareImage: {fileID: 21300000, guid: dfd727a1bc1eef04e99acb2e3dc2c281,
+>>>>>>> Stashed changes
     type: 3}
   followerImage: {fileID: 0}
   followerName: 
