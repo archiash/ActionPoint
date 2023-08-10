@@ -18,6 +18,7 @@ MonoBehaviour:
   followerName: Wanderer Tareus
   followerDescription: 
   followerLevel: 1
+  followerID: 1001
   followerStatus:
     StrV:
       baseValue: 1

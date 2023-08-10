@@ -32,6 +32,14 @@ public class Enchantment : MonoBehaviour
             instance = this;
     }
 
+    public void CloseAllSlot()
+    {
+        for (int i = 0; i < materialSlots.Length; i++)
+        {
+            materialSlots[i].gameObject.SetActive(false);
+        }
+    }
+
     public void SelectEnchant(Equipment equipment)
     {
         ClearMaterialSlot();

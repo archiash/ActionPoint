@@ -159,19 +159,9 @@ public class Character : MonoBehaviour
     {
         get { return characterClass; }
         set {
-
             RemoveModifier(this);
-
             ClassInfluence = influenceData[(int)value];
-
             characterClass = value; 
-            /*
-            if( value == CharacterClass.Magician)
-            {
-                float modValue = 5 + (0.5f * (level - 1));
-                AddModifier(MainStatType.INT,new Modifier(modValue, this, ModifierType.Flat));
-            }*/
-            
         }
     }
 
@@ -188,7 +178,7 @@ public class Character : MonoBehaviour
         switch (Class)
         {
             case CharacterClass.Adventurer:
-                return (status.PAtk.Value,DamageType.Physic);
+                return (status.PAtk.Value * 1.1f,DamageType.Physic);
             case CharacterClass.Magician:
                 if (status.currentMP >= 5 + status.MP.Value * 0.1f)
                 {
@@ -201,21 +191,16 @@ public class Character : MonoBehaviour
                     return (status.PAtk.Value / 2, DamageType.Physic);
                 }
             case CharacterClass.Rogue:
-                return ((status.PAtk.Value * 0.75f) + (status.Spd.Value + 0.35f), DamageType.Physic);
+                return ((status.PAtk.Value * 0.7f) + (status.Spd.Value + 0.35f), DamageType.Physic);
             case CharacterClass.Defender:
-                AddModifier(SubStatType.PDef, new Modifier(2, this, ModifierType.Pecentage, Modifier.ModifierTime.Step, 20, "DefenderClass", 10));
-                AddModifier(SubStatType.MDef, new Modifier(2, this, ModifierType.Pecentage, Modifier.ModifierTime.Step, 20, "DefenderClass", 10));
-                return ((status.PAtk.Value * 0.8f) + (status.HP.Value * 0.10f), DamageType.Physic);
+                AddModifier(SubStatType.PDef, new Modifier(2, this, ModifierType.Percentage, Modifier.ModifierTime.Step, 20, "DefenderClass", 10));
+                AddModifier(SubStatType.MDef, new Modifier(2, this, ModifierType.Percentage, Modifier.ModifierTime.Step, 20, "DefenderClass", 10));
+                return ((status.PAtk.Value * 0.8f) + Mathf.Min(status.HP.Value * 0.10f, 0.5f * status.PAtk.Value), DamageType.Physic);
         }
 
         return (status.PAtk.Value, DamageType.Physic);
     }
    
-    public void ChangeClass()
-    {
-
-    }
-
     public void RemoveModifier(Modifier modifier)
     {
         foreach (SubStatType statType in Enum.GetValues(typeof(SubStatType)))
@@ -247,33 +232,10 @@ public class Character : MonoBehaviour
         MainStat stat = (MainStat)(status.GetType().GetField(statType.ToString()).GetValue(status));
         stat.AddModifier(modifier);
     }
-
     public void AddModifier(SubStatType statType, Modifier modifier)
     {
         Stat stat = (Stat)(status.GetType().GetField(statType.ToString()).GetValue(status));
         stat.AddModifier(modifier);
-    }
-
-    private void Update()
-    {
-        /*
-        if (status.currentHP > 0)
-        {
-            if (status.currentHP < status.HP.Value)
-            {
-                if (regenRate < status.HP.Value * (hpRegen + hpRegenLvBonus) / 100)
-                    regenRate += status.HP.Value * (hpRegen + hpRegenLvBonus) / 100 * Time.deltaTime;
-            }
-            else
-                regenRate = 0;
-        }
-        else
-            regenRate = 0;
-        
-        status.currentHP += regenRate * Time.deltaTime;
-        if (status.currentHP > status.HP.Value)
-            status.currentHP = status.HP.Value;
-        */
     }
 
     public void Equip(Equipment item,bool fromSave = false)
@@ -414,24 +376,6 @@ public class Character : MonoBehaviour
         }
         return null;
     }
-    public MainStat GetMainStat(MainStatType type)
-    {
-        switch (type)
-        {
-            case MainStatType.STR:
-                return status.STR;
-            case MainStatType.DEX:
-                return status.DEX;
-            case MainStatType.AGI:
-                return status.AGI;
-            case MainStatType.INT:
-                return status.INT;
-            case MainStatType.CON:
-                return status.CON;
-        }
-        return null;
-    }
-
 }
 
 #if UNITY_EDITOR

@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5825999a020fbf841bf87164bae64088, type: 3}
   m_Name: FurWinger
   m_EditorClassIdentifier: 
+  offensivePower: 0
+  defensivePower: 0
   sprite: {fileID: 21300000, guid: f1da8ddb2d87c654083c284bb0dcae83, type: 3}
   Name: Fur Winger
   Desc: 

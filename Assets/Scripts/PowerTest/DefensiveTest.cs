@@ -124,7 +124,8 @@ public class DefensiveTest : MonoBehaviour
         float damage = Formula.DamageFormula(monster.status, testStatus);
         if (Formula.CriticalFormula(monster.status, testStatus, ref damage))
             Debug.Log("Critical");
-        if (testStatus.GetDamage(ref damage, monster.status))
+        AttackData attackData = new AttackData(monster.status, damage);
+        if (testStatus.GetDamage(ref attackData))
             Debug.Log($"Deal {damage} Physic Damage to Character");
         
     }
@@ -136,7 +137,8 @@ public class DefensiveTest : MonoBehaviour
         ReduceBuffTurn(testStatus);
 
         float damage = Formula.DamageFormula(testStatus, monster.status, (DamageType)UnityEngine.Random.Range(0,2));
-        if (monster.status.GetDamage(ref damage, testStatus))
+        AttackData attackData = new AttackData(testStatus, damage);
+        if (monster.status.GetDamage(ref attackData))
             Debug.Log($"Deal {damage} Damage to {monster.Name}, Left: {monster.status.currentHP}");
 
         defensePoint += damage;
@@ -281,7 +283,8 @@ public class DefensiveTest : MonoBehaviour
             if (DDPS[i].turnDuration > 0)
             {
                 float damage = Formula.DamageFormula(DDPS[i].userStat, status, DDPS[i].damageType, true, DDPS[i].dps, DDPS[i].penetrate, false);
-                status.GetDamage(ref damage, DDPS[i].userStat, false);
+                AttackData attackData = new AttackData(DDPS[i].userStat, damage, DDPS[i].damageType);
+                status.GetDamage(ref attackData, false);
                 DDPS[i].turnDuration--;
                 Debug.Log(DDPS[i].source.skillName + " Deal Damage " + damage + " Trun Left " + DDPS[i].turnDuration);
 

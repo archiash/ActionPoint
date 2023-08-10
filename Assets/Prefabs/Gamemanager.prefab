@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3795377148819830186}
   - component: {fileID: 7211708386385561541}
   - component: {fileID: 983225468}
+  - component: {fileID: 8224235543397422905}
   m_Layer: 0
   m_Name: Gamemanager
   m_TagString: Untagged
@@ -32,6 +33,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 109.12953, y: 302.5808, z: -118.66029}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -52,6 +54,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4aa773d1c2be87b4fa4e692608b1fc45, type: 2}
   - {fileID: 11400000, guid: 8bf9622e9cb78d644ba87a18177d0f0d, type: 2}
   - {fileID: 11400000, guid: 359130653f72b4c4e9af689e063fc873, type: 2}
+  - {fileID: 11400000, guid: 21447b293a77b1546acaafd8d0e229ad, type: 2}
   levelBonus: {fileID: 11400000, guid: c2f35feeb27ebb840b468800d5b1f015, type: 2}
   pfBonusPanel: {fileID: 0}
   highestLevelBonus: 0
@@ -80,12 +83,12 @@ MonoBehaviour:
       upgradeModifier: 0
       modifiers: []
     HP:
-      baseValue: 150
+      baseValue: 100
       mainModifiers:
       - type: 4
         modifier: 15
       modifiers: []
-    currentHP: 150
+    currentHP: 100
     MP:
       baseValue: 50
       mainModifiers:
@@ -94,7 +97,7 @@ MonoBehaviour:
       modifiers: []
     currentMP: 0
     PAtk:
-      baseValue: 10
+      baseValue: 15
       mainModifiers:
       - type: 0
         modifier: 3
@@ -136,7 +139,7 @@ MonoBehaviour:
         modifier: 3
       modifiers: []
     Hit:
-      baseValue: 15
+      baseValue: 12
       mainModifiers:
       - type: 1
         modifier: 3
@@ -148,7 +151,7 @@ MonoBehaviour:
         modifier: 2
       modifiers: []
     Crate:
-      baseValue: 10
+      baseValue: 5
       mainModifiers:
       - type: 1
         modifier: 2
@@ -238,6 +241,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   saveable: 0
+  loadable: 0
 --- !u!114 &7211708386385561541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -251,6 +255,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemDatabase: {fileID: 11400000, guid: 57a07f44fadb4fd48ad8d18d47229d20, type: 2}
+  followerDatabase: {fileID: 11400000, guid: eade9badc78c7c24e9565fe3ce63644f, type: 2}
 --- !u!114 &983225468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -263,40 +268,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30a7b8bd306d1c84d9203b57bf7b6237, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  strSub:
-  - value: 3
-    subType: 2
-  - value: 1
-    subType: 3
-  dexSub:
-  - value: 2
-    subType: 7
-  - value: 1
-    subType: 9
-  - value: 1
-    subType: 10
-  conSub:
-  - value: 10
-    subType: 0
-  - value: 1
-    subType: 3
-  - value: 1
-    subType: 5
-  agiSub:
-  - value: 2
-    subType: 6
-  - value: 2
-    subType: 8
-  intSub:
-  - value: 5
-    subType: 1
-  - value: 3
-    subType: 4
-  - value: 1
-    subType: 5
-  scale: 10
   strLevel: 0
   dexLevel: 0
   conLevel: 0
   agiLevel: 0
   intLevel: 0
+--- !u!114 &8224235543397422905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3795377148819830191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c989598c9d1172f4b91ca920ea3bfcc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statusMeanValue: []
+  statusStandardDeviation: []
+  monsters:
+  - {fileID: 11400000, guid: 24b5f64c89822354e82b9fbeabec8cb6, type: 2}
+  - {fileID: 11400000, guid: 7cdb2f9068615f54a9f05d0783ad830a, type: 2}
+  - {fileID: 11400000, guid: fd81f5f150642d546a0d80db8cae5d2e, type: 2}
+  - {fileID: 11400000, guid: 5ef074b703b70e443ae4d8f094c717b3, type: 2}
+  - {fileID: 11400000, guid: 26a927b9d02cf134fa387590a211148b, type: 2}
+  - {fileID: 11400000, guid: a75954b4094353e4d887a58764d306aa, type: 2}
+  - {fileID: 11400000, guid: 9170d91a0d1783d41a4a9d0d9f8d1e28, type: 2}
+  - {fileID: 11400000, guid: 4fdef21f5948873449dae091ab4342ea, type: 2}
+  - {fileID: 11400000, guid: 7fb5b826a40ecb4409b6c402ddcc1569, type: 2}
+  - {fileID: 11400000, guid: 1712f262fd2b22c48b1107600f9966e3, type: 2}
+  - {fileID: 11400000, guid: 08675c16b770bed4f8700062a151d0ae, type: 2}
+  - {fileID: 11400000, guid: 05777fab4d5cf2e4e96d8e9c8c5ac139, type: 2}
+  - {fileID: 11400000, guid: 0c2de809156d8014f8a75ee1472ea555, type: 2}
+  - {fileID: 11400000, guid: 4954be4153b85a64bb65cd2a02680932, type: 2}
+  - {fileID: 11400000, guid: 357710b9504c6484d96a7de19aa697b4, type: 2}
+  - {fileID: 11400000, guid: 0c9adc574fd672143b234dc1abce69a4, type: 2}
+  - {fileID: 11400000, guid: 87239d827cd7fc642af11cf782dd5f01, type: 2}
+  - {fileID: 11400000, guid: e963957287a1651428e427824d78a9bb, type: 2}
+  - {fileID: 11400000, guid: 3523b36e8ff273c4496781e834294a63, type: 2}
+  - {fileID: 11400000, guid: 269f016473810c64a889cd6395a5a0be, type: 2}
+  - {fileID: 11400000, guid: 18269a35b71725c48b705705d0d580db, type: 2}

@@ -17,20 +17,25 @@ public static class Formula
     */
     public static bool HitFormula(float hit, float evade, float additionalHitChange = 0)
     {
-        int adventage = evade < hit ? 1 : -1;
-        float dodgeAdvantage = Mathf.Log((evade + 1) / (hit + 1));
-        dodgeAdvantage = Mathf.Pow(dodgeAdvantage, 2);
-        dodgeAdvantage = Mathf.Sqrt(Mathf.Sqrt(dodgeAdvantage));
-        dodgeAdvantage *= adventage * 10;
-        dodgeAdvantage += 20;
-        dodgeAdvantage = Mathf.Clamp(dodgeAdvantage, 0, 50);
-        dodgeAdvantage += additionalHitChange;
-        return Random.value >= dodgeAdvantage / 100f;
+        int advantage = hit >= evade ? 1 : -1;
+        float hitRate = Mathf.Log((hit + 1) / (evade + 1));
+        hitRate = Mathf.Pow(hitRate, 2);
+        hitRate = Mathf.Sqrt(hitRate);
+        hitRate *= 10;
+        hitRate = Mathf.Clamp(hitRate, 0, 60);
+        hitRate *= advantage;
+        hitRate += additionalHitChange;
+        hitRate = Mathf.Min(20, hitRate);
+        float dodgeRate = Mathf.Min(80, 20 - hitRate);
+        dodgeRate /= 100;
+        float hitRoll = Random.value;
+        Debug.Log($"DR: {dodgeRate}, HR: {hitRoll}, Hit: {hit}, Eva: {evade}");
+        return hitRoll >= dodgeRate;
     }
 
     public static float ActionPerStep(float speed)
     {
-        return 1.3f * Mathf.Log(0.0378f * speed + 1.5653f) + 0.1408f;
+        return 0.7f * Mathf.Log(0.0378f * speed + 1.5653f) + 0.1408f;
     }
 
     public static bool CriticalFormula(Status user, Status target,ref float damage, CriticalType criticalType = CriticalType.Able)

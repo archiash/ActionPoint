@@ -7,12 +7,75 @@ using UnityEngine.UI;
 public class ItemSaveManager : MonoBehaviour
 {
     [SerializeField] ItemDatabase itemDatabase;
+    [SerializeField] FollowerDatabase followerDatabase;
 
     private const string InventoryFileName = "Inventory";
     private const string EquipmentFileName = "Equipment";
     private const string PointFileName = "Point";
     private const string CharacterFileName = "Character";
     private const string RaidFileName = "Raid";
+    private const string FollowerFileName = "Follower";
+
+    public void SaveFollower()
+    {
+        FollowerTeam ft = FollowerTeam.instance;
+        FollowerSaveData[] followerSaveDatas = new FollowerSaveData[ft.followerList.Count];
+        for(int i = 0; i < ft.followerList.Count; i++)
+        {
+            Debug.Log($"Save Follower {ft.followerList[i].followerID}");
+            followerSaveDatas[i] = new FollowerSaveData(ft.followerList[i].followerID, ft.followerList[i].followerLevel);
+        }
+        int[] followerTeam = new int[3] {-1, -1, -1};
+        List<Follower> flTeam = ft.followerTeam;
+        for (int i = 0; i < flTeam.Count; i++)
+        {
+            //print($"Save Team: {flTeam[i].followerName}");
+            followerTeam[i] = flTeam[i].followerID;
+            //print(followerTeam[i]);
+        }
+        FollowerListSaveData saveData = new FollowerListSaveData(followerSaveDatas, followerTeam);
+        ItemSaveIO.SaveItems(saveData, FollowerFileName);
+    }
+
+    public void LoadFollwer()
+    {
+        FollowerTeam ft = FollowerTeam.instance;
+        FollowerListSaveData saveData = ItemSaveIO.LoadItems<FollowerListSaveData>(FollowerFileName);
+        if (saveData != null)
+        {
+            for (int i = 0; i < saveData.followerSaveData.Length; i++)
+            {
+                //print(saveData.followerSaveData[i].followerID.ToString());
+                Follower follower = followerDatabase.GetFollowerCopy(saveData.followerSaveData[i].followerID);
+                follower.followerLevel = saveData.followerSaveData[i].level;
+                ft.followerList.Add(follower);
+            }
+
+            for (int i = 0; i < 3; i++)
+            {
+                if (saveData.followerInTeam[i] > 0)
+                {
+                    //print($"Load Team: saveData.followerInTeam[i].ToString()");
+                    Follower fl = ft.GetFollowerInListByID(saveData.followerInTeam[i]);
+                    if (fl != null)
+                        ft.ChangeFollower(fl, i + 1);
+                    else
+                        ft.DisableFollowerImage(i + 1);
+                }
+                else
+                {
+                    ft.DisableFollowerImage(i + 1);
+                }
+                
+            }
+        }
+        else
+        {
+            ft.DisableFollowerImage(1);
+            ft.DisableFollowerImage(2);
+            ft.DisableFollowerImage(3);
+        }
+    }
 
     public void SaveRaid(string id,float hp,int time,bool isRaid)
     {

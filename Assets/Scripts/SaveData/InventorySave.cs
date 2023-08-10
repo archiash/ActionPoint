@@ -91,3 +91,29 @@ public class RaidSaveData
         isRaid = isRaiding;
     }
 }
+
+[Serializable]
+public class FollowerSaveData
+{
+    public int followerID;
+    public int level;
+
+    public FollowerSaveData(int ID, int level)
+    {
+        followerID = ID;
+        this.level = level;
+    }
+}
+
+[Serializable]
+public class FollowerListSaveData
+{
+    public FollowerSaveData[] followerSaveData;
+    public int[] followerInTeam;
+
+    public FollowerListSaveData(FollowerSaveData[] followerDataList, int[] followerInTeam)
+    {
+        followerSaveData = followerDataList;
+        this.followerInTeam = followerInTeam;
+    }
+}

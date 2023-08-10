@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5825999a020fbf841bf87164bae64088, type: 3}
   m_Name: Houndra Berserker
   m_EditorClassIdentifier: 
+  offensivePower: 0
+  defensivePower: 0
   sprite: {fileID: 21300000, guid: 42828861a0c780e488b80db808695336, type: 3}
   Name: Houndra Berserker
   Desc: 
@@ -37,21 +39,21 @@ MonoBehaviour:
       upgradeModifier: 0
       modifiers: []
     HP:
-      baseValue: 220
+      baseValue: 175
       mainModifiers: []
       modifiers: []
-    currentHP: 220
+    currentHP: 175
     MP:
       baseValue: 0
       mainModifiers: []
       modifiers: []
     currentMP: 0
     PAtk:
-      baseValue: 19
+      baseValue: 22
       mainModifiers: []
       modifiers: []
     PDef:
-      baseValue: 10
+      baseValue: 12
       mainModifiers: []
       modifiers: []
     Pen:
@@ -63,7 +65,7 @@ MonoBehaviour:
       mainModifiers: []
       modifiers: []
     MDef:
-      baseValue: 8
+      baseValue: 9
       mainModifiers: []
       modifiers: []
     Neu:
@@ -71,23 +73,23 @@ MonoBehaviour:
       mainModifiers: []
       modifiers: []
     Spd:
-      baseValue: 17
+      baseValue: 19
       mainModifiers: []
       modifiers: []
     Hit:
-      baseValue: 17
+      baseValue: 18
       mainModifiers: []
       modifiers: []
     Eva:
-      baseValue: 17
+      baseValue: 13
       mainModifiers: []
       modifiers: []
     Crate:
-      baseValue: 12
+      baseValue: 5
       mainModifiers: []
       modifiers: []
     Cdmg:
-      baseValue: 12
+      baseValue: 10
       mainModifiers: []
       modifiers: []
     Cres:

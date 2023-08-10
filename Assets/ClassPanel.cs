@@ -14,15 +14,15 @@ public class ClassPanel : MonoBehaviour
     [SerializeField] Button[] classButton;
 
     [SerializeField] TextMeshProUGUI currentClassText;
-    [SerializeField] TextMeshProUGUI currentClassDetailText;
+    //[SerializeField] TextMeshProUGUI currentClassDetailText;
 
     void UpdatePanel()
     {
-        (string className,string classDetail) = ClassUtility.GetClassNameAndDetail(Character.instance.Class);
+        (string className, string classDetail) = ClassUtility.GetClassNameAndDetail(Character.instance.Class);
 
-        currentClassText.text = $"ปัจจุบัน: {className}";
-        currentClassDetailText.text = $"{classDetail}";
-        currentClassDetailText.fontSize = currentClassText.fontSize;
+        currentClassText.text = $"{className}";
+        //currentClassDetailText.text = $"{classDetail}";
+        //currentClassDetailText.fontSize = currentClassText.fontSize;
 
         currentButton = GameObject.Find(Character.instance.Class.ToString()).GetComponent<ClassChangeButton>();
         currentButton.ButtonPanel.color = Color.gray;

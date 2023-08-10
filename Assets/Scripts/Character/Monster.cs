@@ -12,6 +12,7 @@ public class Monster : ScriptableObject
 
     public Sprite sprite;
     public string Name;
+    [TextArea(1, 5)]
     public string Desc;
 
     public Status status;

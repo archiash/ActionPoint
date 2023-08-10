@@ -39,21 +39,21 @@ MonoBehaviour:
       upgradeModifier: 0
       modifiers: []
     HP:
-      baseValue: 2800
+      baseValue: 1200
       mainModifiers: []
       modifiers: []
-    currentHP: 2800
+    currentHP: 1200
     MP:
       baseValue: 0
       mainModifiers: []
       modifiers: []
     currentMP: 0
     PAtk:
-      baseValue: 65
+      baseValue: 60
       mainModifiers: []
       modifiers: []
     PDef:
-      baseValue: 60
+      baseValue: 62
       mainModifiers: []
       modifiers: []
     Pen:
@@ -85,11 +85,11 @@ MonoBehaviour:
       mainModifiers: []
       modifiers: []
     Crate:
-      baseValue: 35
+      baseValue: 25
       mainModifiers: []
       modifiers: []
     Cdmg:
-      baseValue: 35
+      baseValue: 30
       mainModifiers: []
       modifiers: []
     Cres:

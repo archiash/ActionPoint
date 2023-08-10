@@ -33,6 +33,7 @@ public class UI_InventoryDetail : MonoBehaviour
         sellPrice.text = $"Sell Price: {item.item.price}";
         if (item.item is Equipment)
         {
+            sellAmount.text = "1";
             percentage.text = $"{((Equipment)item.item).powerPercent}%";
             enchantment.text = $"+{((Equipment)item.item).enchantment}";
             itemType.text = $"{((Equipment)item.item).part}";
