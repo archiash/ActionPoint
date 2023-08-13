@@ -103,6 +103,7 @@ public class Gamemanager : MonoBehaviour
             itemSaveManager.LoadPoint();
             itemSaveManager.LoadInventory();
             itemSaveManager.LoadFollwer();
+            itemSaveManager.LoadTimeStage();
             isLoad = true;
         }
         
@@ -119,6 +120,7 @@ public class Gamemanager : MonoBehaviour
             itemSaveManager.SavePoint();
             itemSaveManager.SaveCharacterData();
             itemSaveManager.SaveFollower();
+            itemSaveManager.SaveTimeStage();
         }
     }
 

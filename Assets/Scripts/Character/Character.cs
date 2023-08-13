@@ -154,6 +154,10 @@ public class Character : MonoBehaviour
                 }
             }
         }
+
+        get {
+            return classInfluence;
+        }
     }
     public CharacterClass Class
     {

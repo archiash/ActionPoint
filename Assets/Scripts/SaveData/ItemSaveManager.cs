@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 using UnityEngine.UI;
 
 public class ItemSaveManager : MonoBehaviour
@@ -15,6 +16,27 @@ public class ItemSaveManager : MonoBehaviour
     private const string CharacterFileName = "Character";
     private const string RaidFileName = "Raid";
     private const string FollowerFileName = "Follower";
+    private const string TimeStageFileName = "/TimeStage.json";
+
+    public void SaveTimeStage()
+    {
+        TimeStageSaveData tssd = new TimeStageSaveData(UIManager.Instance.timeStageManager.stagesProgression);
+        string tssdText = JsonUtility.ToJson(tssd);
+        File.WriteAllText(Application.persistentDataPath + TimeStageFileName, tssdText);
+    }
+
+    public void LoadTimeStage()
+    {
+        string filePath = Application.persistentDataPath + TimeStageFileName;
+        TimeStageSaveData tssd = null;
+        if (File.Exists(filePath))
+        {
+            string textData = File.ReadAllText(filePath);
+            tssd = JsonUtility.FromJson<TimeStageSaveData>(textData);          
+        }
+        UIManager.Instance.timeStageManager.LoadSave(tssd);
+
+    }
 
     public void SaveFollower()
     {

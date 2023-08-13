@@ -10,32 +10,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3f8b422af388bd246a5e45c5031e3756, type: 3}
-  m_Name: FSkill Flamma Corvus
+  m_Name: Pyrothread
   m_EditorClassIdentifier: 
   skillIcon: {fileID: 0}
-  skillName: Flamma Corvus
-  skillDesc: "Tareus \u0E2A\u0E23\u0E49\u0E32\u0E07\u0E19\u0E01\u0E40\u0E1E\u0E25\u0E34\u0E07\u0E02\u0E36\u0E49\u0E19\u0E21\u0E32\u0E42\u0E08\u0E21\u0E15\u0E35
-    \u0E2A\u0E23\u0E49\u0E32\u0E07\u0E04\u0E27\u0E32\u0E21\u0E40\u0E2A\u0E35\u0E22\u0E2B\u0E32\u0E22\u0E40\u0E27\u0E17\u0E22\u0E4C
-    200% \u0E02\u0E2D\u0E07 Magic"
-  manaCost: 0
-  coolTime: 0
-  isUsePoint: 0
+  skillName: Pyrothread
+  skillDesc: "\u0E2A\u0E23\u0E49\u0E32\u0E07\u0E04\u0E27\u0E32\u0E21\u0E40\u0E2A\u0E35\u0E22\u0E2B\u0E32\u0E22\u0E40\u0E27\u0E17\u0E22\u0E4C
+    10% \u0E02\u0E2D\u0E07 Magic \u0E41\u0E01\u0E48\u0E40\u0E1B\u0E49\u0E32\u0E2B\u0E21\u0E32\u0E22
+    7 steps"
+  manaCost: 45
+  coolTime: 35
+  isUsePoint: 1
   actions:
   - target: 1
-    skillType: 0
+    skillType: 3
     value: 0
     damageType: 1
     critical: 1
     actionModifiers:
     - statType: 1
-      mainType: 3
+      mainType: 0
       subType: 4
-      amount: 2
+      amount: 0.1
     statToBuff: 0
     buffModType: 0
     modifierTime: 0
-    turnDaration: 0
-    dType: 0
+    turnDaration: 7
+    dType: 3
     penetrate: 0
     isDrain: 0
     drainPercent: 0

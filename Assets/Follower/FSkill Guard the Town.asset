@@ -14,19 +14,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillIcon: {fileID: 0}
   skillName: Guard the Town
-  skillDesc: "\u0E1A\u0E31\u0E1E\u0E1E\u0E25\u0E31\u0E07\u0E1B\u0E49\u0E2D\u0E07\u0E01\u0E31\u0E19
-    20% \u0E40\u0E1B\u0E47\u0E19\u0E40\u0E27\u0E25\u0E32 3 \u0E40\u0E17\u0E34\u0E23\u0E4C\u0E19"
+  skillDesc: "\u0E1A\u0E31\u0E1E\u0E1E\u0E25\u0E31\u0E07\u0E1B\u0E49\u0E2D\u0E07\u0E01\u0E31\u0E19\u0E41\u0E25\u0E30\u0E15\u0E49\u0E32\u0E19\u0E17\u0E32\u0E19\u0E40\u0E27\u0E17\u0E22\u0E4C
+    10% \u0E40\u0E1B\u0E47\u0E19\u0E40\u0E27\u0E25\u0E32 3 \u0E40\u0E17\u0E34\u0E23\u0E4C\u0E19"
   manaCost: 0
   coolTime: 0
   isUsePoint: 0
   actions:
   - target: 0
     skillType: 2
-    value: 20
+    value: 10
     damageType: 0
     critical: 0
     actionModifiers: []
     statToBuff: 3
+    buffModType: 1
+    modifierTime: 2
+    turnDaration: 3
+    dType: 0
+    penetrate: 0
+    isDrain: 0
+    drainPercent: 0
+  - target: 0
+    skillType: 2
+    value: 10
+    damageType: 0
+    critical: 0
+    actionModifiers: []
+    statToBuff: 5
     buffModType: 1
     modifierTime: 2
     turnDaration: 3

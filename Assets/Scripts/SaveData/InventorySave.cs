@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
@@ -115,5 +116,30 @@ public class FollowerListSaveData
     {
         followerSaveData = followerDataList;
         this.followerInTeam = followerInTeam;
+    }
+}
+
+[Serializable]
+public class TimeStageSaveData
+{
+    public string[] stagesID;
+    public int[] stagesProgression;
+    public int sv;
+
+    public TimeStageSaveData(Dictionary<string, int> progression = null)
+    {
+        sv = 1;
+        if (progression != null)
+        {
+            stagesID = new string[progression.Count];
+            stagesProgression = new int[progression.Count];
+            int i = 0;
+            foreach (var item in progression)
+            {
+                stagesID[i] = item.Key;
+                stagesProgression[i] = item.Value;
+                i++;
+            }
+        }
     }
 }

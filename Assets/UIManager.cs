@@ -17,8 +17,9 @@ public class UIManager : MonoBehaviour
     public RaidManager raidManager;
     public StageDetail stageDetail;
     public FollowerSelectionMenu followerSelectionMenu;
+    public ScatteredTimeStageManager timeStageManager;
 
-    private void Start()
+    private void Awake()
     {
         Instance = this;
     }

@@ -1,7 +1,7 @@
 Monster Name, HP, MP, Attack, Defense, Magic, Resist, Speed, Accurate, Evade, Cri Rate, Cri DMG, Penetrate, Neutralize, Cri Resist
 ,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 Arstern Knight,800,50,45,40,20,40,32,42,37,20,20,0,0,10
-Wanderer Tareus,1120,320,40,52,77,58,77,52,49,25,35,0,10,20
+Wanderer Tareus,1120,320,40,52,72,58,72,52,49,25,35,0,10,20
 Loglem,80,0,11,5,0,5,10,12,7,5,10,0,0,0
 Warthog,100,0,13,7,0,7,12,15,8,5,10,0,0,0
 Bandit,120,0,17,8,0,6,15,15,12,5,10,0,0,0

@@ -22,7 +22,7 @@ public enum ArenaType
 
 public enum DDType
 {
-    Poison,Stun,Stone
+    Poison,Stun,Stone,Fire
 }
 
 public class DebuffDamage
@@ -73,6 +73,5 @@ public class Skill : ScriptableObject
     {
 
     }
-
 
 }

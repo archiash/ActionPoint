@@ -33,7 +33,8 @@ public class HuntingManager : MonoBehaviour
     public Image enermyHealthBar;
 
     public float timeScale;
-    int STEP_PER_SECOND = 4; 
+    int STEP_PER_SECOND = 4;
+    [SerializeField] float tsDebug;
 
     Character character;
     Monster monster;
@@ -60,7 +61,7 @@ public class HuntingManager : MonoBehaviour
     public void Setup(Monster _monster, List<Follower> playerFollower, List<Follower> enermyFollower = null, int powerlize = 1, bool fromTranslation = false)
     {
 #if UNITY_EDITOR
-        timeScale = 100;
+        timeScale = tsDebug;
 #endif
 
         this.powerlize = powerlize;

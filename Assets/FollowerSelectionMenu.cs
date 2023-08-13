@@ -31,7 +31,7 @@ public class FollowerSelectionMenu : MonoBehaviour
         followerLevel.text = $"Level {follower.followerLevel}";
         followerImage.sprite = follower.followerImage;
         followerDesc.text = follower.statusList;
-        followerSkill.text = follower.folowerSkills[0].skill.skillName;
+        followerSkill.text = follower.folowerSkills[0].skill.skillName + " CD: " + follower.folowerSkills[0].interval + " steps";
         followerSkill.text += $"\n{follower.folowerSkills[0].skill.skillDesc}";
         changeButton.gameObject.SetActive(followerInSlot != follower);
         removeButton.gameObject.SetActive(followerInSlot == follower);

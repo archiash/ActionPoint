@@ -61,7 +61,7 @@ MonoBehaviour:
       mainModifiers: []
       modifiers: []
     MAtk:
-      baseValue: 77
+      baseValue: 72
       mainModifiers: []
       modifiers: []
     MDef:
@@ -73,7 +73,7 @@ MonoBehaviour:
       mainModifiers: []
       modifiers: []
     Spd:
-      baseValue: 77
+      baseValue: 72
       mainModifiers: []
       modifiers: []
     Hit:
@@ -96,7 +96,10 @@ MonoBehaviour:
       baseValue: 20
       mainModifiers: []
       modifiers: []
-  currentSkill: []
+  currentSkill:
+  - {fileID: 11400000, guid: 476e26bd5b23a764b80a047a61f06391, type: 2}
+  - {fileID: 11400000, guid: b3ee949783fc68c4aa9ef8240f5c89d9, type: 2}
+  - {fileID: 11400000, guid: b834c6c468d2329438713825006299b7, type: 2}
   usePoint: 0
   expReward: 0
   dropTables: []

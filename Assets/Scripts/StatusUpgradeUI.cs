@@ -25,9 +25,9 @@ public class StatusUpgradeUI : MonoBehaviour
     Character character;
 
     [SerializeField] Button[] buttons;
-
-
     [SerializeField] Button resetButton;
+
+    [SerializeField] TextMeshProUGUI[] perOneMainDesc;
 
     public void Start()
     {
@@ -88,5 +88,22 @@ public class StatusUpgradeUI : MonoBehaviour
         agiLvl.text = $"+{StatusUpgrade.instance.AGI}";
         intLvl.text = $"+{StatusUpgrade.instance.INT}";
         conLvl.text = $"+{StatusUpgrade.instance.CON}";
+    }
+
+    public void ShowPerOneMainPoint()
+    {
+        ClassInfluence classInfluence = Character.instance.ClassInfluence;
+        for (int i = 0; i < classInfluence.subModifies.Count; i++) {
+            StatusUpgrade.SubModify[] subModify = classInfluence.subModifies[i];
+            perOneMainDesc[i].text = "";
+            for (int j = 0; j < subModify.Length; j++)
+            {
+                perOneMainDesc[i].text += $"+ {subModify[j].value} {subModify[j].subType}";
+                if(j < subModify.Length - 1)
+                {
+                    perOneMainDesc[i].text += "\n";
+                }
+            }
+        }
     }
 }
